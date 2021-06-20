@@ -124,7 +124,7 @@ namespace MSBT_Editor.Sectionsys
 
             offset2 = fs.Position;
 
-            string[] test = new string[entries+1];
+            string[] test = new string[/*entries+1*/0xFF];
             int testcount = 0;
 
             for (long k = 0; k < (offset+sec_size)-offset2; k++) {
@@ -136,14 +136,15 @@ namespace MSBT_Editor.Sectionsys
 
                 test[listNo] = list_item;
 
+                Console.WriteLine((int)(lblfspos - offset));
                 var nameoffindex = name_offset.IndexOf((int)(lblfspos-offset));
                 if (-1 != nameoffindex)list_name.Add(list_item) ;
 
                 //デバッグ用ハッシュ値を表示できます
-                //Console.WriteLine("ハッシュ値 " + CS.MSBT_Hash(list_item, entries).ToString("X8"));
-                //Debugger.HashTxt("ハッシュ値 " + CS.MSBT_Hash(list_item, entries).ToString("X8"));
-                //Debugger.HashTxt(list_item);
-                //Debugger.HashTxt("");
+                Console.WriteLine("ハッシュ値 " + CS.MSBT_Hash(list_item, entries).ToString("X8"));
+                Debugger.HashTxt("ハッシュ値 " + CS.MSBT_Hash(list_item, entries).ToString("X8"));
+                Debugger.HashTxt(list_item);
+                Debugger.HashTxt("");
 
                 list_no.Add(listNo);
                 k += num;

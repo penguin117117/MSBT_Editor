@@ -439,7 +439,7 @@ namespace MSBT_Editor.FileSys
             Bytes2Byte(br);
             Bytes2Byte(br);
             Bytes2Byte(br);
-            Bytes2Byte(br);
+            var lastbit = Bytes2Byte(br);
             string tagstrs = "<Unknown=\"Tag06\">";
             switch (bit6)
             {
@@ -447,6 +447,32 @@ namespace MSBT_Editor.FileSys
                 case 0x01:
                     if (bit8 != 08) break;
                     tagstrs = "</StarShipTag>";
+                    break;
+                case 0x02:
+                    if (bit8 != 08) break;
+                    tagstrs = "</Year01>";
+                    break;
+                case 0x03:
+                    if (bit8 != 08) break;
+                    tagstrs = "</Year02>";
+                    break;
+                case 0x05:
+                    if (bit8 != 08) break;
+                    switch (lastbit) {
+                        case 00:
+                            tagstrs = "</Hour>";
+                            break;
+                        case 01:
+                            tagstrs = "</Minutes>";
+                            break;
+                        case 02:
+                            tagstrs = "</Seconds>";
+                            break;
+                        case 03:
+                            tagstrs = "</AfterTheDecimalPoint>";
+                            break;
+                    }
+                    
                     break;
             }
             UTF16BE(tagstrs, list);
@@ -831,6 +857,25 @@ namespace MSBT_Editor.FileSys
                 case "/StarShipTag":
                     bits = StringToBytes("000E0006000100080000000000000000");
                     break;
+                case "/Year01":
+                    bits = StringToBytes("000E0006000200080000000000000000");
+                    break;
+                case "/Year02":
+                    bits = StringToBytes("000E0006000300080000000000000000");
+                    break;
+                case "/Hour":
+                    bits = StringToBytes("000E0006000500080000000000000000");
+                    break;
+                case "/Minutes":
+                    bits = StringToBytes("000E0006000500080000000000000001");
+                    break;
+                case "/Seconds":
+                    bits = StringToBytes("000E0006000500080000000000000002");
+                    break;
+                case "/AfterTheDecimalPoint":
+                    bits = StringToBytes("000E0006000500080000000000000003");
+                    break;
+
                 case "/ResultGalaxyName":
                     bits = StringToBytes("000E0007000000080000000000000000");
                     break;
@@ -891,6 +936,15 @@ namespace MSBT_Editor.FileSys
 
         public static void TextBoxInsert(TextBox tb , string str) {
             tb.SelectedText = str;
+        }
+
+        public static void TextBoxTagAdder(ListBox lb , TextBox tb , ComboBox cb , string[] strs) {
+            if (lb.Items.Count < 1) return;
+            if (cb.Items.Count == -1) return;
+            if (cb.SelectedIndex == -1) cb.SelectedIndex = 0;
+            int index = cb.SelectedIndex;
+            string tag = strs[index];
+            TextBoxInsert(tb, tag);
         }
 
     }

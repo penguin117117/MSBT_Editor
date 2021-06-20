@@ -48,12 +48,17 @@ namespace MSBT_Editor
             Dialog.SaveAs();
         }
 
+        public readonly string[] IconNameJP01 = { "ピーチ", "クッパ", "キノピオ", "マリオ", "マリオ2", "チコ", "ヨッシー", "腹ペコチコ", "ルイージ", "ベビーチコ", "アシストチコ", "ベーゴマン", "クリボー" };
+        public readonly string[] IconNameJP02 = { "彗星メダル", "コイン×3", "カラフルスターピース", "イエローチップ", "スターピース紫", "シルバースター", "スター", "グランドスター", "ブロンズスター", "コイン", "パープルコイン", "1UPキノコ", "ライフアップキノコ", "ブルースター", "スターリング", "ヨッシーキャプチャー花" };
+        public readonly string[] IconNameJP03 = { "ポインター", "2Pポインター", "ハンドポインター", "Wiiリモコン", "Aボタン", "Bボタン", "Cボタン", "Zボタン", "十字ボタン", "十字ボタン下", "十字ボタン上", "スティック", "ヌンチャク", "照準", "マイナスボタン", "プラスボタン", "×(かける)アイコン", "グリーンコメット", "銀の王冠", "銀の王冠宝石付き", "金の王冠", "手紙", "矢印下", "ストップウォッチ" };
         private void Form1_Load(object sender, EventArgs e)
         {
             Form1.Form1Instance = this;
 
-            string[] IconNameJP = { "彗星メダル", "銀の王冠", "ハンドポインター", "ピーチ", "銀の王冠宝石付き" };
-            comboBox5.Items.AddRange(IconNameJP);
+            
+            comboBox5.Items.AddRange(IconNameJP01);
+            comboBox6.Items.AddRange(IconNameJP02);
+            comboBox7.Items.AddRange(IconNameJP03);
             //コマンドライン引数を配列で取得する
             string[] files = System.Environment.GetCommandLineArgs();
 
@@ -306,7 +311,7 @@ namespace MSBT_Editor
             switch (comboBox3.Text)
             {
                 case "小":
-                    tag = "<Size =\"Small\">";
+                    tag = "<Size=\"Small\">";
                     break;
                 case "普通":
                     tag = "<Size=\"Normal\">";
@@ -420,23 +425,74 @@ namespace MSBT_Editor
 
         private void button11_Click(object sender, EventArgs e)
         {
+
+            //if (listBox1.Items.Count < 1) return;
+            //if (comboBox5.Items.Count == -1) return;
+            //if (comboBox5.SelectedIndex == -1) comboBox5.SelectedIndex = 0 ;
+            string[] IconTag = { "<Icon=\"Peach\">", "<Icon=\"Koopa\">", "<Icon=\"Kinopio\">", "<Icon=\"Mario\">", "<Icon=\"Mario2\">", "<Icon=\"Tico\">", "<Icon=\"Yoshi\">", "<Icon=\"HarapekoTico\">", "<Icon=\"Luigi\">", "<Icon=\"MasterTico\">", "<Icon=\"Columa\">", "<Icon=\"Begoman\">", "<Icon=\"Kuribo\">" };
+            Calculation_System.TextBoxTagAdder(listBox1,textBox1,comboBox5,IconTag);
+            //int index = comboBox5.SelectedIndex;
+            //string tag = IconTag[index];
+            //Calculation_System.TextBoxInsert(textBox1, tag);
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //if (listBox1.Items.Count < 1) return;
+            //if (comboBox6.Items.Count == -1) return;
+            //if (comboBox6.SelectedIndex == -1) comboBox6.SelectedIndex = 0;
+            string[] IconTag = { "<Icon=\"CometMedal\">", "<Icon=\"Coins\">", "<Icon=\"Starbit\">", "<Icon=\"StarPiece\">", "<Icon=\"PurpleStarbit\">", "<Icon=\"SilverStar\">", "<Icon=\"Star\">", "<Icon=\"GrandStar\">", "<Icon=\"BronzeStar\">", "<Icon=\"Coin\">", "<Icon=\"PurpleCoin\">", "<Icon=\"1UPMushroom\">", "<Icon=\"LifeUpMushroom\">", "<Icon=\"BlueStar\">", "<Icon=\"StarRing\">", "<Icon=\"Flower\">" };
+            Calculation_System.TextBoxTagAdder(listBox1, textBox1, comboBox6, IconTag);
+            //int index = comboBox6.SelectedIndex;
+            //string tag = IconTag[index];
+            //Calculation_System.TextBoxInsert(textBox1, tag);
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            string[] IconTag = { "<Icon=\"Pointer\">", "<Icon=\"PointerYellow\">", "<Icon=\"PointerHand\">", "<Icon=\"WiiMote\">", "<Icon=\"AButton\">", "<Icon=\"BButton\">", "<Icon=\"CButton\">", "<Icon=\"ZButton\">", "<Icon=\"DPad\">", "<Icon=\"DPadDown\">", "<Icon=\"DPadUp\">", "<Icon=\"JoyStick\">", "<Icon=\"Nunchuck\">", "<Icon=\"Aim\">", "<Icon=\"MButton\">", "<Icon=\"PButton\">", "<Icon=\"XIcon\">", "<Icon=\"GreenComet\">", "<Icon=\"SilverCrown\">", "<Icon=\"SilverCrownwJewel\">", "<Icon=\"GoldCrown\">", "<Icon=\"Letter\">", "<Icon=\"ArrowDown\">", "<Icon=\"StopWatch\">" };
+            Calculation_System.TextBoxTagAdder(listBox1, textBox1, comboBox7, IconTag);
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
             if (listBox1.Items.Count < 1) return;
-            string[] IconNameJP = { "彗星メダル", "銀の王冠", "ハンドポインター", "ピーチ", "銀の王冠宝石付き" };
-            string Icon = "";
+            string tag = "</Year01>";
+            Calculation_System.TextBoxInsert(textBox1, tag);
+        }
 
-            switch (comboBox5.Text)
-            {
-                case "彗星メダル":
-                    Icon = "CometMedal";
-                    break;
-                
-                default:
-                    Icon = "CometMedal";
-                    break;
-            }
+        private void button15_Click(object sender, EventArgs e)
+        {
+            if (listBox1.Items.Count < 1) return;
+            string tag = "</Year02>";
+            Calculation_System.TextBoxInsert(textBox1, tag);
+        }
 
-            string tag = "<Icon=\""+ Icon +"\">";
+        private void button16_Click(object sender, EventArgs e)
+        {
+            if (listBox1.Items.Count < 1) return;
+            string tag = "</Hour>";
+            Calculation_System.TextBoxInsert(textBox1, tag);
+        }
 
+        private void button17_Click(object sender, EventArgs e)
+        {
+            if (listBox1.Items.Count < 1) return;
+            string tag = "</Minutes>";
+            Calculation_System.TextBoxInsert(textBox1, tag);
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            if (listBox1.Items.Count < 1) return;
+            string tag = "</Seconds>";
+            Calculation_System.TextBoxInsert(textBox1, tag);
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            if (listBox1.Items.Count < 1) return;
+            string tag = "</AfterTheDecimalPoint>";
             Calculation_System.TextBoxInsert(textBox1, tag);
         }
     }
