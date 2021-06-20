@@ -1,8 +1,8 @@
 # MSBT_Editor
+<img alt="GitHub all releases" src="https://img.shields.io/github/downloads/penguin117117/MSBT_Editor/total"><br>
 SMG2のテキストを編集するツール
 ## ツールの情報
 全てのタグに対応しています。</br>
-アイコンタグは現バージョンでは、手動で入力する必要があります。</br>
 既存のMSBTエディターで編集したファイルは読み込むことが</br>
 出来ない可能性が高いです</br>
 理由はバイナリファイルが少し間違っているため。</br>
@@ -14,5 +14,8 @@ SMG2のテキストを編集するツール
 少しMSBTの知識が必要になります。
 
 ## 参考文献
+### MSBT関連
 http://kuribo64.net/wiki/?page=MSBT</br>
 https://github.com/IcySon55/3DLandMSBTeditor
+### MSBF関連
+http://kuribo64.net/wiki/?page=MSBF
