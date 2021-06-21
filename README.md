@@ -1,6 +1,7 @@
 # MSBT_Editor
 <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/penguin117117/MSBT_Editor/total"><br>
 SMG2のテキストを編集するツール
+
 ## ツールの情報
 全てのタグに対応しています。</br>
 既存のMSBTエディターで編集したファイルは読み込むことが</br>
@@ -12,6 +13,11 @@ SMG2のテキストを編集するツール
 または、ファイル→開くから編集したいMSBTファイルを選択してください。</br>
 新規でMSBTファイルを作成することも可能ですが</br>
 少しMSBTの知識が必要になります。
+## ファイルフォーマット
+https://github.com/penguin117117/MSBT_Editor/wiki
+
+## 要望やバグ報告は下記からお願いします。
+https://github.com/penguin117117/MSBT_Editor/issues
 
 ## 参考文献
 ### MSBT関連
