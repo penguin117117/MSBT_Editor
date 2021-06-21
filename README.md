@@ -2,8 +2,13 @@
 <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/penguin117117/MSBT_Editor/total"><br>
 SMG2のテキストを編集するツール
 
-## ツールの情報
+## ツールの特徴と情報
+#### 特徴
+SMG2で使用されるすべてのMSBTファイルに対応</br>
+海外版のMSBTエディターでは対応されていない</br>
+日本語のルビ機能に対応しています。</br>
 全てのタグに対応しています。</br>
+#### 情報
 既存のMSBTエディターで編集したファイルは読み込むことが</br>
 出来ない可能性が高いです</br>
 理由はバイナリファイルが少し間違っているため。</br>
