@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using MSBT_Editor.FileSys;
 using MSBT_Editor.Formsys;
 using MSBT_Editor.Sectionsys;
+using System.IO;
 
 namespace MSBT_Editor
 {
@@ -494,6 +495,103 @@ namespace MSBT_Editor
             if (listBox1.Items.Count < 1) return;
             string tag = "</AfterTheDecimalPoint>";
             Calculation_System.TextBoxInsert(textBox1, tag);
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            if (toolStripStatusLabel2.Text == " ") return;
+            if (textBox13.Text == "") return;
+            string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string msbtname = Path.GetFileNameWithoutExtension(toolStripStatusLabel2.Text);
+            string textpath = Path.Combine(Path.GetDirectoryName(appPath),msbtname+".txt");
+            Console.WriteLine(textpath);
+
+            File.WriteAllText(textpath, textBox13.Text);
+            //sw.Write(text);
+            //sw.Close();
+        }
+
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox2.Items.Count == 0) return;
+            var index = listBox2.SelectedIndex;
+            if (index == -1) index = 0;
+            FLW2 flw2 = new FLW2();
+            Console.WriteLine(index);
+            textBox19.Text = flw2.Item[index].TypeCheck.ToString("X4");
+            textBox20.Text = flw2.Item[index].Unknown1.ToString("X4");
+            textBox21.Text = flw2.Item[index].Unknown2.ToString("X4");
+            textBox22.Text = flw2.Item[index].Unknown3.ToString("X4");
+            textBox23.Text = flw2.Item[index].Unknown4.ToString("X4");
+            textBox24.Text = flw2.Item[index].Unknown5.ToString("X4");
+
+            var blnc = flw2.Branch_List_No.Count * 2;
+            var bnc = flw2.Branch_No.Count;
+
+            if (blnc != bnc) return;
+            if (-1 == flw2.Branch_List_No.IndexOf(index)) {
+                textBox25.Text = "";
+                textBox26.Text = "";
+                return;
+            }
+
+            var brannum = flw2.Item[index].Unknown5;
+
+            textBox25.Text = flw2.Branch_No[brannum].ToString("X4");
+            textBox26.Text = flw2.Branch_No[brannum+1].ToString("X4");
+            //if (blnc == index) {
+            //    textBox25.Text = "tes";
+            //}
+            //else {
+            //    textBox25.Text = "";
+            //}
+        }
+
+        private void textBox19_TextChanged(object sender, EventArgs e)
+        {
+            //if (listBox2.Items.Count == 0) return;
+            //var index = listBox2.SelectedIndex;
+            //FLW2 flw2 = new FLW2();
+            //FLW2.flw2_item item = flw2.Item[index];
+            //item.TypeCheck = Int16.Parse(textBox19.Text);
+            //flw2.Item[index] = item;
+            FLW2.FLW2_Item_Change(listBox2,textBox19);
+        }
+
+        private void textBox20_TextChanged(object sender, EventArgs e)
+        {
+            FLW2.FLW2_Item_Change(listBox2, textBox20);
+        }
+
+        private void textBox21_TextChanged(object sender, EventArgs e)
+        {
+            FLW2.FLW2_Item_Change(listBox2, textBox21);
+        }
+
+        private void textBox22_TextChanged(object sender, EventArgs e)
+        {
+            FLW2.FLW2_Item_Change(listBox2, textBox22);
+        }
+
+        private void textBox23_TextChanged(object sender, EventArgs e)
+        {
+            FLW2.FLW2_Item_Change(listBox2, textBox23);
+        }
+
+        private void textBox24_TextChanged(object sender, EventArgs e)
+        {
+            FLW2.FLW2_Item_Change(listBox2, textBox24);
+        }
+
+        private void textBox25_TextChanged(object sender, EventArgs e)
+        {
+            FLW2.FLW2_FlowType2_Branch(listBox2, textBox25);
+
+        }
+
+        private void textBox26_TextChanged(object sender, EventArgs e)
+        {
+            FLW2.FLW2_FlowType2_Branch(listBox2, textBox26);
         }
     }
 }

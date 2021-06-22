@@ -38,7 +38,7 @@ namespace MSBT_Editor.FileSys
             }
         }
 
-        public static void HashTxt(string txt, bool txttop = false)
+        public static void HashTxt(string txt, bool txttop = false , bool newline = true)
         {
             if (txttop == true)
             {
@@ -46,7 +46,15 @@ namespace MSBT_Editor.FileSys
             }
             else
             {
-                txtb13.AppendText(EN.NewLine + txt);
+                //txtb13.AppendText(EN.NewLine + txt);
+                if (newline == true)
+                {
+                    txtb13.AppendText(EN.NewLine + txt);
+                }
+                else
+                {
+                    txtb13.AppendText(txt);
+                }
             }
         }
     }

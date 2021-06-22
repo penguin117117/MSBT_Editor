@@ -24,6 +24,7 @@ namespace MSBT_Editor.MSBFsys
         private static Int16 unknown9;
 
         
+        
 
         public string Magic
         {

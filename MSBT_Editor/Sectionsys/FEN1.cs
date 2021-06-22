@@ -69,10 +69,15 @@ namespace MSBT_Editor.Sectionsys
             var tagcount = array2.Count().ToString();
             Debugger.MSBF_Text(tagcount);
             Debugger.MSBF_Text("");
+
+            Debugger.HashTxt("//////////FEN1//////////");
             for (int j = 0; j < tag_flag_count; j++) {
                 var txtnum = CS.Bytes2Byte(br);
-                Debugger.MSBF_Text(CS.Byte2Char(br,txtnum)) ;
-                Debugger.MSBF_Text(CS.Byte2Int(br).ToString());
+                //Debugger.MSBF_Text(CS.Byte2Char(br,txtnum)) ;
+                //Debugger.MSBF_Text(CS.Byte2Int(br).ToString());
+                
+                Debugger.HashTxt(CS.Byte2Char(br, txtnum));
+                Debugger.HashTxt(CS.Byte2Int(br).ToString("X8"));
             
             }
             CS.MSBF_Padding(br,fs.Position);

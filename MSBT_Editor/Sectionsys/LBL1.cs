@@ -126,7 +126,7 @@ namespace MSBT_Editor.Sectionsys
 
             string[] test = new string[/*entries+1*/0xFF];
             int testcount = 0;
-
+            Debugger.HashTxt("//////////ハッシュ値順//////////", true);
             for (long k = 0; k < (offset+sec_size)-offset2; k++) {
 
                 var lblfspos = fs.Position;
@@ -144,14 +144,14 @@ namespace MSBT_Editor.Sectionsys
                 Console.WriteLine("ハッシュ値 " + CS.MSBT_Hash(list_item, entries).ToString("X8"));
                 Debugger.HashTxt("ハッシュ値 " + CS.MSBT_Hash(list_item, entries).ToString("X8"));
                 Debugger.HashTxt(list_item);
+                Debugger.HashTxt("リスト番号" + listNo.ToString("X8")) ;
                 Debugger.HashTxt("");
-
                 list_no.Add(listNo);
                 k += num;
                 k += 4;
                 testcount++;
             }
-
+            Debugger.HashTxt("//////////リスト順//////////");
 
             //無意味かもしれない？(今後バグが発生しなければ削除予定)
             //if ((offset + sec_size) - offset2 < entries)
@@ -159,8 +159,16 @@ namespace MSBT_Editor.Sectionsys
             //    var paddingpos = Entries - ((offset + sec_size) - offset2);
             //    for (int a = 0; a < paddingpos; a++) fs.Position += 8;
             //}
-
-            for (int l = 0; l<testcount; l++)list1.Items.Add(test[l]) ;
+            var lino = list_no.ToList();
+            IOrderedEnumerable<int> list_No_sorted = lino.OrderBy(x => x);
+            var lino2 = list_No_sorted.ToArray();
+            for (int l = 0; l < testcount; l++) {
+                list1.Items.Add(test[l]);
+                Debugger.HashTxt("リスト番号"+lino2[l].ToString("X8"));
+                Debugger.HashTxt(test[l]);
+                Debugger.HashTxt("ハッシュ値 " + CS.MSBT_Hash(test[l], entries).ToString("X8"));
+                Debugger.HashTxt("");
+            } 
             CS.Padding(br,fs.Position);
         }
 
@@ -218,6 +226,8 @@ namespace MSBT_Editor.Sectionsys
                 bw.Write(CS.StringToBytes(strnum.ToString("X2")));
                 bw.Write(Encoding.GetEncoding(932).GetBytes(str));
                 bw.Write(CS.StringToBytes(hashdata[hashcount].listindex.ToString("X8")));
+                Console.WriteLine("リストインデックス");
+                Debugger.HashTxt("_" + hashdata[hashcount].listindex.ToString("X8"));
                 hashcount++;
             }
 

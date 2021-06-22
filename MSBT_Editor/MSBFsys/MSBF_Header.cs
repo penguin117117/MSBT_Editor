@@ -14,6 +14,7 @@ namespace MSBT_Editor.MSBFsys
     {
         public void Read(string path)
         {
+            list2.Items.Clear();
             FileStream fs = new FileStream(path, FileMode.Open);
             BinaryReader br = new BinaryReader(fs);
 
