@@ -20,7 +20,7 @@ namespace MSBT_Editor.FileSys
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.FileName = "default.msbt";
             ofd.InitialDirectory = @"C:\";
-            ofd.Filter = "メッセージファイル(*.msbt;*.Msbt)|*.msbt;*.Msbt|すべてのファイル(*.*)|*.*";
+            ofd.Filter = "メッセージファイル(*.msbt;*.Msbt)|*.msbt;*.Msbt|メッセージフローファイル(*.msbf;*.Msbf)|*.msbf;*.Msbf|すべてのファイル(*.*)|*.*";
             ofd.FilterIndex = 1;
             ofd.Title = "開くファイルを選択してください";
             ofd.RestoreDirectory = true;
@@ -87,24 +87,34 @@ namespace MSBT_Editor.FileSys
             Save_Path = filepath;
             if (file_flag == true)
             {
-                tssl2.Text = "";
-                tssl4.Text = "";
+                
+                
                 //拡張子の種類を判別
                 switch (File_Extension.ToLower())
                 {
                     case ".msbt":
+                        tssl2.Text = "";
                         MSBT_Header msbth = new MSBT_Header();
                         msbth.Read(filepath);
                         Console.WriteLine("MSBT_読み込み完了");
                         tssl2.Text = Path.GetFileName(filepath);
 
-                        if (File.Exists(MSBF_File_Path)==false) break;
+                        //if (File.Exists(MSBF_File_Path)==false) break;
+                        //MSBF_Header msbfh = new MSBF_Header();
+                        //msbfh.Read(MSBF_File_Path);
+                        //Console.WriteLine("MSBF_読み込み完了");
+                        //tssl4.Text = Path.GetFileName(MSBF_File_Path);
+
+                        break;
+                    case ".msbf":
+                        tssl4.Text = "";
+                        //if (File.Exists(MSBF_File_Path) == false) break;
                         MSBF_Header msbfh = new MSBF_Header();
                         msbfh.Read(MSBF_File_Path);
                         Console.WriteLine("MSBF_読み込み完了");
                         tssl4.Text = Path.GetFileName(MSBF_File_Path);
-
                         break;
+
                     default:
                         MessageBox.Show("未対応のファイルです" + "\r\n" + "MSBTファイルのみ読み込めます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;

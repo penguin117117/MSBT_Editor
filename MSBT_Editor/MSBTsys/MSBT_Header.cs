@@ -52,6 +52,8 @@ namespace MSBT_Editor.MSBTsys
             //Txt2_Text_List = new List<string>(TXT2.Text_Data);
             atr_nulldata = new List<string>();
             atr_nulldata = ATR1.nulldata;
+
+            if(list1.Items.Count > 0)
             list1.SelectedIndex = 0;
 
             //終了処理

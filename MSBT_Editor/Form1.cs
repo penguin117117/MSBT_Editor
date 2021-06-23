@@ -507,8 +507,6 @@ namespace MSBT_Editor
             Console.WriteLine(textpath);
 
             File.WriteAllText(textpath, textBox13.Text);
-            //sw.Write(text);
-            //sw.Close();
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -534,27 +532,19 @@ namespace MSBT_Editor
                 textBox26.Text = "";
                 return;
             }
-
+            textBox27.AppendText(Environment.NewLine + "selectlist");
             var brannum = flw2.Item[index].Unknown5;
+            textBox27.AppendText(Environment.NewLine + flw2.Branch_No[flw2.Branch_List_No.IndexOf(index)].ToString("X4")+"___"+ flw2.Branch_List_No.IndexOf(index));
 
-            textBox25.Text = flw2.Branch_No[brannum].ToString("X4");
-            textBox26.Text = flw2.Branch_No[brannum+1].ToString("X4");
-            //if (blnc == index) {
-            //    textBox25.Text = "tes";
-            //}
-            //else {
-            //    textBox25.Text = "";
-            //}
+            textBox25.Text = flw2.Branch_No[(flw2.Branch_List_No.IndexOf(index)*2)].ToString("X4");
+            textBox26.Text = flw2.Branch_No[(flw2.Branch_List_No.IndexOf(index)) * 2 +1].ToString("X4");
+
+            //textBox25.Text = flw2.Branch_No[brannum].ToString("X4");
+            //textBox26.Text = flw2.Branch_No[brannum+1].ToString("X4");
         }
 
         private void textBox19_TextChanged(object sender, EventArgs e)
         {
-            //if (listBox2.Items.Count == 0) return;
-            //var index = listBox2.SelectedIndex;
-            //FLW2 flw2 = new FLW2();
-            //FLW2.flw2_item item = flw2.Item[index];
-            //item.TypeCheck = Int16.Parse(textBox19.Text);
-            //flw2.Item[index] = item;
             FLW2.FLW2_Item_Change(listBox2,textBox19);
         }
 
@@ -585,11 +575,56 @@ namespace MSBT_Editor
 
         private void textBox25_TextChanged(object sender, EventArgs e)
         {
-            FLW2.FLW2_FlowType2_Branch(listBox2, textBox25);
+            
 
         }
 
         private void textBox26_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void Form1_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] fileName = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            var filecount = fileName.Count();
+
+            if (filecount == 2) { 
+                var path1 = Path.GetExtension(fileName[0]);
+                var path2 = Path.GetExtension(fileName[1]);
+
+                if (path1 == path2) {
+                    MessageBox.Show("2つファイルを読み込む場合"+"\n\r"+"MSBTとMSBFの組み合わせのみです", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            switch (filecount) {
+                case 1:
+                    Dialog.FileCheck(fileName[0]);
+                    break;
+                case 2:
+                    Dialog.FileCheck(fileName[0]);
+                    Dialog.FileCheck(fileName[1]);
+                    break;
+                default:
+                    MessageBox.Show("3つ以上のファイルはドロップできません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+            }
+        }
+
+        private void Form1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+            else e.Effect = DragDropEffects.None;
+        }
+
+        private void textBox25_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            textBox27.AppendText(Environment.NewLine + "25text");
+            FLW2.FLW2_FlowType2_Branch(listBox2, textBox25);
+        }
+
+        private void textBox26_KeyPress(object sender, KeyPressEventArgs e)
         {
             FLW2.FLW2_FlowType2_Branch(listBox2, textBox26);
         }
