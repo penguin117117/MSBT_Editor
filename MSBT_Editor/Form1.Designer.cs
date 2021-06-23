@@ -150,6 +150,8 @@ namespace MSBT_Editor
             this.textBox25 = new System.Windows.Forms.TextBox();
             this.textBox26 = new System.Windows.Forms.TextBox();
             this.textBox27 = new System.Windows.Forms.TextBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.listBox3 = new System.Windows.Forms.ListBox();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -172,6 +174,7 @@ namespace MSBT_Editor
             this.tabPage10.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -285,6 +288,7 @@ namespace MSBT_Editor
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox2.Size = new System.Drawing.Size(548, 128);
             this.textBox2.TabIndex = 4;
+            this.textBox2.Visible = false;
             // 
             // tabControl1
             // 
@@ -1142,8 +1146,7 @@ namespace MSBT_Editor
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.textBox27);
-            this.tabPage5.Controls.Add(this.groupBox8);
+            this.tabPage5.Controls.Add(this.groupBox9);
             this.tabPage5.Controls.Add(this.groupBox7);
             this.tabPage5.Controls.Add(this.listBox2);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
@@ -1162,6 +1165,7 @@ namespace MSBT_Editor
             this.textBox13.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox13.Size = new System.Drawing.Size(548, 116);
             this.textBox13.TabIndex = 7;
+            this.textBox13.Visible = false;
             // 
             // button19
             // 
@@ -1181,10 +1185,12 @@ namespace MSBT_Editor
             this.button20.TabIndex = 8;
             this.button20.Text = "デバッグテキストファイル排出";
             this.button20.UseVisualStyleBackColor = true;
+            this.button20.Visible = false;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
             // tabPage10
             // 
+            this.tabPage10.Controls.Add(this.textBox27);
             this.tabPage10.Controls.Add(this.button20);
             this.tabPage10.Controls.Add(this.textBox13);
             this.tabPage10.Controls.Add(this.textBox2);
@@ -1203,12 +1209,13 @@ namespace MSBT_Editor
             this.listBox2.Location = new System.Drawing.Point(6, 6);
             this.listBox2.Name = "listBox2";
             this.listBox2.ScrollAlwaysVisible = true;
-            this.listBox2.Size = new System.Drawing.Size(169, 352);
+            this.listBox2.Size = new System.Drawing.Size(169, 340);
             this.listBox2.TabIndex = 0;
             this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.groupBox8);
             this.groupBox7.Controls.Add(this.label28);
             this.groupBox7.Controls.Add(this.label27);
             this.groupBox7.Controls.Add(this.label26);
@@ -1223,7 +1230,7 @@ namespace MSBT_Editor
             this.groupBox7.Controls.Add(this.label23);
             this.groupBox7.Location = new System.Drawing.Point(181, 6);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(206, 164);
+            this.groupBox7.Size = new System.Drawing.Size(373, 164);
             this.groupBox7.TabIndex = 1;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "FLW2";
@@ -1336,9 +1343,9 @@ namespace MSBT_Editor
             this.groupBox8.Controls.Add(this.textBox25);
             this.groupBox8.Controls.Add(this.label30);
             this.groupBox8.Controls.Add(this.label29);
-            this.groupBox8.Location = new System.Drawing.Point(393, 6);
+            this.groupBox8.Location = new System.Drawing.Point(225, 12);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(161, 127);
+            this.groupBox8.Size = new System.Drawing.Size(142, 127);
             this.groupBox8.TabIndex = 12;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "フロータイプ2の場合のみ";
@@ -1381,11 +1388,33 @@ namespace MSBT_Editor
             // 
             // textBox27
             // 
-            this.textBox27.Location = new System.Drawing.Point(181, 199);
+            this.textBox27.Location = new System.Drawing.Point(6, 262);
             this.textBox27.Multiline = true;
             this.textBox27.Name = "textBox27";
-            this.textBox27.Size = new System.Drawing.Size(373, 157);
+            this.textBox27.Size = new System.Drawing.Size(333, 79);
             this.textBox27.TabIndex = 13;
+            this.textBox27.Visible = false;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.listBox3);
+            this.groupBox9.Location = new System.Drawing.Point(181, 176);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(373, 180);
+            this.groupBox9.TabIndex = 13;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "FEN1";
+            // 
+            // listBox3
+            // 
+            this.listBox3.FormattingEnabled = true;
+            this.listBox3.ItemHeight = 12;
+            this.listBox3.Location = new System.Drawing.Point(8, 18);
+            this.listBox3.Name = "listBox3";
+            this.listBox3.ScrollAlwaysVisible = true;
+            this.listBox3.Size = new System.Drawing.Size(120, 148);
+            this.listBox3.TabIndex = 0;
+            this.listBox3.Visible = false;
             // 
             // Form1
             // 
@@ -1434,13 +1463,13 @@ namespace MSBT_Editor
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.tabPage5.ResumeLayout(false);
-            this.tabPage5.PerformLayout();
             this.tabPage10.ResumeLayout(false);
             this.tabPage10.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1568,6 +1597,8 @@ namespace MSBT_Editor
         public System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.TabPage tabPage10;
         public System.Windows.Forms.TextBox textBox27;
+        private System.Windows.Forms.GroupBox groupBox9;
+        public System.Windows.Forms.ListBox listBox3;
     }
 }
 

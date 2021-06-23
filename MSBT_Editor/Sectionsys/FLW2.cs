@@ -257,8 +257,8 @@ namespace MSBT_Editor.Sectionsys
                                 FLW2.branch_list_no.Insert(blnitem.Index,index);
                                 txtb27.AppendText(Environment.NewLine + FLW2.branch_list_no[index]);
 
-                                FLW2.branch_no.Insert(blnitem.Index,0x0001);
-                                FLW2.branch_no.Insert(blnitem.Index, 0x0001);
+                                FLW2.branch_no.Insert(blnitem.Index,0x0000);
+                                FLW2.branch_no.Insert(blnitem.Index, 0x0000);
                                 item.Unknown5 = Convert.ToInt16(blnitem.Index);
                                 //txtb27.AppendText(Environment.NewLine + blnitem.Value+"___"+blnitem.Index.ToString());
                                 break;

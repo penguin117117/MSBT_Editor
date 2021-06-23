@@ -68,7 +68,8 @@ namespace MSBT_Editor
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            //this.textBox25.TextChanged -= new EventHandler(this.textBox25_TextChanged);
+            //this.textBox26.TextChanged -= new EventHandler(this.textBox26_TextChanged);
             //if (MSBT_Editor.MSBTsys.MSBT_Data.Txt2_Text_List.Count > 0)
             if (MSBT_Editor.MSBTsys.MSBT_Data.MSBT_All_Data.Text.Count > 0)
             {
@@ -103,6 +104,8 @@ namespace MSBT_Editor
             {
                 textBox1.Text = "null";
             }
+            //this.textBox25.TextChanged += new EventHandler(this.textBox25_TextChanged);
+            //this.textBox26.TextChanged += new EventHandler(this.textBox26_TextChanged);
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
@@ -511,6 +514,9 @@ namespace MSBT_Editor
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.textBox25.TextChanged -= new EventHandler(this.textBox25_TextChanged);
+            this.textBox26.TextChanged -= new EventHandler(this.textBox26_TextChanged);
+
             if (listBox2.Items.Count == 0) return;
             var index = listBox2.SelectedIndex;
             if (index == -1) index = 0;
@@ -526,10 +532,17 @@ namespace MSBT_Editor
             var blnc = flw2.Branch_List_No.Count * 2;
             var bnc = flw2.Branch_No.Count;
 
-            if (blnc != bnc) return;
+            if (blnc != bnc) {
+                this.textBox25.TextChanged += new EventHandler(this.textBox25_TextChanged);
+                this.textBox26.TextChanged += new EventHandler(this.textBox26_TextChanged);
+                return;
+            }
             if (-1 == flw2.Branch_List_No.IndexOf(index)) {
+
                 textBox25.Text = "";
                 textBox26.Text = "";
+                this.textBox25.TextChanged += new EventHandler(this.textBox25_TextChanged);
+                this.textBox26.TextChanged += new EventHandler(this.textBox26_TextChanged);
                 return;
             }
             textBox27.AppendText(Environment.NewLine + "selectlist");
@@ -541,6 +554,9 @@ namespace MSBT_Editor
 
             //textBox25.Text = flw2.Branch_No[brannum].ToString("X4");
             //textBox26.Text = flw2.Branch_No[brannum+1].ToString("X4");
+
+            this.textBox25.TextChanged += new EventHandler(this.textBox25_TextChanged);
+            this.textBox26.TextChanged += new EventHandler(this.textBox26_TextChanged);
         }
 
         private void textBox19_TextChanged(object sender, EventArgs e)
@@ -576,12 +592,15 @@ namespace MSBT_Editor
         private void textBox25_TextChanged(object sender, EventArgs e)
         {
             
+            textBox27.AppendText(Environment.NewLine + "25text");
+            FLW2.FLW2_FlowType2_Branch(listBox2, textBox25);
+            
 
         }
 
         private void textBox26_TextChanged(object sender, EventArgs e)
         {
-            
+            FLW2.FLW2_FlowType2_Branch(listBox2, textBox26);
         }
 
         private void Form1_DragDrop(object sender, DragEventArgs e)
@@ -620,13 +639,12 @@ namespace MSBT_Editor
 
         private void textBox25_KeyPress(object sender, KeyPressEventArgs e)
         {
-            textBox27.AppendText(Environment.NewLine + "25text");
-            FLW2.FLW2_FlowType2_Branch(listBox2, textBox25);
+            
         }
 
         private void textBox26_KeyPress(object sender, KeyPressEventArgs e)
         {
-            FLW2.FLW2_FlowType2_Branch(listBox2, textBox26);
+            
         }
     }
 }
