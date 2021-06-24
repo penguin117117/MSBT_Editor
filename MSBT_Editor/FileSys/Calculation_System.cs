@@ -22,7 +22,22 @@ namespace MSBT_Editor.FileSys
 
         public static string Byte2Str_UTF16BE(BinaryReader br, int readchers = 2)
         {
-            var strs = Encoding.GetEncoding("unicodeFFFE").GetString(br.ReadBytes(readchers));
+            string strs = "";
+            //ここで、発生するエラーは過去に既存のMSBTで編集したデータを使用している可能性が高い
+            try
+            {
+                strs = Encoding.GetEncoding("unicodeFFFE").GetString(br.ReadBytes(readchers));
+            }
+            catch (Exception e)
+            {
+                
+                br.Close();
+                MessageBox.Show("深刻なエラーが発生しました\n\r[" + e.Message + "]\n\r"+"ErrorNo 1" , "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("「以前に他のMSBTエディタで編集していませんか？」\n\r"+"ファイルフォーマット規則が一部破損しているので\n\r"+"このエディタでは開くことが出来ません", "このエラーの原因で考えられること", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("ゲームから吸い出した壊れていないデータを使用してください\n\r"+"または、正しい方法でバイナリを修正する必要があります。\n\r"+"このメッセージの後アプリケーションを強制終了します", "この問題への提案" ,MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Environment.Exit(0);
+            }
+            
             return strs;
         }
 
@@ -443,7 +458,10 @@ namespace MSBT_Editor.FileSys
             string tagstrs = "<Unknown=\"Tag06\">";
             switch (bit6)
             {
-                
+                case 0x00:
+                    if (bit8 != 08) break;
+                    tagstrs = "</WorldNo>";
+                    break;
                 case 0x01:
                     if (bit8 != 08) break;
                     tagstrs = "</StarShipTag>";
@@ -498,6 +516,14 @@ namespace MSBT_Editor.FileSys
                 case 0x01:
                     if (bit8 != 08) break;
                     tagstrs = "</ResultScenarioName>";
+                    break;
+                case 0x04:
+                    if (bit8 != 08) break;
+                    tagstrs = "</UserName>";
+                    break;
+                case 0x05:
+                    if (bit8 != 08) break;
+                    tagstrs = "</TotalPlayTime>";
                     break;
             }
             UTF16BE(tagstrs, list);
@@ -853,7 +879,10 @@ namespace MSBT_Editor.FileSys
                 case "Icon=\"SilverStar\"":
                     bits = StringToBytes("000E0003001A0002001A");
                     break;
-                
+
+                case "/World_No":
+                    bits = StringToBytes("000E0006000000080000000000000000");
+                    break;
                 case "/StarShipTag":
                     bits = StringToBytes("000E0006000100080000000000000000");
                     break;
@@ -881,6 +910,12 @@ namespace MSBT_Editor.FileSys
                     break;
                 case "/ResultScenarioName":
                     bits = StringToBytes("000E0007000100080000000000000001");
+                    break;
+                case "/UserName":
+                    bits = StringToBytes("000E0007000400080000000000000000");
+                    break;
+                case "/TotalPlayTime":
+                    bits = StringToBytes("000E0007000500080000000000000001");
                     break;
                 default:
                     if (str.Length > 3)

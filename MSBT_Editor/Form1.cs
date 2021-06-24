@@ -646,5 +646,34 @@ namespace MSBT_Editor
         {
             
         }
+
+        private void textBox28_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox29_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.textBox28.TextChanged -= new EventHandler(this.textBox28_TextChanged);
+            this.textBox29.TextChanged -= new EventHandler(this.textBox29_TextChanged);
+
+            if (listBox3.Items.Count == 0) return;
+            var index = listBox3.SelectedIndex;
+            if (index == -1) index = 0;
+
+            FEN1 fen1 = new FEN1();
+            textBox28.Text = fen1.Item1[index].tagflag.ToString("X8");
+            textBox29.Text = fen1.Item2[index].tagnum.ToString("X8");
+
+
+            this.textBox28.TextChanged += new EventHandler(this.textBox28_TextChanged);
+            this.textBox29.TextChanged += new EventHandler(this.textBox29_TextChanged);
+
+        }
     }
 }

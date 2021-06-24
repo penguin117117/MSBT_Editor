@@ -132,6 +132,7 @@ namespace MSBT_Editor.Sectionsys
             }
 
             for (int j = 0; j<Element.Count; j++) {
+                
                 string null_table = "";
                 if (Element.Count - 1 == j){
                     null_table = CS.Byte2Str_UTF16BE(br);
@@ -140,6 +141,7 @@ namespace MSBT_Editor.Sectionsys
                     
                     var check = Element[j + 1].null_offset - Element[j].null_offset;
                     Console.WriteLine(check.ToString("X"));
+                    Console.WriteLine("ATR1" + fs.Position.ToString("X"));
                     null_table = CS.Byte2Str_UTF16BE(br, check);
                     
                 }

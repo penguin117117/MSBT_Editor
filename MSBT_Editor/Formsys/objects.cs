@@ -20,6 +20,7 @@ namespace MSBT_Editor.Formsys
         protected static TextBox txtb13 = Form1.Form1Instance.textBox13;
         protected static ListBox list1 = Form1.Form1Instance.listBox1;
         protected static ListBox list2 = Form1.Form1Instance.listBox2;
+        protected static ListBox list3 = Form1.Form1Instance.listBox3;
         protected static ToolStripStatusLabel tssl2 = Form1.Form1Instance.toolStripStatusLabel2;
         protected static ToolStripStatusLabel tssl4 = Form1.Form1Instance.toolStripStatusLabel4;
        
