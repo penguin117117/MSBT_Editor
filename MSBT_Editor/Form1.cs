@@ -96,7 +96,27 @@ namespace MSBT_Editor
         {
             Form1.Form1Instance = this;
 
-            
+            comboBox8.Text = Properties.Settings.Default.言語;
+
+            Formsys.Langage.Langage_Check();
+            //switch (Properties.Settings.Default.言語) {
+            //    case "日本語":
+            //        comboBox5.Items.AddRange(IconNameJP01);
+            //        comboBox6.Items.AddRange(IconNameJP02);
+            //        comboBox7.Items.AddRange(IconNameJP03);
+            //        break;
+            //    case "EN":
+            //        comboBox5.Items.AddRange(IconNameJP01);
+            //        comboBox6.Items.AddRange(IconNameJP02);
+            //        comboBox7.Items.AddRange(IconNameJP03);
+            //        break;
+            //    default:
+            //        comboBox5.Items.AddRange(IconNameJP01);
+            //        comboBox6.Items.AddRange(IconNameJP02);
+            //        comboBox7.Items.AddRange(IconNameJP03);
+            //        break;
+
+            //}
             comboBox5.Items.AddRange(IconNameJP01);
             comboBox6.Items.AddRange(IconNameJP02);
             comboBox7.Items.AddRange(IconNameJP03);
@@ -104,6 +124,8 @@ namespace MSBT_Editor
             string[] files = System.Environment.GetCommandLineArgs();
 
             if (files.Length > 1) FileSys.Dialog.FileCheck(files[1]);
+
+            
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -581,35 +603,62 @@ namespace MSBT_Editor
                     label26.Text = "Msbtテキストlist番号";
                     label27.Text = "FLW2オフセット";
                     label28.Text = "不明5";
+                    if (Properties.Settings.Default.言語 == "日本語") break;
+                    label25.Text = "Group number";
+                    label26.Text = "Msbt text list number";
+                    label27.Text = "FLW2 offset";
+                    label28.Text = "Unknown5";
                     break;
                 case "0002":
                     label25.Text = "0002固定";
                     label26.Text = "不明3";
                     label27.Text = "不明4";
-                    label28.Text = "FLW2の末尾の分岐先オフセット";
+                    label28.Text = "分岐先オフセット";
+                    if (Properties.Settings.Default.言語 == "日本語") break;
+                    label25.Text = "0002 fixed";
+                    label26.Text = "Unknown3";
+                    label27.Text = "Unknown4";
+                    label28.Text = "Branch offset";
                     break;
                 case "0004":
                     label25.Text = "ジャンプ先";
                     label26.Text = "不明3";
                     label27.Text = "不明4";
                     label28.Text = "不明5";
+                    if (Properties.Settings.Default.言語 == "日本語") break;
+                    label25.Text = "Jump destination";
+                    label26.Text = "Unknown3";
+                    label27.Text = "Unknown4";
+                    label28.Text = "Unknown5";
                     break;
                 case "0003":
                     label25.Text = "イベント番号";
                     label26.Text = "不明3";
                     label27.Text = "不明4";
                     label28.Text = "不明5";
+                    if (Properties.Settings.Default.言語 == "日本語") break;
+                    label25.Text = "Event Number";
+                    label26.Text = "Unknown3";
+                    label27.Text = "Unknown4";
+                    label28.Text = "Unknown5";
                     break;
                 default:
                     label25.Text = "不明2";
                     label26.Text = "不明3";
                     label27.Text = "不明4";
                     label28.Text = "不明5";
+                    if (Properties.Settings.Default.言語 == "日本語") break;
+                    label25.Text = "Unknown2";
+                    label26.Text = "Unknown3";
+                    label27.Text = "Unknown4";
+                    label28.Text = "Unknown5";
                     break;
 
             }
 
             //if (flw2.Branch_List_No == null) return;
+
+            Console.WriteLine("/////////////listchec   " + listBox2.Items.Count);
 
             var blnc = flw2.Branch_List_No.Count*2;
             var bnc = flw2.Branch_No.Count;
@@ -629,7 +678,7 @@ namespace MSBT_Editor
                 return;
             }
             textBox27.AppendText(Environment.NewLine + "selectlist");
-            var brannum = flw2.Item[index].Unknown5;
+            //var brannum = flw2.Item[index].Unknown5;
             textBox27.AppendText(Environment.NewLine + flw2.Branch_No[flw2.Branch_List_No.IndexOf(index)].ToString("X4")+"___"+ flw2.Branch_List_No.IndexOf(index));
 
             textBox25.Text = flw2.Branch_No[(flw2.Branch_List_No.IndexOf(index)*2)].ToString("X4");
@@ -644,12 +693,16 @@ namespace MSBT_Editor
 
         private void textBox19_TextChanged(object sender, EventArgs e)
         {
+            this.listBox2.SelectedIndexChanged -= new EventHandler(this.listBox2_SelectedIndexChanged);
             FLW2.FLW2_Item_Change(listBox2,textBox19);
+            this.listBox2.SelectedIndexChanged += new EventHandler(this.listBox2_SelectedIndexChanged);
         }
 
         private void textBox20_TextChanged(object sender, EventArgs e)
         {
+            this.listBox2.SelectedIndexChanged -= new EventHandler(this.listBox2_SelectedIndexChanged);
             FLW2.FLW2_Item_Change(listBox2, textBox20);
+            this.listBox2.SelectedIndexChanged += new EventHandler(this.listBox2_SelectedIndexChanged);
         }
 
         private void textBox21_TextChanged(object sender, EventArgs e)
@@ -677,7 +730,7 @@ namespace MSBT_Editor
             
             textBox27.AppendText(Environment.NewLine + "25text");
             FLW2.FLW2_FlowType2_Branch(listBox2, textBox25);
-            
+            Console.WriteLine("★" + listBox2.Items.Count);
 
         }
 
@@ -777,50 +830,18 @@ namespace MSBT_Editor
             FLW2 flw2 = new FLW2();
             if (listBox2.Items.Count != 0)
             {
-                
-                    
-
-                    listBox2.Items.Add("メッセージエントリーポイント？");
-
-                    flw2.Item.Add(new FLW2.flw2_item(4,0,0,0,0,0));
-
-                    //MSBTsys.MSBT_Data.MSBT_All_Data.Text.Add("テキスト</End>");
-                    //MSBTsys.MSBT_Data.MSBT_All_Data.Item.Add(new ATR1.Item(0x1, 0x0, 0x0, 0x0, 0x0, 0xFF, 0xFF, 0x00));
-                    //MSBTsys.MSBT_Data.atr_nulldata.Add("");
-                
+                listBox2.Items.Add(Langage.FLW2_List_Langage(4));
+                flw2.Item.Add(new FLW2.flw2_item(4,0,0,0,0,0));
+                listBox2.EndUpdate();
             }
             else
             {
-
-                listBox2.Items.Add("メッセージエントリーポイント？");
-
+                listBox2.Items.Add(Langage.FLW2_List_Langage(4));
                 flw2.Item = new  List<FLW2.flw2_item>();
                 flw2.Item.Add(new FLW2.flw2_item(4, 0, 0, 0, 0, 0));
                 flw2.Branch_List_No = new List<int>();
                 flw2.Branch_No = new List<short>();
-                //flw2.Branch_List_No.Add(0);
-                //flw2.Branch_No.Add(0);
-
-                //MSBTsys.MSBT_Data.Data_List msbtdatalist = new MSBTsys.MSBT_Data.Data_List();
-                //msbtdatalist.Item = new List<ATR1.Item>();
-                //msbtdatalist.Text = new List<string>();
-                //MSBTsys.MSBT_Data.atr_nulldata = new List<string>();
-                //LBL1.list_name = new List<string>();
-                //LBL1.unknown = new List<int>();
-                //LBL1.unknownpos = new List<long>();
-
-                //listBox1.Items.Add(ListNameText.Text);
-                //LBL1.list_name.Add(ListNameText.Text);
-                //LBL1.unknown.Add(1);
-                //LBL1.unknownpos.Add(0);
-
-
-                //MSBTsys.MSBT_Data.atr_nulldata.Add("");
-                //MSBTsys.MSBT_Data.MSBT_All_Data = msbtdatalist;
-
-                //MSBTsys.MSBT_Data.MSBT_All_Data.Text.Add("テキスト</End>");
-                //MSBTsys.MSBT_Data.MSBT_All_Data.Item.Add(new ATR1.Item(0x1, 0x0, 0x0, 0x0, 0x0, 0xFF, 0xFF, 0x00));
-
+                listBox2.EndUpdate();
             }
         }
 
@@ -853,16 +874,8 @@ namespace MSBT_Editor
                     fen1.Item1.Add(new FEN1.Element(1,0));
                     var item2count = fen1.Item2.Count;
                     fen1.Item2.Add(new FEN1.ElementTag(textBox31.Text,item2count));
-
                     var hash = Calculation_System.MSBT_Hash(textBox31.Text,0x3B);
                     fen1.Hashes.Add(new FEN1.Hash_And_Unknown(1, hash));
-
-                    //IOrderedEnumerable<FEN1.Hash_And_Unknown> sorted = fen1.Hashes.OrderBy(x => x.Hash);
-                    //var hashdata = sorted.ToArray();
-
-                    //fen1.Hashes = new List<FEN1.Hash_And_Unknown>(hashdata);
-                    //var indexofnum = fen1.Hashes.IndexOf(new FEN1.Hash_And_Unknown(1, hash));
-                    //fen1.Hashes[indexofnum].
 
                 }
             }
@@ -912,6 +925,26 @@ namespace MSBT_Editor
         private void ListNameText_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void comboBox8_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBox8.SelectedIndex)
+            {
+                case 0:
+                    Properties.Settings.Default.言語 = "日本語";
+                    
+                    break;
+                case 1:
+                    Properties.Settings.Default.言語 = "EN";
+                    break;
+                default:
+                    Properties.Settings.Default.言語 = "日本語";
+                    break;
+            }
+
+            Properties.Settings.Default.Save();
+            Formsys.Langage.Langage_Check();
         }
     }
 }

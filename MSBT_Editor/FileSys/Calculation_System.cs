@@ -635,6 +635,7 @@ namespace MSBT_Editor.FileSys
 
         public static void UTF16BE_String_Writer(BinaryWriter bw , string str) {
             bw.Write(Encoding.GetEncoding("unicodeFFFE").GetBytes(str));
+            
         }
 
         
