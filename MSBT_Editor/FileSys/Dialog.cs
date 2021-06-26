@@ -13,15 +13,16 @@ namespace MSBT_Editor.FileSys
 {
     public class Dialog:objects
     {
-        private static string Save_Path = "None";
+        private static string Save_Path_Msbt = "None";
+        private static string Save_Path_Msbf = "None";
 
-        public static void Open() {
+        public static void Open(int filenum) {
 
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.FileName = "default.msbt";
             ofd.InitialDirectory = @"C:\";
             ofd.Filter = "メッセージファイル(*.msbt;*.Msbt)|*.msbt;*.Msbt|メッセージフローファイル(*.msbf;*.Msbf)|*.msbf;*.Msbf|すべてのファイル(*.*)|*.*";
-            ofd.FilterIndex = 1;
+            ofd.FilterIndex = filenum;
             ofd.Title = "開くファイルを選択してください";
             ofd.RestoreDirectory = true;
             ofd.CheckFileExists = true;
@@ -38,22 +39,37 @@ namespace MSBT_Editor.FileSys
         }
 
         public static void SaveAs() {
-            if (Save_Path == "None") {
+            if (Save_Path_Msbt == "None") {
                 MessageBox.Show("ファイルを開くまたは保存先を指定してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             MSBT_Header msbth = new MSBT_Header();
-            msbth.Write(Save_Path);
-            Console.WriteLine("MSBT_読み込み完了");
+            msbth.Write(Save_Path_Msbt);
+            //Console.WriteLine("MSBT_読み込み完了");
         }
 
-        public static void Save(){
+
+        public static void SaveAs_Msbf()
+        {
+            if (Save_Path_Msbf == "None")
+            {
+                MessageBox.Show("ファイルを開くまたは保存先を指定してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            MSBF_Header msbfh = new MSBF_Header();
+            msbfh.Write(Save_Path_Msbf);
+            //Console.WriteLine("MSBF_読み込み完了");
+        }
+
+        public static void Save(int filenum)
+        {
             //SaveFileDialogクラスのインスタンスを作成
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.FileName = "新しいファイル.msbt";
+            if (filenum == 2) sfd.FileName = "新しいファイル.msbf";
             sfd.InitialDirectory = @"C:\";
-            sfd.Filter = "メッセージファイル(*.msbt)|*.msbt;*.MSBT";
-            sfd.FilterIndex = 1;
+            sfd.Filter = "メッセージファイル(*.msbt;*.Msbt)|*.msbt;*.Msbt|メッセージフローファイル(*.msbf;*.Msbf)|*.msbf;*.Msbf";
+            sfd.FilterIndex = filenum;
             sfd.Title = "保存先のファイルを選択してください";
             sfd.RestoreDirectory = true;
             sfd.OverwritePrompt = true;
@@ -61,14 +77,22 @@ namespace MSBT_Editor.FileSys
             //ダイアログを表示する
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                //OKボタンがクリックされたとき、選択されたファイルを保存
-
-                MSBT_Header msbth = new MSBT_Header();
-                msbth.Write(sfd.FileName);
-                Save_Path = sfd.FileName;
-                Console.WriteLine("MSBT_読み込み完了");
-                //BCK bck = new BCK();
-                //bck.Write(sfd.FileName);
+                switch (filenum) {
+                    case 1:
+                        MSBT_Header msbth = new MSBT_Header();
+                        msbth.Write(sfd.FileName);
+                        Save_Path_Msbt = sfd.FileName;
+                        Console.WriteLine("MSBT_読み込み完了");
+                    break;
+                    case 2:
+                        MSBF_Header msbfh = new MSBF_Header();
+                        msbfh.Write(sfd.FileName);
+                        Save_Path_Msbf = sfd.FileName;
+                        break;
+                    default:
+                        MessageBox.Show("このメッセージが表示されている場合\n\r"+"アプリ製作者のミスの可能性が高いので\n\r"+"至急このバージョンの制作者に連絡してください\n\r"+"ErrorName StaffMiss001 ", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
             }
         }
 
@@ -84,7 +108,7 @@ namespace MSBT_Editor.FileSys
            
             var MSBF_File_Path = Path.ChangeExtension(filepath,"msbf");
 
-            Save_Path = filepath;
+            
             if (file_flag == true)
             {
                 
@@ -93,6 +117,7 @@ namespace MSBT_Editor.FileSys
                 switch (File_Extension.ToLower())
                 {
                     case ".msbt":
+                        Save_Path_Msbt = filepath;
                         tssl2.Text = "";
                         MSBT_Header msbth = new MSBT_Header();
                         msbth.Read(filepath);
@@ -107,6 +132,7 @@ namespace MSBT_Editor.FileSys
 
                         break;
                     case ".msbf":
+                        Save_Path_Msbf = filepath;
                         tssl4.Text = "";
                         //if (File.Exists(MSBF_File_Path) == false) break;
                         MSBF_Header msbfh = new MSBF_Header();

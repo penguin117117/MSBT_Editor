@@ -15,6 +15,7 @@ namespace MSBT_Editor.MSBFsys
         public void Read(string path)
         {
             list2.Items.Clear();
+            list3.Items.Clear();
             FileStream fs = new FileStream(path, FileMode.Open);
             BinaryReader br = new BinaryReader(fs);
 
@@ -54,6 +55,47 @@ namespace MSBT_Editor.MSBFsys
 
             fs.Close();
             br.Close();
+        }
+
+        public void Write(string filepath) {
+            FileStream fs = new FileStream(filepath, FileMode.Create);
+            BinaryWriter bw = new BinaryWriter(fs);
+            long MSBF_File_Size_pos;
+
+            //MSBFヘッダー
+            bw.Write(Encoding.ASCII.GetBytes("MsgFlwBn"));
+            bw.Write(CS.StringToBytes("FEFF"));
+            bw.Write(CS.StringToBytes("0000"));
+            bw.Write(CS.StringToBytes("0003"));
+            bw.Write(CS.StringToBytes("0002"));
+            bw.Write(CS.StringToBytes("0000"));
+
+            //ファイルサイズを後で追記するために位置を記憶させる
+            MSBF_File_Size_pos = fs.Position;
+
+            //ファイルサイズ、最後に追記するのでいったんint型の0
+            bw.Write(BitConverter.GetBytes(0x00000000));
+            bw.Write(CS.StringToBytes("0000"));
+            bw.Write(CS.StringToBytes("0000"));
+            bw.Write(CS.StringToBytes("0000"));
+            bw.Write(CS.StringToBytes("0000"));
+            bw.Write(CS.StringToBytes("0000"));
+
+            //インスタンス生成
+            FLW2 flw2 = new FLW2();
+            FEN1 fen1 = new FEN1();
+
+            //各セクションの書き込み
+            flw2.Write(bw,fs);
+            var filesize = fen1.Write(bw,fs);
+
+            fs.Seek(MSBF_File_Size_pos,SeekOrigin.Begin);
+            bw.Write(CS.StringToBytes(filesize.ToString("X8")));
+
+            //終了処理
+            fs.Close();
+            bw.Close();
+
         }
     }
 }

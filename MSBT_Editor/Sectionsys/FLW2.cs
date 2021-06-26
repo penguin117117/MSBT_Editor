@@ -82,7 +82,7 @@ namespace MSBT_Editor.Sectionsys
 
         //リスト宣言
         private static List<flw2_item> item;
-        private static List<int> branch_no;
+        private static List<Int16> branch_no;
         private static List<int> branch_list_no;
 
         public List<flw2_item> Item{
@@ -90,7 +90,7 @@ namespace MSBT_Editor.Sectionsys
             get => item;
         }
 
-        public List<int> Branch_No {
+        public List<Int16> Branch_No {
             set => branch_no = value;
             get => branch_no;
         }
@@ -105,7 +105,7 @@ namespace MSBT_Editor.Sectionsys
 
             //初期化
             Item = new List<flw2_item>();
-            Branch_No = new List<int>();
+            Branch_No = new List<Int16>();
             Branch_List_No = new List<int>();
 
             //ヘッダー情報
@@ -180,6 +180,64 @@ namespace MSBT_Editor.Sectionsys
             CS.MSBF_Padding(br,fs.Position);
         }
 
+        public void Write(BinaryWriter bw, FileStream fs) {
+            long pos_sec_size, pos_flw2_offset;
+            long pos_sectionend;
+            FLW2 flw2 = new FLW2();
+
+            //FLW2セクション
+            bw.Write(Encoding.ASCII.GetBytes("FLW2"));
+
+            //セクションサイズを後で追記するために位置を記憶させる
+            pos_sec_size = fs.Position;
+
+            //セクションサイズをいったん0(4byte)
+            CS.Null_Writer_Int32(bw, 3);
+
+            //FLW2オフセットを記憶する
+            pos_flw2_offset = fs.Position;
+
+            //エントリーサイズをバイナリに書き込む
+            var entrysize = list2.Items.Count;
+            bw.Write(CS.StringToBytes((/*Entry*/entrysize).ToString("X4")));
+
+            //ジャンプ先番号の数
+            var branchsize = flw2.Branch_List_No.Count;
+            bw.Write(CS.StringToBytes((/*Entry*/branchsize*2).ToString("X4")));
+
+            //パディング4バイト
+            CS.Null_Writer_Int32(bw);
+
+            for (int i = 0; i < entrysize; i++)
+            {
+                bw.Write(CS.StringToBytes(flw2.Item[i].TypeCheck.ToString("X4")));
+                bw.Write(CS.StringToBytes(flw2.Item[i].Unknown1.ToString("X4")));
+                bw.Write(CS.StringToBytes(flw2.Item[i].Unknown2.ToString("X4")));
+                bw.Write(CS.StringToBytes(flw2.Item[i].Unknown3.ToString("X4")));
+                bw.Write(CS.StringToBytes(flw2.Item[i].Unknown4.ToString("X4")));
+                bw.Write(CS.StringToBytes(flw2.Item[i].Unknown5.ToString("X4")));
+            }
+            Console.WriteLine(fs.Position.ToString("X"));
+            for (int j = 0; j < branchsize * 2; j++)
+            {
+                bw.Write(CS.StringToBytes(flw2.Branch_No[j].ToString("X4")));
+            }
+
+            //セクションの末尾を記憶する
+            pos_sectionend = fs.Position;
+
+            //セクションサイズ計算と書き込み
+            fs.Seek(pos_sec_size, SeekOrigin.Begin);
+            var sec_total = (int)(pos_sectionend-pos_flw2_offset);
+            bw.Write(CS.StringToBytes(sec_total.ToString("X8")));
+
+
+            //パディングの書き込み
+            fs.Seek(pos_sectionend, SeekOrigin.Begin);
+            CS.Padding_Writer(bw,fs.Position);
+
+        }
+
         public static string MSBF_Type_Check(int num , int index , bool delete_flag = false) {
             string str = "";
 
@@ -187,6 +245,7 @@ namespace MSBT_Editor.Sectionsys
             switch (num) {
                 case 0x0001:
                     str = "会話決定とジャンプ？";
+                    //labeltxt25.Text = "FLW2ジャンプ先";
                     if (delete_flag == true)
                     {
                         branch_list_no.RemoveAt(FLW2.branch_list_no.IndexOf(index));
@@ -194,6 +253,7 @@ namespace MSBT_Editor.Sectionsys
                     break;
                 case 0x0002:
                     str = "分岐？";
+                    //labeltxt25.Text = "固定";
                     if (delete_flag == false)
                     {
 
@@ -210,7 +270,7 @@ namespace MSBT_Editor.Sectionsys
                     }
                     break;
                 case 0x0004:
-                    str = "メッセージグループ？";
+                    str = "メッセージエントリーポイント？";
                     if (delete_flag == true)
                     {
                         branch_list_no.RemoveAt(FLW2.branch_list_no.IndexOf(index));
@@ -238,6 +298,7 @@ namespace MSBT_Editor.Sectionsys
             FLW2 flw2 = new FLW2();
             FLW2.flw2_item item = flw2.Item[index];
 
+            
 
             var numhex = Int16.Parse(tb.Text, System.Globalization.NumberStyles.HexNumber);
             //foreach (int num in branch_list_no)
@@ -246,21 +307,61 @@ namespace MSBT_Editor.Sectionsys
                 case "19":
                     if (item.TypeCheck != 2 && numhex == 2)
                     {
+                        Console.WriteLine("X→2");
                         txtb27.AppendText(Environment.NewLine + "X→2");
-                        if (-1 != FLW2.branch_list_no.IndexOf(index)) return;
-                        foreach (var blnitem in FLW2.branch_list_no.Select((Value, Index) => new { Value, Index })) {
-                            if (blnitem.Value  > index) {
+                        //if (-1 != FLW2.branch_list_no.IndexOf(index)) return;
+                        List<int> new_branch_list_no = FLW2.branch_list_no;
 
-                                lb.Items[index] = MSBF_Type_Check(numhex, index ,true);
+                        Console.WriteLine(FLW2.branch_list_no == null);
+                        Console.WriteLine(FLW2.branch_list_no.Count);
+                        if (FLW2.branch_list_no != null && FLW2.branch_list_no.Count == 0)
+                        {
+                            Console.WriteLine("value0 bf " + branch_no.Count);
+                            lb.Items[index] = MSBF_Type_Check(numhex, index, true);
+                            FLW2.branch_list_no.Add(index);
+                            //Console.WriteLine("value0 bf " + branch_no.Count);
+                            FLW2.branch_no.Add(0x0000);
+                            FLW2.branch_no.Add(0x0001);
+                            Console.WriteLine("value0  " + branch_no.Count);
+                            item.Unknown5 = Convert.ToInt16(0);
+                            item.TypeCheck = numhex;
+                            break;
+                        }
 
-                                txtb27.Text　= (Environment.NewLine+ "前" + FLW2.branch_list_no[index]);
-                                FLW2.branch_list_no.Insert(blnitem.Index,index);
-                                txtb27.AppendText(Environment.NewLine + FLW2.branch_list_no[index]);
+                        foreach (var blnitem in FLW2.branch_list_no.Select((Value, Index) => new { Value, Index }))
+                        {
 
-                                FLW2.branch_no.Insert(blnitem.Index,0x0000);
+                            //if (blnitem.Value == 0) {
+                            //    //Console.WriteLine("value0 bf " + branch_no.Count);
+                            //    //lb.Items[index] = MSBF_Type_Check(numhex, index, true);
+                            //    //FLW2.branch_list_no.Add(index);
+                            //    ////Console.WriteLine("value0 bf " + branch_no.Count);
+                            //    //FLW2.branch_no.Add(0x0000);
+                            //    //FLW2.branch_no.Add(0x0000);
+                            //    //Console.WriteLine("value0  "+branch_no.Count);
+                            //    //item.Unknown5 = Convert.ToInt16(blnitem.Index);
+                            //    break;
+                            //}
+                            Console.WriteLine(blnitem.Value + "" + index);
+                            if (blnitem.Value >= index)
+                            {
+                                Console.WriteLine("つうか");
+                                lb.Items[index] = MSBF_Type_Check(numhex, index, true);
+                                FLW2.branch_list_no.Insert(blnitem.Index, index);
+                                FLW2.branch_no.Insert(blnitem.Index, 0x0000);
                                 FLW2.branch_no.Insert(blnitem.Index, 0x0000);
                                 item.Unknown5 = Convert.ToInt16(blnitem.Index);
-                                //txtb27.AppendText(Environment.NewLine + blnitem.Value+"___"+blnitem.Index.ToString());
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("みつうか");
+                                lb.Items[index] = MSBF_Type_Check(numhex, index, true);
+                                FLW2.branch_list_no.Add(index);
+                                //Console.WriteLine("value0 bf " + branch_no.Count);
+                                FLW2.branch_no.Add(0x0002);
+                                FLW2.branch_no.Add(0x0003);
+                                item.Unknown5 = Convert.ToInt16(blnitem.Index + 2);
                                 break;
                             }
                         }
@@ -276,13 +377,13 @@ namespace MSBT_Editor.Sectionsys
                         //FLW2.branch_no.Add(0x0000);
                         //var branchpos = FLW2.branch_no.Count() - 2;
                         //item.Unknown5 = Convert.ToInt16(branchpos);
-                        
+
 
                         //lb.Items[index] = MSBF_Type_Check(numhex, index);
                         lb.SelectedIndex = index;
 
 
-                        
+
                     }
                     else if (item.TypeCheck == 2 && numhex != 2)
                     {
@@ -305,12 +406,39 @@ namespace MSBT_Editor.Sectionsys
                             flw2_1.Item[FLW2.branch_list_no[i]] = item1;
                         }
                         item.TypeCheck = numhex;
-                        
+
                         //Console.WriteLine(index + "_" + branch_list_no[item.Unknown5] +"_"+ branch_list_no[item.Unknown5+1]);
                         //var branchpos = FLW2.branch_no.Count() - 2;
                         //txtb24.Focus();
                         //txtb24.Text = branchpos.ToString("X4");
                         //item.Unknown5 = Convert.ToInt16(branchpos);
+                    }
+                    else {
+                        //lb.Items[index] = MSBF_Type_Check(numhex, index, true);
+                        switch (flw2.Item[index].TypeCheck)
+                        {
+                            case 1:
+                                lb.Items[index] = "会話決定とジャンプ？";
+                                
+                                break;
+                            case 2:
+                                lb.Items[index] = "分岐？";
+                                break;
+                            case 3:
+                                lb.Items[index] = "イベント制御？";
+                                break;
+                            case 4:
+                                lb.Items[index] = "メッセージエントリーポイント？";
+                                break;
+                            default:
+                                lb.Items[index] = "エラーデータ「正しいデータを読み込んで」";
+                                break;
+                        }
+
+                        
+                        
+                        
+
                     }
                     
 

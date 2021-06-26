@@ -16,6 +16,12 @@ namespace MSBT_Editor.Formsys
         protected static TextBox txtb15 = Form1.Form1Instance.textBox15;
         protected static TextBox txtb24 = Form1.Form1Instance.textBox24;
         protected static TextBox txtb27 = Form1.Form1Instance.textBox27;
+
+        protected static Label labeltxt25 = Form1.Form1Instance.label25;
+        protected static Label labeltxt26 = Form1.Form1Instance.label26;
+        protected static Label labeltxt27 = Form1.Form1Instance.label27;
+        protected static Label labeltxt28 = Form1.Form1Instance.label28;
+
         protected static TextBox msbtdebugtxt = Form1.Form1Instance.MSBT_Debug_Text;
         protected static TextBox txtb13 = Form1.Form1Instance.textBox13;
         protected static ListBox list1 = Form1.Form1Instance.listBox1;

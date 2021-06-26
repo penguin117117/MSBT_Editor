@@ -35,18 +35,58 @@ namespace MSBT_Editor
 
         private void 開くToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Dialog.Open();
+            Dialog.Open(1);
         }
 
         private void 保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (listBox1.Items.Count != 0 && (MSBTsys.MSBT_Data.MSBT_All_Data.Item.Count != 0) && MSBTsys.MSBT_Data.MSBT_All_Data.Text.Count != 0)
-                Dialog.Save();
+                Dialog.Save(1);
         }
 
         private void 上書き保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Dialog.SaveAs();
+        }
+
+        private void MSBF開くToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Dialog.Open(2);
+        }
+
+        private void MSBF保存ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FLW2 flw2 = new FLW2();
+            FEN1 fen1 = new FEN1();
+
+            if (listBox2.Items.Count == 0 || (flw2.Item.Count == 0)) {
+                MessageBox.Show("MSBFのFLW2の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (listBox3.Items.Count == 0 || (fen1.Hashes.Count == 0) || (fen1.Item2.Count == 0))
+            {
+                MessageBox.Show("MSBFのFEN1の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Dialog.Save(2);
+        }
+
+        private void MSBF上書き保存ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FLW2 flw2 = new FLW2();
+            FEN1 fen1 = new FEN1();
+
+            if (listBox2.Items.Count == 0 || (flw2.Item.Count == 0))
+            {
+                MessageBox.Show("MSBFのFLW2の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (listBox3.Items.Count == 0 || (fen1.Hashes.Count == 0) || (fen1.Item2.Count == 0))
+            {
+                MessageBox.Show("MSBFのFEN1の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Dialog.SaveAs_Msbf();
         }
 
         public readonly string[] IconNameJP01 = { "ピーチ", "クッパ", "キノピオ", "マリオ", "マリオ2", "チコ", "ヨッシー", "腹ペコチコ", "ルイージ", "ベビーチコ", "アシストチコ", "ベーゴマン", "クリボー" };
@@ -177,6 +217,12 @@ namespace MSBT_Editor
                     MSBTsys.MSBT_Data.MSBT_All_Data.Text.Add("テキスト</End>");
                     MSBTsys.MSBT_Data.MSBT_All_Data.Item.Add(new ATR1.Item(0x1, 0x0, 0x0, 0x0, 0x0, 0xFF, 0xFF, 0x00));
                     MSBTsys.MSBT_Data.atr_nulldata.Add("");
+
+                    LBL1.list_name.Add(ListNameText.Text);
+                    LBL1.unknown.Add(0x00000001);
+                    LBL1.unknownpos.Add(0);
+
+
                 }
             }
             else {
@@ -529,9 +575,46 @@ namespace MSBT_Editor
             textBox23.Text = flw2.Item[index].Unknown4.ToString("X4");
             textBox24.Text = flw2.Item[index].Unknown5.ToString("X4");
 
-            var blnc = flw2.Branch_List_No.Count * 2;
+            switch (flw2.Item[index].TypeCheck.ToString("X4")) {
+                case "0001":
+                    label25.Text = "グループ番号";
+                    label26.Text = "Msbtテキストlist番号";
+                    label27.Text = "FLW2オフセット";
+                    label28.Text = "不明5";
+                    break;
+                case "0002":
+                    label25.Text = "0002固定";
+                    label26.Text = "不明3";
+                    label27.Text = "不明4";
+                    label28.Text = "FLW2の末尾の分岐先オフセット";
+                    break;
+                case "0004":
+                    label25.Text = "ジャンプ先";
+                    label26.Text = "不明3";
+                    label27.Text = "不明4";
+                    label28.Text = "不明5";
+                    break;
+                case "0003":
+                    label25.Text = "イベント番号";
+                    label26.Text = "不明3";
+                    label27.Text = "不明4";
+                    label28.Text = "不明5";
+                    break;
+                default:
+                    label25.Text = "不明2";
+                    label26.Text = "不明3";
+                    label27.Text = "不明4";
+                    label28.Text = "不明5";
+                    break;
+
+            }
+
+            //if (flw2.Branch_List_No == null) return;
+
+            var blnc = flw2.Branch_List_No.Count*2;
             var bnc = flw2.Branch_No.Count;
 
+            Console.WriteLine(blnc+"_ひかくー_"+bnc);
             if (blnc != bnc) {
                 this.textBox25.TextChanged += new EventHandler(this.textBox25_TextChanged);
                 this.textBox26.TextChanged += new EventHandler(this.textBox26_TextChanged);
@@ -550,7 +633,7 @@ namespace MSBT_Editor
             textBox27.AppendText(Environment.NewLine + flw2.Branch_No[flw2.Branch_List_No.IndexOf(index)].ToString("X4")+"___"+ flw2.Branch_List_No.IndexOf(index));
 
             textBox25.Text = flw2.Branch_No[(flw2.Branch_List_No.IndexOf(index)*2)].ToString("X4");
-            textBox26.Text = flw2.Branch_No[(flw2.Branch_List_No.IndexOf(index)) * 2 +1].ToString("X4");
+            textBox26.Text = flw2.Branch_No[(flw2.Branch_List_No.IndexOf(index)*2)+1].ToString("X4");
 
             //textBox25.Text = flw2.Branch_No[brannum].ToString("X4");
             //textBox26.Text = flw2.Branch_No[brannum+1].ToString("X4");
@@ -649,12 +732,12 @@ namespace MSBT_Editor
 
         private void textBox28_TextChanged(object sender, EventArgs e)
         {
-
+            FEN1.FEN1_Item_Change(listBox3 , textBox28);
         }
 
         private void textBox29_TextChanged(object sender, EventArgs e)
         {
-
+            FEN1.FEN1_Item_Change(listBox3, textBox29);
         }
 
         private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
@@ -667,12 +750,167 @@ namespace MSBT_Editor
             if (index == -1) index = 0;
 
             FEN1 fen1 = new FEN1();
-            textBox28.Text = fen1.Item1[index].tagflag.ToString("X8");
+            var hashes = Calculation_System.MSBT_Hash(fen1.Item2[index].tagname , 0x3B);
+
+            //textBox28.Text = fen1.Item1[index].tagflag.ToString("X8");
+            textBox28.Text = fen1.Hashes[index].tagflag.ToString("X8");
             textBox29.Text = fen1.Item2[index].tagnum.ToString("X8");
 
 
             this.textBox28.TextChanged += new EventHandler(this.textBox28_TextChanged);
             this.textBox29.TextChanged += new EventHandler(this.textBox29_TextChanged);
+
+        }
+
+        private void textBox30_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox31_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            FLW2 flw2 = new FLW2();
+            if (listBox2.Items.Count != 0)
+            {
+                
+                    
+
+                    listBox2.Items.Add("メッセージエントリーポイント？");
+
+                    flw2.Item.Add(new FLW2.flw2_item(4,0,0,0,0,0));
+
+                    //MSBTsys.MSBT_Data.MSBT_All_Data.Text.Add("テキスト</End>");
+                    //MSBTsys.MSBT_Data.MSBT_All_Data.Item.Add(new ATR1.Item(0x1, 0x0, 0x0, 0x0, 0x0, 0xFF, 0xFF, 0x00));
+                    //MSBTsys.MSBT_Data.atr_nulldata.Add("");
+                
+            }
+            else
+            {
+
+                listBox2.Items.Add("メッセージエントリーポイント？");
+
+                flw2.Item = new  List<FLW2.flw2_item>();
+                flw2.Item.Add(new FLW2.flw2_item(4, 0, 0, 0, 0, 0));
+                flw2.Branch_List_No = new List<int>();
+                flw2.Branch_No = new List<short>();
+                //flw2.Branch_List_No.Add(0);
+                //flw2.Branch_No.Add(0);
+
+                //MSBTsys.MSBT_Data.Data_List msbtdatalist = new MSBTsys.MSBT_Data.Data_List();
+                //msbtdatalist.Item = new List<ATR1.Item>();
+                //msbtdatalist.Text = new List<string>();
+                //MSBTsys.MSBT_Data.atr_nulldata = new List<string>();
+                //LBL1.list_name = new List<string>();
+                //LBL1.unknown = new List<int>();
+                //LBL1.unknownpos = new List<long>();
+
+                //listBox1.Items.Add(ListNameText.Text);
+                //LBL1.list_name.Add(ListNameText.Text);
+                //LBL1.unknown.Add(1);
+                //LBL1.unknownpos.Add(0);
+
+
+                //MSBTsys.MSBT_Data.atr_nulldata.Add("");
+                //MSBTsys.MSBT_Data.MSBT_All_Data = msbtdatalist;
+
+                //MSBTsys.MSBT_Data.MSBT_All_Data.Text.Add("テキスト</End>");
+                //MSBTsys.MSBT_Data.MSBT_All_Data.Item.Add(new ATR1.Item(0x1, 0x0, 0x0, 0x0, 0x0, 0xFF, 0xFF, 0x00));
+
+            }
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            FLW2 flw2 = new FLW2();
+            
+            if (listBox2.Items.Count != 0 && (flw2.Item.Count != 0) && (flw2.Branch_List_No != null) && (flw2.Branch_No != null))
+            {
+                
+
+                var listselect = listBox2.SelectedIndex;
+                listBox2.Items.RemoveAt(listselect);
+                if (flw2.Item[listselect].TypeCheck == 2) {
+                    flw2.Branch_No.RemoveAt((flw2.Branch_List_No.IndexOf(listselect))*2);
+                    flw2.Branch_List_No.RemoveAt(flw2.Branch_List_No.IndexOf(listselect));
+                }
+                flw2.Item.RemoveAt(listselect);
+            }
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            FEN1 fen1 = new FEN1();
+            if (listBox3.Items.Count != 0)
+            {
+                if (textBox31.Text != "")
+                {
+                    listBox3.Items.Add(textBox31.Text);
+                    fen1.Item1.Add(new FEN1.Element(1,0));
+                    var item2count = fen1.Item2.Count;
+                    fen1.Item2.Add(new FEN1.ElementTag(textBox31.Text,item2count));
+
+                    var hash = Calculation_System.MSBT_Hash(textBox31.Text,0x3B);
+                    fen1.Hashes.Add(new FEN1.Hash_And_Unknown(1, hash));
+
+                    //IOrderedEnumerable<FEN1.Hash_And_Unknown> sorted = fen1.Hashes.OrderBy(x => x.Hash);
+                    //var hashdata = sorted.ToArray();
+
+                    //fen1.Hashes = new List<FEN1.Hash_And_Unknown>(hashdata);
+                    //var indexofnum = fen1.Hashes.IndexOf(new FEN1.Hash_And_Unknown(1, hash));
+                    //fen1.Hashes[indexofnum].
+
+                }
+            }
+            else
+            {
+                if (textBox31.Text != "")
+                {
+                    fen1.Item1 = new List<FEN1.Element>();
+                    fen1.Item2 = new List<FEN1.ElementTag>();
+                    fen1.Hashes = new List<FEN1.Hash_And_Unknown>();
+                    
+
+                    listBox3.Items.Add(textBox31.Text);
+                    fen1.Item1.Add(new FEN1.Element(1, 0));
+                    
+                    fen1.Item2.Add(new FEN1.ElementTag(textBox31.Text, 0));
+
+                    var hash = Calculation_System.MSBT_Hash(textBox31.Text, 0x3B);
+                    fen1.Hashes.Add(new FEN1.Hash_And_Unknown(1, hash));
+                }
+            }
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            FEN1 fen1 = new FEN1();
+
+            if (listBox3.Items.Count != 0 && (fen1.Item1.Count != 0) && (fen1.Item2.Count != 0) && (fen1.Hashes.Count != 0))
+            {
+                Console.WriteLine( fen1.Item1.Count());
+                Console.WriteLine(fen1.Item2.Count());
+                Console.WriteLine(fen1.Hashes.Count());
+
+                
+
+                var listselect = listBox3.SelectedIndex;
+                listBox3.Items.RemoveAt(listselect);
+                
+                fen1.Item1.RemoveAt(listselect);
+                fen1.Item2.RemoveAt(listselect);
+                fen1.Hashes.RemoveAt(listselect);
+
+                
+            }
+        }
+
+        private void ListNameText_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }
