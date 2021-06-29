@@ -98,7 +98,7 @@ namespace MSBT_Editor.Formsys
             labeltxt03.Text = "ダイアログタイプ";
             labeltxt04.Text = "ウィンドウタイプ";
             labeltxt05.Text = "イベントカメラID";
-            labeltxt06.Text = "会話制御エリア Obj_arg1";
+            labeltxt06.Text = "会話制御エリア Obj_arg0";
             labeltxt07.Text = "分からない6";
             labeltxt08.Text = "特殊テキストオフセット";
             labeltxt09.Text = "特殊テキスト(基本null) ※上級者以外触らない";
@@ -152,7 +152,7 @@ namespace MSBT_Editor.Formsys
             labeltxt03.Text = "Dialog Type";
             labeltxt04.Text = "Window Type";
             labeltxt05.Text = "Event Camera ID";
-            labeltxt06.Text = "MessageArea Obj_arg1";
+            labeltxt06.Text = "MessageArea Obj_arg0";
             labeltxt07.Text = "Unknown6";
             labeltxt08.Text = "Special Text Offset";
             labeltxt09.Text = "Unique text (Basically null) ※Don't touch it except advanced users";
