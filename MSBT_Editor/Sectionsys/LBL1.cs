@@ -133,6 +133,9 @@ namespace MSBT_Editor.Sectionsys
                 byte num = CS.Bytes2Byte(br);
                 string list_item = CS.Byte2Char(br, num);
                 var listNo = CS.Byte2Int(br);
+                Debugger.HashTxt("ListName_ " + list_item);
+                Debugger.HashTxt("ListNo_ " + listNo.ToString("X"));
+                Debugger.HashTxt("");
 
                 test[listNo] = list_item;
 
@@ -151,6 +154,8 @@ namespace MSBT_Editor.Sectionsys
                 k += 4;
                 testcount++;
             }
+
+            Debugger.HashTxt("リストかうんと" + testcount.ToString("X"));
             Debugger.HashTxt("//////////リスト順//////////");
 
             //無意味かもしれない？(今後バグが発生しなければ削除予定)
@@ -175,6 +180,8 @@ namespace MSBT_Editor.Sectionsys
         public void Write(BinaryWriter bw , FileStream fs) {
             int itemcount = 0;
             List<long> labelpos = new List<long>();
+            //HashData = new List<Hash_Data>();
+            //if(HashData == null)
             HashData = new List<Hash_Data>();
 
             //LBL1セクション
@@ -208,26 +215,36 @@ namespace MSBT_Editor.Sectionsys
                 var strnum = (byte)str.Count();
                 //ハッシュ値とリスト番号をリストへ
                 HashData.Add(new Hash_Data(CS.MSBT_Hash(str, Entries), itemcount));
+                Debugger.HashTxt(HashData[itemcount].hash.ToString("X")+"そーとまえ"+ HashData[itemcount].listindex.ToString("X"));
                 itemcount++;
             }
 
+            // ScenarioName_RedBlueExGalaxy3
+            //ScenarioName_RedBlueExGalaxy3
             //ハッシュ値を並び替えリスト番号も順番変更
             IOrderedEnumerable<Hash_Data> sorted = HashData.OrderBy(x => x.hash);
             var hashdata = sorted.ToArray();
 
+            //for (int i = 0; i < HashData.Count; i++)
+            //{
+            //    HashData[i] = new Hash_Data(hashdata2[i].hash, i);
+            //    Console.WriteLine(HashData[i].hash + "___" + HashData[i].listindex);
+            //}
+
+
             int hashcount = 0;
             foreach (var hashdatsorted in hashdata) {
                 var index = hashdatsorted.listindex;
-                list1.SelectedIndex = (int)index;
+                list1.SelectedIndex = (int)index/*(int)HashData[hashcount].listindex*/;
                 labelpos.Add(fs.Position);
                 var str = list1.Text;
                 var strnum = (byte)str.Count();
 
                 bw.Write(CS.StringToBytes(strnum.ToString("X2")));
                 bw.Write(Encoding.GetEncoding(932).GetBytes(str));
-                bw.Write(CS.StringToBytes(hashdata[hashcount].listindex.ToString("X8")));
-                Console.WriteLine("リストインデックス");
-                Debugger.HashTxt("_" + hashdata[hashcount].listindex.ToString("X8"));
+                bw.Write(CS.StringToBytes(hashdatsorted.listindex.ToString("X8")));
+                //Console.WriteLine("リストインデックス");
+                Debugger.HashTxt("_" + hashdatsorted.hash.ToString("X8") +"_"+hashdatsorted.listindex.ToString("X"));
                 hashcount++;
             }
 
@@ -248,6 +265,9 @@ namespace MSBT_Editor.Sectionsys
             
 
             var entry_hash_counter = 0;
+
+
+
             for (int i = 0; i < sorted.Count(); i++)
             {
 
@@ -276,7 +296,7 @@ namespace MSBT_Editor.Sectionsys
                 if ((hashdata[i].hash) - (hashdata[i - 1].hash) == 0)
                 {
                     samecheck++;
-                    //entry_hash_counter++;
+                    entry_hash_counter++;
                     continue;
                 }
 
@@ -286,6 +306,8 @@ namespace MSBT_Editor.Sectionsys
                     if (j == (hashdata[i].hash) - (hashdata[i - 1].hash)-1)
                     {
                         bw.Write(CS.StringToInt32_byte((unknown[i - samecheck]).ToString("X8")));
+                        Debugger.HashTxt(unknown[i - samecheck].ToString());
+                        //ScenarioName_RedBlueExGalaxy3
                     }
                     else
                     {
