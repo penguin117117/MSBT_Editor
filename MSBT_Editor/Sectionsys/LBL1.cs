@@ -42,6 +42,21 @@ namespace MSBT_Editor.Sectionsys
 
         }
 
+        public struct LBL_1st_Item {
+            public int HashSkipCounter;
+            public string ListName;
+            public UInt32 hash;
+            public LBL_1st_Item(int arg1,string arg2 ,UInt32 arg3) {
+                this.HashSkipCounter = arg1;
+                this.ListName = arg2;
+                this.hash = arg3;
+                
+            }
+        
+        }
+
+        public List<LBL_1st_Item> Item_1st;
+
         public List<Hash_Data> HashData;
 
         public string Magic {

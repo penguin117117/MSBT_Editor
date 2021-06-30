@@ -92,6 +92,11 @@ namespace MSBT_Editor.Formsys
             tabp2.Text = "MSBTテキスト編集";
             tabp3.Text = "リスト編集";
             tabp4.Text = "MSBFの設定";
+
+            tabp6.Text = "汎用タグ";
+            tabp7.Text = "数値必須タグ";
+            tabp8.Text = "特殊タグ";
+            tabp9.Text = "アイコンタグ";
             //label
             labeltxt01.Text = "NPCボイス";
             labeltxt02.Text = "カメラ";
@@ -110,9 +115,14 @@ namespace MSBT_Editor.Formsys
 
             labeltxt23.Text = "フロータイプ";
             labeltxt24.Text = "パディング";
+            labeltxt25.Text = "不明2";
+            labeltxt26.Text = "不明3";
+            labeltxt27.Text = "不明4";
+            labeltxt28.Text = "不明5";
 
             labeltxt29.Text = "ジャンプ先1";
             labeltxt30.Text = "ジャンプ先2";
+            labeltxt33.Text = "※まだすべての機能が解明できていないので" + Environment.NewLine + "不具合が発生する可能性があります";
             labeltxt34.Text = "この項目は名前が不要です";
             labeltxt35.Text = "名前必須(Flowなどを省いた名前)";
             labeltxt31.Text = "不明";
@@ -120,15 +130,38 @@ namespace MSBT_Editor.Formsys
             labeltxt39.Text = "この項目が　0　の場合"+ Environment.NewLine +"ゲームにテキストが認識されません";
 
             //groupbox
+            groupbox3.Text = "各セクションのエントリーサイズ";
             groupbox8.Text = "フロータイプ2の場合のみ";
 
             //button
+            button1.Text = "カラータグ挿入";
+            button2.Text = "行制御タグ挿入";
+            button3.Text = "サイズタグ挿入";
+            button4.Text = "センタリングタグ挿入";
             listadd.Text = "追加";
             listdelete.Text = "削除";
             button21.Text = "追加";
             button22.Text = "削除";
             button23.Text = "追加";
             button24.Text = "削除";
+
+            //combobox
+            combo1.Items.Clear();
+            combo2.Items.Clear();
+            combo3.Items.Clear();
+            combo4.Items.Clear();
+            string[] cb1 = { "ブラック" , "レッド" , "グリーン" , "ブルー" , "イエロー" , "パープル" , "オレンジ" , "グレー" , "カラーエンドタグ" };
+            string[] cb2 = { "改行" , "次のページ" ,"終了" };
+            string[] cb3 = { "小" , "普通" , "大" };
+            string[] cb4 = { "横方向" , "縦方向"};
+            combo1.Text = "ブラック";
+            combo1.Items.AddRange(cb1);
+            combo2.Text = "改行";
+            combo2.Items.AddRange(cb2);
+            combo3.Text = "普通";
+            combo3.Items.AddRange(cb3);
+            combo4.Text = "横方向";
+            combo4.Items.AddRange(cb4);
         }
 
         public static void EN()
@@ -146,6 +179,11 @@ namespace MSBT_Editor.Formsys
             tabp2.Text = "MSBT Text Editing";
             tabp3.Text = "List Editing";
             tabp4.Text = "MSBF Settings";
+
+            tabp6.Text = "Generic Tags";
+            tabp7.Text = "Numeric-Required Tags";
+            tabp8.Text = "Special Tags";
+            tabp9.Text = "Icon Tags";
             //label
             labeltxt01.Text = "NPC Voice";
             labeltxt02.Text = "Camera";
@@ -165,23 +203,53 @@ namespace MSBT_Editor.Formsys
 
             labeltxt23.Text = "Flow Type";
             labeltxt24.Text = "Padding";
+            labeltxt25.Text = "Unknown2";
+            labeltxt26.Text = "Unknown3";
+            labeltxt27.Text = "Unknown4";
+            labeltxt28.Text = "Unknown5";
 
             labeltxt29.Text = "Jump destination 1";
             labeltxt30.Text = "Jump destination 2";
             labeltxt31.Text = "Unknown";
             labeltxt32.Text = "FLW2 start index";
+            labeltxt33.Text = "※Not all features have been figured out yet," + Environment.NewLine + "　　so there may be some glitches.";
             labeltxt34.Text = "This item doesn't require a name.";
             labeltxt35.Text = "Name required (name without Flow, etc.)";
             labeltxt39.Text = "This item must not be 0";
 
             //groupbox
+            groupbox3.Text = "Entry size for each section";
             groupbox8.Text = "Only case of flow type 2";
+
+            //button
+            button1.Text = "Insert color tag";
+            button2.Text = "Insert line control tag"; 
+            button3.Text = "Insert size tag";
+            button4.Text = "Insert centering tag";
             listadd.Text = "Add";
             listdelete.Text = "Delete";
             button21.Text = "Add";
             button22.Text = "Delete";
             button23.Text = "Add";
             button24.Text = "Delete";
+
+            //combobox
+            combo1.Items.Clear();
+            combo2.Items.Clear();
+            combo3.Items.Clear();
+            combo4.Items.Clear();
+            string[] cb1 = { "Black", "Red", "Green", "Blue", "Yellow", "Purple", "Orange", "Gray", "ColorEnd" };
+            string[] cb2 = { "New Line", "Next Page", "End" };
+            string[] cb3 = { "Small", "General", "Large" };
+            string[] cb4 = { "Horizontal Direction", "Vertical direction" };
+            combo1.Text = "Black";
+            combo1.Items.AddRange(cb1);
+            combo2.Text = "New Line";
+            combo2.Items.AddRange(cb2);
+            combo3.Text = "General";
+            combo3.Items.AddRange(cb3);
+            combo4.Text = "Horizontal Direction";
+            combo4.Items.AddRange(cb4);
         }
     }
 }

@@ -166,6 +166,8 @@ namespace MSBT_Editor
             {
                 textBox1.Text = "null";
             }
+
+            label42.Text ="0x" + listBox1.SelectedIndex.ToString("X");
             //this.textBox25.TextChanged += new EventHandler(this.textBox25_TextChanged);
             //this.textBox26.TextChanged += new EventHandler(this.textBox26_TextChanged);
         }
@@ -239,12 +241,14 @@ namespace MSBT_Editor
                     //インスタンス生成と初期化
                     LBL1 lbl1 = new LBL1();
                     lbl1.HashData = new List<LBL1.Hash_Data>();
+                    lbl1.Item_1st = new List<LBL1.LBL_1st_Item>();
                     long listcounter = 0;
 
                     //リストボックス1のデータをハッシュデータ構造体に入れる
                     foreach (var listname in listBox1.Items) {
 
                         lbl1.HashData.Add(new LBL1.Hash_Data(Calculation_System.MSBT_Hash(listname.ToString(), lbl1.Entries),listcounter));
+                        
                         listcounter++;
                     }
 
@@ -262,26 +266,40 @@ namespace MSBT_Editor
 
                     //ハッシュ値がデフォルトの場合、新しいハッシュ値がハッシュリストの値を超える値を返す
                     if (equal_flag.hash == default) equal_flag = hashlist.LastOrDefault(x => x.hash  < newhash);
-                    
+
                     //ハッシュ値を基準に見つかったハッシュ構造体のリスト値に+1した値にリストを挿入する
-                    listBox1.Items.Insert((int)equal_flag.listindex +1 , ListNameText.Text);
-                    MSBTsys.MSBT_Data.MSBT_All_Data.Text.Insert((int)equal_flag.listindex + 1, "テキスト</End>");
-                    MSBTsys.MSBT_Data.MSBT_All_Data.Item.Insert((int)equal_flag.listindex + 1, new ATR1.Item(0x1, 0x0, 0x0, 0x0, 0x0, 0xFF, 0xFF, 0x00));
-                    MSBTsys.MSBT_Data.atr_nulldata.Insert((int)equal_flag.listindex + 1, "");
+                    equal_flag.listindex++;
+                    listBox1.Items.Insert((int)equal_flag.listindex, ListNameText.Text);
+                    MSBTsys.MSBT_Data.MSBT_All_Data.Text.Insert((int)equal_flag.listindex , "テキスト</End>");
+                    MSBTsys.MSBT_Data.MSBT_All_Data.Item.Insert((int)equal_flag.listindex , new ATR1.Item(0x1, 0x0, 0x0, 0x0, 0x0, 0xFF, 0xFF, 0x00));
+                    MSBTsys.MSBT_Data.atr_nulldata.Insert((int)equal_flag.listindex , "");
 
                     //
                     IEnumerable<LBL1.Hash_Data> noduplicates = hashlist.Distinct();
                     hashlist = new List<LBL1.Hash_Data>(noduplicates);
                     var foundhashlist = hashlist.LastOrDefault(x => x.hash == newhash);
-                    if (foundhashlist.hash == default) foundhashlist = hashlist.LastOrDefault(x => x.hash -1 < newhash); ;
+                    if (foundhashlist.hash == default) foundhashlist = hashlist.LastOrDefault(x => x.hash  < newhash); ;
                     //ラベル情報を追加する
                     var lbl1_newindex = hashlist.LastIndexOf(foundhashlist);
-                    Debugger.HashTxt("lbl newindex"+lbl1_newindex.ToString());
+                    //lbl1_newindex ++;
+                    foreach (var items in LBL1.list_name.Select((Value, Index) => (Value, Index))) {
+                        var hashdata = Calculation_System.MSBT_Hash(items.Value,lbl1.Entries);
+                        lbl1.Item_1st.Add(new LBL1.LBL_1st_Item(LBL1.unknown[items.Index],LBL1.list_name[items.Index],hashdata));
+                    }
+                    lbl1.Item_1st.Sort((a, b) => a.hash.CompareTo(b.hash));
+                    var found1stitem = lbl1.Item_1st.LastOrDefault(x => x.hash == newhash);
+                    if (found1stitem.hash == default) found1stitem = lbl1.Item_1st.LastOrDefault(x => x.hash < newhash);
+
+                    var newindex = lbl1.Item_1st.LastIndexOf(found1stitem);
+
+                    lbl1_newindex = newindex+1;
+                    Debugger.HashTxt("lbl newindex"+lbl1_newindex +1.ToString());
                     LBL1.name_offset.Insert(lbl1_newindex,0);
                     LBL1.list_name.Insert(lbl1_newindex, ListNameText.Text);
                     LBL1.unknown.Insert(lbl1_newindex, 0x00000001);
-                    LBL1.unknownpos.Insert(lbl1_newindex, 0);
+                    LBL1.unknownpos.Insert(lbl1_newindex , 0);
                 }
+
             }
             else {
                 //初回にデータを入れる場合
@@ -723,6 +741,7 @@ namespace MSBT_Editor
 
             Console.WriteLine(blnc+"_ひかくー_"+bnc);
             if (blnc != bnc) {
+                label43.Text = "0x" + listBox2.SelectedIndex.ToString("X");
                 this.textBox25.TextChanged += new EventHandler(this.textBox25_TextChanged);
                 this.textBox26.TextChanged += new EventHandler(this.textBox26_TextChanged);
                 return;
@@ -731,6 +750,7 @@ namespace MSBT_Editor
 
                 textBox25.Text = "";
                 textBox26.Text = "";
+                label43.Text = "0x" + listBox2.SelectedIndex.ToString("X");
                 this.textBox25.TextChanged += new EventHandler(this.textBox25_TextChanged);
                 this.textBox26.TextChanged += new EventHandler(this.textBox26_TextChanged);
                 return;
@@ -744,7 +764,7 @@ namespace MSBT_Editor
 
             //textBox25.Text = flw2.Branch_No[brannum].ToString("X4");
             //textBox26.Text = flw2.Branch_No[brannum+1].ToString("X4");
-
+            label43.Text = "0x" + listBox2.SelectedIndex.ToString("X");
             this.textBox25.TextChanged += new EventHandler(this.textBox25_TextChanged);
             this.textBox26.TextChanged += new EventHandler(this.textBox26_TextChanged);
         }
@@ -869,6 +889,7 @@ namespace MSBT_Editor
 
             if (listBox2.Items.Count > fen1.Item2[index].tagnum) listBox2.SelectedIndex = fen1.Item2[index].tagnum;
 
+            label44.Text = "0x" + listBox3.SelectedIndex.ToString("X");
             this.textBox28.TextChanged += new EventHandler(this.textBox28_TextChanged);
             this.textBox29.TextChanged += new EventHandler(this.textBox29_TextChanged);
 

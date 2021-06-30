@@ -20,6 +20,11 @@ namespace MSBT_Editor.Formsys
         //button
         protected static Button listadd = Form1.Form1Instance.AddListText;
         protected static Button listdelete = Form1.Form1Instance.DeleteListText;
+        protected static Button button1 = Form1.Form1Instance.button1;
+        protected static Button button2 = Form1.Form1Instance.button2;
+        protected static Button button3 = Form1.Form1Instance.button3;
+        protected static Button button4 = Form1.Form1Instance.button4;
+
         protected static Button button21 = Form1.Form1Instance.button21;
         protected static Button button22 = Form1.Form1Instance.button22;
         protected static Button button23 = Form1.Form1Instance.button23;
@@ -56,6 +61,7 @@ namespace MSBT_Editor.Formsys
         protected static Label labeltxt30 = Form1.Form1Instance.label30;
         protected static Label labeltxt31 = Form1.Form1Instance.label31;
         protected static Label labeltxt32 = Form1.Form1Instance.label32;
+        protected static Label labeltxt33 = Form1.Form1Instance.label33;
         protected static Label labeltxt34 = Form1.Form1Instance.label34;
         protected static Label labeltxt35 = Form1.Form1Instance.label35;
         protected static Label labeltxt39 = Form1.Form1Instance.label39;
@@ -66,7 +72,14 @@ namespace MSBT_Editor.Formsys
         protected static ListBox list2 = Form1.Form1Instance.listBox2;
         protected static ListBox list3 = Form1.Form1Instance.listBox3;
 
+        //combbox
+        protected static ComboBox combo1 = Form1.Form1Instance.comboBox1;
+        protected static ComboBox combo2 = Form1.Form1Instance.comboBox2;
+        protected static ComboBox combo3 = Form1.Form1Instance.comboBox3;
+        protected static ComboBox combo4 = Form1.Form1Instance.comboBox4;
+
         //groupbox
+        protected static GroupBox groupbox3 = Form1.Form1Instance.groupBox3;
         protected static GroupBox groupbox8 = Form1.Form1Instance.groupBox8;
 
         //tab
@@ -75,6 +88,11 @@ namespace MSBT_Editor.Formsys
         protected static TabPage tabp2 = Form1.Form1Instance.tabPage2;
         protected static TabPage tabp3 = Form1.Form1Instance.tabPage3;
         protected static TabPage tabp4 = Form1.Form1Instance.tabPage4;
+
+        protected static TabPage tabp6 = Form1.Form1Instance.tabPage6;
+        protected static TabPage tabp7 = Form1.Form1Instance.tabPage7;
+        protected static TabPage tabp8 = Form1.Form1Instance.tabPage8;
+        protected static TabPage tabp9 = Form1.Form1Instance.tabPage9;
 
         //menu
         protected static ToolStripMenuItem tlmi_file = Form1.Form1Instance.ファイルToolStripMenuItem;
