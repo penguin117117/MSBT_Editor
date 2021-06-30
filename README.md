@@ -10,7 +10,7 @@ SMG2のテキストを編集するツール
 ----------MSBT----------</br>
 Supports all MSBT files used by SMG2</br>
 It supports the Japanese ruby function, which is not supported by the overseas version of the MSBT editor.</br>
-Compatible with all tags </br>
+<s>Compatible with all tags</s> </br>
 ----------MSBF----------</br>
 Supports MSBF used in SMG2</br>
 There may be a bug because we haven't fully understood the function yet.</br>
@@ -46,7 +46,7 @@ http://kuribo64.net/wiki/?page=MSBF
 SMG2で使用されるすべてのMSBTファイルに対応</br>
 海外版のMSBTエディターでは対応されていない</br>
 日本語のルビ機能に対応しています。</br>
-全てのタグに対応しています。</br>
+<s>全てのタグに対応しています。</s> </br>
 ----------MSBF----------</br>
 SMG2で使用されるMSBFに対応しています</br>
 まだ、完全に機能を理解しきれていないので不具合が</br>
