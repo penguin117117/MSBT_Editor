@@ -89,9 +89,13 @@ namespace MSBT_Editor
             Dialog.SaveAs_Msbf();
         }
 
-        public readonly string[] IconNameJP01 = { "ピーチ", "クッパ", "キノピオ", "マリオ", "マリオ2", "チコ", "ヨッシー", "腹ペコチコ", "ルイージ", "ベビーチコ", "アシストチコ", "ベーゴマン", "クリボー" };
-        public readonly string[] IconNameJP02 = { "彗星メダル", "コイン×3", "カラフルスターピース", "イエローチップ", "スターピース紫", "シルバースター", "スター", "グランドスター", "ブロンズスター", "コイン", "パープルコイン", "1UPキノコ", "ライフアップキノコ", "ブルースター", "スターリング", "ヨッシーキャプチャー花" };
-        public readonly string[] IconNameJP03 = { "ポインター", "2Pポインター", "ハンドポインター", "Wiiリモコン", "Aボタン", "Bボタン", "Cボタン", "Zボタン", "十字ボタン", "十字ボタン下", "十字ボタン上", "スティック", "ヌンチャク", "照準", "マイナスボタン", "プラスボタン", "×(かける)アイコン", "グリーンコメット", "銀の王冠", "銀の王冠宝石付き", "金の王冠", "手紙", "矢印下", "ストップウォッチ" };
+        public static readonly string[] IconNameJP01 = { "ピーチ", "クッパ", "キノピオ", "マリオ", "マリオ2", "チコ", "ヨッシー", "腹ペコチコ", "ルイージ", "ベビーチコ", "アシストチコ", "ベーゴマン", "クリボー" };
+        public static readonly string[] IconNameJP02 = { "彗星メダル", "コイン×3", "カラフルスターピース", "イエローチップ", "スターピース紫", "シルバースター", "スター", "グランドスター", "ブロンズスター", "コイン", "パープルコイン", "1UPキノコ", "ライフアップキノコ", "ブルースター", "スターリング", "ヨッシーキャプチャー花" };
+        public static readonly string[] IconNameJP03 = { "ポインター", "2Pポインター", "ハンドポインター", "Wiiリモコン", "Aボタン", "Bボタン", "Cボタン", "Zボタン", "十字ボタン", "十字ボタン下", "十字ボタン上", "スティック", "ヌンチャク", "照準", "マイナスボタン", "プラスボタン", "×(かける)アイコン", "グリーンコメット", "銀の王冠", "銀の王冠宝石付き", "金の王冠", "手紙", "矢印下", "ストップウォッチ" };
+
+        public static readonly string[] IconNameEN01 = { "Peach", "Bowser", "Toad", "Mario", "Mario2", "Luma", "Yoshi", "HungryLuma", "Luigi", "MasterLuma", "Co-StarLuma", "Topman", "Goomba" };
+        public static readonly string[] IconNameEN02 = { "CometMedal", "Coin×3", "RainbowStarBit", "YellowChip", "PurpleStarBit", "SilverStar", "Star", "GrandStar", "BronzeStar", "Coin", "PurpleCoin", "1UPMushroom", "LifeUpMushroom", "BlueStar", "StarRing", "YoshiCapture" };
+        public static readonly string[] IconNameEN03 = { "Pointer", "2PPointer", "HandPointer", "WiiRemote", "AButton", "BButton", "CButton", "ZButton", "十PadButton", "十PadButtonUnder", "十PadButtonUp", "ControllerStick", "Nunchuck", "Aim", "MinusButton", "PlusButton", "×Icon", "GreenComet", "SilverCrown", "SilverCrownJewel", "GoldCrown", "Letter", "ArrowUnder", "StopWatch" };
         private void Form1_Load(object sender, EventArgs e)
         {
             Form1.Form1Instance = this;
@@ -99,27 +103,31 @@ namespace MSBT_Editor
             comboBox8.Text = Properties.Settings.Default.言語;
 
             Formsys.Langage.Langage_Check();
-            //switch (Properties.Settings.Default.言語) {
-            //    case "日本語":
-            //        comboBox5.Items.AddRange(IconNameJP01);
-            //        comboBox6.Items.AddRange(IconNameJP02);
-            //        comboBox7.Items.AddRange(IconNameJP03);
-            //        break;
-            //    case "EN":
-            //        comboBox5.Items.AddRange(IconNameJP01);
-            //        comboBox6.Items.AddRange(IconNameJP02);
-            //        comboBox7.Items.AddRange(IconNameJP03);
-            //        break;
-            //    default:
-            //        comboBox5.Items.AddRange(IconNameJP01);
-            //        comboBox6.Items.AddRange(IconNameJP02);
-            //        comboBox7.Items.AddRange(IconNameJP03);
-            //        break;
+            switch (Properties.Settings.Default.言語)
+            {
+                case "日本語":
+                    comboBox5.Items.AddRange(IconNameJP01);
+                    comboBox6.Items.AddRange(IconNameJP02);
+                    comboBox7.Items.AddRange(IconNameJP03);
+                    break;
+                case "EN":
+                    comboBox5.Items.AddRange(IconNameEN01);
+                    comboBox6.Items.AddRange(IconNameEN02);
+                    comboBox7.Items.AddRange(IconNameEN03);
+                    break;
+                default:
+                    comboBox5.Items.AddRange(IconNameJP01);
+                    comboBox6.Items.AddRange(IconNameJP02);
+                    comboBox7.Items.AddRange(IconNameJP03);
+                    break;
 
-            //}
-            comboBox5.Items.AddRange(IconNameJP01);
-            comboBox6.Items.AddRange(IconNameJP02);
-            comboBox7.Items.AddRange(IconNameJP03);
+            }
+            comboBox5.SelectedIndex = 0;
+            comboBox6.SelectedIndex = 0;
+            comboBox7.SelectedIndex = 0;
+            //comboBox5.Items.AddRange(IconNameJP01);
+            //comboBox6.Items.AddRange(IconNameJP02);
+            //comboBox7.Items.AddRange(IconNameJP03);
             //コマンドライン引数を配列で取得する
             string[] files = System.Environment.GetCommandLineArgs();
 

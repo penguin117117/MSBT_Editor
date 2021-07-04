@@ -21,6 +21,9 @@ namespace MSBT_Editor.Formsys
                     JP();
                     break;
             }
+            combo5.SelectedIndex = 0;
+            combo6.SelectedIndex = 0;
+            combo7.SelectedIndex = 0;
         }
 
         public static string FLW2_List_Langage(int num) {
@@ -117,7 +120,13 @@ namespace MSBT_Editor.Formsys
             labeltxt12.Text = "削除は対象のリスト選択後に" + Environment.NewLine + "右の削除ボタンを押す";
             labeltxt13.Text = "※ゲームの命名規則を守ってください";
             labeltxt15.Text = "※初心者は触らないでください" + Environment.NewLine + "データが破損する恐れあり";
+            labeltxt17.Text = "ふりがなの数";
+            labeltxt18.Text = "漢字の数";
+            labeltxt19.Text = "時間";
 
+            labeltxt20.Text = "キャラクター系";
+            labeltxt21.Text = "アイテム、オブジェクト";
+            labeltxt22.Text = "操作、その他";
             labeltxt23.Text = "フロータイプ";
             labeltxt24.Text = "パディング";
             labeltxt25.Text = "不明2";
@@ -136,13 +145,34 @@ namespace MSBT_Editor.Formsys
 
             //groupbox
             groupbox3.Text = "各セクションのエントリーサイズ";
+            groupbox4.Text = "ルビ";
+            groupbox5.Text = "タイマー";
+            groupbox6.Text = "システムメッセージ専用(その他で使えるか不明)";
             groupbox8.Text = "フロータイプ2の場合のみ";
+            
 
             //button
             button1.Text = "カラータグ挿入";
             button2.Text = "行制御タグ挿入";
             button3.Text = "サイズタグ挿入";
             button4.Text = "センタリングタグ挿入";
+            button5.Text = "ルビタグ挿入";
+            button6.Text = "タイマータグ挿入";
+            button7.Text = "プレイキャラクター";
+            button8.Text = "星船不明タグ";
+            button9.Text = "リザルトギャラクシー名";
+
+
+            button10.Text = "リザルトシナリオ名";
+            button11.Text = "NPC,キャラタグ挿入";
+            button12.Text = "アイテム,オブジェクトタグ挿入";
+            button13.Text = "操作,その他タグ挿入";
+            button14.Text = "年01？";
+            button15.Text = "年02？";
+            button16.Text = "時間";
+            button17.Text = "分";
+            button18.Text = "秒";
+            button19.Text = "小数点以下";
             listadd.Text = "追加";
             listdelete.Text = "削除";
             button21.Text = "追加";
@@ -155,6 +185,9 @@ namespace MSBT_Editor.Formsys
             combo2.Items.Clear();
             combo3.Items.Clear();
             combo4.Items.Clear();
+            combo5.Items.Clear();
+            combo6.Items.Clear();
+            combo7.Items.Clear();
             string[] cb1 = { "ブラック" , "レッド" , "グリーン" , "ブルー" , "イエロー" , "パープル" , "オレンジ" , "グレー" , "カラーエンドタグ" };
             string[] cb2 = { "改行" , "次のページ" ,"終了" };
             string[] cb3 = { "小" , "普通" , "大" };
@@ -167,6 +200,10 @@ namespace MSBT_Editor.Formsys
             combo3.Items.AddRange(cb3);
             combo4.Text = "横方向";
             combo4.Items.AddRange(cb4);
+
+            combo5.Items.AddRange(Form1.IconNameJP01);
+            combo6.Items.AddRange(Form1.IconNameJP02);
+            combo7.Items.AddRange(Form1.IconNameJP03);
         }
 
         public static void EN()
@@ -205,7 +242,13 @@ namespace MSBT_Editor.Formsys
             labeltxt13.Text = "Press delete after selecting the list";
 
             labeltxt15.Text = "※Don't touch this" + Environment.NewLine + "Data may break";
+            labeltxt17.Text = "FURIGANA_Num";
+            labeltxt18.Text = "KANJI_Num";
+            labeltxt19.Text = "Time";
 
+            labeltxt20.Text = "Character-Based";
+            labeltxt21.Text = "Item,Object";
+            labeltxt22.Text = "Operation etc.";
             labeltxt23.Text = "Flow Type";
             labeltxt24.Text = "Padding";
             labeltxt25.Text = "Unknown2";
@@ -224,6 +267,9 @@ namespace MSBT_Editor.Formsys
 
             //groupbox
             groupbox3.Text = "Entry size for each section";
+            groupbox4.Text = "Rubi";
+            groupbox5.Text = "Timer";
+            groupbox6.Text = "For system messages only (not sure if it can be used for others)";
             groupbox8.Text = "Only case of flow type 2";
 
             //button
@@ -231,6 +277,21 @@ namespace MSBT_Editor.Formsys
             button2.Text = "Insert line control tag"; 
             button3.Text = "Insert size tag";
             button4.Text = "Insert centering tag";
+            button5.Text = "Insert Rubi";
+            button6.Text = "Insert Timer";
+            button7.Text = "Player";
+            button8.Text = "StarshipUnknown";
+            button9.Text = "ResultGalaxyName";
+            button10.Text = "ResultScenarioName";
+            button11.Text = "InsertCharacterTag";
+            button12.Text = "InsertItem,ObjectTag";
+            button13.Text = "InsertOperationTag";
+            button14.Text = "Year01?";
+            button15.Text = "Year02?";
+            button16.Text = "Hour";
+            button17.Text = "Minute";
+            button18.Text = "Second";
+            button19.Text = "NumberOfDecimals";
             listadd.Text = "Add";
             listdelete.Text = "Delete";
             button21.Text = "Add";
@@ -243,6 +304,9 @@ namespace MSBT_Editor.Formsys
             combo2.Items.Clear();
             combo3.Items.Clear();
             combo4.Items.Clear();
+            combo5.Items.Clear();
+            combo6.Items.Clear();
+            combo7.Items.Clear();
             string[] cb1 = { "Black", "Red", "Green", "Blue", "Yellow", "Purple", "Orange", "Gray", "ColorEnd" };
             string[] cb2 = { "New Line", "Next Page", "End" };
             string[] cb3 = { "Small", "General", "Large" };
@@ -255,6 +319,10 @@ namespace MSBT_Editor.Formsys
             combo3.Items.AddRange(cb3);
             combo4.Text = "Horizontal Direction";
             combo4.Items.AddRange(cb4);
+
+            combo5.Items.AddRange(Form1.IconNameEN01);
+            combo6.Items.AddRange(Form1.IconNameEN02);
+            combo7.Items.AddRange(Form1.IconNameEN03);
         }
     }
 }
