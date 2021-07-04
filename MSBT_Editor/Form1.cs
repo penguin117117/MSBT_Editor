@@ -822,6 +822,20 @@ namespace MSBT_Editor
             string[] fileName = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             var filecount = fileName.Count();
 
+            ////デバッグに必須なので消さない
+            //foreach (var item in fileName)
+            //{
+            //    UnknownTag.Text = "";
+            //    Dialog.FileCheck(item);
+            //    if (toolStripStatusLabel2.Text == " ") return;
+            //    if (UnknownTag.Text == "") return;
+            //    string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            //    string msbtname = Path.GetFileNameWithoutExtension(toolStripStatusLabel2.Text);
+            //    string textpath = Path.Combine(Path.GetDirectoryName(appPath),"SE_"+ msbtname  + ".txt");
+            //    Console.WriteLine(textpath);
+            //    File.WriteAllText(textpath, UnknownTag.Text);
+            //}
+            //return;
             if (filecount == 2) { 
                 var path1 = Path.GetExtension(fileName[0]);
                 var path2 = Path.GetExtension(fileName[1]);
@@ -911,13 +925,13 @@ namespace MSBT_Editor
             if (listBox2.Items.Count != 0)
             {
                 listBox2.Items.Add(Langage.FLW2_List_Langage(4));
-                flw2.Item.Add(new FLW2.flw2_item(4,0,0,0,0,0));
+                flw2.Item.Add(new FLW2.flw2_item(4, 0, 0, 0, 0, 0));
                 listBox2.EndUpdate();
             }
             else
             {
                 listBox2.Items.Add(Langage.FLW2_List_Langage(4));
-                flw2.Item = new  List<FLW2.flw2_item>();
+                flw2.Item = new List<FLW2.flw2_item>();
                 flw2.Item.Add(new FLW2.flw2_item(4, 0, 0, 0, 0, 0));
                 flw2.Branch_List_No = new List<int>();
                 flw2.Branch_No = new List<short>();
@@ -946,17 +960,39 @@ namespace MSBT_Editor
         private void button23_Click(object sender, EventArgs e)
         {
             FEN1 fen1 = new FEN1();
+            FLW2 flw2 = new FLW2();
+            
+            short list2count = 0;
             if (listBox3.Items.Count != 0)
             {
+                list2count = (short)fen1.Item2.Count;
                 if (textBox31.Text != "")
                 {
                     listBox3.Items.Add(textBox31.Text);
                     fen1.Item1.Add(new FEN1.Element(1,0));
                     var item2count = fen1.Item2.Count;
-                    fen1.Item2.Add(new FEN1.ElementTag(textBox31.Text,item2count));
+                    fen1.Item2.Add(new FEN1.ElementTag(textBox31.Text,listBox2.Items.Count));
                     var hash = Calculation_System.MSBT_Hash(textBox31.Text,0x3B);
                     fen1.Hashes.Add(new FEN1.Hash_And_Unknown(1, hash));
+                    //treeView1.Nodes.Add(textBox31.Text);
 
+
+                    //if (listBox2.Items.Count != 0)
+                    //{
+                    //    listBox2.Items.Add(Langage.FLW2_List_Langage(4));
+                    //    flw2.Item.Add(new FLW2.flw2_item(4, 0, list2count, 0, 0, 0));
+                    //    listBox2.EndUpdate();
+                    //}
+                    //else
+                    //{
+                    //    listBox2.Items.Add(Langage.FLW2_List_Langage(4));
+                    //    flw2.Item = new List<FLW2.flw2_item>();
+                    //    flw2.Item.Add(new FLW2.flw2_item(4, 0, list2count, 0, 0, 0));
+                    //    flw2.Branch_List_No = new List<int>();
+                    //    flw2.Branch_No = new List<short>();
+                    //    listBox2.EndUpdate();
+                    //}
+                    //treeView1.Nodes[list2count].Tag = new FLW2.flw2_item(4, 0, list2count, 0, 0, 0);
                 }
             }
             else
@@ -971,10 +1007,28 @@ namespace MSBT_Editor
                     listBox3.Items.Add(textBox31.Text);
                     fen1.Item1.Add(new FEN1.Element(1, 0));
                     
-                    fen1.Item2.Add(new FEN1.ElementTag(textBox31.Text, 0));
+                    fen1.Item2.Add(new FEN1.ElementTag(textBox31.Text, listBox2.Items.Count));
 
                     var hash = Calculation_System.MSBT_Hash(textBox31.Text, 0x3B);
                     fen1.Hashes.Add(new FEN1.Hash_And_Unknown(1, hash));
+                    //treeView1.Nodes.Add(textBox31.Text);
+
+                    //if (listBox2.Items.Count != 0)
+                    //{
+                    //    listBox2.Items.Add(Langage.FLW2_List_Langage(4));
+                    //    flw2.Item.Add(new FLW2.flw2_item(4, 0, list2count, 0, 0, 0));
+                    //    listBox2.EndUpdate();
+                    //}
+                    //else
+                    //{
+                    //    listBox2.Items.Add(Langage.FLW2_List_Langage(4));
+                    //    flw2.Item = new List<FLW2.flw2_item>();
+                    //    flw2.Item.Add(new FLW2.flw2_item(4, 0, list2count, 0, 0, 0));
+                    //    flw2.Branch_List_No = new List<int>();
+                    //    flw2.Branch_No = new List<short>();
+                    //    listBox2.EndUpdate();
+                    //}
+                    //treeView1.Nodes[list2count].Tag = new FLW2.flw2_item(4, 0, list2count, 0, 0, 0);
                 }
             }
         }
@@ -1025,6 +1079,76 @@ namespace MSBT_Editor
 
             Properties.Settings.Default.Save();
             Formsys.Langage.Langage_Check();
+        }
+
+        public static TreeNode tvparenfinder(TreeView tv) {
+            var rootnode = tv.SelectedNode;
+            //this.textBox25.TextChanged -= new EventHandler(this.textBox25_TextChanged)
+            //this.treeView1.AfterSelect -= new EventHandler(this.treeView1_AfterSelect);
+            while (rootnode.Parent != null)
+            {
+                rootnode = rootnode.Parent;
+            }
+            return rootnode;
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            FLW2 flw2 = new FLW2();
+            if (treeView1.Nodes.Count == 0) return;
+            if (treeView1.SelectedNode.Tag == default) return;
+            
+            var oldindex = treeView1.SelectedNode;
+            var rootnode = Form1.tvparenfinder(treeView1);
+
+            var rootnodelistbox3find = 0;
+            if (listBox3.Items.Count != 0) { 
+                rootnodelistbox3find = listBox3.Items.IndexOf(rootnode.Text);
+                listBox3.SelectedIndex = rootnodelistbox3find;
+            }
+             
+
+            var roottag = (FLW2.flw2_item)rootnode.Tag;
+            var a = (FLW2.flw2_item)treeView1.SelectedNode.Tag;
+            var find = flw2.Item.IndexOf(a);
+            switch (a.TypeCheck) {
+                case 1:
+                    Console.WriteLine("メッセージ");
+                    if (listBox1.Items.Count == 0) break;
+                    if (listBox1.Items.Count > a.Unknown3) listBox1.SelectedIndex = a.Unknown3;
+                    if (listBox2.Items.Count == 0) break;
+                    if (listBox2.Items.Count > find) listBox2.SelectedIndex = find;
+                    break;
+                case 2:
+                    Console.WriteLine("分岐");
+                    if (listBox2.Items.Count == 0) break;
+                    if (listBox2.Items.Count > find) listBox2.SelectedIndex = find;
+                    break;
+                case 3:
+                    Console.WriteLine("イベント");
+                    if (listBox2.Items.Count == 0) break;
+                    if (listBox2.Items.Count > find) listBox2.SelectedIndex = find;
+                    break;
+                case 4:
+                    Console.WriteLine("エントリーポイント");
+                    if (listBox2.Items.Count == 0) break;
+                    if (listBox2.Items.Count > find) listBox2.SelectedIndex = find;
+                    break;
+                default:
+
+                    break;
+            }
+
+            //if (a.TypeCheck == 4) Console.WriteLine("せれくとつりー");
+            
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            TXT2 txt2 = new TXT2();
+            var str = HashCalculation.Text;
+            var hash = Calculation_System.MSBT_Hash(str,101);
+            HashCalculation.Text = hash.ToString("X8");
         }
     }
 }

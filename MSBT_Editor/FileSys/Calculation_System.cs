@@ -30,8 +30,8 @@ namespace MSBT_Editor.FileSys
             }
             catch (Exception e)
             {
-                
                 br.Close();
+                
                 MessageBox.Show("深刻なエラーが発生しました\n\r[" + e.Message + "]\n\r"+"ErrorNo 1" , "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 MessageBox.Show("「以前に他のMSBTエディタで編集していませんか？」\n\r"+"ファイルフォーマット規則が一部破損しているので\n\r"+"このエディタでは開くことが出来ません", "このエラーの原因で考えられること", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 MessageBox.Show("ゲームから吸い出した壊れていないデータを使用してください\n\r"+"または、正しい方法でバイナリを修正する必要があります。\n\r"+"このメッセージの後アプリケーションを強制終了します", "この問題への提案" ,MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -81,6 +81,9 @@ namespace MSBT_Editor.FileSys
                             continue;
                         case 0x01:
                             Tag01(br, fs, bit_list, bit5, bit6, bit7, bit8);
+                            continue;
+                        case 0x02:
+                            Tag02(br, fs, bit_list, bit5, bit6, bit7, bit8);
                             continue;
                         case 0x03:
                             Tag03(br, fs, bit_list, bit5, bit6, bit7, bit8);
@@ -140,6 +143,7 @@ namespace MSBT_Editor.FileSys
             }
 
             UTF16BE(tagstrs, list);
+            if (tagstrs.Substring(1,7)== "Unknown") Debugger.Unknowntagwriter(tagstrs);
             return true;
         }
 
@@ -225,9 +229,39 @@ namespace MSBT_Editor.FileSys
             }
 
             UTF16BE(tagstrs, list);
+            if (tagstrs.Substring(1, 7) == "Unknown") Debugger.Unknowntagwriter(tagstrs);
             return true;
         }
 
+
+        public static bool Tag02(BinaryReader br, FileStream fs, List<byte> list, byte bit5, byte bit6, byte bit7, byte bit8)
+        {
+            var bit9 = Bytes2Byte(br);
+            var bit10 = Bytes2Byte(br);
+
+            string tagstrs = "<SE=\""+ "000E00020000"+ bit7.ToString("X2")+ bit8.ToString("X2")+ bit9.ToString("X2")+ bit10.ToString("X2") + "\">";
+            var SEName = Byte2Str_UTF16BE(br , bit10);
+            tagstrs = "<SE=\""+ SEName +"\">";
+            //switch (bit6)
+            //{
+            //    case 0x00:
+            //        var bit11 = Bytes2Byte(br);
+            //        var bit12 = Bytes2Byte(br);
+            //        var rubi = (bit12 >> 1);
+            //        var target = (bit10 >> 1);
+            //        tagstrs = "<Rubi=\"" + rubi.ToString() + "\" Target=\"" + target.ToString() + "\">";
+
+            //        break;
+            //    case 0x03:
+            //        tagstrs = Tag_Colors(bit10);
+            //        break;
+            //}
+
+            UTF16BE(tagstrs, list);
+            //if (tagstrs.Substring(1, 7) == "Unknown") Debugger.Unknowntagwriter(tagstrs);
+            Debugger.Unknowntagwriter(tagstrs + EN.NewLine);
+            return true;
+        }
 
         public static bool Tag03(BinaryReader br, FileStream fs, List<byte> list, byte bit5, byte bit6, byte bit7, byte bit8)
         {
@@ -240,6 +274,35 @@ namespace MSBT_Editor.FileSys
             string tagstrs = "<Unknown=\"Tag03\">" + "<Icon=\"" + icon_num + "\">";
             switch (icon_num)
             {
+                //case "0003000500020005":
+                //    tagstrs = "<Icon=\"1Button\">";
+                //    break;
+                //case "0003000600020006":
+                //    tagstrs = "<Icon=\"2Button\">";
+                //    break;
+                //case "0003000C0002000C":
+                //    tagstrs = "<Icon=\"Coconut\">";
+                //    break;
+                //case "0003000E0002000E":
+                //    tagstrs = "<Icon=\"Star Bunny\">";
+                //    break;
+                //case "0003001400020014":
+                //    tagstrs = "<Icon=\"BlueChip\">";
+                //    break;
+                //case "0003001600020016":
+                //    tagstrs = "<Icon=\"HomeButton\">";
+                //    break;
+                //case "0003002400020024":
+                //    tagstrs = "<Icon=\"PointerGrip\">";
+                //    break;
+                //case "0003002500020026":
+                //    tagstrs = "<Icon=\"PointerNonGrip\">";
+                //    break;
+                //case "0003002A0002002A":
+                //    tagstrs = "<Icon=\"QuestionMark\">";
+                //    break;
+                    //tuika
+                    //
                 case "000300350002003A":
                     tagstrs = "<Icon=\"CometMedal\">";
                     break;
@@ -403,6 +466,7 @@ namespace MSBT_Editor.FileSys
             }
 
             UTF16BE(tagstrs, list);
+            if (tagstrs.Substring(1, 7) == "Unknown") Debugger.Unknowntagwriter(tagstrs);
             return true;
         }
 
@@ -425,6 +489,7 @@ namespace MSBT_Editor.FileSys
             }
             Console.WriteLine(tagstrs + "_てす");
             UTF16BE(tagstrs, list);
+            if (tagstrs.Substring(1, 7) == "Unknown") Debugger.Unknowntagwriter(tagstrs);
             return true;
         }
 
@@ -442,6 +507,7 @@ namespace MSBT_Editor.FileSys
             }
             Console.WriteLine(tagstrs + "_てす");
             UTF16BE(tagstrs, list);
+            if (tagstrs.Substring(1, 7) == "Unknown") Debugger.Unknowntagwriter(tagstrs);
             return true;
         }
 
@@ -474,6 +540,25 @@ namespace MSBT_Editor.FileSys
                     if (bit8 != 08) break;
                     tagstrs = "</Year02>";
                     break;
+                case 0x04:
+                    if (bit8 != 08) break;
+                   
+                    switch (lastbit)
+                    {
+                        case 00:
+                            tagstrs = "</Score01>";
+                            break;
+                        case 01:
+                            //tagstrs = "</Score?>";
+                            break;
+                        case 02:
+                            //tagstrs = "</Score??>";
+                            break;
+                        case 03:
+                            //tagstrs = "</Score???>";
+                            break;
+                    }
+                    break;
                 case 0x05:
                     if (bit8 != 08) break;
                     switch (lastbit) {
@@ -494,6 +579,9 @@ namespace MSBT_Editor.FileSys
                     break;
             }
             UTF16BE(tagstrs, list);
+            if(tagstrs.Length > 8)
+            Console.WriteLine("tagname   "+tagstrs.Substring(1, 7));
+            if (tagstrs.Substring(1, 7) == "Unknown" && tagstrs.Length >8) Debugger.Unknowntagwriter(tagstrs);
             return true;
         }
         public static bool Tag07(BinaryReader br, FileStream fs, List<byte> list, byte bit5, byte bit6, byte bit7, byte bit8)
@@ -527,6 +615,7 @@ namespace MSBT_Editor.FileSys
                     break;
             }
             UTF16BE(tagstrs, list);
+            if (tagstrs.Substring(1, 7) == "Unknown") Debugger.Unknowntagwriter(tagstrs);
             return true;
         }
 
@@ -919,6 +1008,25 @@ namespace MSBT_Editor.FileSys
                     bits = StringToBytes("000E0007000500080000000000000001");
                     break;
                 default:
+                    if (str.Length > 2)
+                    {
+                        if (str.Substring(0, 3) == "SE=")
+                        {
+                            Console.WriteLine(str);
+                            var strs = str.Split('\"');
+                            var strslength = strs[1].Length;
+                            var bit9to10 = strslength *2;
+                            var bit7to8 = bit9to10 + 2;
+                            //var se_no = Int32.Parse(strs[1]);
+                            var setagand = "000E00020000"+bit7to8.ToString("X4")+bit9to10.ToString("X4");
+                            var stringbytes = Encoding.GetEncoding("unicodeFFFE").GetBytes(strs[1]);
+                            var bytestring = BitConverter.ToString(stringbytes).Replace("-", string.Empty);
+
+                            Console.WriteLine(setagand + bytestring);
+                            bits = StringToBytes(setagand + bytestring);
+                            break;
+                        }
+                    }
                     if (str.Length > 3)
                     {
                         if (str.Substring(0, 4) == "Rubi")

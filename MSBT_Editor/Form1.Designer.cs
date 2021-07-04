@@ -182,6 +182,11 @@ namespace MSBT_Editor
             this.label42 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.UnknownTag = new System.Windows.Forms.TextBox();
+            this.HashCalculation = new System.Windows.Forms.TextBox();
+            this.button25 = new System.Windows.Forms.Button();
+            this.label45 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -352,7 +357,7 @@ namespace MSBT_Editor
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(6, 128);
+            this.textBox2.Location = new System.Drawing.Point(6, 6);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -1332,6 +1337,8 @@ namespace MSBT_Editor
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.label45);
+            this.tabPage4.Controls.Add(this.treeView1);
             this.tabPage4.Controls.Add(this.label33);
             this.tabPage4.Controls.Add(this.groupBox9);
             this.tabPage4.Controls.Add(this.groupBox7);
@@ -1584,6 +1591,8 @@ namespace MSBT_Editor
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.button25);
+            this.tabPage5.Controls.Add(this.HashCalculation);
             this.tabPage5.Controls.Add(this.textBox13);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
@@ -1599,12 +1608,13 @@ namespace MSBT_Editor
             this.textBox13.Multiline = true;
             this.textBox13.Name = "textBox13";
             this.textBox13.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox13.Size = new System.Drawing.Size(548, 422);
+            this.textBox13.Size = new System.Drawing.Size(548, 172);
             this.textBox13.TabIndex = 7;
             this.textBox13.Visible = false;
             // 
             // tabPage10
             // 
+            this.tabPage10.Controls.Add(this.UnknownTag);
             this.tabPage10.Controls.Add(this.MSBT_Debug_Text);
             this.tabPage10.Controls.Add(this.textBox27);
             this.tabPage10.Controls.Add(this.button20);
@@ -1619,7 +1629,7 @@ namespace MSBT_Editor
             // 
             // MSBT_Debug_Text
             // 
-            this.MSBT_Debug_Text.Location = new System.Drawing.Point(6, 347);
+            this.MSBT_Debug_Text.Location = new System.Drawing.Point(6, 229);
             this.MSBT_Debug_Text.Multiline = true;
             this.MSBT_Debug_Text.Name = "MSBT_Debug_Text";
             this.MSBT_Debug_Text.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -1629,7 +1639,7 @@ namespace MSBT_Editor
             // 
             // textBox27
             // 
-            this.textBox27.Location = new System.Drawing.Point(6, 262);
+            this.textBox27.Location = new System.Drawing.Point(6, 144);
             this.textBox27.Multiline = true;
             this.textBox27.Name = "textBox27";
             this.textBox27.Size = new System.Drawing.Size(333, 79);
@@ -1638,7 +1648,7 @@ namespace MSBT_Editor
             // 
             // button20
             // 
-            this.button20.Location = new System.Drawing.Point(345, 262);
+            this.button20.Location = new System.Drawing.Point(345, 200);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(209, 23);
             this.button20.TabIndex = 8;
@@ -1744,6 +1754,51 @@ namespace MSBT_Editor
             this.label44.Size = new System.Drawing.Size(23, 12);
             this.label44.TabIndex = 13;
             this.label44.Text = "null";
+            // 
+            // treeView1
+            // 
+            this.treeView1.Location = new System.Drawing.Point(329, 25);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(225, 307);
+            this.treeView1.TabIndex = 15;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            // 
+            // UnknownTag
+            // 
+            this.UnknownTag.Location = new System.Drawing.Point(6, 265);
+            this.UnknownTag.Multiline = true;
+            this.UnknownTag.Name = "UnknownTag";
+            this.UnknownTag.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.UnknownTag.Size = new System.Drawing.Size(548, 163);
+            this.UnknownTag.TabIndex = 14;
+            // 
+            // HashCalculation
+            // 
+            this.HashCalculation.Location = new System.Drawing.Point(6, 263);
+            this.HashCalculation.Name = "HashCalculation";
+            this.HashCalculation.Size = new System.Drawing.Size(351, 19);
+            this.HashCalculation.TabIndex = 8;
+            this.HashCalculation.Visible = false;
+            // 
+            // button25
+            // 
+            this.button25.Location = new System.Drawing.Point(371, 261);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(75, 23);
+            this.button25.TabIndex = 9;
+            this.button25.Text = "button25";
+            this.button25.UseVisualStyleBackColor = true;
+            this.button25.Visible = false;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(329, 10);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(129, 12);
+            this.label45.TabIndex = 16;
+            this.label45.Text = "テスト機能/Test function";
             // 
             // Form1
             // 
@@ -1976,6 +2031,11 @@ namespace MSBT_Editor
         private System.Windows.Forms.Label label44;
         public System.Windows.Forms.GroupBox groupBox3;
         public System.Windows.Forms.Label label33;
+        public System.Windows.Forms.TreeView treeView1;
+        public System.Windows.Forms.TextBox UnknownTag;
+        private System.Windows.Forms.Button button25;
+        private System.Windows.Forms.TextBox HashCalculation;
+        private System.Windows.Forms.Label label45;
     }
 }
 

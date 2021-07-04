@@ -72,6 +72,9 @@ namespace MSBT_Editor.Formsys
         protected static ListBox list2 = Form1.Form1Instance.listBox2;
         protected static ListBox list3 = Form1.Form1Instance.listBox3;
 
+        //
+        protected static TreeView treeview1 = Form1.Form1Instance.treeView1;
+
         //combbox
         protected static ComboBox combo1 = Form1.Form1Instance.comboBox1;
         protected static ComboBox combo2 = Form1.Form1Instance.comboBox2;
@@ -107,6 +110,9 @@ namespace MSBT_Editor.Formsys
         protected static ToolStripStatusLabel tssl1 = Form1.Form1Instance.toolStripStatusLabel1;
         protected static ToolStripStatusLabel tssl2 = Form1.Form1Instance.toolStripStatusLabel2;
         protected static ToolStripStatusLabel tssl4 = Form1.Form1Instance.toolStripStatusLabel4;
+
+        //
+        protected static TextBox unknowntag = Form1.Form1Instance.UnknownTag;
        
     }
 }

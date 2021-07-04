@@ -311,7 +311,6 @@ namespace MSBT_Editor.Sectionsys
                 if ((hashdata[i].hash) - (hashdata[i - 1].hash) == 0)
                 {
                     samecheck++;
-                    entry_hash_counter++;
                     continue;
                 }
 

@@ -16,7 +16,7 @@ namespace MSBT_Editor.Sectionsys
         public int sec_size;
         public int unknown1;
         public int unknown2;
-        public int entries;
+        public static int entries;
         public List<long> txt_pos;
         public static List<string> Text_Data;
         

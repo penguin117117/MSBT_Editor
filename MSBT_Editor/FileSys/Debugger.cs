@@ -57,5 +57,9 @@ namespace MSBT_Editor.FileSys
                 }
             }
         }
+
+        public static void Unknowntagwriter(string str) {
+            unknowntag.AppendText(str);
+        }
     }
 }

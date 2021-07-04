@@ -50,6 +50,9 @@ namespace MSBT_Editor.Formsys
                 case 0x0004:
                     str = "メッセージエントリーポイント？";
                     break;
+                default:
+                    str ="エラー "+num.ToString();
+                    break;
 
             }
             return str;
@@ -72,7 +75,9 @@ namespace MSBT_Editor.Formsys
                 case 0x0004:
                     str = "Message entry point";
                     break;
-
+                default:
+                    str = "エラー " + num.ToString();
+                    break;
             }
             return str;
         }
