@@ -20,7 +20,11 @@ namespace MSBT_Editor.Sectionsys
         private static int unknown2;
         private static int entry;
 
-        
+        private static List<Int16> EventNo;
+        private static List<Int16> BranchNo;
+        private static List<Int16> BranchNo2;
+        private static List<List<Int16>> BranchNoItems;
+
         public string Magic {
             set => magic = value;
             get => magic;
@@ -230,7 +234,7 @@ namespace MSBT_Editor.Sectionsys
                 tagcounter++;
             }
 
-           
+
             FLW2 flw2 = new FLW2();
 
             var rootnodecounter = 0;
@@ -238,13 +242,18 @@ namespace MSBT_Editor.Sectionsys
             Console.WriteLine(flw2.Branch_No.Count);
 
             var nodecount = treeview1.Nodes.Count;
-            for (var i = 0;  i< nodecount; i++) {
+            for (var i = 0; i < nodecount; i++)
+            {
+                BranchNoItems = new List<List<short>>();
+                BranchNo = new List<short>();
+                BranchNo2 = new List<short>();
+                EventNo = new List<short>();
                 List<ElementTag> fen1newiteme = new List<ElementTag>(Item2);
 
                 var rootnode_element = fen1newiteme.FirstOrDefault(x => x.tagname == treeview1.Nodes[rootnodecounter].Text);
                 Console.WriteLine(treeview1.Nodes[rootnodecounter].Text);
                 var flw2item = flw2.Item[rootnode_element.tagnum];
-                
+
                 //エントリーポイントをサブノードに追加
                 var entrypointnum = flw2item.TypeCheck;
                 var entrynodename = Langage.FLW2_List_Langage(entrypointnum);
@@ -315,27 +324,69 @@ namespace MSBT_Editor.Sectionsys
                     break;
                 case 2:
                     //分岐1
+                    
                     var subbranchfunc = flw2.Branch_No[flw2.Item[subfunc].Unknown5];
                     tn.Nodes.Add(subnodename + subbranchfunc.ToString("X"));
-                    Treeview_Branch_Node_Adder(flw2.Item[subfunc], tn.Nodes[0]);
+                    if (BranchNo.IndexOf(subfunc) == -1)
+                    {
+                        BranchNo.Add(subbranchfunc);
+                        Treeview_Branch_Node_Adder(flw2.Item[subfunc], tn.Nodes[0]);
+                        //BranchNo = new List<short>();
+                    }
+                    //else BranchNo = new List<short>();
+                    //else BranchNo = new List<short>();
                     //tn.Nodes[0].Tag = flw2.Item[subfunc];
                     //分岐2
                     var subbranchfunc2 = flw2.Branch_No[flw2.Item[subfunc].Unknown5 + 1];
                     tn.Nodes.Add(subnodename + subbranchfunc2.ToString("X"));
-                    Treeview_Branch_Node_Adder(flw2.Item[subfunc], tn.Nodes[1], 1);
+                    if (BranchNo.IndexOf(subfunc) == -1)
+                    {
+                        BranchNo.Add(subbranchfunc2);
+                        Treeview_Branch_Node_Adder(flw2.Item[subfunc], tn.Nodes[1], 1);
+                        //BranchNo = new List<short>();
+                    }
+                    
+                    //BranchNo = new List<short>();
+                    //BranchNo = new List<short>();
+                    //BranchNo2 = new List<short>();
                     //tn.Nodes[1].Tag = flw2.Item[subfunc];
-
+                    //BranchNo = new List<short>();
                     break;
                 case 3:
                     tn.Nodes.Add(subnodename);
                     var indexfllow3 = flw2.Item.IndexOf(flw2.Item[subfunc]);
-                    if ((flw2.Item[subfunc].Unknown3 != indexfllow3) && (flw2.Item[subfunc].Unknown3.ToString("X4") != "FFFF"))
-                    {
-                        //treeviewnodeadder(flw2.Item[subfunc], tn.Nodes[0]);
-                        Treeview_Event_Node_Adder(flw2.Item[indexfllow3], tn.Nodes[0]);
+
+                    if (EventNo.IndexOf(flw2.Item[indexfllow3].Unknown5) == -1) {
+                        Console.WriteLine("EVENT fllow");
+                        
+                        if ((flw2.Item[subfunc].Unknown3 != indexfllow3) && (flw2.Item[subfunc].Unknown3.ToString("X4") != "FFFF"))
+                        {
+                            EventNo.Add(flw2.Item[indexfllow3].Unknown5);
+                            //treeviewnodeadder(flw2.Item[subfunc], tn.Nodes[0]);
+                            Treeview_Event_Node_Adder(flw2.Item[indexfllow3], tn.Nodes[0]);
+                            //EventNo = new List<short>();
+                        }
+                        //EventNo = new List<short>();
+                        //BranchNo = new List<short>();
+                        
                     }
+                    //BranchNo = new List<short>();
+
                     tn.Nodes[0].Tag = flw2.Item[indexfllow3];
                     break;
+                //case 4:
+                //    tn.Nodes.Add(subnodename);
+                //    var indexfllow4 = flw2.Item.IndexOf(flw2.Item[subfunc]);
+                //    if ((flw2.Item[subfunc].Unknown2 != indexfllow4) && (flw2.Item[subfunc].Unknown2.ToString("X4") != "FFFF"))
+                //    {
+                //        //treeviewnodeadder(flw2.Item[subfunc], tn.Nodes[0]);
+                //        treeviewnodeadder(flw2.Item[indexfllow4], tn.Nodes[0]);
+                //    }
+                //    tn.Nodes[0].Tag = flw2.Item[indexfllow4];
+                //    break;
+                //default:
+                //    //tn.Nodes.Add(subnodename);
+                //    break;
             }
         }
 
@@ -408,12 +459,12 @@ namespace MSBT_Editor.Sectionsys
         public static void Treeview_Message_Node_Adder(FLW2.flw2_item flw2item, TreeNode tn, int brancno = 0)
         {
             //tn.Tag = flw2item;
-            Console.WriteLine("messagenode");
+            //Console.WriteLine("messagenode");
             //構文をサブノードに追加する
             FLW2 flw2 = new FLW2();
 
             var subfunc = flw2item.Unknown4;
-            Console.WriteLine("" + subfunc.ToString("X"));
+            //Console.WriteLine("" + subfunc.ToString("X"));
             var subnode_element = flw2.Item[subfunc];
             var subnodename = Langage.FLW2_List_Langage(subnode_element.TypeCheck);
             TreeView_Fllow_Type_Checker(subfunc, subnode_element.TypeCheck, subnodename, tn);
@@ -462,12 +513,12 @@ namespace MSBT_Editor.Sectionsys
         public static void Treeview_Event_Node_Adder(FLW2.flw2_item flw2item, TreeNode tn, int brancno = 0)
         {
             tn.Tag = flw2item;
-            Console.WriteLine("eventnode");
+            //Console.WriteLine("eventnode");
             //構文をサブノードに追加する
             FLW2 flw2 = new FLW2();
 
             var subfunc = flw2item.Unknown3;
-            Console.WriteLine("" + subfunc.ToString("X"));
+            //Console.WriteLine("" + subfunc.ToString("X"));
             var subnode_element = flw2.Item[subfunc];
             var subnodename = Langage.FLW2_List_Langage(subnode_element.TypeCheck);
             TreeView_Fllow_Type_Checker(subfunc, subnode_element.TypeCheck, subnodename, tn);

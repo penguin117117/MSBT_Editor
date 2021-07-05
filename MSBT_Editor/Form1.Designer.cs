@@ -187,6 +187,10 @@ namespace MSBT_Editor
             this.label42 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
+            this.button26 = new System.Windows.Forms.Button();
+            this.button27 = new System.Windows.Forms.Button();
+            this.button28 = new System.Windows.Forms.Button();
+            this.button29 = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -696,6 +700,7 @@ namespace MSBT_Editor
             // tabPage6
             // 
             this.tabPage6.Controls.Add(this.button1);
+            this.tabPage6.Controls.Add(this.button7);
             this.tabPage6.Controls.Add(this.comboBox4);
             this.tabPage6.Controls.Add(this.button4);
             this.tabPage6.Controls.Add(this.comboBox1);
@@ -920,7 +925,6 @@ namespace MSBT_Editor
             // tabPage8
             // 
             this.tabPage8.Controls.Add(this.groupBox6);
-            this.tabPage8.Controls.Add(this.button7);
             this.tabPage8.Location = new System.Drawing.Point(4, 22);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
@@ -931,6 +935,10 @@ namespace MSBT_Editor
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.button29);
+            this.groupBox6.Controls.Add(this.button28);
+            this.groupBox6.Controls.Add(this.button27);
+            this.groupBox6.Controls.Add(this.button26);
             this.groupBox6.Controls.Add(this.button19);
             this.groupBox6.Controls.Add(this.button18);
             this.groupBox6.Controls.Add(this.button17);
@@ -940,18 +948,18 @@ namespace MSBT_Editor
             this.groupBox6.Controls.Add(this.button8);
             this.groupBox6.Controls.Add(this.button10);
             this.groupBox6.Controls.Add(this.button9);
-            this.groupBox6.Location = new System.Drawing.Point(6, 32);
+            this.groupBox6.Location = new System.Drawing.Point(6, 6);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(528, 103);
+            this.groupBox6.Size = new System.Drawing.Size(528, 129);
             this.groupBox6.TabIndex = 4;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "システムメッセージ専用(その他で使えるか不明)";
             // 
             // button19
             // 
-            this.button19.Location = new System.Drawing.Point(316, 74);
+            this.button19.Location = new System.Drawing.Point(355, 100);
             this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(149, 23);
+            this.button19.Size = new System.Drawing.Size(167, 23);
             this.button19.TabIndex = 9;
             this.button19.Text = "小数点以下";
             this.button19.UseVisualStyleBackColor = true;
@@ -959,9 +967,9 @@ namespace MSBT_Editor
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(316, 47);
+            this.button18.Location = new System.Drawing.Point(445, 74);
             this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(149, 23);
+            this.button18.Size = new System.Drawing.Size(77, 23);
             this.button18.TabIndex = 8;
             this.button18.Text = "秒";
             this.button18.UseVisualStyleBackColor = true;
@@ -969,9 +977,9 @@ namespace MSBT_Editor
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(316, 18);
+            this.button17.Location = new System.Drawing.Point(445, 47);
             this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(149, 23);
+            this.button17.Size = new System.Drawing.Size(77, 23);
             this.button17.TabIndex = 7;
             this.button17.Text = "分";
             this.button17.UseVisualStyleBackColor = true;
@@ -979,9 +987,9 @@ namespace MSBT_Editor
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(161, 74);
+            this.button16.Location = new System.Drawing.Point(445, 18);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(149, 23);
+            this.button16.Size = new System.Drawing.Size(77, 23);
             this.button16.TabIndex = 6;
             this.button16.Text = "時間";
             this.button16.UseVisualStyleBackColor = true;
@@ -989,9 +997,9 @@ namespace MSBT_Editor
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(161, 47);
+            this.button15.Location = new System.Drawing.Point(355, 47);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(149, 23);
+            this.button15.Size = new System.Drawing.Size(84, 23);
             this.button15.TabIndex = 5;
             this.button15.Text = "年02？";
             this.button15.UseVisualStyleBackColor = true;
@@ -999,9 +1007,9 @@ namespace MSBT_Editor
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(161, 18);
+            this.button14.Location = new System.Drawing.Point(355, 18);
             this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(149, 23);
+            this.button14.Size = new System.Drawing.Size(84, 23);
             this.button14.TabIndex = 4;
             this.button14.Text = "年01？";
             this.button14.UseVisualStyleBackColor = true;
@@ -1039,7 +1047,7 @@ namespace MSBT_Editor
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(12, 6);
+            this.button7.Location = new System.Drawing.Point(385, 9);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(149, 23);
             this.button7.TabIndex = 0;
@@ -1669,6 +1677,7 @@ namespace MSBT_Editor
             this.UnknownTag.Multiline = true;
             this.UnknownTag.Name = "UnknownTag";
             this.UnknownTag.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.UnknownTag.ShortcutsEnabled = false;
             this.UnknownTag.Size = new System.Drawing.Size(548, 163);
             this.UnknownTag.TabIndex = 14;
             this.UnknownTag.Visible = false;
@@ -1800,6 +1809,46 @@ namespace MSBT_Editor
             this.label44.Size = new System.Drawing.Size(23, 12);
             this.label44.TabIndex = 13;
             this.label44.Text = "null";
+            // 
+            // button26
+            // 
+            this.button26.Location = new System.Drawing.Point(6, 100);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(149, 23);
+            this.button26.TabIndex = 10;
+            this.button26.Text = "button26";
+            this.button26.UseVisualStyleBackColor = true;
+            this.button26.Click += new System.EventHandler(this.button26_Click);
+            // 
+            // button27
+            // 
+            this.button27.Location = new System.Drawing.Point(161, 18);
+            this.button27.Name = "button27";
+            this.button27.Size = new System.Drawing.Size(149, 23);
+            this.button27.TabIndex = 11;
+            this.button27.Text = "button27";
+            this.button27.UseVisualStyleBackColor = true;
+            this.button27.Click += new System.EventHandler(this.button27_Click);
+            // 
+            // button28
+            // 
+            this.button28.Location = new System.Drawing.Point(161, 47);
+            this.button28.Name = "button28";
+            this.button28.Size = new System.Drawing.Size(149, 23);
+            this.button28.TabIndex = 12;
+            this.button28.Text = "button28";
+            this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
+            // 
+            // button29
+            // 
+            this.button29.Location = new System.Drawing.Point(161, 76);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(149, 23);
+            this.button29.TabIndex = 13;
+            this.button29.Text = "button29";
+            this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
             // Form1
             // 
@@ -2037,6 +2086,10 @@ namespace MSBT_Editor
         public System.Windows.Forms.Label label21;
         public System.Windows.Forms.Button button13;
         public System.Windows.Forms.Label label22;
+        public System.Windows.Forms.Button button29;
+        public System.Windows.Forms.Button button28;
+        public System.Windows.Forms.Button button27;
+        public System.Windows.Forms.Button button26;
     }
 }
 

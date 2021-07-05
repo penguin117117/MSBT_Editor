@@ -180,6 +180,11 @@ namespace MSBT_Editor.Formsys
             button23.Text = "追加";
             button24.Text = "削除";
 
+            button26.Text = "ワールドナンバー";
+            button27.Text = "スコア";
+            button28.Text = "ユーザー名";
+            button29.Text = "トータルプレイ時間";
+
             //combobox
             combo1.Items.Clear();
             combo2.Items.Clear();
@@ -299,6 +304,10 @@ namespace MSBT_Editor.Formsys
             button23.Text = "Add";
             button24.Text = "Delete";
 
+            button26.Text = "World_Num";
+            button27.Text = "Score";
+            button28.Text = "UserName";
+            button29.Text = "TotalPlayTime ";
             //combobox
             combo1.Items.Clear();
             combo2.Items.Clear();

@@ -16,6 +16,11 @@ namespace MSBT_Editor.FileSys
         private static string Save_Path_Msbt = "None";
         private static string Save_Path_Msbf = "None";
 
+        public string Path_Msbt {
+            set => Save_Path_Msbt = value;
+            get => Save_Path_Msbt;
+        }
+
         public static void Open(int filenum) {
 
             OpenFileDialog ofd = new OpenFileDialog();

@@ -89,13 +89,13 @@ namespace MSBT_Editor
             Dialog.SaveAs_Msbf();
         }
 
-        public static readonly string[] IconNameJP01 = { "ピーチ", "クッパ", "キノピオ", "マリオ", "マリオ2", "チコ", "ヨッシー", "腹ペコチコ", "ルイージ", "ベビーチコ", "アシストチコ", "ベーゴマン", "クリボー" };
-        public static readonly string[] IconNameJP02 = { "彗星メダル", "コイン×3", "カラフルスターピース", "イエローチップ", "スターピース紫", "シルバースター", "スター", "グランドスター", "ブロンズスター", "コイン", "パープルコイン", "1UPキノコ", "ライフアップキノコ", "ブルースター", "スターリング", "ヨッシーキャプチャー花" };
-        public static readonly string[] IconNameJP03 = { "ポインター", "2Pポインター", "ハンドポインター", "Wiiリモコン", "Aボタン", "Bボタン", "Cボタン", "Zボタン", "十字ボタン", "十字ボタン下", "十字ボタン上", "スティック", "ヌンチャク", "照準", "マイナスボタン", "プラスボタン", "×(かける)アイコン", "グリーンコメット", "銀の王冠", "銀の王冠宝石付き", "金の王冠", "手紙", "矢印下", "ストップウォッチ" };
+        public static readonly string[] IconNameJP01 = { "ピーチ", "クッパ", "キノピオ", "マリオ", "マリオ2", "チコ", "ヨッシー", "腹ペコチコ", "ルイージ", "ベビーチコ", "アシストチコ", "ベーゴマン", "クリボー" , "星ウサギ" };
+        public static readonly string[] IconNameJP02 = { "彗星メダル", "コイン×3", "カラフルスターピース", "イエローチップ", "スターピース紫", "シルバースター", "スター", "グランドスター", "ブロンズスター", "コイン", "パープルコイン", "1UPキノコ", "ライフアップキノコ", "ブルースター", "スターリング", "ヨッシーキャプチャー花" , "ココナッツ","ブルーチップ","バルーンフルーツ","中間ポイント","グランドブロンズスター"};
+        public static readonly string[] IconNameJP03 = { "ポインター", "2Pポインター", "ハンドポインター選択", "Wiiリモコン", "Aボタン", "Bボタン", "Cボタン", "Zボタン", "十字ボタン", "十字ボタン下", "十字ボタン上", "スティック", "ヌンチャク", "照準", "マイナスボタン", "プラスボタン", "×(かける)アイコン", "グリーンコメット", "銀の王冠", "銀の王冠宝石付き", "金の王冠", "手紙", "矢印下", "ストップウォッチ" ,"1ボタン", "2ボタン", "ホームボタン", "ハンドポインター握り", "ハンドポインター", "？マーク", "イエローコメット", "？マーク緑", "空のスター", "空の彗星メダル", "空の彗星", "各シスター", "ブロンズコメット" };
 
-        public static readonly string[] IconNameEN01 = { "Peach", "Bowser", "Toad", "Mario", "Mario2", "Luma", "Yoshi", "HungryLuma", "Luigi", "MasterLuma", "Co-StarLuma", "Topman", "Goomba" };
-        public static readonly string[] IconNameEN02 = { "CometMedal", "Coin×3", "RainbowStarBit", "YellowChip", "PurpleStarBit", "SilverStar", "Star", "GrandStar", "BronzeStar", "Coin", "PurpleCoin", "1UPMushroom", "LifeUpMushroom", "BlueStar", "StarRing", "YoshiCapture" };
-        public static readonly string[] IconNameEN03 = { "Pointer", "2PPointer", "HandPointer", "WiiRemote", "AButton", "BButton", "CButton", "ZButton", "十PadButton", "十PadButtonUnder", "十PadButtonUp", "ControllerStick", "Nunchuck", "Aim", "MinusButton", "PlusButton", "×Icon", "GreenComet", "SilverCrown", "SilverCrownJewel", "GoldCrown", "Letter", "ArrowUnder", "StopWatch" };
+        public static readonly string[] IconNameEN01 = { "Peach", "Bowser", "Toad", "Mario", "Mario2", "Luma", "Yoshi", "HungryLuma", "Luigi", "MasterLuma", "Co-StarLuma", "Topman", "Goomba" , "StarBunny"};
+        public static readonly string[] IconNameEN02 = { "CometMedal", "Coin×3", "RainbowStarBit", "YellowChip", "PurpleStarBit", "SilverStar", "Star", "GrandStar", "BronzeStar", "Coin", "PurpleCoin", "1UPMushroom", "LifeUpMushroom", "BlueStar", "StarRing", "YoshiCapture" , "Coconut","BlueChip", "BlueFruit", "CheckPointFlag","GrandBronzeStar"};
+        public static readonly string[] IconNameEN03 = { "Pointer", "2PPointer", "HandPointer", "WiiRemote", "AButton", "BButton", "CButton", "ZButton", "十PadButton", "十PadButtonUnder", "十PadButtonUp", "ControllerStick", "Nunchuck", "Aim", "MinusButton", "PlusButton", "×Icon", "GreenComet", "SilverCrown", "SilverCrownJewel", "GoldCrown", "Letter", "ArrowUnder", "StopWatch", "1Button", "2Button", "HomeButton", "PointerGrip", "PointerNonGrip", "QuestionMark", "YellowComet", "GreenQuestionMark", "EmptyStar", "EmptyCometMedal", "EmptyStarComet", "HiddenStar", "BronzeComet" };
         private void Form1_Load(object sender, EventArgs e)
         {
             Form1.Form1Instance = this;
@@ -585,7 +585,7 @@ namespace MSBT_Editor
             //if (listBox1.Items.Count < 1) return;
             //if (comboBox5.Items.Count == -1) return;
             //if (comboBox5.SelectedIndex == -1) comboBox5.SelectedIndex = 0 ;
-            string[] IconTag = { "<Icon=\"Peach\">", "<Icon=\"Koopa\">", "<Icon=\"Kinopio\">", "<Icon=\"Mario\">", "<Icon=\"Mario2\">", "<Icon=\"Tico\">", "<Icon=\"Yoshi\">", "<Icon=\"HarapekoTico\">", "<Icon=\"Luigi\">", "<Icon=\"MasterTico\">", "<Icon=\"Columa\">", "<Icon=\"Begoman\">", "<Icon=\"Kuribo\">" };
+            string[] IconTag = { "<Icon=\"Peach\">", "<Icon=\"Koopa\">", "<Icon=\"Kinopio\">", "<Icon=\"Mario\">", "<Icon=\"Mario2\">", "<Icon=\"Tico\">", "<Icon=\"Yoshi\">", "<Icon=\"HarapekoTico\">", "<Icon=\"Luigi\">", "<Icon=\"MasterTico\">", "<Icon=\"Columa\">", "<Icon=\"Begoman\">", "<Icon=\"Kuribo\">" + "<Icon=\"Star Bunny\">" };
             Calculation_System.TextBoxTagAdder(listBox1,textBox1,comboBox5,IconTag);
             //int index = comboBox5.SelectedIndex;
             //string tag = IconTag[index];
@@ -597,7 +597,7 @@ namespace MSBT_Editor
             //if (listBox1.Items.Count < 1) return;
             //if (comboBox6.Items.Count == -1) return;
             //if (comboBox6.SelectedIndex == -1) comboBox6.SelectedIndex = 0;
-            string[] IconTag = { "<Icon=\"CometMedal\">", "<Icon=\"Coins\">", "<Icon=\"Starbit\">", "<Icon=\"StarPiece\">", "<Icon=\"PurpleStarbit\">", "<Icon=\"SilverStar\">", "<Icon=\"Star\">", "<Icon=\"GrandStar\">", "<Icon=\"BronzeStar\">", "<Icon=\"Coin\">", "<Icon=\"PurpleCoin\">", "<Icon=\"1UPMushroom\">", "<Icon=\"LifeUpMushroom\">", "<Icon=\"BlueStar\">", "<Icon=\"StarRing\">", "<Icon=\"Flower\">" };
+            string[] IconTag = { "<Icon=\"CometMedal\">", "<Icon=\"Coins\">", "<Icon=\"Starbit\">", "<Icon=\"StarPiece\">", "<Icon=\"PurpleStarbit\">", "<Icon=\"SilverStar\">", "<Icon=\"Star\">", "<Icon=\"GrandStar\">", "<Icon=\"BronzeStar\">", "<Icon=\"Coin\">", "<Icon=\"PurpleCoin\">", "<Icon=\"1UPMushroom\">", "<Icon=\"LifeUpMushroom\">", "<Icon=\"BlueStar\">", "<Icon=\"StarRing\">", "<Icon=\"Flower\">" , "<Icon=\"Coconut\">" , "<Icon=\"BlueChip\">" , "<Icon=\"BlueFruit\">" , "<Icon=\"CheckPointFlag\">" , "<Icon=\"GrandBronzeStar\">" };
             Calculation_System.TextBoxTagAdder(listBox1, textBox1, comboBox6, IconTag);
             //int index = comboBox6.SelectedIndex;
             //string tag = IconTag[index];
@@ -606,7 +606,7 @@ namespace MSBT_Editor
 
         private void button13_Click(object sender, EventArgs e)
         {
-            string[] IconTag = { "<Icon=\"Pointer\">", "<Icon=\"PointerYellow\">", "<Icon=\"PointerHand\">", "<Icon=\"WiiMote\">", "<Icon=\"AButton\">", "<Icon=\"BButton\">", "<Icon=\"CButton\">", "<Icon=\"ZButton\">", "<Icon=\"DPad\">", "<Icon=\"DPadDown\">", "<Icon=\"DPadUp\">", "<Icon=\"JoyStick\">", "<Icon=\"Nunchuck\">", "<Icon=\"Aim\">", "<Icon=\"MButton\">", "<Icon=\"PButton\">", "<Icon=\"XIcon\">", "<Icon=\"GreenComet\">", "<Icon=\"SilverCrown\">", "<Icon=\"SilverCrownwJewel\">", "<Icon=\"GoldCrown\">", "<Icon=\"Letter\">", "<Icon=\"ArrowDown\">", "<Icon=\"StopWatch\">" };
+            string[] IconTag = { "<Icon=\"Pointer\">", "<Icon=\"PointerYellow\">", "<Icon=\"PointerHand\">", "<Icon=\"WiiMote\">", "<Icon=\"AButton\">", "<Icon=\"BButton\">", "<Icon=\"CButton\">", "<Icon=\"ZButton\">", "<Icon=\"DPad\">", "<Icon=\"DPadDown\">", "<Icon=\"DPadUp\">", "<Icon=\"JoyStick\">", "<Icon=\"Nunchuck\">", "<Icon=\"Aim\">", "<Icon=\"MButton\">", "<Icon=\"PButton\">", "<Icon=\"XIcon\">", "<Icon=\"GreenComet\">", "<Icon=\"SilverCrown\">", "<Icon=\"SilverCrownwJewel\">", "<Icon=\"GoldCrown\">", "<Icon=\"Letter\">", "<Icon=\"ArrowDown\">", "<Icon=\"StopWatch\">" , "<Icon=\"1Button\">", "<Icon=\"2Button\">", "<Icon=\"HomeButton\">" , "<Icon=\"PointerGrip\">" , "<Icon=\"PointerNonGrip\">" , "<Icon=\"QuestionMark\">" , "<Icon=\"YellowComet\">" , "<Icon=\"GreenQuestionMark\">" , "<Icon=\"EmptyStar\">" , "<Icon=\"EmptyCometMedal\">" , "<Icon=\"EmptyStarComet\">" , "<Icon=\"HiddenStar\">" , "<Icon=\"BronzeComet\">" };
             Calculation_System.TextBoxTagAdder(listBox1, textBox1, comboBox7, IconTag);
         }
 
@@ -1157,6 +1157,34 @@ namespace MSBT_Editor
             var str = HashCalculation.Text;
             var hash = Calculation_System.MSBT_Hash(str,101);
             HashCalculation.Text = hash.ToString("X8");
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            if (listBox1.Items.Count < 1) return;
+            string tag = "</WorldNo>";
+            Calculation_System.TextBoxInsert(textBox1, tag);
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+            if (listBox1.Items.Count < 1) return;
+            string tag = "</Score01>";
+            Calculation_System.TextBoxInsert(textBox1, tag);
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            if (listBox1.Items.Count < 1) return;
+            string tag = "</UserName>";
+            Calculation_System.TextBoxInsert(textBox1, tag);
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            if (listBox1.Items.Count < 1) return;
+            string tag = "</TotalPlayTime>";
+            Calculation_System.TextBoxInsert(textBox1, tag);
         }
     }
 }

@@ -47,6 +47,11 @@ namespace MSBT_Editor.Formsys
         protected static Button button23 = Form1.Form1Instance.button23;
         protected static Button button24 = Form1.Form1Instance.button24;
 
+        protected static Button button26 = Form1.Form1Instance.button26;
+        protected static Button button27 = Form1.Form1Instance.button27;
+        protected static Button button28 = Form1.Form1Instance.button28;
+        protected static Button button29 = Form1.Form1Instance.button29;
+
         //label 0～9
         protected static Label labeltxt01 = Form1.Form1Instance.label1;
         protected static Label labeltxt02 = Form1.Form1Instance.label2;

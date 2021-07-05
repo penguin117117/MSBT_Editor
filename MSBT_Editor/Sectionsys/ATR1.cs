@@ -102,6 +102,7 @@ namespace MSBT_Editor.Sectionsys
             Entries = CS.Byte2Int(br);
             Entry_Size = CS.Byte2Int(br);
 
+            //エントリーサイズをテキストボックスに
             txtb15.Text = Entries.ToString();
 
             for (int i = 0; i < Entries; i++)

@@ -30,33 +30,37 @@ namespace MSBT_Editor.FileSys
             }
             catch (Exception e)
             {
-                br.Close();
-                string[] errorJP01 = { "深刻なエラーが発生しました\n\r[" + e.Message + "]\n\r" + "ErrorNo 1" , "エラー" };
-                string[] errorJP02 = { "「以前に他のMSBTエディタで編集していませんか？」\n\r", "ファイルフォーマット規則が一部破損しているので\n\r" , "このエディタでは開くことが出来ません"  , "このエラーの原因で考えられること" };
-                string[] errorJP03 = { "ゲームから吸い出した壊れていないデータを使用してください\n\r", "または、正しい方法でバイナリを修正する必要があります。\n\r" , "このメッセージの後アプリケーションを強制終了します" , "この問題への提案" };
-                string[] errorEN01 = { "A serious error has occurred.\n\r[" + e.Message + "]\n\r"+"ErrorNo 1", "Error"};
-                string[] errorEN02 = { "「Have you edited with a different 'MSBT editor' before?」\n\r" , "The file formatting rules are partially broken,\n\r" , "so this editor cannot open the file." , "Possible causes for this error." };
-                string[] errorEN03 = { "Use the uncorrupted data sucked out of the game.\n\r" , "Or you need to modify the binary in the right way.\n\r" , "After this message, the application will be killed." , "Suggestions for this problem" };
+               
+                    br.Close();
+                    string[] errorJP01 = { "深刻なエラーが発生しました\n\r[" + e.Message + "]\n\r" + "ErrorNo 1", "エラー" };
+                    string[] errorJP02 = { "「以前に他のMSBTエディタで編集していませんか？」\n\r", "ファイルフォーマット規則が一部破損しているので\n\r", "このエディタでは開くことが出来ません", "このエラーの原因で考えられること" };
+                    string[] errorJP03 = { "ゲームから吸い出した壊れていないデータを使用してください\n\r", "または、正しい方法でバイナリを修正する必要があります。\n\r", "このメッセージの後アプリケーションを強制終了します", "この問題への提案" };
+                    string[] errorEN01 = { "A serious error has occurred.\n\r[" + e.Message + "]\n\r" + "ErrorNo 1", "Error" };
+                    string[] errorEN02 = { "「Have you edited with a different 'MSBT editor' before?」\n\r", "The file formatting rules are partially broken,\n\r", "so this editor cannot open the file.", "Possible causes for this error." };
+                    string[] errorEN03 = { "Use the uncorrupted data sucked out of the game.\n\r", "Or you need to modify the binary in the right way.\n\r", "After this message, the application will be killed.", "Suggestions for this problem" };
 
-                string[] error01;
-                string[] error02;
-                string[] error03;
+                    string[] error01;
+                    string[] error02;
+                    string[] error03;
 
-                if (Properties.Settings.Default.言語 == "EN"){
-                    error01 = errorEN01;
-                    error02 = errorEN02;
-                    error03 = errorEN03;
-                }
-                else {
-                    error01 = errorJP01;
-                    error02 = errorJP02;
-                    error03 = errorJP03;
-                }
+                    if (Properties.Settings.Default.言語 == "EN")
+                    {
+                        error01 = errorEN01;
+                        error02 = errorEN02;
+                        error03 = errorEN03;
+                    }
+                    else
+                    {
+                        error01 = errorJP01;
+                        error02 = errorJP02;
+                        error03 = errorJP03;
+                    }
 
-                MessageBox.Show(error01[0], error01[1], MessageBoxButtons.OK, MessageBoxIcon.Error);
-                MessageBox.Show(error02[0]+error02[1]+error02[2], error02[3], MessageBoxButtons.OK, MessageBoxIcon.Information);
-                MessageBox.Show(error03[0]+error03[1]+error03[2], error03[3] ,MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Environment.Exit(0);
+                    MessageBox.Show(error01[0], error01[1], MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(error02[0] + error02[1] + error02[2], error02[3], MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(error03[0] + error03[1] + error03[2], error03[3], MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Environment.Exit(0);
+                
             }
             
             return strs;
@@ -292,38 +296,69 @@ namespace MSBT_Editor.FileSys
             var icon_num = "0003" + bit5.ToString("X2") + bit6.ToString("X2") + bit7.ToString("X2") + bit8.ToString("X2") + bit9.ToString("X2") + bit10.ToString("X2");
             Console.WriteLine(icon_num);
 
-            string tagstrs = "<Unknown=\"Tag03\">" + "<Icon=\"" + icon_num + "\">";
+            string tagstrs = "<UserIcon=\"" + "000E" + icon_num + "\">";
             switch (icon_num)
             {
-                //case "0003000500020005":
-                //    tagstrs = "<Icon=\"1Button\">";
-                //    break;
-                //case "0003000600020006":
-                //    tagstrs = "<Icon=\"2Button\">";
-                //    break;
-                //case "0003000C0002000C":
-                //    tagstrs = "<Icon=\"Coconut\">";
-                //    break;
-                //case "0003000E0002000E":
-                //    tagstrs = "<Icon=\"Star Bunny\">";
-                //    break;
-                //case "0003001400020014":
-                //    tagstrs = "<Icon=\"BlueChip\">";
-                //    break;
-                //case "0003001600020016":
-                //    tagstrs = "<Icon=\"HomeButton\">";
-                //    break;
-                //case "0003002400020024":
-                //    tagstrs = "<Icon=\"PointerGrip\">";
-                //    break;
-                //case "0003002500020026":
-                //    tagstrs = "<Icon=\"PointerNonGrip\">";
-                //    break;
-                //case "0003002A0002002A":
-                //    tagstrs = "<Icon=\"QuestionMark\">";
-                //    break;
-                    //tuika
-                    //
+                case "0003000500020005":
+                    tagstrs = "<Icon=\"1Button\">";
+                    break;
+                case "0003000600020006":
+                    tagstrs = "<Icon=\"2Button\">";
+                    break;
+                case "0003000C0002000C":
+                    tagstrs = "<Icon=\"Coconut\">";
+                    break;
+                case "0003000E0002000E":
+                    tagstrs = "<Icon=\"Star Bunny\">";
+                    break;
+                case "0003001400020014":
+                    tagstrs = "<Icon=\"BlueChip\">";
+                    break;
+                case "0003001600020016":
+                    tagstrs = "<Icon=\"HomeButton\">";
+                    break;
+                case "0003002400020024":
+                    tagstrs = "<Icon=\"PointerGrip\">";
+                    break;
+                case "0003002500020026":
+                    tagstrs = "<Icon=\"PointerNonGrip\">";
+                    break;
+                case "0003002A0002002A":
+                    tagstrs = "<Icon=\"QuestionMark\">";
+                    break;
+
+                case "0003003000020035":
+                    tagstrs = "<Icon=\"YellowComet\">";
+                    break;
+                case "0003003100020036":
+                    tagstrs = "<Icon=\"GreenQuestionMark\">";
+                    break;
+                case "000300380002003C":
+                    tagstrs = "<Icon=\"CheckPointFlag\">";
+                    break;
+                case "000300390002003D":
+                    tagstrs = "<Icon=\"EmptyStar\">";
+                    break;
+                case "00030003C002003E":
+                    tagstrs = "<Icon=\"EmptyCometMedal\">";
+                    break;
+                case "00030003B002003F":
+                    tagstrs = "<Icon=\"EmptyStarComet\">";
+                    break;
+                case "0003003C00020041":
+                    tagstrs = "<Icon=\"HiddenStar\">";
+                    break;
+                case "0003003E00020043":
+                    tagstrs = "<Icon=\"BlueFruit\">";
+                    break;
+                case "0003004000020045":
+                    tagstrs = "<Icon=\"GrandBronzeStar\">";
+                    break;
+                case "000300480002004D":
+                    tagstrs = "<Icon=\"BronzeComet\">";
+                    break;
+                //tuika
+                //
                 case "000300350002003A":
                     tagstrs = "<Icon=\"CometMedal\">";
                     break;
@@ -626,6 +661,12 @@ namespace MSBT_Editor.FileSys
                     if (bit8 != 08) break;
                     tagstrs = "</ResultScenarioName>";
                     break;
+                case 0x02:
+                    tagstrs = "</UnusedTags07_02>";
+                    break;
+                case 0x03:
+                    tagstrs = "</UnusedTags07_03>";
+                    break;
                 case 0x04:
                     if (bit8 != 08) break;
                     tagstrs = "</UserName>";
@@ -826,6 +867,67 @@ namespace MSBT_Editor.FileSys
                 case "/Color":
                     bits = StringToBytes("000E000000030002FFFF");
                     break;
+                    //tuika
+                case "Icon=\"1Button\"":
+                    bits = StringToBytes("000E0003000500020005");
+                    break;
+                case "Icon=\"2Button\"":
+                    bits = StringToBytes("000E0003000600020006");
+                    break;
+                case "Icon=\"Coconut\"":
+                    bits = StringToBytes("000E0003000C0002000C");
+                    break;
+                case "Icon=\"Star Bunny\"":
+                    bits = StringToBytes("000E0003000E0002000E");
+                    break;
+                case "Icon=\"BlueChip\"":
+                    bits = StringToBytes("000E0003001400020014");
+                    break;
+                case "Icon=\"HomeButton\"":
+                    bits = StringToBytes("000E0003001600020016");
+                    break;
+                case "Icon=\"PointerGrip\"":
+                    bits = StringToBytes("000E0003002400020024");
+                    break;
+                case "Icon=\"PointerNonGrip\"":
+                    bits = StringToBytes("000E0003002500020026");
+                    break;
+                case "Icon=\"QuestionMark\"":
+                    bits = StringToBytes("000E0003002A0002002A");
+                    break;
+
+                case "Icon=\"YellowComet\"":
+                    bits = StringToBytes("000E0003003000020035");
+                    break;
+                case "Icon=\"GreenQuestionMark\"":
+                    bits = StringToBytes("000E0003003100020036");
+                    break;
+                case "Icon=\"CheckPointFlag\"":
+                    bits = StringToBytes("000E000300380002003C");
+                    break;
+                case "Icon=\"EmptyStar\"":
+                    bits = StringToBytes("000E000300390002003D");
+                    break;
+                case "Icon=\"EmptyCometMedal\"":
+                    bits = StringToBytes("000E00030003C002003E");
+                    break;
+                case "Icon=\"EmptyStarComet\"":
+                    bits = StringToBytes("000E00030003B002003F");
+                    break;
+                case "Icon=\"HiddenStar\"":
+                    bits = StringToBytes("000E0003003C00020041");
+                    break;
+                case "Icon=\"BlueFruit\"":
+                    bits = StringToBytes("000E0003003E00020043");
+                    break;
+                case "Icon=\"GrandBronzeStar\"":
+                    bits = StringToBytes("000E0003004000020045");
+                    break;
+                case "Icon=\"BronzeComet\"":
+                    bits = StringToBytes("000E000300480002004D");
+                    break;
+                //tuika end
+
                 case "Icon=\"CometMedal\"":
                     bits = StringToBytes("000E000300350002003A");
                     break;
@@ -1003,6 +1105,9 @@ namespace MSBT_Editor.FileSys
                 case "/Year02":
                     bits = StringToBytes("000E0006000300080000000000000000");
                     break;
+                case "/Score01":
+                    bits = StringToBytes("000E0006000400080000000000000000");
+                    break;
                 case "/Hour":
                     bits = StringToBytes("000E0006000500080000000000000000");
                     break;
@@ -1090,6 +1195,13 @@ namespace MSBT_Editor.FileSys
                             var time = UInt16.Parse(strs[1]);
 
                             bits = StringToBytes("000E000100000002" + time.ToString("X4"));
+                            break;
+                        }
+                    }
+                    if (str.Length > 8) {
+                        if (str.Substring(0,9) == "UserIcon=") {
+                            var strs = str.Split('\"');
+                            bits = StringToBytes(strs[1]);
                             break;
                         }
                     }

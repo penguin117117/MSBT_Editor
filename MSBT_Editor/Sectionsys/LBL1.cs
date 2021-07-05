@@ -184,6 +184,7 @@ namespace MSBT_Editor.Sectionsys
             var lino2 = list_No_sorted.ToArray();
             for (int l = 0; l < testcount; l++) {
                 list1.Items.Add(test[l]);
+               
                 Debugger.HashTxt("リスト番号"+lino2[l].ToString("X8"));
                 Debugger.HashTxt(test[l]);
                 Debugger.HashTxt("ハッシュ値 " + CS.MSBT_Hash(test[l], entries).ToString("X8"));
