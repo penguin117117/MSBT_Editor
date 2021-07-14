@@ -343,10 +343,7 @@ namespace MSBT_Editor.Sectionsys
                             {
                                 Console.WriteLine("つうか");
                                 lb.Items[index] = MSBF_Type_Check(numhex, index, true);
-                                Console.WriteLine(lb.Items[index]);
-                                Console.WriteLine("index      " + index);
                                 lb.SelectedIndex = index;
-                                Console.WriteLine("index      " + index);
                                 FLW2.branch_list_no.Insert(blnitem.Index, index);
                                 FLW2.branch_no.Insert(blnitem.Index, 0x0000);
                                 FLW2.branch_no.Insert(blnitem.Index, 0x0000);
@@ -364,8 +361,8 @@ namespace MSBT_Editor.Sectionsys
                                 //lb.SelectedIndex = index;
                                 FLW2.branch_list_no.Add(index);
                                 //Console.WriteLine("value0 bf " + branch_no.Count);
-                                FLW2.branch_no.Add(0x0002);
-                                FLW2.branch_no.Add(0x0003);
+                                FLW2.branch_no.Add(0x0008);
+                                FLW2.branch_no.Add(0x0009);
                                 item.Unknown5 = Convert.ToInt16(blnitem.Index + 2);
                                 //item.TypeCheck = numhex;
                                 Console.WriteLine("tetttttttt"+lb.Items.Count);
@@ -482,11 +479,11 @@ namespace MSBT_Editor.Sectionsys
 
         public static void FLW2_FlowType2_Branch(ListBox lb, TextBox tb) {
 
-            Console.WriteLine("★" + lb.Items.Count);
+            //Console.WriteLine("★" + lb.Items.Count);
 
-            txtb27.AppendText(Environment.NewLine+"///////////check");
-            foreach (int num in FLW2.branch_no)
-                txtb27.AppendText(Environment.NewLine + num);
+            //txtb27.AppendText(Environment.NewLine+"///////////check");
+            //foreach (int num in FLW2.branch_no)
+            //    txtb27.AppendText(Environment.NewLine + num);
 
             //エラー対策
             if (lb.Items.Count == 0) return;
@@ -494,13 +491,14 @@ namespace MSBT_Editor.Sectionsys
 
             //リストボックスのインデックス取得
             var index = lb.SelectedIndex;
-            Console.WriteLine("///////////OK");
+            //Console.WriteLine("///////////OK");
             //現在のインデックスがflowtype2のセクションか判別
             if (-1 == FLW2.branch_list_no.IndexOf(index))return ;
             Console.WriteLine("flowtype2");
 
             //ジャンプ先1と2のインデックスを取得
             var branchindex1 = FLW2.branch_list_no.IndexOf(index);
+            branchindex1 += branchindex1;
             var branchindex2 = branchindex1 + 1;
             Console.WriteLine("★" + lb.Items.Count);
             Console.WriteLine(branchindex1+"_"+branchindex2+"__"+ FLW2.branch_list_no.IndexOf(index));
@@ -510,10 +508,11 @@ namespace MSBT_Editor.Sectionsys
                 case "25":
                     branch_no[branchindex1] = Int16.Parse(tb.Text, System.Globalization.NumberStyles.HexNumber);
                     Console.WriteLine("25__" + branch_no[branchindex1]);
+                    
                     break;
                 case "26":
                     branch_no[branchindex2] = Int16.Parse(tb.Text, System.Globalization.NumberStyles.HexNumber);
-                    Console.WriteLine("26__" + branch_no[branchindex2]);
+                    Console.WriteLine("26__" + branch_no[branchindex2] +"__"+ Int16.Parse(tb.Text, System.Globalization.NumberStyles.HexNumber));
                     break;
             }
         }

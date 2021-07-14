@@ -26,34 +26,8 @@ namespace MSBT_Editor.MSBTsys
         private static Int16 unknown7;
         private static Int16 unknown8;
         private static Int16 unknown9;
-
-        
-
         public static List<string> Txt2_Text_List;
         public static List<string> atr_nulldata;
-
-        //public struct Item
-        //{
-        //    public byte unknown1;
-        //    public byte unknown2;
-        //    public byte Dialog_Type;
-        //    public byte unknown3;
-        //    public short unknown4;
-        //    public byte unknown5;
-        //    public byte unknown6;
-        //    public int null_offset;
-        //    public Item(byte arg1, byte arg2, byte arg3, byte arg4, short arg5, byte arg6, byte arg7, int arg8)
-        //    {
-        //        this.unknown1 = arg1;
-        //        this.unknown2 = arg2;
-        //        this.Dialog_Type = arg3;
-        //        this.unknown3 = arg4;
-        //        this.unknown4 = arg5;
-        //        this.unknown5 = arg6;
-        //        this.unknown6 = arg7;
-        //        this.null_offset = arg8;
-        //    }
-        //}
 
         public struct Data_List {
             public List<string> Text;
@@ -67,12 +41,6 @@ namespace MSBT_Editor.MSBTsys
         }
 
         public static Data_List MSBT_All_Data;
-        //LBL1
-        //private static string lbl1;
-        //private static int lblsectionsize;
-        //private static int lblunknown1;
-        //private static int lblunknown2;
-        //private static int lblentries;
 
         public string Magic
         {

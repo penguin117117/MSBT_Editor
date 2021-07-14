@@ -31,12 +31,18 @@ namespace MSBT_Editor.Sectionsys
             unknown2 = CS.Byte2Int(br);
             entries = CS.Byte2Int(br);
 
+            //テキストオフセットの先頭を記録
             var offset = fs.Position;
+
+            //テキストオフセットの位置を読み込む
             for (int i = 0; i < entries; i++){
                 txt_pos.Add((int)offset + CS.Byte2Int(br));
             }
 
+            //テキスト位置の先頭を記録
             var offset2 = fs.Position;
+
+            //テキストを読み込む
             for(int j = 0; j<entries; j++) {
                 fs.Position = txt_pos[j]-4;
                 Text_Data.Add(CS.Byte2JIS(br, fs));

@@ -105,6 +105,7 @@ namespace MSBT_Editor.Sectionsys
             //エントリーサイズをテキストボックスに
             txtb15.Text = Entries.ToString();
 
+            //ATR1の各値を読み込む
             for (int i = 0; i < Entries; i++)
             {
                 var arg1 = CS.Bytes2Byte(br);
@@ -114,21 +115,8 @@ namespace MSBT_Editor.Sectionsys
                 var arg5 = CS.Byte2Short(br);
                 var arg6 = CS.Bytes2Byte(br);
                 var arg7 = CS.Bytes2Byte(br);
-                if (arg7 != 0xFF){ 
-                    notffcount++;
-                    Console.WriteLine(fs.Position.ToString("X"));
-                }
+                if (arg7 != 0xFF) notffcount++;
                 var arg8 = CS.Byte2Int(br);
-
-                //星船マリオの対策
-                //if (i != 0)
-                //{
-                //    var starship_Check = arg8 - Element[i - 1].null_offset;
-                //    if (starship_Check > 2)
-                //    {
-
-                //    }
-                //}
                 Element.Add(new Item( arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
             }
 
@@ -139,15 +127,13 @@ namespace MSBT_Editor.Sectionsys
                     null_table = CS.Byte2Str_UTF16BE(br);
                 }
                 else {
-                    
                     var check = Element[j + 1].null_offset - Element[j].null_offset;
-                    Console.WriteLine(check.ToString("X"));
-                    Console.WriteLine("ATR1" + fs.Position.ToString("X"));
                     null_table = CS.Byte2Str_UTF16BE(br, check);
-                    
                 }
                 nulldata.Add(null_table);
             }
+
+            //パディング分バイナリリードを進める
             CS.Padding(br,fs.Position);
         }
 

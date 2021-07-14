@@ -33,23 +33,19 @@ namespace MSBT_Editor.MSBTsys
             Unknown7 = CS.Byte2Short(br);
             Unknown8 = CS.Byte2Short(br);
             Unknown9 = CS.Byte2Short(br);   //ここまで
-            Console.WriteLine(fs.Position);
+
             //インスタンス生成
             LBL1 lbl1 = new LBL1();
             ATR1 atr1 = new ATR1();
             TXT2 txt2 = new TXT2();
-            Console.WriteLine(fs.Position);
+
             //各セクション読み取り
             lbl1.Read(br, fs);
-            Console.WriteLine(fs.Position);
             atr1.Read(br, fs);
-            Console.WriteLine(fs.Position);
             txt2.Read(br,fs);
-            Console.WriteLine("読み込みつうか");
             
             //データ記録
             MSBT_All_Data = new Data_List(new List<string>(TXT2.Text_Data) , new List<ATR1.Item>(atr1.Element));
-            //Txt2_Text_List = new List<string>(TXT2.Text_Data);
             atr_nulldata = new List<string>();
             atr_nulldata = ATR1.nulldata;
 

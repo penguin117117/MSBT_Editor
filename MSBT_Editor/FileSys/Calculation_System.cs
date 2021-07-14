@@ -339,10 +339,10 @@ namespace MSBT_Editor.FileSys
                 case "000300390002003D":
                     tagstrs = "<Icon=\"EmptyStar\">";
                     break;
-                case "00030003C002003E":
+                case "0003003C0002003E":
                     tagstrs = "<Icon=\"EmptyCometMedal\">";
                     break;
-                case "00030003B002003F":
+                case "0003003B0002003F":
                     tagstrs = "<Icon=\"EmptyStarComet\">";
                     break;
                 case "0003003C00020041":
@@ -909,10 +909,10 @@ namespace MSBT_Editor.FileSys
                     bits = StringToBytes("000E000300390002003D");
                     break;
                 case "Icon=\"EmptyCometMedal\"":
-                    bits = StringToBytes("000E00030003C002003E");
+                    bits = StringToBytes("000E0003003C0002003E");
                     break;
                 case "Icon=\"EmptyStarComet\"":
-                    bits = StringToBytes("000E00030003B002003F");
+                    bits = StringToBytes("000E0003003B0002003F");
                     break;
                 case "Icon=\"HiddenStar\"":
                     bits = StringToBytes("000E0003003C00020041");

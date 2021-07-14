@@ -91,7 +91,7 @@ namespace MSBT_Editor
 
         public static readonly string[] IconNameJP01 = { "ピーチ", "クッパ", "キノピオ", "マリオ", "マリオ2", "チコ", "ヨッシー", "腹ペコチコ", "ルイージ", "ベビーチコ", "アシストチコ", "ベーゴマン", "クリボー" , "星ウサギ" };
         public static readonly string[] IconNameJP02 = { "彗星メダル", "コイン×3", "カラフルスターピース", "イエローチップ", "スターピース紫", "シルバースター", "スター", "グランドスター", "ブロンズスター", "コイン", "パープルコイン", "1UPキノコ", "ライフアップキノコ", "ブルースター", "スターリング", "ヨッシーキャプチャー花" , "ココナッツ","ブルーチップ","バルーンフルーツ","中間ポイント","グランドブロンズスター"};
-        public static readonly string[] IconNameJP03 = { "ポインター", "2Pポインター", "ハンドポインター選択", "Wiiリモコン", "Aボタン", "Bボタン", "Cボタン", "Zボタン", "十字ボタン", "十字ボタン下", "十字ボタン上", "スティック", "ヌンチャク", "照準", "マイナスボタン", "プラスボタン", "×(かける)アイコン", "グリーンコメット", "銀の王冠", "銀の王冠宝石付き", "金の王冠", "手紙", "矢印下", "ストップウォッチ" ,"1ボタン", "2ボタン", "ホームボタン", "ハンドポインター握り", "ハンドポインター", "？マーク", "イエローコメット", "？マーク緑", "空のスター", "空の彗星メダル", "空の彗星", "各シスター", "ブロンズコメット" };
+        public static readonly string[] IconNameJP03 = { "ポインター", "2Pポインター", "ハンドポインター選択", "Wiiリモコン", "Aボタン", "Bボタン", "Cボタン", "Zボタン", "十字ボタン", "十字ボタン下", "十字ボタン上", "スティック", "ヌンチャク", "照準", "マイナスボタン", "プラスボタン", "×(かける)アイコン", "グリーンコメット", "銀の王冠", "銀の王冠宝石付き", "金の王冠", "手紙", "矢印下", "ストップウォッチ" ,"1ボタン", "2ボタン", "ホームボタン", "ハンドポインター握り", "ハンドポインター", "？マーク", "イエローコメット", "？マーク緑", "空のスター", "空の彗星メダル", "空の彗星", "隠しシスター", "ブロンズコメット" };
 
         public static readonly string[] IconNameEN01 = { "Peach", "Bowser", "Toad", "Mario", "Mario2", "Luma", "Yoshi", "HungryLuma", "Luigi", "MasterLuma", "Co-StarLuma", "Topman", "Goomba" , "StarBunny"};
         public static readonly string[] IconNameEN02 = { "CometMedal", "Coin×3", "RainbowStarBit", "YellowChip", "PurpleStarBit", "SilverStar", "Star", "GrandStar", "BronzeStar", "Coin", "PurpleCoin", "1UPMushroom", "LifeUpMushroom", "BlueStar", "StarRing", "YoshiCapture" , "Coconut","BlueChip", "BlueFruit", "CheckPointFlag","GrandBronzeStar"};
@@ -103,6 +103,11 @@ namespace MSBT_Editor
             comboBox8.Text = Properties.Settings.Default.言語;
 
             Formsys.Langage.Langage_Check();
+
+            comboBox5.Items.Clear();
+            comboBox6.Items.Clear();
+            comboBox7.Items.Clear();
+
             switch (Properties.Settings.Default.言語)
             {
                 case "日本語":
@@ -237,6 +242,7 @@ namespace MSBT_Editor
             {
                 MSBTsys.MSBT_Data.MSBT_All_Data.Text[listBox1.SelectedIndex] = textBox1.Text;
             }
+            
         }
 
         private void AddListText_Click(object sender, EventArgs e)
@@ -254,9 +260,7 @@ namespace MSBT_Editor
 
                     //リストボックス1のデータをハッシュデータ構造体に入れる
                     foreach (var listname in listBox1.Items) {
-
                         lbl1.HashData.Add(new LBL1.Hash_Data(Calculation_System.MSBT_Hash(listname.ToString(), lbl1.Entries),listcounter));
-                        
                         listcounter++;
                     }
 
@@ -273,39 +277,62 @@ namespace MSBT_Editor
                     LBL1.Hash_Data equal_flag =  hashlist.LastOrDefault(x => x.hash == newhash);
 
                     //ハッシュ値がデフォルトの場合、新しいハッシュ値がハッシュリストの値を超える値を返す
-                    if (equal_flag.hash == default) equal_flag = hashlist.LastOrDefault(x => x.hash  < newhash);
+                    if (equal_flag.hash == default) equal_flag = hashlist.LastOrDefault(x => x.hash  > newhash);
 
                     //ハッシュ値を基準に見つかったハッシュ構造体のリスト値に+1した値にリストを挿入する
                     equal_flag.listindex++;
                     listBox1.Items.Insert((int)equal_flag.listindex, ListNameText.Text);
-                    MSBTsys.MSBT_Data.MSBT_All_Data.Text.Insert((int)equal_flag.listindex , "テキスト</End>");
-                    MSBTsys.MSBT_Data.MSBT_All_Data.Item.Insert((int)equal_flag.listindex , new ATR1.Item(0x1, 0x0, 0x0, 0x0, 0x0, 0xFF, 0xFF, 0x00));
-                    MSBTsys.MSBT_Data.atr_nulldata.Insert((int)equal_flag.listindex , "");
+
+                    listBox1.Sorted = true;
+                    listBox1.Sorted = false;
+                    var testindex = listBox1.Items.IndexOf(ListNameText.Text);
+                    Console.WriteLine( );
+                    MSBTsys.MSBT_Data.MSBT_All_Data.Text.Insert(testindex , "テキスト</End>");
+                    MSBTsys.MSBT_Data.MSBT_All_Data.Item.Insert(testindex, new ATR1.Item(0x1, 0x0, 0x0, 0x0, 0x0, 0xFF, 0xFF, 0x00));
+                    MSBTsys.MSBT_Data.atr_nulldata.Insert(testindex , "");
 
                     //
                     IEnumerable<LBL1.Hash_Data> noduplicates = hashlist.Distinct();
                     hashlist = new List<LBL1.Hash_Data>(noduplicates);
                     var foundhashlist = hashlist.LastOrDefault(x => x.hash == newhash);
-                    if (foundhashlist.hash == default) foundhashlist = hashlist.LastOrDefault(x => x.hash  < newhash); ;
+                    if (foundhashlist.hash == default) foundhashlist = hashlist.LastOrDefault(x => x.hash > newhash); ;
                     //ラベル情報を追加する
                     var lbl1_newindex = hashlist.LastIndexOf(foundhashlist);
                     //lbl1_newindex ++;
-                    foreach (var items in LBL1.list_name.Select((Value, Index) => (Value, Index))) {
-                        var hashdata = Calculation_System.MSBT_Hash(items.Value,lbl1.Entries);
-                        lbl1.Item_1st.Add(new LBL1.LBL_1st_Item(LBL1.unknown[items.Index],LBL1.list_name[items.Index],hashdata));
+                    foreach (var items in LBL1.list_name.Select((Value, Index) => (Value, Index)))
+                    {
+                        var hashdata = Calculation_System.MSBT_Hash(items.Value, lbl1.Entries);
+                        lbl1.Item_1st.Add(new LBL1.LBL_1st_Item(LBL1.unknown[items.Index], LBL1.list_name[items.Index], hashdata));
+                        Console.WriteLine(hashdata.ToString("X8"));
+                        Console.WriteLine(items.Value);
                     }
                     lbl1.Item_1st.Sort((a, b) => a.hash.CompareTo(b.hash));
                     var found1stitem = lbl1.Item_1st.LastOrDefault(x => x.hash == newhash);
-                    if (found1stitem.hash == default) found1stitem = lbl1.Item_1st.LastOrDefault(x => x.hash < newhash);
+                    if (found1stitem.hash == default) found1stitem = lbl1.Item_1st.LastOrDefault(x => x.hash > newhash);
 
                     var newindex = lbl1.Item_1st.LastIndexOf(found1stitem);
 
-                    lbl1_newindex = newindex+1;
-                    Debugger.HashTxt("lbl newindex"+lbl1_newindex +1.ToString());
+                    lbl1_newindex = /*testindex*/newindex;
+                    Debugger.HashTxt("lbl newindex" + lbl1_newindex.ToString());
                     LBL1.name_offset.Insert(lbl1_newindex,0);
                     LBL1.list_name.Insert(lbl1_newindex, ListNameText.Text);
                     LBL1.unknown.Insert(lbl1_newindex, 0x00000001);
-                    LBL1.unknownpos.Insert(lbl1_newindex , 0);
+                    LBL1.unknownpos.Insert(lbl1_newindex, 0);
+
+                    Console.WriteLine("listname"+LBL1.list_name.IndexOf(ListNameText.Text).ToString("X"));
+                    //BattanKing002_Flow000
+                    //ScenarioName_RedBlueExGalaxy3
+                    //MSBFファイルのフロータイプ1の対象MSBTの挿入以降の番号に+1する
+                    if (listBox2.Items.Count == 0 || listBox3.Items.Count == 0) return;
+                    FLW2 flw2 = new FLW2();
+                    List<FLW2.flw2_item> copyitem = new List<FLW2.flw2_item>(flw2.Item);
+                    foreach (var flw2item in copyitem.Select((Value, Index) => (Value, Index))) {
+                        if (flw2item.Value.TypeCheck!=1) continue;
+                        if (flw2item.Value.Unknown3 < testindex) continue;
+                        FLW2.flw2_item newitem =  flw2item.Value;
+                        newitem.Unknown3++;
+                        flw2.Item[flw2item.Index] =  newitem;
+                    }
                 }
 
             }
@@ -1185,6 +1212,44 @@ namespace MSBT_Editor
             if (listBox1.Items.Count < 1) return;
             string tag = "</TotalPlayTime>";
             Calculation_System.TextBoxInsert(textBox1, tag);
+        }
+
+        private void textBox32_TextChanged(object sender, EventArgs e)
+        {
+            var strbytes = Encoding.GetEncoding("utf-16BE").GetBytes(textBox32.Text);
+            textBox33.Text = "";
+            foreach (var hexbit in strbytes) textBox33.AppendText(Environment.NewLine + hexbit.ToString("X2"));
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            //if (richTextBox1.Text.Contains("<Icon=\"AButton\">"))
+            //{
+            //    //richTextBox1.Find("");
+            //    //richTextBox1.SelectionStart = richTextBox1.Find("<Icon=\"AButton\">", RichTextBoxFinds.WholeWord);
+            //    //richTextBox1.SelectionLength = 16;
+            //    //Image img = Image.FromFile(@"F:\Kari\LocalizeData\JpJapanese\LayoutData\Font\a.png");
+            //    //Clipboard.SetImage(img);
+            //    //this.richTextBox1.Paste();
+            //}
+
+            //int pos = 0;
+            //for (; ; )
+            //{
+            //    //文字列を検索して、選択状態にする
+            //    pos = richTextBox1.Find("<Icon=\"AButton\">", pos, RichTextBoxFinds.None);
+            //    if (pos < 0)
+            //    {
+            //        break;
+            //    }
+            //    //背景色を赤にする
+            //    Image img = Image.FromFile(@"F:\Kari\LocalizeData\JpJapanese\LayoutData\Font\a.png");
+
+            //    Clipboard.SetImage(img);
+            //    richTextBox1.Paste();
+            //    pos++;
+            //}
+
         }
     }
 }

@@ -99,105 +99,95 @@ namespace MSBT_Editor.Sectionsys
             list1.Items.Clear();
 
             //リスト初期化
-            unknownpos = new List<long>();
+            unknownpos  = new List<long>();
             unknown     = new List<int>();
             name_offset = new List<int>();
-            list_name = new List<string>();
-            list_no = new List<int>();
+            list_name   = new List<string>();
+            list_no     = new List<int>();
 
             //ヘッダー部読み取り
-            Magic    = CS.Byte2Char(br);
-            Sec_Size = CS.Byte2Int(br);
-            Unknown1 = CS.Byte2Int(br);
-            Unknown2 = CS.Byte2Int(br);
+            Magic       = CS.Byte2Char(br);
+            Sec_Size    = CS.Byte2Int(br);
+            Unknown1    = CS.Byte2Int(br);
+            Unknown2    = CS.Byte2Int(br);
 
             //LBL1のオフセット位置を記憶
-            offset = fs.Position;
+            offset      = fs.Position;
 
             //エントリーの数101、例外あり
-            Entries  = CS.Byte2Int(br);
+            Entries     = CS.Byte2Int(br);
             txtb14.Text = Entries.ToString();
 
+            //LBLのスキップ数(数値が違っても問題なし)とオフセット値を読み込む
             for (int i = 0; i<entries; i++){
+
+                //各エントリオフセットの先頭を記録する
                 unknownpos.Add(fs.Position);
+
+                //スキップ数とオフセット値の読み取り
                 var unk = CS.Byte2Int(br);
                 var n_set = CS.Byte2Int(br);
                 unknown.Add(unk);
                 name_offset.Add(n_set);
-                if (i != 0)
+
+                //一番最初のエントリの場合
+                if (i == 0) continue;
+                
+                //Name_Offsetの数を記録
+                var counter = name_offset.Count();
+
+                //同じオフセット値の場合上書きする
+                if (name_offset[counter - 2] == name_offset[counter-1])
                 {
-                    var counter = name_offset.Count();
-                    if (name_offset[counter - 2] == name_offset[counter-1])
-                    {
-                        unknownpos.RemoveRange(unknownpos.Count() - 2, 1);
-                        unknown.RemoveRange(unknown.Count()-2,1);
-                        name_offset.RemoveRange(name_offset.Count() - 2, 1);
-                        continue;
-                    }
+                    unknownpos.RemoveRange(unknownpos.Count() - 2, 1);
+                    unknown.RemoveRange(unknown.Count()-2,1);
+                    name_offset.RemoveRange(name_offset.Count() - 2, 1);
+                    continue;
                 }
             }
 
+            //現在地を記録する
             offset2 = fs.Position;
 
-            string[] test = new string[/*entries+1*/0xFF];
+            //配列を用意エントリー数を超える場合があるので最大値を0xFFにしています
+            string[] ListName = new string[0xFF];
+
+            //リスト名のカウンター
             int testcount = 0;
-            Debugger.HashTxt("//////////ハッシュ値順//////////", true);
+
+            //LBL1セクションのラベル名セクションの処理
             for (long k = 0; k < (offset+sec_size)-offset2; k++) {
 
+                //各ラベル名の先頭をその都度記録する
                 var lblfspos = fs.Position;
-                byte num = CS.Bytes2Byte(br);
-                string list_item = CS.Byte2Char(br, num);
+
+                //ラベル名の項目を読み取る
+                var num = CS.Bytes2Byte(br);
+                var list_item = CS.Byte2Char(br, num);
                 var listNo = CS.Byte2Int(br);
-                Debugger.HashTxt("ListName_ " + list_item);
-                Debugger.HashTxt("ListNo_ " + listNo.ToString("X"));
-                Debugger.HashTxt("");
+                ListName[listNo] = list_item;
 
-                test[listNo] = list_item;
-
-                Console.WriteLine((int)(lblfspos - offset));
+                //
                 var nameoffindex = name_offset.IndexOf((int)(lblfspos-offset));
                 if (-1 != nameoffindex)list_name.Add(list_item) ;
-
-                //デバッグ用ハッシュ値を表示できます
-                Console.WriteLine("ハッシュ値 " + CS.MSBT_Hash(list_item, entries).ToString("X8"));
-                Debugger.HashTxt("ハッシュ値 " + CS.MSBT_Hash(list_item, entries).ToString("X8"));
-                Debugger.HashTxt(list_item);
-                Debugger.HashTxt("リスト番号" + listNo.ToString("X8")) ;
-                Debugger.HashTxt("");
                 list_no.Add(listNo);
+
+                //
                 k += num;
                 k += 4;
                 testcount++;
             }
 
-            Debugger.HashTxt("リストかうんと" + testcount.ToString("X"));
-            Debugger.HashTxt("//////////リスト順//////////");
-
-            //無意味かもしれない？(今後バグが発生しなければ削除予定)
-            //if ((offset + sec_size) - offset2 < entries)
-            //{
-            //    var paddingpos = Entries - ((offset + sec_size) - offset2);
-            //    for (int a = 0; a < paddingpos; a++) fs.Position += 8;
-            //}
             var lino = list_no.ToList();
             IOrderedEnumerable<int> list_No_sorted = lino.OrderBy(x => x);
             var lino2 = list_No_sorted.ToArray();
-            for (int l = 0; l < testcount; l++) {
-                list1.Items.Add(test[l]);
-               
-                Debugger.HashTxt("リスト番号"+lino2[l].ToString("X8"));
-                Debugger.HashTxt(test[l]);
-                Debugger.HashTxt("ハッシュ値 " + CS.MSBT_Hash(test[l], entries).ToString("X8"));
-                Debugger.HashTxt("");
-            } 
+            for (int l = 0; l < testcount; l++) list1.Items.Add(ListName[l]);
             CS.Padding(br,fs.Position);
         }
 
         public void Write(BinaryWriter bw , FileStream fs) {
             int itemcount = 0;
             List<long> labelpos = new List<long>();
-            //HashData = new List<Hash_Data>();
-            //if(HashData == null)
             HashData = new List<Hash_Data>();
 
             //LBL1セクション
@@ -215,43 +205,29 @@ namespace MSBT_Editor.Sectionsys
             //エントリーサイズをバイナリに書き込む
             if (Entries<=101) Entries = 101;
             bw.Write(CS.StringToBytes((Entries).ToString("X8")));
-            //CS.Null_Writer_Int32(bw);
 
             //ラベルindex(不明)とラベルオフセットを空白で埋める
-            for (int i = 0; i < Entries; i++)
-            {
-                CS.Null_Writer_Int32(bw, 2);
-            }
-
-            //ラベルのエリアの値を書き込む
+            for (int i = 0; i < Entries; i++) CS.Null_Writer_Int32(bw, 2);
             
-            foreach (var item in list1.Items)
-            {
+            //ラベルのエリアの値を書き込む
+            foreach (var item in list1.Items){
+
                 var str = item.ToString();
                 var strnum = (byte)str.Count();
                 //ハッシュ値とリスト番号をリストへ
                 HashData.Add(new Hash_Data(CS.MSBT_Hash(str, Entries), itemcount));
-                Debugger.HashTxt(HashData[itemcount].hash.ToString("X")+"そーとまえ"+ HashData[itemcount].listindex.ToString("X"));
                 itemcount++;
             }
 
-            // ScenarioName_RedBlueExGalaxy3
-            //ScenarioName_RedBlueExGalaxy3
             //ハッシュ値を並び替えリスト番号も順番変更
             IOrderedEnumerable<Hash_Data> sorted = HashData.OrderBy(x => x.hash);
             var hashdata = sorted.ToArray();
-
-            //for (int i = 0; i < HashData.Count; i++)
-            //{
-            //    HashData[i] = new Hash_Data(hashdata2[i].hash, i);
-            //    Console.WriteLine(HashData[i].hash + "___" + HashData[i].listindex);
-            //}
 
 
             int hashcount = 0;
             foreach (var hashdatsorted in hashdata) {
                 var index = hashdatsorted.listindex;
-                list1.SelectedIndex = (int)index/*(int)HashData[hashcount].listindex*/;
+                list1.SelectedIndex = (int)index;
                 labelpos.Add(fs.Position);
                 var str = list1.Text;
                 var strnum = (byte)str.Count();
@@ -259,10 +235,9 @@ namespace MSBT_Editor.Sectionsys
                 bw.Write(CS.StringToBytes(strnum.ToString("X2")));
                 bw.Write(Encoding.GetEncoding(932).GetBytes(str));
                 bw.Write(CS.StringToBytes(hashdatsorted.listindex.ToString("X8")));
-                //Console.WriteLine("リストインデックス");
-                Debugger.HashTxt("_" + hashdatsorted.hash.ToString("X8") +"_"+hashdatsorted.listindex.ToString("X"));
                 hashcount++;
             }
+
 
             var lblend = fs.Position;
 
@@ -270,31 +245,44 @@ namespace MSBT_Editor.Sectionsys
             CS.Padding_Writer(bw, fs.Position);
             var fspadend1 = fs.Position;
 
-            
-
             //同じハッシュ値をチェックする数値
             var samecheck = 0;
 
             //ファイルストリームの位置を変更
             fs.Seek(offset2 + 4, SeekOrigin.Begin);
 
-            
-
+            //
             var entry_hash_counter = 0;
 
+            //
+            var skipcounter = 1;
+
+            //
+            //List<UInt32> savehash = new List<uint>();
+            //for (int i = 0; i < sorted.Count(); i++) {
+            //    if (i == 0)
+            //    { 
+                
+            //    }
+            //}
 
 
-            for (int i = 0; i < sorted.Count(); i++)
-            {
 
+
+
+
+            for (int i = 0; i < sorted.Count(); i++){
+                Console.WriteLine(hashdata[i].hash.ToString("X8"));
+                var skipindex = hashdata.Where(a => a.hash.Equals(hashdata[i].hash)).Count();
                 //初回のみの処理
                 if (i == 0)
                 {
-                    for (int j = 0; j < (hashdata[i].hash)+1; j++)
+                    for (int j = 0; j < (hashdata[i].hash) + 1; j++)
                     {
                         if (j == (hashdata[i].hash))
                         {
-                            bw.Write(CS.StringToInt32_byte((unknown[i]).ToString("X8")));
+                            bw.Write(CS.StringToInt32_byte((/*unknown[i]*/skipindex).ToString("X8")));
+                            //skipcounter = 1;
                         }
                         else
                         {
@@ -303,34 +291,44 @@ namespace MSBT_Editor.Sectionsys
                         bw.Write(CS.StringToInt32_byte(((int)labelpos[i] - 0x30).ToString("X8")));
                         entry_hash_counter++;
                     }
-                    
+                    //Console.WriteLine(skipcounter);
                     continue;
+                    if ((hashdata[i + 1].hash) - (hashdata[i].hash) == 0) continue;
                 }
-
+                
 
                 //同じハッシュ値の処理
-                if ((hashdata[i].hash) - (hashdata[i - 1].hash) == 0)
-                {
+
+                if ((hashdata[i].hash) - (hashdata[i - 1].hash) == 0){
                     samecheck++;
-                    continue;
-                }
+                    skipcounter++;
+                    //Console.WriteLine("__________"+hashdata[i].hash.ToString("X8"));
 
-                for (int j = 0; j < (hashdata[i].hash) - (hashdata[i - 1].hash ); j++)
-                {
-
-                    if (j == (hashdata[i].hash) - (hashdata[i - 1].hash)-1)
+                    if ((sorted.Count() - 1) != i)
                     {
-                        bw.Write(CS.StringToInt32_byte((unknown[i - samecheck]).ToString("X8")));
-                        Debugger.HashTxt(unknown[i - samecheck].ToString());
-                        //ScenarioName_RedBlueExGalaxy3
+                        if ((hashdata[i + 1].hash) - (hashdata[i].hash) == 0) continue;
+
                     }
-                    else
-                    {
+                    //continue;
+                }
+                
+                for (int j = 0; j < (hashdata[i].hash) - (hashdata[i - 1].hash ); j++){
+                    
+                    if (j == (hashdata[i].hash) - (hashdata[i - 1].hash)-1){
+                        bw.Write(CS.StringToInt32_byte((/*unknown[i - samecheck]*/skipindex).ToString("X8")));
+                        //skipcounter = 0;
+                    }
+                    else{
                         CS.Null_Writer_Int32(bw);
+                        //skipcounter++;
                     }
                     bw.Write(CS.StringToInt32_byte(((int)labelpos[i] - 0x30).ToString("X8")));
                     entry_hash_counter++;
                 }
+                //Console.WriteLine((hashdata[i].hash).ToString("X8"));
+                Console.WriteLine(skipcounter);
+                skipcounter = 1;
+
             }
             if (entry_hash_counter   < Entries) {
                 var remaining_offset = Entries - entry_hash_counter;

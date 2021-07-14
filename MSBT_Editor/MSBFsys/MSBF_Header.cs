@@ -34,6 +34,7 @@ namespace MSBT_Editor.MSBFsys
             Unknown8 = CS.Byte2Short(br);
             Unknown9 = CS.Byte2Short(br);   //ここまで
 
+            //インスタンス生成
             FLW2 flw2 = new FLW2();
             FEN1 fen1 = new FEN1();
 
@@ -50,6 +51,7 @@ namespace MSBT_Editor.MSBFsys
             Debugger.MSBF_Text(Unknown8.ToString());
             Debugger.MSBF_Text(Unknown9.ToString());
 
+            //各セクションの読み込み
             flw2.Read(br,fs);
             fen1.Read(br,fs);
 
@@ -89,6 +91,7 @@ namespace MSBT_Editor.MSBFsys
             flw2.Write(bw,fs);
             var filesize = fen1.Write(bw,fs);
 
+            //ファイルサイズの書き込み
             fs.Seek(MSBF_File_Size_pos,SeekOrigin.Begin);
             bw.Write(CS.StringToBytes(filesize.ToString("X8")));
 
