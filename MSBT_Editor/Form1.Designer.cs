@@ -195,6 +195,16 @@ namespace MSBT_Editor
             this.label42 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
+            this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.label48 = new System.Windows.Forms.Label();
+            this.label49 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.label51 = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -221,6 +231,9 @@ namespace MSBT_Editor
             this.groupBox8.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage10.SuspendLayout();
+            this.tabPage11.SuspendLayout();
+            this.groupBox13.SuspendLayout();
+            this.groupBox14.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -382,6 +395,7 @@ namespace MSBT_Editor
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage10);
+            this.tabControl1.Controls.Add(this.tabPage11);
             this.tabControl1.Location = new System.Drawing.Point(442, 51);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1380,7 +1394,6 @@ namespace MSBT_Editor
             this.ListNameText.Name = "ListNameText";
             this.ListNameText.Size = new System.Drawing.Size(204, 19);
             this.ListNameText.TabIndex = 0;
-            this.ListNameText.Text = "ScenarioName_RedBlueExGalaxy3";
             this.ListNameText.TextChanged += new System.EventHandler(this.ListNameText_TextChanged);
             // 
             // AddListText
@@ -1901,6 +1914,106 @@ namespace MSBT_Editor
             this.label44.TabIndex = 13;
             this.label44.Text = "null";
             // 
+            // tabPage11
+            // 
+            this.tabPage11.Controls.Add(this.groupBox14);
+            this.tabPage11.Controls.Add(this.groupBox13);
+            this.tabPage11.Location = new System.Drawing.Point(4, 22);
+            this.tabPage11.Name = "tabPage11";
+            this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage11.Size = new System.Drawing.Size(560, 434);
+            this.tabPage11.TabIndex = 6;
+            this.tabPage11.Text = "Credit";
+            this.tabPage11.UseVisualStyleBackColor = true;
+            // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(this.label52);
+            this.groupBox13.Controls.Add(this.label51);
+            this.groupBox13.Controls.Add(this.label50);
+            this.groupBox13.Controls.Add(this.label49);
+            this.groupBox13.Controls.Add(this.label47);
+            this.groupBox13.Controls.Add(this.label46);
+            this.groupBox13.Location = new System.Drawing.Point(3, 50);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(182, 58);
+            this.groupBox13.TabIndex = 0;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "デバッガー";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(6, 15);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(36, 12);
+            this.label46.TabIndex = 0;
+            this.label46.Text = "Xenon";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(6, 39);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(43, 12);
+            this.label47.TabIndex = 1;
+            this.label47.Text = "Dossun";
+            // 
+            // groupBox14
+            // 
+            this.groupBox14.Controls.Add(this.label48);
+            this.groupBox14.Location = new System.Drawing.Point(3, 6);
+            this.groupBox14.Name = "groupBox14";
+            this.groupBox14.Size = new System.Drawing.Size(182, 38);
+            this.groupBox14.TabIndex = 1;
+            this.groupBox14.TabStop = false;
+            this.groupBox14.Text = "プログラミング";
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(6, 15);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(53, 12);
+            this.label48.TabIndex = 0;
+            this.label48.Text = "ぺんぐいん";
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(65, 15);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(29, 12);
+            this.label49.TabIndex = 2;
+            this.label49.Text = "映幻";
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(65, 27);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(47, 12);
+            this.label50.TabIndex = 3;
+            this.label50.Text = "柊：貴星";
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(6, 27);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(53, 12);
+            this.label51.TabIndex = 4;
+            this.label51.Text = "Evanbowl";
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(65, 39);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(68, 12);
+            this.label52.TabIndex = 5;
+            this.label52.Text = "ChurenPorto";
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -1973,6 +2086,11 @@ namespace MSBT_Editor
             this.tabPage5.PerformLayout();
             this.tabPage10.ResumeLayout(false);
             this.tabPage10.PerformLayout();
+            this.tabPage11.ResumeLayout(false);
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox13.PerformLayout();
+            this.groupBox14.ResumeLayout(false);
+            this.groupBox14.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2145,6 +2263,16 @@ namespace MSBT_Editor
         private System.Windows.Forms.TextBox textBox32;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button30;
+        private System.Windows.Forms.TabPage tabPage11;
+        private System.Windows.Forms.GroupBox groupBox14;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.GroupBox groupBox13;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label label49;
+        private System.Windows.Forms.Label label47;
+        private System.Windows.Forms.Label label46;
     }
 }
 

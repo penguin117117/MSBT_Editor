@@ -381,6 +381,8 @@ namespace MSBT_Editor
                 MSBTsys.MSBT_Data.MSBT_All_Data.Text.RemoveRange(listBox1.SelectedIndex, 1);
                 MSBTsys.MSBT_Data.atr_nulldata.RemoveRange(listBox1.SelectedIndex , 1);
 
+
+                //ハッシュスキップされている値の場合
                 if (array_search != -1) {
                     Debugger.HashTxt(array_search.ToString());
                     Debugger.HashTxt(LBL1.list_name[array_search]);
@@ -612,27 +614,14 @@ namespace MSBT_Editor
 
         private void button11_Click(object sender, EventArgs e)
         {
-
-            //if (listBox1.Items.Count < 1) return;
-            //if (comboBox5.Items.Count == -1) return;
-            //if (comboBox5.SelectedIndex == -1) comboBox5.SelectedIndex = 0 ;
             string[] IconTag = { "<Icon=\"Peach\">", "<Icon=\"Koopa\">", "<Icon=\"Kinopio\">", "<Icon=\"Mario\">", "<Icon=\"Mario2\">", "<Icon=\"Tico\">", "<Icon=\"Yoshi\">", "<Icon=\"HarapekoTico\">", "<Icon=\"Luigi\">", "<Icon=\"MasterTico\">", "<Icon=\"Columa\">", "<Icon=\"Begoman\">", "<Icon=\"Kuribo\">" , "<Icon=\"Star Bunny\">" };
             Calculation_System.TextBoxTagAdder(listBox1,textBox1,comboBox5,IconTag);
-            //int index = comboBox5.SelectedIndex;
-            //string tag = IconTag[index];
-            //Calculation_System.TextBoxInsert(textBox1, tag);
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //if (listBox1.Items.Count < 1) return;
-            //if (comboBox6.Items.Count == -1) return;
-            //if (comboBox6.SelectedIndex == -1) comboBox6.SelectedIndex = 0;
             string[] IconTag = { "<Icon=\"CometMedal\">", "<Icon=\"Coins\">", "<Icon=\"Starbit\">", "<Icon=\"StarPiece\">", "<Icon=\"PurpleStarbit\">", "<Icon=\"SilverStar\">", "<Icon=\"Star\">", "<Icon=\"GrandStar\">", "<Icon=\"BronzeStar\">", "<Icon=\"Coin\">", "<Icon=\"PurpleCoin\">", "<Icon=\"1UPMushroom\">", "<Icon=\"LifeUpMushroom\">", "<Icon=\"BlueStar\">", "<Icon=\"StarRing\">", "<Icon=\"Flower\">" , "<Icon=\"Coconut\">" , "<Icon=\"BlueChip\">" , "<Icon=\"BlueFruit\">" , "<Icon=\"CheckPointFlag\">" , "<Icon=\"GrandBronzeStar\">" };
             Calculation_System.TextBoxTagAdder(listBox1, textBox1, comboBox6, IconTag);
-            //int index = comboBox6.SelectedIndex;
-            //string tag = IconTag[index];
-            //Calculation_System.TextBoxInsert(textBox1, tag);
         }
 
         private void button13_Click(object sender, EventArgs e)
