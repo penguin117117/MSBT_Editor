@@ -1685,6 +1685,7 @@ namespace MSBT_Editor
             this.button30.TabIndex = 14;
             this.button30.Text = "button30";
             this.button30.UseVisualStyleBackColor = true;
+            this.button30.Visible = false;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
             // textBox33
@@ -1693,6 +1694,7 @@ namespace MSBT_Editor
             this.textBox33.Name = "textBox33";
             this.textBox33.Size = new System.Drawing.Size(133, 19);
             this.textBox33.TabIndex = 11;
+            this.textBox33.Visible = false;
             // 
             // textBox32
             // 
@@ -1700,6 +1702,7 @@ namespace MSBT_Editor
             this.textBox32.Name = "textBox32";
             this.textBox32.Size = new System.Drawing.Size(133, 19);
             this.textBox32.TabIndex = 10;
+            this.textBox32.Visible = false;
             this.textBox32.TextChanged += new System.EventHandler(this.textBox32_TextChanged);
             // 
             // button25
@@ -1710,6 +1713,7 @@ namespace MSBT_Editor
             this.button25.TabIndex = 9;
             this.button25.Text = "button25";
             this.button25.UseVisualStyleBackColor = true;
+            this.button25.Visible = false;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
             // HashCalculation
@@ -1718,6 +1722,7 @@ namespace MSBT_Editor
             this.HashCalculation.Name = "HashCalculation";
             this.HashCalculation.Size = new System.Drawing.Size(351, 19);
             this.HashCalculation.TabIndex = 8;
+            this.HashCalculation.Visible = false;
             // 
             // richTextBox1
             // 
@@ -1726,6 +1731,7 @@ namespace MSBT_Editor
             this.richTextBox1.Size = new System.Drawing.Size(83, 121);
             this.richTextBox1.TabIndex = 13;
             this.richTextBox1.Text = "";
+            this.richTextBox1.Visible = false;
             // 
             // textBox13
             // 
@@ -1822,7 +1828,7 @@ namespace MSBT_Editor
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(36, 12);
             this.label36.TabIndex = 7;
-            this.label36.Text = "MSBF";
+            this.label36.Text = "MSBT";
             // 
             // label37
             // 

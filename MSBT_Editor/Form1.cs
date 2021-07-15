@@ -373,24 +373,28 @@ namespace MSBT_Editor
             if (listBox1.Items.Count != 0 && (MSBTsys.MSBT_Data.MSBT_All_Data.Item.Count !=0) && MSBTsys.MSBT_Data.MSBT_All_Data.Text.Count != 0)
             {
                 var array_list_name = LBL1.list_name.ToArray();
-                var array_search = Array.IndexOf(array_list_name, listBox1.SelectedItem);
-
-                if (array_search == -1) return;
-
+                var array_search = Array.IndexOf(array_list_name, listBox1.SelectedItem.ToString());
+                Console.WriteLine("array_search -1");
+                //if (array_search == -1) return;
+                Console.WriteLine("array_search -1以外");
                 MSBTsys.MSBT_Data.MSBT_All_Data.Item.RemoveRange(listBox1.SelectedIndex,1);
                 MSBTsys.MSBT_Data.MSBT_All_Data.Text.RemoveRange(listBox1.SelectedIndex, 1);
                 MSBTsys.MSBT_Data.atr_nulldata.RemoveRange(listBox1.SelectedIndex , 1);
 
+                if (array_search != -1) {
+                    Debugger.HashTxt(array_search.ToString());
+                    Debugger.HashTxt(LBL1.list_name[array_search]);
+                    Debugger.HashTxt(LBL1.unknown[array_search].ToString());
+                    Debugger.HashTxt(LBL1.unknownpos[array_search].ToString());
 
-                Debugger.HashTxt(array_search.ToString());
-                Debugger.HashTxt(LBL1.list_name[array_search]);
-                Debugger.HashTxt(LBL1.unknown[array_search].ToString());
-                Debugger.HashTxt(LBL1.unknownpos[array_search].ToString());
+                    LBL1.name_offset.RemoveAt(array_search);
+                    LBL1.list_name.RemoveAt(array_search);
+                    LBL1.unknown.RemoveAt(array_search);
+                    LBL1.unknownpos.RemoveAt(array_search);
 
-                LBL1.name_offset.RemoveAt(array_search);
-                LBL1.list_name.RemoveAt(array_search);
-                LBL1.unknown.RemoveAt(array_search);
-                LBL1.unknownpos.RemoveAt(array_search);
+
+                }
+               
                 //LBL1.list_name.RemoveRange(array_search , 1);
                 //LBL1.unknown.RemoveRange(array_search, 1);
                 //LBL1.unknownpos.RemoveRange(array_search, 1);
