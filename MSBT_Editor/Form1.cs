@@ -421,32 +421,32 @@ namespace MSBT_Editor
 
             string color = "";
 
-            switch (comboBox1.Text) {
-                case "ブラック":
+            switch (comboBox1.SelectedIndex) {
+                case 0:
                     color = "Black";
                     break;
-                case "レッド":
+                case 1:
                     color = "Red";
                     break;
-                case "グリーン":
+                case 2:
                     color = "Green";
                     break;
-                case "ブルー":
+                case 3:
                     color = "Blue";
                     break;
-                case "イエロー":
+                case 4:
                     color = "Yellow";
                     break;
-                case "パープル":
+                case 5:
                     color = "Purple";
                     break;
-                case "オレンジ":
+                case 6:
                     color = "Orange";
                     break;
-                case "グレー":
+                case 7:
                     color = "Gray";
                     break;
-                case "エンドタグ":
+                case 8:
                     Calculation_System.TextBoxInsert(textBox1, "</Color>");
                     return;
                 default:
@@ -465,14 +465,14 @@ namespace MSBT_Editor
 
             string tag = "";
 
-            switch (comboBox2.Text) {
-                case "改行":
+            switch (comboBox2.SelectedIndex) {
+                case 0:
                     tag = "</br>" + Environment.NewLine;
                     break;
-                case "次のページ":
+                case 1:
                     tag = "</New_Page>"+Environment.NewLine + Environment.NewLine;
                     break;
-                case "終了":
+                case 2:
                     tag = "</End>";
                     break;
                 default:
@@ -495,15 +495,15 @@ namespace MSBT_Editor
 
             string tag = "";
 
-            switch (comboBox3.Text)
+            switch (comboBox3.SelectedIndex)
             {
-                case "小":
+                case 0:
                     tag = "<Size=\"Small\">";
                     break;
-                case "普通":
+                case 1:
                     tag = "<Size=\"Normal\">";
                     break;
-                case "大":
+                case 2:
                     tag = "<Size=\"Large\">";
                     break;
                 default:
@@ -520,12 +520,12 @@ namespace MSBT_Editor
 
             string tag = "";
 
-            switch (comboBox4.Text)
+            switch (comboBox4.SelectedIndex)
             {
-                case "横方向":
+                case 0:
                     tag = "</XCenter>";
                     break;
-                case "縦方向":
+                case 1:
                     tag = "</YCenter>";
                     break;
                 default:
@@ -616,7 +616,7 @@ namespace MSBT_Editor
             //if (listBox1.Items.Count < 1) return;
             //if (comboBox5.Items.Count == -1) return;
             //if (comboBox5.SelectedIndex == -1) comboBox5.SelectedIndex = 0 ;
-            string[] IconTag = { "<Icon=\"Peach\">", "<Icon=\"Koopa\">", "<Icon=\"Kinopio\">", "<Icon=\"Mario\">", "<Icon=\"Mario2\">", "<Icon=\"Tico\">", "<Icon=\"Yoshi\">", "<Icon=\"HarapekoTico\">", "<Icon=\"Luigi\">", "<Icon=\"MasterTico\">", "<Icon=\"Columa\">", "<Icon=\"Begoman\">", "<Icon=\"Kuribo\">" + "<Icon=\"Star Bunny\">" };
+            string[] IconTag = { "<Icon=\"Peach\">", "<Icon=\"Koopa\">", "<Icon=\"Kinopio\">", "<Icon=\"Mario\">", "<Icon=\"Mario2\">", "<Icon=\"Tico\">", "<Icon=\"Yoshi\">", "<Icon=\"HarapekoTico\">", "<Icon=\"Luigi\">", "<Icon=\"MasterTico\">", "<Icon=\"Columa\">", "<Icon=\"Begoman\">", "<Icon=\"Kuribo\">" , "<Icon=\"Star Bunny\">" };
             Calculation_System.TextBoxTagAdder(listBox1,textBox1,comboBox5,IconTag);
             //int index = comboBox5.SelectedIndex;
             //string tag = IconTag[index];

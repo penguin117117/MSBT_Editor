@@ -434,6 +434,7 @@ namespace MSBT_Editor
             // 
             // textBox12
             // 
+            this.textBox12.Enabled = false;
             this.textBox12.Location = new System.Drawing.Point(127, 44);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(100, 19);
@@ -456,6 +457,7 @@ namespace MSBT_Editor
             // 
             // textBox15
             // 
+            this.textBox15.Enabled = false;
             this.textBox15.Location = new System.Drawing.Point(147, 68);
             this.textBox15.Name = "textBox15";
             this.textBox15.Size = new System.Drawing.Size(100, 19);
@@ -483,6 +485,7 @@ namespace MSBT_Editor
             // 
             // textBox14
             // 
+            this.textBox14.Enabled = false;
             this.textBox14.Location = new System.Drawing.Point(147, 44);
             this.textBox14.Name = "textBox14";
             this.textBox14.Size = new System.Drawing.Size(100, 19);
@@ -617,6 +620,7 @@ namespace MSBT_Editor
             // 
             // textBox10
             // 
+            this.textBox10.Enabled = false;
             this.textBox10.Location = new System.Drawing.Point(147, 197);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(100, 19);
