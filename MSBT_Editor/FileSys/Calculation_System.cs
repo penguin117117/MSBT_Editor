@@ -709,8 +709,8 @@ namespace MSBT_Editor.FileSys
         }
 
         /// <summary>
-        /// BCKファイルのパディング分ﾊﾞｲﾅﾘﾘｰﾄﾞｽﾄﾘｰﾑを進めます<br/>
-        /// <remarks>Padding(進めたいﾊﾞｲﾅﾘﾘｰﾄﾞ、ﾌｧｲﾙｽﾄﾘｰﾑの位置(ling型))</remarks>
+        /// ファイルのパディング分バイナリリードを進めます<br/>
+        /// <remarks>Padding(進めたいバイナリリード、ファイルストリームの位置(ling型))</remarks>
         /// </summary>
         /// 
         public static void Padding(BinaryReader br, long fs)
@@ -723,6 +723,11 @@ namespace MSBT_Editor.FileSys
             Debugger.Text(ps);
         }
 
+        /// <summary>
+        /// ファイルのパディング分バイナリライトを進めます<br/>
+        /// <remarks>Padding_Writer(進めたいバイナリライト、ファイルストリームの位置(ling型))</remarks>
+        /// </summary>
+        /// 
         public static void Padding_Writer(BinaryWriter bw, long bw_pos)
         {
             int i = 0;

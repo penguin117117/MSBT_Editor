@@ -125,8 +125,8 @@ namespace MSBT_Editor.Sectionsys
                 unknownpos.Add(fs.Position);
 
                 //スキップ数とオフセット値の読み取り
-                var unk = CS.Byte2Int(br);
-                var n_set = CS.Byte2Int(br);
+                var unk     = CS.Byte2Int(br);
+                var n_set   = CS.Byte2Int(br);
                 unknown.Add(unk);
                 name_offset.Add(n_set);
 
@@ -154,7 +154,7 @@ namespace MSBT_Editor.Sectionsys
 
             //リスト名のカウンター
             int testcount = 0;
-
+            Console.WriteLine(((offset + sec_size) - offset2).ToString("X"));
             //LBL1セクションのラベル名セクションの処理
             for (long k = 0; k < (offset+sec_size)-offset2; k++) {
 
@@ -172,7 +172,7 @@ namespace MSBT_Editor.Sectionsys
                 if (-1 != nameoffindex)list_name.Add(list_item) ;
                 list_no.Add(listNo);
 
-                //
+                //文字数のカウント分と末尾のInt32(4byte)分進める
                 k += num;
                 k += 4;
                 testcount++;

@@ -27,10 +27,8 @@ namespace MSBT_Editor
 
         public static Form1 Form1Instance
         {
-            get
-            { return _form1Instance; }
-            set
-            { _form1Instance = value; }
+            set => _form1Instance = value;
+            get => _form1Instance;
         }
 
         private void 開くToolStripMenuItem_Click(object sender, EventArgs e)
@@ -46,7 +44,8 @@ namespace MSBT_Editor
 
         private void 上書き保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Dialog.SaveAs();
+            if (listBox1.Items.Count != 0 && (MSBTsys.MSBT_Data.MSBT_All_Data.Item.Count != 0) && MSBTsys.MSBT_Data.MSBT_All_Data.Text.Count != 0)
+                Dialog.SaveAs();
         }
 
         private void MSBF開くToolStripMenuItem_Click(object sender, EventArgs e)
@@ -56,37 +55,14 @@ namespace MSBT_Editor
 
         private void MSBF保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FLW2 flw2 = new FLW2();
-            FEN1 fen1 = new FEN1();
-
-            if (listBox2.Items.Count == 0 || (flw2.Item.Count == 0)) {
-                MessageBox.Show("MSBFのFLW2の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (listBox3.Items.Count == 0 || (fen1.Hashes.Count == 0) || (fen1.Item2.Count == 0))
-            {
-                MessageBox.Show("MSBFのFEN1の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            Dialog.Save(2);
+            Action<int> ac = (num) => Dialog.Save(2);
+            Dialog.MSBF_Item_And_ListItem_Checker(ac);
         }
 
         private void MSBF上書き保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FLW2 flw2 = new FLW2();
-            FEN1 fen1 = new FEN1();
-
-            if (listBox2.Items.Count == 0 || (flw2.Item.Count == 0))
-            {
-                MessageBox.Show("MSBFのFLW2の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (listBox3.Items.Count == 0 || (fen1.Hashes.Count == 0) || (fen1.Item2.Count == 0))
-            {
-                MessageBox.Show("MSBFのFEN1の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            Dialog.SaveAs_Msbf();
+            Action ac = () => Dialog.SaveAs_Msbf();
+            Dialog.MSBF_Item_And_ListItem_Checker(ac);
         }
 
         public static readonly string[] IconNameJP01 = { "ピーチ", "クッパ", "キノピオ", "マリオ", "マリオ2", "チコ", "ヨッシー", "腹ペコチコ", "ルイージ", "ベビーチコ", "アシストチコ", "ベーゴマン", "クリボー" , "星ウサギ" };
@@ -100,9 +76,9 @@ namespace MSBT_Editor
         {
             Form1.Form1Instance = this;
 
+            //言語設定
             comboBox8.Text = Properties.Settings.Default.言語;
-
-            Formsys.Langage.Langage_Check();
+            Langage.Langage_Check();
 
             comboBox5.Items.Clear();
             comboBox6.Items.Clear();
@@ -127,26 +103,22 @@ namespace MSBT_Editor
                     break;
 
             }
+
             comboBox5.SelectedIndex = 0;
             comboBox6.SelectedIndex = 0;
             comboBox7.SelectedIndex = 0;
-            //comboBox5.Items.AddRange(IconNameJP01);
-            //comboBox6.Items.AddRange(IconNameJP02);
-            //comboBox7.Items.AddRange(IconNameJP03);
+
             //コマンドライン引数を配列で取得する
             string[] files = System.Environment.GetCommandLineArgs();
 
-            if (files.Length > 1) FileSys.Dialog.FileCheck(files[1]);
+            if (files.Length > 1) Dialog.FileCheck(files[1]);
 
             
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //this.textBox25.TextChanged -= new EventHandler(this.textBox25_TextChanged);
-            //this.textBox26.TextChanged -= new EventHandler(this.textBox26_TextChanged);
-            //if (MSBT_Editor.MSBTsys.MSBT_Data.Txt2_Text_List.Count > 0)
-            if (MSBT_Editor.MSBTsys.MSBT_Data.MSBT_All_Data.Text.Count > 0)
+            if (MSBTsys.MSBT_Data.MSBT_All_Data.Text.Count > 0)
             {
                 if (listBox1.SelectedIndex < 0) listBox1.SelectedIndex = 0;
                 var selectnum = listBox1.SelectedIndex;
@@ -164,10 +136,8 @@ namespace MSBT_Editor
                 textBox11.Text = nulldata[selectnum];
 
                 var liststrs = listBox1.Text;
-                //Console.WriteLine(liststrs+ LBL1.list_name.IndexOf(liststrs)+"_"+LBL1.list_name.Count());
                 if (-1 != LBL1.list_name.IndexOf(liststrs))
                 {
-                    //Console.WriteLine("OK");
                     var unknownlbldata = LBL1.unknownpos[LBL1.list_name.IndexOf(liststrs)].ToString("X");
                     textBox12.Text = LBL1.unknown[LBL1.list_name.IndexOf(liststrs)].ToString("X8");
                 }
@@ -181,8 +151,6 @@ namespace MSBT_Editor
             }
 
             label42.Text ="0x" + listBox1.SelectedIndex.ToString("X");
-            //this.textBox25.TextChanged += new EventHandler(this.textBox25_TextChanged);
-            //this.textBox26.TextChanged += new EventHandler(this.textBox26_TextChanged);
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
@@ -283,17 +251,22 @@ namespace MSBT_Editor
                     equal_flag.listindex++;
                     listBox1.Items.Insert((int)equal_flag.listindex, ListNameText.Text);
 
+                    //リストボックスを名前順にソート
                     listBox1.Sorted = true;
                     listBox1.Sorted = false;
+
+                    //追加したリスト名のインデックスを検索
                     var testindex = listBox1.Items.IndexOf(ListNameText.Text);
-                    Console.WriteLine( );
+
+                    //MSBTのデータを先ほどのインデックス位置に挿入
                     MSBTsys.MSBT_Data.MSBT_All_Data.Text.Insert(testindex , "テキスト</End>");
                     MSBTsys.MSBT_Data.MSBT_All_Data.Item.Insert(testindex, new ATR1.Item(0x1, 0x0, 0x0, 0x0, 0x0, 0xFF, 0xFF, 0x00));
                     MSBTsys.MSBT_Data.atr_nulldata.Insert(testindex , "");
 
-                    //
+                    //重複したデータを削除
                     IEnumerable<LBL1.Hash_Data> noduplicates = hashlist.Distinct();
                     hashlist = new List<LBL1.Hash_Data>(noduplicates);
+
                     var foundhashlist = hashlist.LastOrDefault(x => x.hash == newhash);
                     if (foundhashlist.hash == default) foundhashlist = hashlist.LastOrDefault(x => x.hash > newhash); ;
                     //ラベル情報を追加する

@@ -8,19 +8,24 @@ using System.Windows.Forms;
 using MSBT_Editor.MSBTsys;
 using MSBT_Editor.Formsys;
 using MSBT_Editor.MSBFsys;
+using MSBT_Editor.Sectionsys;
 
 namespace MSBT_Editor.FileSys
 {
+    /// <summary>
+    /// ダイアログクラス
+    /// </summary>
+    /// <remarks>ファイルを開いたり保存する</remarks>
     public class Dialog:objects
     {
         private static string Save_Path_Msbt = "None";
         private static string Save_Path_Msbf = "None";
 
-        public string Path_Msbt {
-            set => Save_Path_Msbt = value;
-            get => Save_Path_Msbt;
-        }
-
+        /// <summary>
+        /// ファイルを選択して開く
+        /// </summary>
+        /// <param name="filenum">「1の場合MSBT」「2の場合MSBF」</param>
+        /// <remarks></remarks>
         public static void Open(int filenum) {
 
             OpenFileDialog ofd = new OpenFileDialog();
@@ -50,7 +55,6 @@ namespace MSBT_Editor.FileSys
             }
             MSBT_Header msbth = new MSBT_Header();
             msbth.Write(Save_Path_Msbt);
-            //Console.WriteLine("MSBT_読み込み完了");
         }
 
 
@@ -63,7 +67,6 @@ namespace MSBT_Editor.FileSys
             }
             MSBF_Header msbfh = new MSBF_Header();
             msbfh.Write(Save_Path_Msbf);
-            //Console.WriteLine("MSBF_読み込み完了");
         }
 
         public static void Save(int filenum)
@@ -101,8 +104,44 @@ namespace MSBT_Editor.FileSys
             }
         }
 
-        public static void MSBF() {
-        
+        public static bool MSBF_Item_And_ListItem_Checker(Action action) {
+            FLW2 flw2 = new FLW2();
+            FEN1 fen1 = new FEN1();
+
+
+            if (list2.Items.Count == 0 || (flw2.Item.Count == 0))
+            {
+                MessageBox.Show("MSBFのFLW2の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (list3.Items.Count == 0 || (fen1.Hashes.Count == 0) || (fen1.Item2.Count == 0))
+            {
+                MessageBox.Show("MSBFのFEN1の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            action();
+            return true;
+        }
+
+        public static bool MSBF_Item_And_ListItem_Checker(Action<int> action)
+        {
+            FLW2 flw2 = new FLW2();
+            FEN1 fen1 = new FEN1();
+
+
+            if (list2.Items.Count == 0 || (flw2.Item.Count == 0))
+            {
+                MessageBox.Show("MSBFのFLW2の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (list3.Items.Count == 0 || (fen1.Hashes.Count == 0) || (fen1.Item2.Count == 0))
+            {
+                MessageBox.Show("MSBFのFEN1の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            var a =Convert.ToInt32(action.Method.GetParameters());
+            action(a);
+            return true;
         }
 
 
@@ -128,18 +167,10 @@ namespace MSBT_Editor.FileSys
                         msbth.Read(filepath);
                         Console.WriteLine("MSBT_読み込み完了");
                         tssl2.Text = Path.GetFileName(filepath);
-
-                        //if (File.Exists(MSBF_File_Path)==false) break;
-                        //MSBF_Header msbfh = new MSBF_Header();
-                        //msbfh.Read(MSBF_File_Path);
-                        //Console.WriteLine("MSBF_読み込み完了");
-                        //tssl4.Text = Path.GetFileName(MSBF_File_Path);
-
                         break;
                     case ".msbf":
                         Save_Path_Msbf = filepath;
                         tssl4.Text = "";
-                        //if (File.Exists(MSBF_File_Path) == false) break;
                         MSBF_Header msbfh = new MSBF_Header();
                         msbfh.Read(MSBF_File_Path);
                         Console.WriteLine("MSBF_読み込み完了");
