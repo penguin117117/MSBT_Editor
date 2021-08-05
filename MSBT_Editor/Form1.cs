@@ -38,14 +38,15 @@ namespace MSBT_Editor
 
         private void 保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count != 0 && (MSBTsys.MSBT_Data.MSBT_All_Data.Item.Count != 0) && MSBTsys.MSBT_Data.MSBT_All_Data.Text.Count != 0)
-                Dialog.Save(1);
+            Action ac = () => Dialog.SaveAs(1);
+            Dialog.MSBT_Item_And_ListItem_Checker(ac);
         }
 
         private void 上書き保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count != 0 && (MSBTsys.MSBT_Data.MSBT_All_Data.Item.Count != 0) && MSBTsys.MSBT_Data.MSBT_All_Data.Text.Count != 0)
-                Dialog.SaveAs();
+            MSBTsys.MSBT_Header msbth = new MSBTsys.MSBT_Header();
+            Action ac = () => Dialog.Save(msbth);
+            Dialog.MSBT_Item_And_ListItem_Checker(ac);
         }
 
         private void MSBF開くToolStripMenuItem_Click(object sender, EventArgs e)
@@ -55,13 +56,14 @@ namespace MSBT_Editor
 
         private void MSBF保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Action<int> ac = (num) => Dialog.Save(2);
+            Action ac = () => Dialog.SaveAs(2);
             Dialog.MSBF_Item_And_ListItem_Checker(ac);
         }
 
         private void MSBF上書き保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Action ac = () => Dialog.SaveAs_Msbf();
+            MSBFsys.MSBF_Header msbfh = new MSBFsys.MSBF_Header();
+            Action ac = () => Dialog.Save(msbfh);
             Dialog.MSBF_Item_And_ListItem_Checker(ac);
         }
 
@@ -80,37 +82,10 @@ namespace MSBT_Editor
             comboBox8.Text = Properties.Settings.Default.言語;
             Langage.Langage_Check();
 
-            comboBox5.Items.Clear();
-            comboBox6.Items.Clear();
-            comboBox7.Items.Clear();
-
-            switch (Properties.Settings.Default.言語)
-            {
-                case "日本語":
-                    comboBox5.Items.AddRange(IconNameJP01);
-                    comboBox6.Items.AddRange(IconNameJP02);
-                    comboBox7.Items.AddRange(IconNameJP03);
-                    break;
-                case "EN":
-                    comboBox5.Items.AddRange(IconNameEN01);
-                    comboBox6.Items.AddRange(IconNameEN02);
-                    comboBox7.Items.AddRange(IconNameEN03);
-                    break;
-                default:
-                    comboBox5.Items.AddRange(IconNameJP01);
-                    comboBox6.Items.AddRange(IconNameJP02);
-                    comboBox7.Items.AddRange(IconNameJP03);
-                    break;
-
-            }
-
-            comboBox5.SelectedIndex = 0;
-            comboBox6.SelectedIndex = 0;
-            comboBox7.SelectedIndex = 0;
+            checkBox1.Checked = true;
 
             //コマンドライン引数を配列で取得する
-            string[] files = System.Environment.GetCommandLineArgs();
-
+            string[] files = Environment.GetCommandLineArgs();
             if (files.Length > 1) Dialog.FileCheck(files[1]);
 
             
@@ -125,6 +100,7 @@ namespace MSBT_Editor
                 MSBTsys.MSBT_Data.Data_List mad = MSBTsys.MSBT_Data.MSBT_All_Data;
                 List<string> nulldata =  MSBTsys.MSBT_Data.atr_nulldata;
                 textBox1.Text = mad.Text[selectnum];
+
                 textBox3.Text = mad.Item[selectnum].unknown1.ToString("X2");
                 textBox4.Text = mad.Item[selectnum].unknown2.ToString("X2");
                 textBox5.Text = mad.Item[selectnum].Dialog_Type.ToString("X2");
@@ -134,6 +110,8 @@ namespace MSBT_Editor
                 textBox9.Text = mad.Item[selectnum].unknown6.ToString("X2");
                 textBox10.Text = mad.Item[selectnum].null_offset.ToString("X8");
                 textBox11.Text = nulldata[selectnum];
+
+                textBox35.Text = textBox1.Text;
 
                 var liststrs = listBox1.Text;
                 if (-1 != LBL1.list_name.IndexOf(liststrs))
@@ -313,6 +291,9 @@ namespace MSBT_Editor
                 //初回にデータを入れる場合
                 if (ListNameText.Text != "")
                 {
+                    LBL1 lbl1 = new LBL1();
+                    lbl1.Entries = 101;
+
                     //初期化
                     MSBTsys.MSBT_Data.Data_List msbtdatalist = new MSBTsys.MSBT_Data.Data_List();
                     msbtdatalist.Item = new List<ATR1.Item>();
@@ -733,14 +714,9 @@ namespace MSBT_Editor
 
             }
 
-            //if (flw2.Branch_List_No == null) return;
-
-            Console.WriteLine("/////////////listchec   " + listBox2.Items.Count);
-
             var blnc = flw2.Branch_List_No.Count*2;
             var bnc = flw2.Branch_No.Count;
 
-            Console.WriteLine(blnc+"_ひかくー_"+bnc);
             if (blnc != bnc) {
                 label43.Text = "0x" + listBox2.SelectedIndex.ToString("X");
                 this.textBox25.TextChanged += new EventHandler(this.textBox25_TextChanged);
@@ -757,14 +733,11 @@ namespace MSBT_Editor
                 return;
             }
             textBox27.AppendText(Environment.NewLine + "selectlist");
-            //var brannum = flw2.Item[index].Unknown5;
             textBox27.AppendText(Environment.NewLine + flw2.Branch_No[flw2.Branch_List_No.IndexOf(index)].ToString("X4")+"___"+ flw2.Branch_List_No.IndexOf(index));
 
             textBox25.Text = flw2.Branch_No[(flw2.Branch_List_No.IndexOf(index)*2)].ToString("X4");
             textBox26.Text = flw2.Branch_No[(flw2.Branch_List_No.IndexOf(index)*2)+1].ToString("X4");
 
-            //textBox25.Text = flw2.Branch_No[brannum].ToString("X4");
-            //textBox26.Text = flw2.Branch_No[brannum+1].ToString("X4");
             label43.Text = "0x" + listBox2.SelectedIndex.ToString("X");
             this.textBox25.TextChanged += new EventHandler(this.textBox25_TextChanged);
             this.textBox26.TextChanged += new EventHandler(this.textBox26_TextChanged);
@@ -806,11 +779,8 @@ namespace MSBT_Editor
 
         private void textBox25_TextChanged(object sender, EventArgs e)
         {
-            
             textBox27.AppendText(Environment.NewLine + "25text");
             FLW2.FLW2_FlowType2_Branch(listBox2, textBox25);
-            Console.WriteLine("★" + listBox2.Items.Count);
-
         }
 
         private void textBox26_TextChanged(object sender, EventArgs e)
@@ -823,18 +793,18 @@ namespace MSBT_Editor
             string[] fileName = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             var filecount = fileName.Count();
 
-            ////デバッグに必須なので消さない
+            //デバッグに必須なので消さない
             //foreach (var item in fileName)
             //{
             //    UnknownTag.Text = "";
             //    Dialog.FileCheck(item);
-            //    if (toolStripStatusLabel2.Text == " ") return;
-            //    if (UnknownTag.Text == "") return;
+            //    if (toolStripStatusLabel4.Text == " ") return;
+            //    //if (UnknownTag.Text == "") return;
             //    string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            //    string msbtname = Path.GetFileNameWithoutExtension(toolStripStatusLabel2.Text);
-            //    string textpath = Path.Combine(Path.GetDirectoryName(appPath),"SE_"+ msbtname  + ".txt");
-            //    Console.WriteLine(textpath);
-            //    File.WriteAllText(textpath, UnknownTag.Text);
+            //    string msbtname = Path.GetFileNameWithoutExtension(toolStripStatusLabel4.Text);
+            //    string textpath = Path.Combine(Path.GetDirectoryName(appPath), "Debug_" + msbtname + ".txt");
+            //    textBox34.AppendText(textpath + Environment.NewLine);
+            //    //File.WriteAllText(textpath, UnknownTag.Text);
             //}
             //return;
             if (filecount == 2) { 
@@ -843,6 +813,7 @@ namespace MSBT_Editor
 
                 if (path1 == path2) {
                     MessageBox.Show("2つファイルを読み込む場合"+"\n\r"+"MSBTとMSBFの組み合わせのみです", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
             }
 
@@ -1216,6 +1187,29 @@ namespace MSBT_Editor
             //    pos++;
             //}
 
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            var yesno = MessageBox.Show("ツリーを更新しますか？", "質問", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (yesno == DialogResult.No) return;
+            FEN1 fen1 = new FEN1();
+            FEN1.TreeLoder(fen1.Item2);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked){
+                button31.Enabled = true;
+                treeView1.Enabled = true;
+                checkBox1.Text = "ON";
+            }
+            else {
+                button31.Enabled = false;
+                treeView1.Enabled = false;
+                treeView1.Nodes.Clear();
+                checkBox1.Text = "OFF";
+            }
         }
     }
 }

@@ -635,9 +635,11 @@ namespace MSBT_Editor.FileSys
                     break;
             }
             UTF16BE(tagstrs, list);
-            if(tagstrs.Length > 8)
-            Console.WriteLine("tagname   "+tagstrs.Substring(1, 7));
-            if (tagstrs.Substring(1, 7) == "Unknown" && tagstrs.Length >8) Debugger.Unknowntagwriter(tagstrs);
+            if (tagstrs.Length > 8) {
+                Console.WriteLine("tagname   " + tagstrs.Substring(1, 7));
+                if (tagstrs.Substring(1, 7) == "Unknown" && tagstrs.Length > 8) Debugger.Unknowntagwriter(tagstrs);
+            }
+            
             return true;
         }
         public static bool Tag07(BinaryReader br, FileStream fs, List<byte> list, byte bit5, byte bit6, byte bit7, byte bit8)
@@ -727,7 +729,6 @@ namespace MSBT_Editor.FileSys
         /// ファイルのパディング分バイナリライトを進めます<br/>
         /// <remarks>Padding_Writer(進めたいバイナリライト、ファイルストリームの位置(ling型))</remarks>
         /// </summary>
-        /// 
         public static void Padding_Writer(BinaryWriter bw, long bw_pos)
         {
             int i = 0;

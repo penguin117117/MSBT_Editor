@@ -257,20 +257,6 @@ namespace MSBT_Editor.Sectionsys
             //
             var skipcounter = 1;
 
-            //
-            //List<UInt32> savehash = new List<uint>();
-            //for (int i = 0; i < sorted.Count(); i++) {
-            //    if (i == 0)
-            //    { 
-                
-            //    }
-            //}
-
-
-
-
-
-
             for (int i = 0; i < sorted.Count(); i++){
                 Console.WriteLine(hashdata[i].hash.ToString("X8"));
                 var skipindex = hashdata.Where(a => a.hash.Equals(hashdata[i].hash)).Count();
@@ -281,8 +267,7 @@ namespace MSBT_Editor.Sectionsys
                     {
                         if (j == (hashdata[i].hash))
                         {
-                            bw.Write(CS.StringToInt32_byte((/*unknown[i]*/skipindex).ToString("X8")));
-                            //skipcounter = 1;
+                            bw.Write(CS.StringToInt32_byte((skipindex).ToString("X8")));
                         }
                         else
                         {
@@ -291,9 +276,7 @@ namespace MSBT_Editor.Sectionsys
                         bw.Write(CS.StringToInt32_byte(((int)labelpos[i] - 0x30).ToString("X8")));
                         entry_hash_counter++;
                     }
-                    //Console.WriteLine(skipcounter);
                     continue;
-                    if ((hashdata[i + 1].hash) - (hashdata[i].hash) == 0) continue;
                 }
                 
 
@@ -302,31 +285,25 @@ namespace MSBT_Editor.Sectionsys
                 if ((hashdata[i].hash) - (hashdata[i - 1].hash) == 0){
                     samecheck++;
                     skipcounter++;
-                    //Console.WriteLine("__________"+hashdata[i].hash.ToString("X8"));
 
                     if ((sorted.Count() - 1) != i)
                     {
                         if ((hashdata[i + 1].hash) - (hashdata[i].hash) == 0) continue;
 
                     }
-                    //continue;
                 }
                 
                 for (int j = 0; j < (hashdata[i].hash) - (hashdata[i - 1].hash ); j++){
                     
                     if (j == (hashdata[i].hash) - (hashdata[i - 1].hash)-1){
-                        bw.Write(CS.StringToInt32_byte((/*unknown[i - samecheck]*/skipindex).ToString("X8")));
-                        //skipcounter = 0;
+                        bw.Write(CS.StringToInt32_byte((skipindex).ToString("X8")));
                     }
                     else{
                         CS.Null_Writer_Int32(bw);
-                        //skipcounter++;
                     }
                     bw.Write(CS.StringToInt32_byte(((int)labelpos[i] - 0x30).ToString("X8")));
                     entry_hash_counter++;
                 }
-                //Console.WriteLine((hashdata[i].hash).ToString("X8"));
-                Console.WriteLine(skipcounter);
                 skipcounter = 1;
 
             }

@@ -113,11 +113,6 @@ namespace MSBT_Editor.Sectionsys
             Section_Size = CS.Byte2Int(br);
             Unknown1     = CS.Byte2Int(br);
             Unknown2     = CS.Byte2Int(br);
-
-            //オフセット値記憶
-            var pos1 = fs.Position;
-
-            //ヘッダー情報続き
             Entry        = CS.Byte2Short(br);
             Unknown3     = CS.Byte2Short(br);
             Padding      = CS.Byte2Int(br);

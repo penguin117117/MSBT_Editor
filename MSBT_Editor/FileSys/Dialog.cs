@@ -39,37 +39,37 @@ namespace MSBT_Editor.FileSys
             ofd.CheckPathExists = true;
 
             if (ofd.ShowDialog() == DialogResult.OK){
-                
                 FileCheck(ofd.FileName);
-
             }
-
-
-
         }
 
-        public static void SaveAs() {
-            if (Save_Path_Msbt == "None") {
-                MessageBox.Show("ファイルを開くまたは保存先を指定してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            MSBT_Header msbth = new MSBT_Header();
-            msbth.Write(Save_Path_Msbt);
-        }
+        
 
-
-        public static void SaveAs_Msbf()
-        {
-            if (Save_Path_Msbf == "None")
+        private static bool SaveErrorMessage(string path) {
+            if (path == "None")
             {
                 MessageBox.Show("ファイルを開くまたは保存先を指定してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return true;
             }
-            MSBF_Header msbfh = new MSBF_Header();
-            msbfh.Write(Save_Path_Msbf);
+            return false;
         }
 
-        public static void Save(int filenum)
+        public static void Save(MSBT_Header MSBTH) {
+
+            var flag = SaveErrorMessage(Save_Path_Msbt);
+            if (flag) return;
+            MSBTH.Write(Save_Path_Msbt);
+        }
+
+
+        public static void Save(MSBF_Header MSBFH)
+        {
+            var flag = SaveErrorMessage(Save_Path_Msbf);
+            if (flag) return;
+            MSBFH.Write(Save_Path_Msbf);
+        }
+
+        public static void SaveAs(int filenum)
         {
             //SaveFileDialogクラスのインスタンスを作成
             SaveFileDialog sfd = new SaveFileDialog();
@@ -90,7 +90,6 @@ namespace MSBT_Editor.FileSys
                         MSBT_Header msbth = new MSBT_Header();
                         msbth.Write(sfd.FileName);
                         Save_Path_Msbt = sfd.FileName;
-                        Console.WriteLine("MSBT_読み込み完了");
                     break;
                     case 2:
                         MSBF_Header msbfh = new MSBF_Header();
@@ -119,28 +118,27 @@ namespace MSBT_Editor.FileSys
                 MessageBox.Show("MSBFのFEN1の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+            var msbf = action;
             action();
             return true;
         }
 
-        public static bool MSBF_Item_And_ListItem_Checker(Action<int> action)
+        public static bool MSBT_Item_And_ListItem_Checker(Action action)
         {
             FLW2 flw2 = new FLW2();
             FEN1 fen1 = new FEN1();
 
+            var list1_counter = list1.Items.Count == 0;
+            var msbt_all_item = MSBT_Data.MSBT_All_Data.Item == default;
+            var msbt_all_text = MSBT_Data.MSBT_All_Data.Text == default;
 
-            if (list2.Items.Count == 0 || (flw2.Item.Count == 0))
-            {
-                MessageBox.Show("MSBFのFLW2の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (list1_counter|| (msbt_all_item) || msbt_all_text) {
+                MessageBox.Show("MSBTの項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            if (list3.Items.Count == 0 || (fen1.Hashes.Count == 0) || (fen1.Item2.Count == 0))
-            {
-                MessageBox.Show("MSBFのFEN1の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            var a =Convert.ToInt32(action.Method.GetParameters());
-            action(a);
+
+            var msbt = action;
+            action();
             return true;
         }
 
@@ -152,40 +150,40 @@ namespace MSBT_Editor.FileSys
            
             var MSBF_File_Path = Path.ChangeExtension(filepath,"msbf");
 
-            
-            if (file_flag == true)
+
+            if (file_flag == false) {
+                MessageBox.Show("ファイルが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            }
+
+
+
+            //拡張子の種類を判別
+            switch (File_Extension.ToLower())
             {
-                
-                
-                //拡張子の種類を判別
-                switch (File_Extension.ToLower())
-                {
-                    case ".msbt":
-                        Save_Path_Msbt = filepath;
-                        tssl2.Text = "";
-                        MSBT_Header msbth = new MSBT_Header();
-                        msbth.Read(filepath);
-                        Console.WriteLine("MSBT_読み込み完了");
-                        tssl2.Text = Path.GetFileName(filepath);
-                        break;
-                    case ".msbf":
-                        Save_Path_Msbf = filepath;
-                        tssl4.Text = "";
-                        MSBF_Header msbfh = new MSBF_Header();
-                        msbfh.Read(MSBF_File_Path);
-                        Console.WriteLine("MSBF_読み込み完了");
-                        tssl4.Text = Path.GetFileName(MSBF_File_Path);
-                        break;
+                case ".msbt":
+                    Save_Path_Msbt = filepath;
+                    tssl2.Text = "";
+                    MSBT_Header msbth = new MSBT_Header();
+                    msbth.Read(filepath);
+                    tssl2.Text = Path.GetFileName(filepath);
+                    break;
+                case ".msbf":
+                    Save_Path_Msbf = filepath;
+                    tssl4.Text = "";
+                    MSBF_Header msbfh = new MSBF_Header();
+                    msbfh.Read(MSBF_File_Path);
+                    tssl4.Text = Path.GetFileName(MSBF_File_Path);
+                    break;
 
-                    default:
-                        MessageBox.Show("未対応のファイルです" + "\r\n" + "MSBTファイルのみ読み込めます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                default:
+                    MessageBox.Show("未対応のファイルです" + "\r\n" + "MSBTファイルのみ読み込めます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
 
-                }
             }
-            else {
-                MessageBox.Show("ファイルが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
+
+
+
         }
     }
 }

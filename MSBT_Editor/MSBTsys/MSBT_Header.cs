@@ -12,7 +12,7 @@ using MSBT_Editor.Sectionsys;
 
 namespace MSBT_Editor.MSBTsys
 {
-    class MSBT_Header : MSBT_Data
+    public class MSBT_Header : MSBT_Data
     {
         
         public void Read(string path)

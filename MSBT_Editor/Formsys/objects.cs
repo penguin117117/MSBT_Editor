@@ -105,6 +105,9 @@ namespace MSBT_Editor.Formsys
         //
         protected static TreeView treeview1 = Form1.Form1Instance.treeView1;
 
+        //
+        protected static CheckBox chb1 = Form1.Form1Instance.checkBox1;
+
         //combbox
         protected static ComboBox combo1 = Form1.Form1Instance.comboBox1;
         protected static ComboBox combo2 = Form1.Form1Instance.comboBox2;
@@ -146,6 +149,8 @@ namespace MSBT_Editor.Formsys
         protected static ToolStripStatusLabel tssl1 = Form1.Form1Instance.toolStripStatusLabel1;
         protected static ToolStripStatusLabel tssl2 = Form1.Form1Instance.toolStripStatusLabel2;
         protected static ToolStripStatusLabel tssl4 = Form1.Form1Instance.toolStripStatusLabel4;
+        protected static ToolStripStatusLabel tssl6 = Form1.Form1Instance.toolStripStatusLabel6;
+        protected static ToolStripStatusLabel tssl7 = Form1.Form1Instance.toolStripStatusLabel7;
 
         //
         protected static TextBox unknowntag = Form1.Form1Instance.UnknownTag;

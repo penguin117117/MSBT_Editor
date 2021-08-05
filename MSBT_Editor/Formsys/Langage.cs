@@ -86,7 +86,8 @@ namespace MSBT_Editor.Formsys
         }
 
         public static void JP(){
-            tssl1.Text = "状態：";
+            tssl1.Text = "開いたファイル：";
+            tssl6.Text = "保存したファイル：";
             //menue
             tlmi_file.Text = "ファイル";
             tlmi_msbt_open.Text = "MSBT開く";
@@ -213,7 +214,8 @@ namespace MSBT_Editor.Formsys
 
         public static void EN()
         {
-            tssl1.Text = "State：";
+            tssl1.Text = "OpenFile：";
+            tssl6.Text = "SaveFile：";
             tlmi_file.Text = "File";
             tlmi_msbt_open.Text = "MSBT Open";
             tlmi_msbt_save.Text = "MSBT Save";
