@@ -139,7 +139,6 @@ namespace MSBT_Editor.Sectionsys
 
         public static void ATR1_Change(TextBox textbox)
         {
-            
             if (list1.Items.Count != 0)
             {
                 byte bit = 0x01;

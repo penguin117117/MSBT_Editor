@@ -254,7 +254,7 @@ namespace MSBT_Editor.Sectionsys
 
                         branch_list_no.Add(index);
                     }
-                    Console.WriteLine("★" + list2.Items.Count);
+                    //Console.WriteLine("★" + list2.Items.Count);
 
                     break;
                 case 0x0003:
@@ -310,7 +310,7 @@ namespace MSBT_Editor.Sectionsys
                         {
                             
                             lb.Items[index] = MSBF_Type_Check(numhex, index, true);
-                            Console.WriteLine(lb.Items[index]);
+                            //Console.WriteLine(lb.Items[index]);
                             FLW2.branch_list_no.Add(index);
                             FLW2.branch_no.Add(0x0000);
                             FLW2.branch_no.Add(0x0001);
@@ -333,10 +333,10 @@ namespace MSBT_Editor.Sectionsys
                             //    //item.Unknown5 = Convert.ToInt16(blnitem.Index);
                             //    break;
                             //}
-                            Console.WriteLine(blnitem.Value + "" + index);
+                            //Console.WriteLine(blnitem.Value + "" + index);
                             if (blnitem.Value >= index)
                             {
-                                Console.WriteLine("つうか");
+                                //Console.WriteLine("つうか");
                                 lb.Items[index] = MSBF_Type_Check(numhex, index, true);
                                 lb.SelectedIndex = index;
                                 FLW2.branch_list_no.Insert(blnitem.Index, index);
@@ -349,9 +349,9 @@ namespace MSBT_Editor.Sectionsys
                             else
                             {
                                 
-                                Console.WriteLine(lb.Items.Count);
-                                Console.WriteLine("みつうか");
-                                Console.WriteLine(lb.Items[index]);
+                                //Console.WriteLine(lb.Items.Count);
+                                //Console.WriteLine("みつうか");
+                                //Console.WriteLine(lb.Items[index]);
                                 lb.Items[index] = MSBF_Type_Check(numhex, index, true);
                                 //lb.SelectedIndex = index;
                                 FLW2.branch_list_no.Add(index);
@@ -360,7 +360,7 @@ namespace MSBT_Editor.Sectionsys
                                 FLW2.branch_no.Add(0x0009);
                                 item.Unknown5 = Convert.ToInt16(blnitem.Index + 2);
                                 //item.TypeCheck = numhex;
-                                Console.WriteLine("tetttttttt"+lb.Items.Count);
+                                //Console.WriteLine("tetttttttt"+lb.Items.Count);
                                 break;
                             }
                         }
@@ -401,7 +401,7 @@ namespace MSBT_Editor.Sectionsys
                         {
                             FLW2 flw2_1 = new FLW2();
                             FLW2.flw2_item item1 = flw2_1.Item[FLW2.branch_list_no[i]];
-                            Console.WriteLine("bln" + FLW2.branch_list_no[i]);
+                            //Console.WriteLine("bln" + FLW2.branch_list_no[i]);
                             if (item1.Unknown5 != 0) item1.Unknown5 -= 2;
                             flw2_1.Item[FLW2.branch_list_no[i]] = item1;
                         }
@@ -465,11 +465,11 @@ namespace MSBT_Editor.Sectionsys
                     break;
             }
             //item.TypeCheck = Int16.Parse(tb.Text);
-            Console.WriteLine("★" + lb.Items.Count);
+            //Console.WriteLine("★" + lb.Items.Count);
             
             flw2.Item[index] = item;
-            Console.WriteLine(lb.Items[index]);
-            Console.WriteLine("★" + lb.Items.Count);
+            //Console.WriteLine(lb.Items[index]);
+            //Console.WriteLine("★" + lb.Items.Count);
         }
 
         public static void FLW2_FlowType2_Branch(ListBox lb, TextBox tb) {

@@ -358,7 +358,7 @@ namespace MSBT_Editor.FileSys
                     tagstrs = "<Icon=\"BronzeComet\">";
                     break;
                 //tuika
-                //
+                //<UserIcon="000E000300490002004E">
                 case "000300350002003A":
                     tagstrs = "<Icon=\"CometMedal\">";
                     break;

@@ -262,7 +262,7 @@ namespace MSBT_Editor.Sectionsys
 
             //ツリーの構成に必要なデータがあるか確認する
             if ((Item2.Count == 0) || (flw2.Item.Count == 0)) return;
-
+            Console.WriteLine(item2.Count);
             //ツリーを構成する
             foreach (var item in Item2.Select((Value, Index) => (Value, Index)))
             {
@@ -292,19 +292,25 @@ namespace MSBT_Editor.Sectionsys
             switch (type)
             {
                 case 1:
+
+                   
                     tn.Nodes.Add(subnodename);
                     var indexfllow1 = flw2.Item.IndexOf(flw2.Item[subfunc]);
                     tn.Nodes[0].Tag = flw2.Item[indexfllow1];
-
                     var AJA_Find = AllJumpAddres.IndexOf(flw2.Item[subfunc].Unknown4);
-                    if (AJA_Find != -1) {
-                        tn.Nodes[0].Text = subnodename + "  「重複/Dupe」";
-                        break; 
+                    if (AJA_Find != -1)
+                    {
+                        var dupeOrEnd = "  「重複/Dupe」";
+                        if (flw2.Item[subfunc].Unknown4 == indexfllow1) dupeOrEnd = "  「終了/End」";
+                        tn.Nodes[0].Text = subnodename + dupeOrEnd;
+
+                        break;
                     }
 
                     if ((flw2.Item[subfunc].Unknown4 != indexfllow1) && (flw2.Item[subfunc].Unknown4.ToString("X4") != "FFFF")){
-                        Treeview_Message_Node_Adder(flw2.Item[indexfllow1], tn.Nodes[0]);
                         AllJumpAddres.Add(flw2.Item[subfunc].Unknown4);
+                        Treeview_Message_Node_Adder(flw2.Item[indexfllow1], tn.Nodes[0]);
+                        
                     }
                     
                     break;
@@ -314,10 +320,10 @@ namespace MSBT_Editor.Sectionsys
                     tn.Nodes[0].Tag = flw2.Item[subfunc];
                     var AJA_Find2 = AllJumpAddres.IndexOf(subbranchfunc);
 
-                    if (AJA_Find2 != -1){
-                        tn.Nodes[0].Text = subnodename + subbranchfunc.ToString("X") + "  「重複/Dupe」";
-                        break;
-                    }
+                    //if (AJA_Find2 != -1){
+                    //    tn.Nodes[0].Text = subnodename + subbranchfunc.ToString("X") + "  「重複/Dupe」";
+                    //    break;
+                    //}
 
 
                     BranchNo.Add(subbranchfunc);
@@ -329,11 +335,11 @@ namespace MSBT_Editor.Sectionsys
                     tn.Nodes[1].Tag = flw2.Item[subfunc];
                     var AJA_Find3 = AllJumpAddres.IndexOf(subbranchfunc2);
 
-                    if (AJA_Find3 != -1)
-                    {
-                        tn.Nodes[1].Text = subnodename + subbranchfunc2.ToString("X") + "  「重複/Dupe」";
-                        break;
-                    }
+                    //if (AJA_Find3 != -1)
+                    //{
+                    //    tn.Nodes[1].Text = subnodename + subbranchfunc2.ToString("X") + "  「重複/Dupe」";
+                    //    break;
+                    //}
 
                     BranchNo.Add(subbranchfunc2);
                     Treeview_Branch_Node_Adder(flw2.Item[subfunc], tn.Nodes[1], 1);
@@ -347,15 +353,18 @@ namespace MSBT_Editor.Sectionsys
                     var AJA_Find4 = AllJumpAddres.IndexOf(flw2.Item[subfunc].Unknown3);
 
                     if (AJA_Find4 != -1){
-                        tn.Nodes[0].Text = subnodename + "  「重複/Dupe」";
+                        var dupeOrEnd = "  「重複/Dupe」";
+                        if (flw2.Item[subfunc].Unknown3 == indexfllow3) dupeOrEnd = "  「終了/End」";
+                        tn.Nodes[0].Text = subnodename + dupeOrEnd;
                         break;
                     }
                     if (EventNo.IndexOf(flw2.Item[indexfllow3].Unknown3) == -1){
 
                         if ((flw2.Item[subfunc].Unknown3 != indexfllow3) && (flw2.Item[subfunc].Unknown3.ToString("X4") != "FFFF")){
                             EventNo.Add(flw2.Item[indexfllow3].Unknown3);
-                            Treeview_Event_Node_Adder(flw2.Item[indexfllow3], tn.Nodes[0]);
                             AllJumpAddres.Add(flw2.Item[indexfllow3].Unknown3);
+                            Treeview_Event_Node_Adder(flw2.Item[indexfllow3], tn.Nodes[0]);
+                            
                         }
 
                     }
@@ -378,6 +387,7 @@ namespace MSBT_Editor.Sectionsys
             var subfunc = flw2item.Unknown2;
             var subnode_element = flw2.Item[subfunc];
             var subnodename = Langage.FLW2_List_Langage(subnode_element.TypeCheck);
+            //AllJumpAddres.Add(subnode_element.Unknown2);
             TreeView_Fllow_Type_Checker(subfunc, subnode_element.TypeCheck, subnodename, tn);
             //return 0;
 
@@ -427,81 +437,97 @@ namespace MSBT_Editor.Sectionsys
 
         public int Write(BinaryWriter bw, FileStream fs)
         {
+            //宣言または初期化
             var filesize = 0;
-
+            var hash_duplicate_count = 0;
             HashData = new List<HashData_And_TagItem>();
-            long pos_fen1_sec_size, pos_fen1_offset;
+            List<int> pos_fen1_offset_entry_name = new List<int>();
+            long pos_fen1_sec_size, pos_fen1_offset,pos_fen1_sec_data;
             FEN1 fen1 = new FEN1();
 
-            //FEN1セクション
-            bw.Write(Encoding.ASCII.GetBytes("FEN1"));
+            //ヘッダー情報
+            var MagicBytes = Encoding.ASCII.GetBytes("FEN1");
+            var entrysize  = list3.Items.Count;
+            var EntrySize  = CS.StringToBytes((0x3B).ToString("X8"));
 
-            //セクションサイズを後で追記するために位置を記憶させる
-            pos_fen1_sec_size = fs.Position;
+            //後に再書き込みする必要がある位置
+            pos_fen1_sec_size = fs.Position +  0x4;
+            pos_fen1_offset   = fs.Position +  0x10;
+            pos_fen1_sec_data = fs.Position +  0x14;
 
-            //セクションサイズをいったん0(4byte)
+            //FEN1ヘッダー情報の書き込み
+            bw.Write(MagicBytes);
             CS.Null_Writer_Int32(bw, 3);
+            bw.Write(EntrySize);
 
-            //FEN1オフセットを記憶する
-            pos_fen1_offset = fs.Position;
-
-            //エントリーサイズをバイナリに書き込む
-            var entrysize = list3.Items.Count;
-            bw.Write(CS.StringToBytes((0x3B).ToString("X8")));
-
-            var offset01 = fs.Position;
-
-            //一度0でファイルを埋める
+            //一度0でsec_dataを埋める
             for (int i = 0; i < 0x3B; i++) {
                 CS.Null_Writer_Int32(bw, 2);
             }
 
-            var hash_duplicate_count = 0;
-
-            foreach (var a in fen1.Item2.Select((Value, Index) => new { Value, Index }))
+            foreach (var item in fen1.Item2.Select((Value, Index) => new { Value, Index }))
             {
+                var hash = CS.MSBT_Hash(item.Value.tagname, 0x3B);
+                HashData_And_TagItem AdderItem;
 
-                var hash = CS.MSBT_Hash(a.Value.tagname, 0x3B);
-
-                if (a.Index == 0)
-                {
-                    HashData.Add(new HashData_And_TagItem(a.Value.tagname, a.Value.tagnum, hash, fen1.Hashes[a.Index].tagflag));
+                if (item.Index == 0){
+                    AdderItem.tagname = item.Value.tagname;
+                    AdderItem.tagnum  = item.Value.tagnum;
+                    AdderItem.Hash    = hash;
+                    AdderItem.tagflag = fen1.Hashes[item.Index].tagflag;
+                    HashData.Add(AdderItem);
+                    Console.WriteLine(item.Value.tagname);
                     continue;
                 }
-                if (HashData[a.Index - (1 + hash_duplicate_count)].Hash == hash)
-                {
-                    HashData_And_TagItem newitem = new HashData_And_TagItem();
-                    newitem = HashData[a.Index - (1 + hash_duplicate_count)];
-                    newitem.tagflag = fen1.Hashes[a.Index - 1 + hash_duplicate_count].tagflag;
-                    HashData[a.Index - (1 + hash_duplicate_count)] = newitem;
 
-                    HashData.Add(new HashData_And_TagItem(a.Value.tagname, a.Value.tagnum, hash, fen1.Hashes[a.Index - (1 + hash_duplicate_count)].tagflag));
+                //var hdIndex = item.Index - (1 + hash_duplicate_count);
+                //Console.WriteLine(hdIndex);
 
-                    hash_duplicate_count++;
-                    continue;
-                }
-                HashData.Add(new HashData_And_TagItem(a.Value.tagname, a.Value.tagnum, hash, fen1.Hashes[a.Index].tagflag));
-
+                //if (HashData[hdIndex].Hash == hash)
+                //{
+                    AdderItem.tagname = item.Value.tagname;
+                    AdderItem.tagnum = item.Value.tagnum;
+                    AdderItem.Hash = hash;
+                    var testes = fen1.Hashes.Where(x=> x.Hash == fen1.Hashes[item.Index].Hash);
+                    var testes2 = testes.ToList();
+                    var t2c = testes2.Count;
+                    AdderItem.tagflag = t2c;
+                    //AdderItem = HashData[hdIndex];
+                    //AdderItem.tagflag = fen1.Hashes[hdIndex].tagflag;
+                    //HashData[hdIndex] = AdderItem;
+                    //Console.WriteLine(HashData[hdIndex].tagname);
+                    //hash_duplicate_count++;
+                //}
+                //else
+                //{
+                //    AdderItem.tagname = item.Value.tagname;
+                //    AdderItem.tagnum = item.Value.tagnum;
+                //    AdderItem.Hash = hash;
+                //    AdderItem.tagflag = fen1.Hashes[item.Index].tagflag;
+                //    //Console.WriteLine(item.Value.tagname);
+                //    //hash_duplicate_count = 0;
+                //}
+                HashData.Add(AdderItem);
             }
 
             //ハッシュ値を並び替えリスト番号も順番変更
             IOrderedEnumerable<HashData_And_TagItem> sorted = HashData.OrderBy(x => x.Hash);
             var hashdata = sorted.ToArray();
-
             var pos_unknown_and_offsetend = fs.Position;
 
-            List<int> pos_fen1_offset_entry_name = new List<int>();
+            foreach (var b in hashdata){
+                var pos_calculation = (int)(fs.Position - pos_fen1_offset);
+                var str = ((byte)(b.tagname.Length)).ToString("X2");
+                pos_fen1_offset_entry_name.Add(pos_calculation);
 
-            foreach (var b in hashdata)
-            {
-                pos_fen1_offset_entry_name.Add((int)(fs.Position - pos_fen1_offset));
-                bw.Write(CS.StringToBytes(((byte)(b.tagname.Length)).ToString("X2")));
-                bw.Write(Encoding.GetEncoding(932).GetBytes((b.tagname)));
+                bw.Write(CS.StringToBytes(str));
+                bw.Write(Encoding.GetEncoding(932).GetBytes(b.tagname));
                 bw.Write(CS.StringToBytes((b.tagnum).ToString("X8")));
             }
 
             var sectionend = fs.Position;
-            fs.Seek(offset01, SeekOrigin.Begin);
+            Console.WriteLine("secend_"+(sectionend-pos_fen1_offset).ToString("X"));
+            fs.Seek(pos_fen1_sec_data, SeekOrigin.Begin);
 
             var hashcounter = 0;
             foreach (var c in hashdata.Select((Value, Index) => new { Value, Index }))

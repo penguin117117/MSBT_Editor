@@ -47,6 +47,7 @@ namespace MSBT_Editor
             this.mSBF開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mSBF保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mSBF上書き保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -148,6 +149,9 @@ namespace MSBT_Editor
             this.ListNameText = new System.Windows.Forms.TextBox();
             this.AddListText = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.button31 = new System.Windows.Forms.Button();
+            this.textBox35 = new System.Windows.Forms.TextBox();
             this.label45 = new System.Windows.Forms.Label();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.label33 = new System.Windows.Forms.Label();
@@ -209,10 +213,7 @@ namespace MSBT_Editor
             this.label42 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
-            this.textBox35 = new System.Windows.Forms.TextBox();
-            this.button31 = new System.Windows.Forms.Button();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label53 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -384,6 +385,11 @@ namespace MSBT_Editor
             this.mSBF上書き保存ToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             this.mSBF上書き保存ToolStripMenuItem.Text = "MSBF上書き保存";
             this.mSBF上書き保存ToolStripMenuItem.Click += new System.EventHandler(this.MSBF上書き保存ToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(220, 6);
             // 
             // listBox1
             // 
@@ -1454,6 +1460,37 @@ namespace MSBT_Editor
             this.tabPage4.Text = "MSBF";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(464, 9);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(40, 16);
+            this.checkBox1.TabIndex = 19;
+            this.checkBox1.Text = "ON";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // button31
+            // 
+            this.button31.Location = new System.Drawing.Point(439, 341);
+            this.button31.Name = "button31";
+            this.button31.Size = new System.Drawing.Size(115, 23);
+            this.button31.TabIndex = 18;
+            this.button31.Text = "アップデート/Reload ";
+            this.button31.UseVisualStyleBackColor = true;
+            this.button31.Click += new System.EventHandler(this.button31_Click);
+            // 
+            // textBox35
+            // 
+            this.textBox35.Location = new System.Drawing.Point(6, 370);
+            this.textBox35.Multiline = true;
+            this.textBox35.Name = "textBox35";
+            this.textBox35.ReadOnly = true;
+            this.textBox35.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox35.Size = new System.Drawing.Size(548, 58);
+            this.textBox35.TabIndex = 17;
+            // 
             // label45
             // 
             this.label45.AutoSize = true;
@@ -1712,6 +1749,7 @@ namespace MSBT_Editor
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.label53);
             this.tabPage5.Controls.Add(this.textBox34);
             this.tabPage5.Controls.Add(this.button30);
             this.tabPage5.Controls.Add(this.textBox33);
@@ -1751,15 +1789,16 @@ namespace MSBT_Editor
             // 
             // textBox33
             // 
-            this.textBox33.Location = new System.Drawing.Point(313, 388);
+            this.textBox33.Location = new System.Drawing.Point(6, 77);
             this.textBox33.Name = "textBox33";
             this.textBox33.Size = new System.Drawing.Size(133, 19);
             this.textBox33.TabIndex = 11;
             this.textBox33.Visible = false;
+            this.textBox33.TextChanged += new System.EventHandler(this.textBox33_TextChanged);
             // 
             // textBox32
             // 
-            this.textBox32.Location = new System.Drawing.Point(313, 363);
+            this.textBox32.Location = new System.Drawing.Point(6, 52);
             this.textBox32.Name = "textBox32";
             this.textBox32.Size = new System.Drawing.Size(133, 19);
             this.textBox32.TabIndex = 10;
@@ -1768,22 +1807,23 @@ namespace MSBT_Editor
             // 
             // button25
             // 
-            this.button25.Location = new System.Drawing.Point(452, 336);
+            this.button25.Location = new System.Drawing.Point(274, 25);
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(75, 23);
             this.button25.TabIndex = 9;
-            this.button25.Text = "button25";
+            this.button25.Text = "計算";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Visible = false;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
             // HashCalculation
             // 
-            this.HashCalculation.Location = new System.Drawing.Point(184, 338);
+            this.HashCalculation.Location = new System.Drawing.Point(6, 27);
             this.HashCalculation.Name = "HashCalculation";
             this.HashCalculation.Size = new System.Drawing.Size(262, 19);
             this.HashCalculation.TabIndex = 8;
             this.HashCalculation.Visible = false;
+            this.HashCalculation.TextChanged += new System.EventHandler(this.HashCalculation_TextChanged);
             // 
             // richTextBox1
             // 
@@ -1796,11 +1836,11 @@ namespace MSBT_Editor
             // 
             // textBox13
             // 
-            this.textBox13.Location = new System.Drawing.Point(6, 6);
+            this.textBox13.Location = new System.Drawing.Point(6, 112);
             this.textBox13.Multiline = true;
             this.textBox13.Name = "textBox13";
             this.textBox13.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox13.Size = new System.Drawing.Size(548, 172);
+            this.textBox13.Size = new System.Drawing.Size(548, 66);
             this.textBox13.TabIndex = 7;
             this.textBox13.Visible = false;
             // 
@@ -2058,41 +2098,15 @@ namespace MSBT_Editor
             this.label44.TabIndex = 13;
             this.label44.Text = "null";
             // 
-            // textBox35
+            // label53
             // 
-            this.textBox35.Location = new System.Drawing.Point(6, 370);
-            this.textBox35.Multiline = true;
-            this.textBox35.Name = "textBox35";
-            this.textBox35.ReadOnly = true;
-            this.textBox35.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox35.Size = new System.Drawing.Size(548, 58);
-            this.textBox35.TabIndex = 17;
-            // 
-            // button31
-            // 
-            this.button31.Location = new System.Drawing.Point(439, 341);
-            this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(115, 23);
-            this.button31.TabIndex = 18;
-            this.button31.Text = "アップデート/Reload ";
-            this.button31.UseVisualStyleBackColor = true;
-            this.button31.Click += new System.EventHandler(this.button31_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(220, 6);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(464, 9);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(40, 16);
-            this.checkBox1.TabIndex = 19;
-            this.checkBox1.Text = "ON";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(6, 12);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(107, 12);
+            this.label53.TabIndex = 16;
+            this.label53.Text = "MSBFハッシュ計算機";
+            this.label53.Visible = false;
             // 
             // Form1
             // 
@@ -2361,6 +2375,7 @@ namespace MSBT_Editor
         private System.Windows.Forms.Button button31;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         public System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label53;
     }
 }
 

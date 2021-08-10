@@ -19,7 +19,6 @@ namespace MSBT_Editor
         public Form1()
         {
             InitializeComponent();
-            
         }
 
         private static Form1 _form1Instance;
@@ -328,9 +327,9 @@ namespace MSBT_Editor
             {
                 var array_list_name = LBL1.list_name.ToArray();
                 var array_search = Array.IndexOf(array_list_name, listBox1.SelectedItem.ToString());
-                Console.WriteLine("array_search -1");
+                ////Console.WriteLine("array_search -1");
                 //if (array_search == -1) return;
-                Console.WriteLine("array_search -1以外");
+                //Console.WriteLine("array_search -1以外");
                 MSBTsys.MSBT_Data.MSBT_All_Data.Item.RemoveRange(listBox1.SelectedIndex,1);
                 MSBTsys.MSBT_Data.MSBT_All_Data.Text.RemoveRange(listBox1.SelectedIndex, 1);
                 MSBTsys.MSBT_Data.atr_nulldata.RemoveRange(listBox1.SelectedIndex , 1);
@@ -633,7 +632,7 @@ namespace MSBT_Editor
             string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
             string msbtname = Path.GetFileNameWithoutExtension(toolStripStatusLabel2.Text);
             string textpath = Path.Combine(Path.GetDirectoryName(appPath),msbtname+".txt");
-            Console.WriteLine(textpath);
+            //Console.WriteLine(textpath);
 
             File.WriteAllText(textpath, textBox13.Text);
         }
@@ -647,7 +646,7 @@ namespace MSBT_Editor
             var index = listBox2.SelectedIndex;
             if (index == -1) index = 0;
             FLW2 flw2 = new FLW2();
-            Console.WriteLine(index);
+            //Console.WriteLine(index);
             textBox19.Text = flw2.Item[index].TypeCheck.ToString("X4");
             textBox20.Text = flw2.Item[index].Unknown1.ToString("X4");
             textBox21.Text = flw2.Item[index].Unknown2.ToString("X4");
@@ -978,7 +977,6 @@ namespace MSBT_Editor
 
                     listBox3.Items.Add(textBox31.Text);
                     fen1.Item1.Add(new FEN1.Element(1, 0));
-                    
                     fen1.Item2.Add(new FEN1.ElementTag(textBox31.Text, listBox2.Items.Count));
 
                     var hash = Calculation_System.MSBT_Hash(textBox31.Text, 0x3B);
@@ -1085,24 +1083,24 @@ namespace MSBT_Editor
             var find = flw2.Item.IndexOf(a);
             switch (a.TypeCheck) {
                 case 1:
-                    Console.WriteLine("メッセージ");
+                    //Console.WriteLine("メッセージ");
                     if (listBox1.Items.Count == 0) break;
                     if (listBox1.Items.Count > a.Unknown3) listBox1.SelectedIndex = a.Unknown3;
                     if (listBox2.Items.Count == 0) break;
                     if (listBox2.Items.Count > find) listBox2.SelectedIndex = find;
                     break;
                 case 2:
-                    Console.WriteLine("分岐");
+                    //Console.WriteLine("分岐");
                     if (listBox2.Items.Count == 0) break;
                     if (listBox2.Items.Count > find) listBox2.SelectedIndex = find;
                     break;
                 case 3:
-                    Console.WriteLine("イベント");
+                    //Console.WriteLine("イベント");
                     if (listBox2.Items.Count == 0) break;
                     if (listBox2.Items.Count > find) listBox2.SelectedIndex = find;
                     break;
                 case 4:
-                    Console.WriteLine("エントリーポイント");
+                    //Console.WriteLine("エントリーポイント");
                     if (listBox2.Items.Count == 0) break;
                     if (listBox2.Items.Count > find) listBox2.SelectedIndex = find;
                     break;
@@ -1119,7 +1117,7 @@ namespace MSBT_Editor
         {
             TXT2 txt2 = new TXT2();
             var str = HashCalculation.Text;
-            var hash = Calculation_System.MSBT_Hash(str,101);
+            var hash = Calculation_System.MSBT_Hash(str,0x3B);
             HashCalculation.Text = hash.ToString("X8");
         }
 
@@ -1210,6 +1208,16 @@ namespace MSBT_Editor
                 treeView1.Nodes.Clear();
                 checkBox1.Text = "OFF";
             }
+        }
+
+        private void textBox33_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void HashCalculation_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
