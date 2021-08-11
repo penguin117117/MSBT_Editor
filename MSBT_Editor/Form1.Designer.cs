@@ -180,6 +180,7 @@ namespace MSBT_Editor
             this.textBox19 = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.label53 = new System.Windows.Forms.Label();
             this.textBox34 = new System.Windows.Forms.TextBox();
             this.button30 = new System.Windows.Forms.Button();
             this.textBox33 = new System.Windows.Forms.TextBox();
@@ -213,7 +214,6 @@ namespace MSBT_Editor
             this.label42 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
-            this.label53 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -257,7 +257,7 @@ namespace MSBT_Editor
             this.toolStripStatusLabel7});
             this.statusStrip1.Location = new System.Drawing.Point(0, 521);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1020, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1016, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -309,7 +309,7 @@ namespace MSBT_Editor
             this.ファイルToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1020, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1016, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -332,64 +332,64 @@ namespace MSBT_Editor
             // 
             this.開くToolStripMenuItem.Name = "開くToolStripMenuItem";
             this.開くToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.開くToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.開くToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.開くToolStripMenuItem.Text = "MSBT開く";
             this.開くToolStripMenuItem.Click += new System.EventHandler(this.開くToolStripMenuItem_Click);
             // 
             // 保存ToolStripMenuItem
             // 
             this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
-            this.保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.S)));
-            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.保存ToolStripMenuItem.Text = "MSBT保存";
             this.保存ToolStripMenuItem.Click += new System.EventHandler(this.保存ToolStripMenuItem_Click);
             // 
             // 上書き保存ToolStripMenuItem
             // 
             this.上書き保存ToolStripMenuItem.Name = "上書き保存ToolStripMenuItem";
-            this.上書き保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.上書き保存ToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.上書き保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.上書き保存ToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.上書き保存ToolStripMenuItem.Text = "MSBT上書き保存";
             this.上書き保存ToolStripMenuItem.Click += new System.EventHandler(this.上書き保存ToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(220, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(252, 6);
             // 
             // mSBF開くToolStripMenuItem
             // 
             this.mSBF開くToolStripMenuItem.Name = "mSBF開くToolStripMenuItem";
             this.mSBF開くToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.O)));
-            this.mSBF開くToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.mSBF開くToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.mSBF開くToolStripMenuItem.Text = "MSBF開く";
             this.mSBF開くToolStripMenuItem.Click += new System.EventHandler(this.MSBF開くToolStripMenuItem_Click);
             // 
             // mSBF保存ToolStripMenuItem
             // 
             this.mSBF保存ToolStripMenuItem.Name = "mSBF保存ToolStripMenuItem";
-            this.mSBF保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.Shift) 
+            this.mSBF保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.S)));
-            this.mSBF保存ToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.mSBF保存ToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.mSBF保存ToolStripMenuItem.Text = "MSBF保存";
             this.mSBF保存ToolStripMenuItem.Click += new System.EventHandler(this.MSBF保存ToolStripMenuItem_Click);
             // 
             // mSBF上書き保存ToolStripMenuItem
             // 
             this.mSBF上書き保存ToolStripMenuItem.Name = "mSBF上書き保存ToolStripMenuItem";
-            this.mSBF上書き保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            this.mSBF上書き保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.mSBF上書き保存ToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.mSBF上書き保存ToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
             this.mSBF上書き保存ToolStripMenuItem.Text = "MSBF上書き保存";
             this.mSBF上書き保存ToolStripMenuItem.Click += new System.EventHandler(this.MSBF上書き保存ToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(220, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(252, 6);
             // 
             // listBox1
             // 
@@ -432,7 +432,7 @@ namespace MSBT_Editor
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage10);
             this.tabControl1.Controls.Add(this.tabPage11);
-            this.tabControl1.Location = new System.Drawing.Point(442, 51);
+            this.tabControl1.Location = new System.Drawing.Point(438, 51);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(568, 460);
@@ -1558,6 +1558,7 @@ namespace MSBT_Editor
             // 
             // textBox28
             // 
+            this.textBox28.Enabled = false;
             this.textBox28.Location = new System.Drawing.Point(178, 15);
             this.textBox28.Name = "textBox28";
             this.textBox28.Size = new System.Drawing.Size(100, 19);
@@ -1765,6 +1766,16 @@ namespace MSBT_Editor
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "MSBFデバッグ";
             this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(6, 12);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(107, 12);
+            this.label53.TabIndex = 16;
+            this.label53.Text = "MSBFハッシュ計算機";
+            this.label53.Visible = false;
             // 
             // textBox34
             // 
@@ -2004,10 +2015,10 @@ namespace MSBT_Editor
             // 
             this.listBox3.FormattingEnabled = true;
             this.listBox3.ItemHeight = 12;
-            this.listBox3.Location = new System.Drawing.Point(222, 303);
+            this.listBox3.Location = new System.Drawing.Point(222, 291);
             this.listBox3.Name = "listBox3";
             this.listBox3.ScrollAlwaysVisible = true;
-            this.listBox3.Size = new System.Drawing.Size(204, 208);
+            this.listBox3.Size = new System.Drawing.Size(204, 220);
             this.listBox3.TabIndex = 0;
             this.listBox3.SelectedIndexChanged += new System.EventHandler(this.listBox3_SelectedIndexChanged);
             // 
@@ -2025,7 +2036,7 @@ namespace MSBT_Editor
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(12, 36);
+            this.label36.Location = new System.Drawing.Point(10, 36);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(36, 12);
             this.label36.TabIndex = 7;
@@ -2034,7 +2045,7 @@ namespace MSBT_Editor
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(220, 36);
+            this.label37.Location = new System.Drawing.Point(222, 36);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(33, 12);
             this.label37.TabIndex = 8;
@@ -2043,7 +2054,7 @@ namespace MSBT_Editor
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(222, 284);
+            this.label38.Location = new System.Drawing.Point(222, 276);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(33, 12);
             this.label38.TabIndex = 9;
@@ -2074,7 +2085,7 @@ namespace MSBT_Editor
             // label42
             // 
             this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(191, 36);
+            this.label42.Location = new System.Drawing.Point(193, 36);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(23, 12);
             this.label42.TabIndex = 11;
@@ -2092,41 +2103,31 @@ namespace MSBT_Editor
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(403, 288);
+            this.label44.Location = new System.Drawing.Point(403, 276);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(23, 12);
             this.label44.TabIndex = 13;
             this.label44.Text = "null";
-            // 
-            // label53
-            // 
-            this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(6, 12);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(107, 12);
-            this.label53.TabIndex = 16;
-            this.label53.Text = "MSBFハッシュ計算機";
-            this.label53.Visible = false;
             // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1020, 543);
+            this.ClientSize = new System.Drawing.Size(1016, 543);
             this.Controls.Add(this.label44);
-            this.Controls.Add(this.label43);
-            this.Controls.Add(this.label42);
-            this.Controls.Add(this.label40);
-            this.Controls.Add(this.comboBox8);
-            this.Controls.Add(this.label38);
-            this.Controls.Add(this.label37);
             this.Controls.Add(this.label36);
+            this.Controls.Add(this.label38);
+            this.Controls.Add(this.label43);
+            this.Controls.Add(this.listBox3);
             this.Controls.Add(this.listBox2);
+            this.Controls.Add(this.label42);
+            this.Controls.Add(this.label37);
+            this.Controls.Add(this.label40);
             this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.comboBox8);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.listBox3);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;

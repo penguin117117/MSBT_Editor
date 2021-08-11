@@ -218,11 +218,11 @@ namespace MSBT_Editor.Formsys
             tssl6.Text = "SaveFile：";
             tlmi_file.Text = "File";
             tlmi_msbt_open.Text = "MSBT Open";
-            tlmi_msbt_save.Text = "MSBT Save";
-            tlmi_msbt_save_as.Text = "MSBT Save As";
+            tlmi_msbt_save.Text = "MSBT Save As";
+            tlmi_msbt_save_as.Text = "MSBT Save";
             tlmi_msbf_open.Text = "MSBF Open";
-            tlmi_msbf_save.Text = "MSBF Save";
-            tlmi_msbf_save_as.Text = "MSBF Save As";
+            tlmi_msbf_save.Text = "MSBF Save As";
+            tlmi_msbf_save_as.Text = "MSBF Save";
             //tab
             tabp1.Text = "MSBT Text Settings";
             tabp2.Text = "MSBT Text Editing";

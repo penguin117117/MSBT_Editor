@@ -7,7 +7,7 @@
     <ProjectGuid>{5594784E-060D-4312-A41B-8CB9C47050B1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>MSBT_Editor</RootNamespace>
-    <AssemblyName>MSBT_And_MSBF_Editor_ver0.6.1.0</AssemblyName>
+    <AssemblyName>MSBT_And_MSBF_Editor_ver0.6.2.5</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -27,7 +27,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\MSBT_And_MSBF_Editor_ver0.6.1.0\</OutputPath>
+    <OutputPath>bin\Release\MSBT_And_MSBF_Editor_ver0.6.2.5\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
