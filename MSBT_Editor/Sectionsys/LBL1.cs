@@ -98,7 +98,6 @@ namespace MSBT_Editor.Sectionsys
             //リストボックスのアイテムをすべて削除
             list1.Items.Clear();
 
-
             //リスト初期化
             unknownpos  = new List<long>();
             unknown     = new List<int>();
