@@ -214,6 +214,8 @@ namespace MSBT_Editor
             this.label42 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
+            this.label54 = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -1925,10 +1927,13 @@ namespace MSBT_Editor
             // 
             // groupBox14
             // 
+            this.groupBox14.Controls.Add(this.label55);
+            this.groupBox14.Controls.Add(this.label54);
             this.groupBox14.Controls.Add(this.label48);
+            this.groupBox14.Controls.Add(this.label51);
             this.groupBox14.Location = new System.Drawing.Point(3, 6);
             this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(182, 38);
+            this.groupBox14.Size = new System.Drawing.Size(248, 53);
             this.groupBox14.TabIndex = 1;
             this.groupBox14.TabStop = false;
             this.groupBox14.Text = "プログラミング";
@@ -1936,7 +1941,7 @@ namespace MSBT_Editor
             // label48
             // 
             this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(6, 15);
+            this.label48.Location = new System.Drawing.Point(177, 15);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(53, 12);
             this.label48.TabIndex = 0;
@@ -1945,14 +1950,13 @@ namespace MSBT_Editor
             // groupBox13
             // 
             this.groupBox13.Controls.Add(this.label52);
-            this.groupBox13.Controls.Add(this.label51);
             this.groupBox13.Controls.Add(this.label50);
             this.groupBox13.Controls.Add(this.label49);
             this.groupBox13.Controls.Add(this.label47);
             this.groupBox13.Controls.Add(this.label46);
-            this.groupBox13.Location = new System.Drawing.Point(3, 50);
+            this.groupBox13.Location = new System.Drawing.Point(6, 65);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(182, 58);
+            this.groupBox13.Size = new System.Drawing.Size(150, 58);
             this.groupBox13.TabIndex = 0;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "デバッガー";
@@ -1960,7 +1964,7 @@ namespace MSBT_Editor
             // label52
             // 
             this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(65, 39);
+            this.label52.Location = new System.Drawing.Point(6, 39);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(68, 12);
             this.label52.TabIndex = 5;
@@ -1969,7 +1973,7 @@ namespace MSBT_Editor
             // label51
             // 
             this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(6, 27);
+            this.label51.Location = new System.Drawing.Point(177, 33);
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(53, 12);
             this.label51.TabIndex = 4;
@@ -1978,7 +1982,7 @@ namespace MSBT_Editor
             // label50
             // 
             this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(65, 27);
+            this.label50.Location = new System.Drawing.Point(6, 27);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(47, 12);
             this.label50.TabIndex = 3;
@@ -1996,7 +2000,7 @@ namespace MSBT_Editor
             // label47
             // 
             this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(6, 39);
+            this.label47.Location = new System.Drawing.Point(65, 27);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(43, 12);
             this.label47.TabIndex = 1;
@@ -2108,6 +2112,24 @@ namespace MSBT_Editor
             this.label44.Size = new System.Drawing.Size(23, 12);
             this.label44.TabIndex = 13;
             this.label44.Text = "null";
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(6, 33);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(79, 12);
+            this.label54.TabIndex = 5;
+            this.label54.Text = "EngrishSetting";
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(6, 15);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(118, 12);
+            this.label55.TabIndex = 2;
+            this.label55.Text = "メインコード日本語設定";
             // 
             // Form1
             // 
@@ -2377,6 +2399,8 @@ namespace MSBT_Editor
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         public System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Label label54;
     }
 }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +9,10 @@ namespace MSBT_Editor.Formsys
 {
     public class Langage : objects
     {
-        public static void Langage_Check() {
-            switch (Properties.Settings.Default.言語) {
+        public static void Langage_Check()
+        {
+            switch (Properties.Settings.Default.言語)
+            {
                 case "日本語":
                     JP();
                     break;
@@ -21,9 +23,12 @@ namespace MSBT_Editor.Formsys
                     JP();
                     break;
             }
-            combo5.SelectedIndex = 0;
-            combo6.SelectedIndex = 0;
-            combo7.SelectedIndex = 0;
+            if (Properties.Settings.Default.言語 == "日本語")
+            {
+                combo5.SelectedIndex = 0;
+                combo6.SelectedIndex = 0;
+                combo7.SelectedIndex = 0;
+            }
         }
 
         public static string FLW2_List_Langage(int num) {
@@ -67,16 +72,16 @@ namespace MSBT_Editor.Formsys
             switch (num)
             {
                 case 0x0001:
-                    str = "Conversation decision and jump？";
+                    str = "Message Flow";
                     break;
                 case 0x0002:
-                    str = "Branch？";
+                    str = "Condition Flow";
                     break;
                 case 0x0003:
-                    str = "Event control？";
+                    str = "Event Flow";
                     break;
                 case 0x0004:
-                    str = "Message entry point";
+                    str = "Initializer Flow";
                     break;
                 default:
                     str = "エラー " + num.ToString();
@@ -91,11 +96,11 @@ namespace MSBT_Editor.Formsys
             //menue
             tlmi_file.Text = "ファイル";
             tlmi_msbt_open.Text = "MSBT開く";
-            tlmi_msbt_save.Text = "MSBT保存";
-            tlmi_msbt_save_as.Text = "MSBT上書き保存";
+            tlmi_msbt_save.Text = "MSBT上書き保存";
+            tlmi_msbt_save_as.Text = "MSBT保存";
             tlmi_msbf_open.Text = "MSBF開く";
-            tlmi_msbf_save.Text = "MSBF保存";
-            tlmi_msbf_save_as.Text = "MSBF上書き保存";
+            tlmi_msbf_save.Text = "MSBF上書き保存";
+            tlmi_msbf_save_as.Text = "MSBF保存";
             //tab
             tabp1.Text = "MSBTテキストの詳細設定";
             tabp2.Text = "MSBTテキスト編集";
@@ -207,6 +212,14 @@ namespace MSBT_Editor.Formsys
             combo4.Text = "横方向";
             combo4.Items.AddRange(cb4);
 
+            //show what was hidden for EN translation
+            combo6.Show();
+            combo7.Show();
+            labeltxt21.Show();
+            labeltxt22.Show();
+            button12.Show();
+            button13.Show();
+            combo5.Text = "ピーチ";
             combo5.Items.AddRange(Form1.IconNameJP01);
             combo6.Items.AddRange(Form1.IconNameJP02);
             combo7.Items.AddRange(Form1.IconNameJP03);
@@ -218,23 +231,23 @@ namespace MSBT_Editor.Formsys
             tssl6.Text = "SaveFile：";
             tlmi_file.Text = "File";
             tlmi_msbt_open.Text = "MSBT Open";
-            tlmi_msbt_save.Text = "MSBT Save As";
-            tlmi_msbt_save_as.Text = "MSBT Save";
+            tlmi_msbt_save.Text = "MSBT Save";
+            tlmi_msbt_save_as.Text = "MSBT Save As";
             tlmi_msbf_open.Text = "MSBF Open";
-            tlmi_msbf_save.Text = "MSBF Save As";
-            tlmi_msbf_save_as.Text = "MSBF Save";
+            tlmi_msbf_save.Text = "MSBF Save";
+            tlmi_msbf_save_as.Text = "MSBF Save As";
             //tab
             tabp1.Text = "MSBT Text Settings";
             tabp2.Text = "MSBT Text Editing";
             tabp3.Text = "List Editing";
             tabp4.Text = "MSBF Settings";
 
-            tabp6.Text = "Generic Tags";
-            tabp7.Text = "Numeric-Required Tags";
+            tabp6.Text = "Text Tags";
+            tabp7.Text = "Numeric Tags";
             tabp8.Text = "Special Tags";
             tabp9.Text = "Icon Tags";
             //label
-            labeltxt01.Text = "NPC Voice";
+            labeltxt01.Text = "Sound ID";
             labeltxt02.Text = "Camera";
             labeltxt03.Text = "Dialog Type";
             labeltxt04.Text = "Window Type";
@@ -243,12 +256,12 @@ namespace MSBT_Editor.Formsys
             labeltxt07.Text = "Unknown6";
             labeltxt08.Text = "Special Text Offset";
             labeltxt09.Text = "Unique text (Basically null) ※Don't touch it except advanced users";
-            labeltxt10.Text = "Tag index？？";
-            labeltxt11.Text = "MSBT List name you add";
-            labeltxt12.Text = "Press delete after" + Environment.NewLine + "selecting list to delete it";
-            labeltxt13.Text = "Press delete after selecting the list";
+            labeltxt10.Text = "Index";
+            labeltxt11.Text = "Add MSBT entry";
+            labeltxt12.Text = "Delete the selected MSBT entry";
+            //labeltxt13.Text = "Press delete after selecting the list";
 
-            labeltxt15.Text = "※Don't touch this" + Environment.NewLine + "Data may break";
+            labeltxt15.Text = "※Don't touch this," + Environment.NewLine + "Data may break!";
             labeltxt17.Text = "FURIGANA_Num";
             labeltxt18.Text = "KANJI_Num";
             labeltxt19.Text = "Time";
@@ -263,8 +276,8 @@ namespace MSBT_Editor.Formsys
             labeltxt27.Text = "Unknown4";
             labeltxt28.Text = "Unknown5";
 
-            labeltxt29.Text = "Jump destination 1";
-            labeltxt30.Text = "Jump destination 2";
+            labeltxt29.Text = "Condition Jump True";
+            labeltxt30.Text = "Condition Jump False";
             labeltxt31.Text = "Unknown";
             labeltxt32.Text = "FLW2 start index";
             labeltxt33.Text = "※Not all features have been figured out yet," + Environment.NewLine + "　　so there may be some glitches.";
@@ -277,28 +290,28 @@ namespace MSBT_Editor.Formsys
             groupbox4.Text = "Rubi";
             groupbox5.Text = "Timer";
             groupbox6.Text = "For system messages only (not sure if it can be used for others)";
-            groupbox8.Text = "Only case of flow type 2";
+            groupbox8.Text = "Condition Flow Jump Destinations";
 
             //button
-            button1.Text = "Insert color tag";
-            button2.Text = "Insert line control tag"; 
-            button3.Text = "Insert size tag";
-            button4.Text = "Insert centering tag";
+            button1.Text = "Add Color";
+            button2.Text = "Insert Command";
+            button3.Text = "Insert Text Size";
+            button4.Text = "Insert Position";
             button5.Text = "Insert Rubi";
             button6.Text = "Insert Timer";
             button7.Text = "Player";
-            button8.Text = "StarshipUnknown";
-            button9.Text = "ResultGalaxyName";
-            button10.Text = "ResultScenarioName";
-            button11.Text = "InsertCharacterTag";
-            button12.Text = "InsertItem,ObjectTag";
-            button13.Text = "InsertOperationTag";
-            button14.Text = "Year01?";
-            button15.Text = "Year02?";
+            button8.Text = "Starship Unknown";
+            button9.Text = "Result Galaxy Name";
+            button10.Text = "Result Scenario Name";
+            button11.Text = "Insert Character Tag";
+            button12.Text = "Insert Item,Object Tag";
+            button13.Text = "Insert Operation Tag";
+            button14.Text = "Year 01?";
+            button15.Text = "Year 02?";
             button16.Text = "Hour";
             button17.Text = "Minute";
             button18.Text = "Second";
-            button19.Text = "NumberOfDecimals";
+            button19.Text = "Number of Decimals";
             listadd.Text = "Add";
             listdelete.Text = "Delete";
             button21.Text = "Add";
@@ -331,9 +344,27 @@ namespace MSBT_Editor.Formsys
             combo4.Text = "Horizontal Direction";
             combo4.Items.AddRange(cb4);
 
-            combo5.Items.AddRange(Form1.IconNameEN01);
-            combo6.Items.AddRange(Form1.IconNameEN02);
-            combo7.Items.AddRange(Form1.IconNameEN03);
+            combo5.Items.Clear();
+            combo6.Items.Clear();
+            combo7.Items.Clear();
+
+            //hide what is not needed in EN translation
+            combo6.Hide();
+            combo7.Hide();
+            labeltxt21.Hide();
+            labeltxt22.Hide();
+            button12.Hide();
+            button13.Hide();
+
+            //all icons in one combo
+            combo5.Items.AddRange(new object[] { "A Button", "B Button", "C Button", "Wii Remote", "Nunchuck", "1 Button", "2 Button", "Power Star", "Launch Star", "Pull Star", "P1 Pointer", "Purple Star Bit", "Coconut", "Down Arrow", "Star Bunny", "Control Stick", "X Icon", "Coin", "Mario Icon", "D-Pad", "Pull Star Chip", "Star Chip", "HOME Button", "Minus Button", "Plus Button", "Z Button", "Silver Star", "Grand Star", "Luigi Icon", "P2 Pointer", "Purple Coin", "Green Comet", "Golden Crown", "Aim Target", "Bowser Icon", "Star Pointer Hand (Selected)", "Star Pointer Hand (Pointing)", "Star Pointer Hand (Selecting)", "Rainbow Star Bit", "Peach Icon", "Letter", "Question Mark", "One Up Mushroom", "Life Up Mushroom", "Hungry Luma", "Luma", "Power Star Comet", "Green Question Mark", "Timer Icon", "Young Master Luma", "Yoshi", "Comet Medal", "Silver Crown", "Yoshi Grapple", "Checkpoint Flag", "Empty Power Star", "Empty Comet Medal", "Empty Comet", "Empty Hidden Star", "Bronze Star", "Blimp Fruit", "Large Silver Crown", "Bronze Grand Star", "Topman", "Goomba", "Coin Stack", "D-Pad Up", "D-Pad Down", "Co-Star Luma", "Toad", "Bronze Comet" });
+            combo5.Text = "A Button";
+
+            if (tssl2.Text == "  " || tssl2.Text == "NA")
+                tssl2.Text = "No MSBT Open";
+
+            if (tssl4.Text == "  " || tssl4.Text == "NA")
+                tssl4.Text = "No MSBF Open";
         }
     }
 }

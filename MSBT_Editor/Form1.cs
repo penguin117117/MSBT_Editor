@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,14 +34,13 @@ namespace MSBT_Editor
         {
             Dialog.Open(1);
         }
-
-        private void 保存ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 上書き保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Action ac = () => Dialog.SaveAs(1);
             Dialog.MSBT_Item_And_ListItem_Checker(ac);
         }
-
-        private void 上書き保存ToolStripMenuItem_Click(object sender, EventArgs e)
+        
+        private void 保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MSBTsys.MSBT_Header msbth = new MSBTsys.MSBT_Header();
             Action ac = () => Dialog.Save(msbth);
@@ -53,13 +52,13 @@ namespace MSBT_Editor
             Dialog.Open(2);
         }
 
-        private void MSBF保存ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MSBF上書き保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Action ac = () => Dialog.SaveAs(2);
             Dialog.MSBF_Item_And_ListItem_Checker(ac);
         }
-
-        private void MSBF上書き保存ToolStripMenuItem_Click(object sender, EventArgs e)
+        
+        private void MSBF保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MSBFsys.MSBF_Header msbfh = new MSBFsys.MSBF_Header();
             Action ac = () => Dialog.Save(msbfh);
@@ -308,6 +307,9 @@ namespace MSBT_Editor
 
                     //リストボックス1とMSBTのデータに追加する
                     listBox1.Items.Add(ListNameText.Text);
+                    if (Properties.Settings.Default.言語 == "EN")
+                    MSBTsys.MSBT_Data.MSBT_All_Data.Text.Add("Default Text</End>");
+                    else
                     MSBTsys.MSBT_Data.MSBT_All_Data.Text.Add("テキスト</End>");
                     MSBTsys.MSBT_Data.MSBT_All_Data.Item.Add(new ATR1.Item(0x1, 0x0, 0x0, 0x0, 0x0, 0xFF, 0xFF, 0x00));
                     MSBTsys.MSBT_Data.atr_nulldata.Add("");
@@ -567,8 +569,87 @@ namespace MSBT_Editor
 
         private void button11_Click(object sender, EventArgs e)
         {
-            string[] IconTag = { "<Icon=\"Peach\">", "<Icon=\"Koopa\">", "<Icon=\"Kinopio\">", "<Icon=\"Mario\">", "<Icon=\"Mario2\">", "<Icon=\"Tico\">", "<Icon=\"Yoshi\">", "<Icon=\"HarapekoTico\">", "<Icon=\"Luigi\">", "<Icon=\"MasterTico\">", "<Icon=\"Columa\">", "<Icon=\"Begoman\">", "<Icon=\"Kuribo\">" , "<Icon=\"Star Bunny\">" };
-            Calculation_System.TextBoxTagAdder(listBox1,textBox1,comboBox5,IconTag);
+            if (Properties.Settings.Default.言語 == "EN")
+            {//all icons in one combo
+                string[] IconTag = {
+                    "<Icon=\"AButton\">",
+                    "<Icon=\"BButton\">",
+                    "<Icon=\"CButton\">",
+                    "<Icon=\"WiiMote\">",
+                    "<Icon=\"Nunchuck\">",
+                    "<Icon=\"1Button\">",
+                    "<Icon=\"2Button\">",
+                    "<Icon=\"Star\">",
+                    "<Icon=\"StarRing\">",
+                    "<Icon=\"BlueStar\">",
+                    "<Icon=\"Pointer\">",
+                    "<Icon=\"PurpleStarbit\">",
+                    "<Icon=\"Coconut\">",
+                    "<Icon=\"ArrowDown\">",
+                    "<Icon=\"StarBunny\">",
+                    "<Icon=\"JoyStick\">",
+                    "<Icon=\"XIcon\">",
+                    "<Icon=\"Coin\">",
+                    "<Icon=\"Mario2\">",
+                    "<Icon=\"DPad\">",
+                    "<Icon=\"BlueStarPiece\">",
+                    "<Icon=\"StarPiece\">",
+                    "<Icon=\"HomeButton\">",
+                    "<Icon=\"MButton\">",
+                    "<Icon=\"PButton\">",
+                    "<Icon=\"ZButton\">",
+                    "<Icon=\"SilverStar\">",
+                    "<Icon=\"GrandStar\">",
+                    "<Icon=\"Luigi\">",
+                    "<Icon=\"PointerYellow\">",
+                    "<Icon=\"PurpleCoin\">",
+                    "<Icon=\"GreenComet\">",
+                    "<Icon=\"GoldCrown\">",
+                    "<Icon=\"Aim\">",
+                    "<Icon=\"Koopa\">",
+                    "<Icon=\"PointerHandSelected\">",
+                    "<Icon=\"PointerHand\">",
+                    "<Icon=\"PointerHandSelecting\">",
+                    "<Icon=\"Starbit\">",
+                    "<Icon=\"Peach\">",
+                    "<Icon=\"Letter\">",
+                    "<Icon=\"QuestionMark\">",
+                    "<Icon=\"1UPMushroom\">",
+                    "<Icon=\"LifeUpMushroom\">",
+                    "<Icon=\"HarapekoTico\">",
+                    "<Icon=\"Tico\">",
+                    "<Icon=\"CometStar\">",
+                    "<Icon=\"QuestionMarkGreen\">",
+                    "<Icon=\"StopWatch\">",
+                    "<Icon=\"MasterTico\">",
+                    "<Icon=\"Yoshi\">",
+                    "<Icon=\"CometMedal\">",
+                    "<Icon=\"SilverCrown\">",
+                    "<Icon=\"Flower\">",
+                    "<Icon=\"CheckpointFlag\">",
+                    "<Icon=\"EmptyStar\">",
+                    "<Icon=\"EmptyCometMedal\">",
+                    "<Icon=\"EmptyCometStar\">",
+                    "<Icon=\"EmptyHiddenStar\">",
+                    "<Icon=\"BronzeStar\">",
+                    "<Icon=\"BlimpFruit\">",
+                    "<Icon=\"SilverCrownwJewel\">",
+                    "<Icon=\"BronzeGrandStar\">",
+                    "<Icon=\"Begoman\">",
+                    "<Icon=\"Kuribo\">",
+                    "<Icon=\"Coins\">",
+                    "<Icon=\"DPadUp\">",
+                    "<Icon=\"DPadDown\">",
+                    "<Icon=\"Columa\">",
+                    "<Icon=\"Kinopio\">",
+                    "<Icon=\"BronzeComet\">", };
+
+                Calculation_System.TextBoxTagAdder(listBox1, textBox1, comboBox5, IconTag);
+            }
+            else {
+                string[] IconTag = { "<Icon=\"Peach\">", "<Icon=\"Koopa\">", "<Icon=\"Kinopio\">", "<Icon=\"Mario\">", "<Icon=\"Mario2\">", "<Icon=\"Tico\">", "<Icon=\"Yoshi\">", "<Icon=\"HarapekoTico\">", "<Icon=\"Luigi\">", "<Icon=\"MasterTico\">", "<Icon=\"Columa\">", "<Icon=\"Begoman\">", "<Icon=\"Kuribo\">", "<Icon=\"Star Bunny\">" };
+                Calculation_System.TextBoxTagAdder(listBox1, textBox1, comboBox5, IconTag);
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -662,8 +743,8 @@ namespace MSBT_Editor
                     label28.Text = "不明5";
                     if (Properties.Settings.Default.言語 == "日本語") break;
                     label25.Text = "Group number";
-                    label26.Text = "Msbt text list number";
-                    label27.Text = "FLW2 offset";
+                    label26.Text = "MSBT Entry";
+                    label27.Text = "Next Flow";
                     label28.Text = "Unknown5";
                     break;
                 case "0002":
@@ -672,10 +753,10 @@ namespace MSBT_Editor
                     label27.Text = "不明4";
                     label28.Text = "分岐先オフセット";
                     if (Properties.Settings.Default.言語 == "日本語") break;
-                    label25.Text = "0002 fixed";
-                    label26.Text = "Unknown3";
+                    label25.Text = "Always 0002";
+                    label26.Text = "Condition ID";
                     label27.Text = "Unknown4";
-                    label28.Text = "Branch offset";
+                    label28.Text = "Unknown5";
                     break;
                 case "0004":
                     label25.Text = "ジャンプ先";
@@ -683,19 +764,19 @@ namespace MSBT_Editor
                     label27.Text = "不明4";
                     label28.Text = "不明5";
                     if (Properties.Settings.Default.言語 == "日本語") break;
-                    label25.Text = "Jump destination";
+                    label25.Text = "Next Flow ID";
                     label26.Text = "Unknown3";
                     label27.Text = "Unknown4";
                     label28.Text = "Unknown5";
                     break;
                 case "0003":
                     label25.Text = "イベント番号";
-                    label26.Text = "不明3";
+                    label26.Text = "FLWオフセット";
                     label27.Text = "不明4";
                     label28.Text = "不明5";
                     if (Properties.Settings.Default.言語 == "日本語") break;
-                    label25.Text = "Event Number";
-                    label26.Text = "Unknown3";
+                    label25.Text = "Event ID";
+                    label26.Text = "Next Flow";
                     label27.Text = "Unknown4";
                     label28.Text = "Unknown5";
                     break;
@@ -793,19 +874,19 @@ namespace MSBT_Editor
             var filecount = fileName.Count();
 
             //デバッグに必須なので消さない
-            //foreach (var item in fileName)
-            //{
-            //    UnknownTag.Text = "";
-            //    Dialog.FileCheck(item);
-            //    if (toolStripStatusLabel4.Text == " ") return;
-            //    //if (UnknownTag.Text == "") return;
-            //    string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            //    string msbtname = Path.GetFileNameWithoutExtension(toolStripStatusLabel4.Text);
-            //    string textpath = Path.Combine(Path.GetDirectoryName(appPath), "Debug_" + msbtname + ".txt");
-            //    textBox34.AppendText(textpath + Environment.NewLine);
-            //    //File.WriteAllText(textpath, UnknownTag.Text);
-            //}
-            //return;
+            foreach (var item in fileName)
+            {
+                UnknownTag.Text = "";
+                Dialog.FileCheck(item);
+                if (toolStripStatusLabel4.Text == " ") return;
+                //if (UnknownTag.Text == "") return;
+                string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                string msbtname = Path.GetFileNameWithoutExtension(toolStripStatusLabel4.Text);
+                string textpath = Path.Combine(Path.GetDirectoryName(appPath), "Debug_" + msbtname + ".txt");
+                textBox34.AppendText(textpath + Environment.NewLine);
+                //File.WriteAllText(textpath, UnknownTag.Text);
+            }
+            return;
             if (filecount == 2) { 
                 var path1 = Path.GetExtension(fileName[0]);
                 var path2 = Path.GetExtension(fileName[1]);
@@ -1016,13 +1097,13 @@ namespace MSBT_Editor
                 
 
                 var listselect = listBox3.SelectedIndex;
-                listBox3.Items.RemoveAt(listselect);
                 
-                fen1.Item1.RemoveAt(listselect);
+                
+                //fen1.Item1.RemoveAt(listselect);
                 fen1.Item2.RemoveAt(listselect);
                 fen1.Hashes.RemoveAt(listselect);
 
-                
+                listBox3.Items.RemoveAt(listselect);
             }
         }
 
