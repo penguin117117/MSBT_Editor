@@ -96,11 +96,11 @@ namespace MSBT_Editor.Formsys
             //menue
             tlmi_file.Text = "ファイル";
             tlmi_msbt_open.Text = "MSBT開く";
-            tlmi_msbt_save.Text = "MSBT保存";
-            tlmi_msbt_save_as.Text = "MSBT上書き保存";
+            tlmi_msbt_save.Text = "MSBT上書き保存";
+            tlmi_msbt_save_as.Text = "MSBT保存";
             tlmi_msbf_open.Text = "MSBF開く";
-            tlmi_msbf_save.Text = "MSBF保存";
-            tlmi_msbf_save_as.Text = "MSBF上書き保存";
+            tlmi_msbf_save.Text = "MSBF上書き保存";
+            tlmi_msbf_save_as.Text = "MSBF保存";
             //tab
             tabp1.Text = "MSBTテキストの詳細設定";
             tabp2.Text = "MSBTテキスト編集";

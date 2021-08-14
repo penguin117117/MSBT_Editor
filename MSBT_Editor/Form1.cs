@@ -646,6 +646,10 @@ namespace MSBT_Editor
 
                 Calculation_System.TextBoxTagAdder(listBox1, textBox1, comboBox5, IconTag);
             }
+            else {
+                string[] IconTag = { "<Icon=\"Peach\">", "<Icon=\"Koopa\">", "<Icon=\"Kinopio\">", "<Icon=\"Mario\">", "<Icon=\"Mario2\">", "<Icon=\"Tico\">", "<Icon=\"Yoshi\">", "<Icon=\"HarapekoTico\">", "<Icon=\"Luigi\">", "<Icon=\"MasterTico\">", "<Icon=\"Columa\">", "<Icon=\"Begoman\">", "<Icon=\"Kuribo\">", "<Icon=\"Star Bunny\">" };
+                Calculation_System.TextBoxTagAdder(listBox1, textBox1, comboBox5, IconTag);
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -767,7 +771,7 @@ namespace MSBT_Editor
                     break;
                 case "0003":
                     label25.Text = "イベント番号";
-                    label26.Text = "不明3";
+                    label26.Text = "FLWオフセット";
                     label27.Text = "不明4";
                     label28.Text = "不明5";
                     if (Properties.Settings.Default.言語 == "日本語") break;
@@ -870,19 +874,19 @@ namespace MSBT_Editor
             var filecount = fileName.Count();
 
             //デバッグに必須なので消さない
-            //foreach (var item in fileName)
-            //{
-            //    UnknownTag.Text = "";
-            //    Dialog.FileCheck(item);
-            //    if (toolStripStatusLabel4.Text == " ") return;
-            //    //if (UnknownTag.Text == "") return;
-            //    string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            //    string msbtname = Path.GetFileNameWithoutExtension(toolStripStatusLabel4.Text);
-            //    string textpath = Path.Combine(Path.GetDirectoryName(appPath), "Debug_" + msbtname + ".txt");
-            //    textBox34.AppendText(textpath + Environment.NewLine);
-            //    //File.WriteAllText(textpath, UnknownTag.Text);
-            //}
-            //return;
+            foreach (var item in fileName)
+            {
+                UnknownTag.Text = "";
+                Dialog.FileCheck(item);
+                if (toolStripStatusLabel4.Text == " ") return;
+                //if (UnknownTag.Text == "") return;
+                string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                string msbtname = Path.GetFileNameWithoutExtension(toolStripStatusLabel4.Text);
+                string textpath = Path.Combine(Path.GetDirectoryName(appPath), "Debug_" + msbtname + ".txt");
+                textBox34.AppendText(textpath + Environment.NewLine);
+                //File.WriteAllText(textpath, UnknownTag.Text);
+            }
+            return;
             if (filecount == 2) { 
                 var path1 = Path.GetExtension(fileName[0]);
                 var path2 = Path.GetExtension(fileName[1]);
@@ -1093,13 +1097,13 @@ namespace MSBT_Editor
                 
 
                 var listselect = listBox3.SelectedIndex;
-                listBox3.Items.RemoveAt(listselect);
                 
-                fen1.Item1.RemoveAt(listselect);
+                
+                //fen1.Item1.RemoveAt(listselect);
                 fen1.Item2.RemoveAt(listselect);
                 fen1.Hashes.RemoveAt(listselect);
 
-                
+                listBox3.Items.RemoveAt(listselect);
             }
         }
 
