@@ -874,19 +874,19 @@ namespace MSBT_Editor
             var filecount = fileName.Count();
 
             //デバッグに必須なので消さない
-            foreach (var item in fileName)
-            {
-                UnknownTag.Text = "";
-                Dialog.FileCheck(item);
-                if (toolStripStatusLabel4.Text == " ") return;
-                //if (UnknownTag.Text == "") return;
-                string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-                string msbtname = Path.GetFileNameWithoutExtension(toolStripStatusLabel4.Text);
-                string textpath = Path.Combine(Path.GetDirectoryName(appPath), "Debug_" + msbtname + ".txt");
-                textBox34.AppendText(textpath + Environment.NewLine);
-                //File.WriteAllText(textpath, UnknownTag.Text);
-            }
-            return;
+            //foreach (var item in fileName)
+            //{
+            //    UnknownTag.Text = "";
+            //    Dialog.FileCheck(item);
+            //    if (toolStripStatusLabel4.Text == " ") return;
+            //    //if (UnknownTag.Text == "") return;
+            //    string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            //    string msbtname = Path.GetFileNameWithoutExtension(toolStripStatusLabel4.Text);
+            //    string textpath = Path.Combine(Path.GetDirectoryName(appPath), "Debug_" + msbtname + ".txt");
+            //    textBox34.AppendText(textpath + Environment.NewLine);
+            //    //File.WriteAllText(textpath, UnknownTag.Text);
+            //}
+            //return;
             if (filecount == 2) { 
                 var path1 = Path.GetExtension(fileName[0]);
                 var path2 = Path.GetExtension(fileName[1]);

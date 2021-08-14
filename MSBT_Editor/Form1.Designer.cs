@@ -2118,9 +2118,9 @@ namespace MSBT_Editor
             this.label54.AutoSize = true;
             this.label54.Location = new System.Drawing.Point(6, 33);
             this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(79, 12);
+            this.label54.Size = new System.Drawing.Size(114, 12);
             this.label54.TabIndex = 5;
-            this.label54.Text = "EngrishSetting";
+            this.label54.Text = "EnglishSettingAndFix";
             // 
             // label55
             // 
