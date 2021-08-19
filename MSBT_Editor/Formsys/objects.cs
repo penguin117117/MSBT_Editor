@@ -98,7 +98,7 @@ namespace MSBT_Editor.Formsys
 
         protected static TextBox msbtdebugtxt = Form1.Form1Instance.MSBT_Debug_Text;
         protected static TextBox txtb13 = Form1.Form1Instance.textBox13;
-        protected static ListBox list1 = Form1.Form1Instance.listBox1;
+        protected static ListBox MsbtListBox = Form1.Form1Instance.MsbtListBox;
         protected static ListBox list2 = Form1.Form1Instance.listBox2;
         protected static ListBox list3 = Form1.Form1Instance.listBox3;
 
@@ -150,7 +150,7 @@ namespace MSBT_Editor.Formsys
         protected static ToolStripStatusLabel tssl2 = Form1.Form1Instance.toolStripStatusLabel2;
         protected static ToolStripStatusLabel tssl4 = Form1.Form1Instance.toolStripStatusLabel4;
         protected static ToolStripStatusLabel tssl6 = Form1.Form1Instance.toolStripStatusLabel6;
-        protected static ToolStripStatusLabel tssl7 = Form1.Form1Instance.toolStripStatusLabel7;
+        protected static ToolStripStatusLabel SaveStatusPathString = Form1.Form1Instance.SavePathString;
 
         //
         protected static TextBox unknowntag = Form1.Form1Instance.UnknownTag;
