@@ -13,6 +13,9 @@ using MSBT_Editor.Formsys;
 
 namespace MSBT_Editor.FileSys
 {
+    /// <summary>
+    /// <para><br/></para>
+    /// </summary>
     class Calculation_System
     {
         public static string Byte2Char(BinaryReader br, int readchers = 4)
@@ -30,7 +33,6 @@ namespace MSBT_Editor.FileSys
             }
             catch (Exception e)
             {
-               
                     br.Close();
                     string[] errorJP01 = { "深刻なエラーが発生しました\n\r[" + e.Message + "]\n\r" + "ErrorNo 1", "エラー" };
                     string[] errorJP02 = { "「以前に他のMSBTエディタで編集していませんか？」\n\r", "ファイルフォーマット規則が一部破損しているので\n\r", "このエディタでは開くことが出来ません", "このエラーの原因で考えられること" };
@@ -757,6 +759,9 @@ namespace MSBT_Editor.FileSys
             return bs.ToArray();
         }
 
+        public static void StringToBytesWriter(BinaryWriter bw , string str) {
+            bw.Write(StringToBytes(str));
+        }
         
 
         public static byte[] StringToInt32_byte(string str)
@@ -790,6 +795,10 @@ namespace MSBT_Editor.FileSys
         public static void UTF16BE_String_Writer(BinaryWriter bw , string str) {
             bw.Write(Encoding.GetEncoding("unicodeFFFE").GetBytes(str));
             
+        }
+
+        public static void String_Writer(BinaryWriter bw , string str , string EncodingName = "ASCII") {
+            bw.Write(Encoding.GetEncoding(EncodingName).GetBytes(str));
         }
 
         

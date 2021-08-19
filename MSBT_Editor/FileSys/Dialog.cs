@@ -9,6 +9,7 @@ using MSBT_Editor.MSBTsys;
 using MSBT_Editor.Formsys;
 using MSBT_Editor.MSBFsys;
 using MSBT_Editor.Sectionsys;
+using System.Drawing;
 
 namespace MSBT_Editor.FileSys
 {
@@ -16,17 +17,17 @@ namespace MSBT_Editor.FileSys
     /// ダイアログクラス
     /// </summary>
     /// <remarks>ファイルを開いたり保存する</remarks>
-    public class Dialog:objects
+    public class Dialog : objects
     {
         private static string Save_Path_Msbt = "None";
         private static string Save_Path_Msbf = "None";
-
         /// <summary>
         /// ファイルを選択して開く
         /// </summary>
         /// <param name="filenum">「1の場合MSBT」「2の場合MSBF」</param>
         /// <remarks></remarks>
-        public static void Open(int filenum) {
+        public static void Open(int filenum)
+        {
 
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.FileName = "default.msbt";
@@ -38,14 +39,20 @@ namespace MSBT_Editor.FileSys
             ofd.CheckFileExists = true;
             ofd.CheckPathExists = true;
 
-            if (ofd.ShowDialog() == DialogResult.OK){
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
                 FileCheck(ofd.FileName);
             }
         }
 
-        
 
-        private static bool SaveErrorMessage(string path) {
+        /// <summary>
+        /// ファイルパスが設定されているかをチェックします。
+        /// </summary>
+        /// <param name="path">Noneの場合trueを返す</param>
+        /// <returns>path == "None"の場合true</returns>
+        private static bool CheckSavePath(string path)
+        {
             if (path == "None")
             {
                 MessageBox.Show("ファイルを開くまたは保存先を指定してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -54,19 +61,45 @@ namespace MSBT_Editor.FileSys
             return false;
         }
 
-        public static void Save(MSBT_Header MSBTH) {
+        //public static void Save(object obj) {
+        //    if (obj is MSBF_Header) {
+        //        MSBF_Header MSBFH = (MSBF_Header)obj;
+        //        MSBFH.Write(Save_Path_Msbf);
 
-            var flag = SaveErrorMessage(Save_Path_Msbt);
-            if (flag) return;
+        //        Console.WriteLine("MSBFです");
+
+        //    } 
+
+
+        //}
+
+        public static void Save(MSBT_Header MSBTH)
+        {
+
+            var hasPath = CheckSavePath(Save_Path_Msbt);
+            if (hasPath) return;
             MSBTH.Write(Save_Path_Msbt);
+            SaveStatusPathString.Text = Save_Path_Msbt;
+            SaveStatusPathString.ForeColor = Color.Green;
         }
 
 
         public static void Save(MSBF_Header MSBFH)
         {
-            var flag = SaveErrorMessage(Save_Path_Msbf);
-            if (flag) return;
+            bool hasNotPath = CheckSavePath(Save_Path_Msbf);
+            if (hasNotPath) return;
+            //var OldMsbfBytes = File.ReadAllBytes(Save_Path_Msbf);
+
+            //try
+            //{
             MSBFH.Write(Save_Path_Msbf);
+            //}
+            //catch
+            //{
+            //    File.WriteAllBytes(Save_Path_Msbf, OldMsbfBytes);
+            //}
+            SaveStatusPathString.Text = Save_Path_Msbf;
+            SaveStatusPathString.ForeColor = Color.Green;
         }
 
         public static void SaveAs(int filenum)
@@ -85,25 +118,40 @@ namespace MSBT_Editor.FileSys
             //ダイアログを表示する
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                switch (filenum) {
+                switch (filenum)
+                {
                     case 1:
                         MSBT_Header msbth = new MSBT_Header();
+                        //try
+                        //{
+
                         msbth.Write(sfd.FileName);
                         Save_Path_Msbt = sfd.FileName;
-                    break;
+                        SaveStatusPathString.Text = Save_Path_Msbt;
+                        SaveStatusPathString.ForeColor = Color.Green;
+                        //}
+                        //catch
+                        //{
+
+                        //}
+
+                        break;
                     case 2:
                         MSBF_Header msbfh = new MSBF_Header();
                         msbfh.Write(sfd.FileName);
                         Save_Path_Msbf = sfd.FileName;
+                        SaveStatusPathString.ForeColor = Color.Green;
+                        SaveStatusPathString.Text = Save_Path_Msbf;
                         break;
                     default:
-                        MessageBox.Show("このメッセージが表示されている場合\n\r"+"アプリ製作者のミスの可能性が高いので\n\r"+"至急このバージョンの制作者に連絡してください\n\r"+"ErrorName StaffMiss001 ", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("このメッセージが表示されている場合\n\r" + "アプリ製作者のミスの可能性が高いので\n\r" + "至急このバージョンの制作者に連絡してください\n\r" + "ErrorName StaffMiss001 ", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
             }
         }
 
-        public static bool MSBF_Item_And_ListItem_Checker(Action action) {
+        public static bool MSBF_Item_And_ListItem_Checker(Action action)
+        {
             FLW2 flw2 = new FLW2();
             FEN1 fen1 = new FEN1();
 
@@ -128,11 +176,12 @@ namespace MSBT_Editor.FileSys
             FLW2 flw2 = new FLW2();
             FEN1 fen1 = new FEN1();
 
-            var list1_counter = list1.Items.Count == 0;
+            var list1_counter = MsbtListBox.Items.Count == 0;
             var msbt_all_item = MSBT_Data.MSBT_All_Data.Item == default;
             var msbt_all_text = MSBT_Data.MSBT_All_Data.Text == default;
 
-            if (list1_counter|| (msbt_all_item) || msbt_all_text) {
+            if (list1_counter || (msbt_all_item) || msbt_all_text)
+            {
                 MessageBox.Show("MSBTの項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
@@ -147,12 +196,13 @@ namespace MSBT_Editor.FileSys
         {
             var file_flag = File.Exists(filepath);
             var File_Extension = Path.GetExtension(filepath);
-           
-            var MSBF_File_Path = Path.ChangeExtension(filepath,"msbf");
+
+            var MSBF_File_Path = Path.ChangeExtension(filepath, "msbf");
 
 
-            if (file_flag == false) {
-                MessageBox.Show("ファイルが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            if (file_flag == false)
+            {
+                MessageBox.Show("ファイルが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 

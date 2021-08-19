@@ -139,7 +139,7 @@ namespace MSBT_Editor.Sectionsys
 
         public static void ATR1_Change(TextBox textbox)
         {
-            if (list1.Items.Count != 0)
+            if (MsbtListBox.Items.Count != 0)
             {
                 byte bit = 0x01;
                 short sh = 0x0000;
@@ -155,7 +155,7 @@ namespace MSBT_Editor.Sectionsys
                 }
 
 
-                ATR1.Item element = MSBT_Data.MSBT_All_Data.Item[list1.SelectedIndex];
+                ATR1.Item element = MSBT_Data.MSBT_All_Data.Item[MsbtListBox.SelectedIndex];
                 switch (textbox.Name)
                 {
                     case "textBox3":
@@ -180,7 +180,7 @@ namespace MSBT_Editor.Sectionsys
                         element.unknown6 = bit;
                         break;
                 }
-                MSBT_Data.MSBT_All_Data.Item[list1.SelectedIndex] = element;
+                MSBT_Data.MSBT_All_Data.Item[MsbtListBox.SelectedIndex] = element;
             }
         }
 
@@ -199,7 +199,7 @@ namespace MSBT_Editor.Sectionsys
             var atr_offset_pos = fs.Position;
 
             //エントリー数と1エントリー当たりのバイト数を書き込む
-            bw.Write(CS.StringToInt32_byte((list1.Items.Count).ToString("X8")));
+            bw.Write(CS.StringToInt32_byte((MsbtListBox.Items.Count).ToString("X8")));
             bw.Write(CS.StringToInt32_byte((12).ToString("X8")));
 
             //エントリーの各データを書き込む
@@ -220,9 +220,9 @@ namespace MSBT_Editor.Sectionsys
 
             //特殊テキストの書き込み
             List<long> sptextoffset = new List<long>();
-            for (int j = 0; j < list1.Items.Count; j++)
+            for (int j = 0; j < MsbtListBox.Items.Count; j++)
             {
-                list1.SelectedIndex = j;
+                MsbtListBox.SelectedIndex = j;
                 if (txtb11.Text == "")
                 {
                     sptextoffset.Add(fs.Position - (atr_offset_pos));

@@ -49,8 +49,8 @@ namespace MSBT_Editor.MSBTsys
             atr_nulldata = new List<string>();
             atr_nulldata = ATR1.nulldata;
 
-            if(list1.Items.Count > 0)
-            list1.SelectedIndex = 0;
+            if(MsbtListBox.Items.Count > 0)
+            MsbtListBox.SelectedIndex = 0;
 
             //終了処理
             fs.Close();
@@ -59,6 +59,8 @@ namespace MSBT_Editor.MSBTsys
 
 
         public void Write(string filepath) {
+            Console.WriteLine("MSBT処理に入りました");
+
             FileStream fs = new FileStream(filepath, FileMode.Create);
             BinaryWriter bw = new BinaryWriter(fs);
             long MSBT_File_Size_pos;

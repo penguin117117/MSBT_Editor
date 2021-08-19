@@ -13,31 +13,28 @@ namespace MSBT_Editor.Sectionsys
 {
     public class LBL1:objects
     {
-        //ヘッダー情報
-        private static string magic;
-        private static int sec_size;
-        private static int unknown1;
-        private static int unknown2;
-        private static int entries;
+        private static string s_magic;
+        private static int s_sectionSize;
+        private static int s_unknown1;
+        private static int s_unknown2;
+        private static int s_entries;
+        private static long s_positionBaseAddress;
+        private static long s_positionLastEntrySection;
 
-        private static long offset;
-        private static long offset2;
-
-        public static List<long> unknownpos;
-
-        public static List<int> unknown;
-        public static List<int> name_offset;
-        public static List<string> list_name;
-        public List<int> list_no;
+        public static List<long> BeginEntryAdressList;
+        public static List<int> HashSkipList;
+        public static List<int> NameOffsetList;
+        public static List<string> NameList;
+        public List<int> MsbtListBoxIndexList;
 
         public struct Hash_Data
         {
-            public UInt32 hash;
-            public long listindex;
-            public Hash_Data(UInt32 arg1, long arg2)
+            public UInt32 Hash;
+            public long MsbtListBoxIndex;
+            public Hash_Data(UInt32 hash, long msbtListBoxIndex)
             {
-                this.hash = arg1;
-                this.listindex = arg2;
+                this.Hash = hash;
+                this.MsbtListBoxIndex = msbtListBoxIndex;
             }
 
         }
@@ -45,11 +42,11 @@ namespace MSBT_Editor.Sectionsys
         public struct LBL_1st_Item {
             public int HashSkipCounter;
             public string ListName;
-            public UInt32 hash;
-            public LBL_1st_Item(int arg1,string arg2 ,UInt32 arg3) {
-                this.HashSkipCounter = arg1;
-                this.ListName = arg2;
-                this.hash = arg3;
+            public UInt32 Hash;
+            public LBL_1st_Item(int hashSkipCounter,string listName ,UInt32 hash) {
+                this.HashSkipCounter = hashSkipCounter;
+                this.ListName = listName;
+                this.Hash = hash;
                 
             }
         
@@ -60,270 +57,361 @@ namespace MSBT_Editor.Sectionsys
         public List<Hash_Data> HashData;
 
         public string Magic {
-            set => magic = value;
-            get => magic;
+            set => s_magic = value;
+            get => s_magic;
         }
 
-        public int Sec_Size {
-            set => sec_size = value;
-            get => sec_size;
+        public int SectionSize {
+            set => s_sectionSize = value;
+            get => s_sectionSize;
         }
 
         public int Unknown1 {
-            set => unknown1 = value;
-            get => unknown1;
+            set => s_unknown1 = value;
+            get => s_unknown1;
         }
 
         public int Unknown2 {
-            set => unknown2 = value;
-            get => unknown2;
+            set => s_unknown2 = value;
+            get => s_unknown2;
         }
 
         public int Entries {
             set {
                 if (value != 101 || value != 102)
                 {
-                    entries = 101;
+                    s_entries = 101;
                     
                 }
                 else {
-                    entries = 101;
+                    s_entries = 101;
                 }
             }
-            get => entries;
+            get => s_entries;
         }
 
+        /// <summary>
+        /// <para>
+        /// LBL1セクションのデータを読み込んで変数と構造体リストに保存します。<br/>
+        /// Read the data in the LBL1 section and save it in variables and in the structure list.
+        /// </para>
+        /// </summary>
+        /// <param name="br"></param>
+        /// <param name="fs"></param>
         public void Read(BinaryReader br , FileStream fs) {
 
-            //リストボックスのアイテムをすべて削除
-            list1.Items.Clear();
+            MsbtListBox.Items.Clear();
+            
+            BeginEntryAdressList = new List<long>();
+            HashSkipList         = new List<int>();
+            NameOffsetList       = new List<int>();
+            NameList             = new List<string>();
+            MsbtListBoxIndexList = new List<int>();
 
-            //リスト初期化
-            unknownpos  = new List<long>();
-            unknown     = new List<int>();
-            name_offset = new List<int>();
-            list_name   = new List<string>();
-            list_no     = new List<int>();
-
-            //ヘッダー部読み取り
+            //ヘッダー部読み取り header section reading
             Magic       = CS.Byte2Char(br);
-            Sec_Size    = CS.Byte2Int(br);
+            SectionSize = CS.Byte2Int(br);
             Unknown1    = CS.Byte2Int(br);
             Unknown2    = CS.Byte2Int(br);
-
-            //LBL1のオフセット位置を記憶
-            offset      = fs.Position;
-
-            //エントリーの数101、例外あり
             Entries     = CS.Byte2Int(br);
-            txtb14.Text = Entries.ToString();
 
-            //LBLのスキップ数(数値が違っても問題なし)とオフセット値を読み込む
-            for (int i = 0; i<entries; i++){
+            //LBL1のベースアドレスを記憶 Stores the base address of LBL1
+            s_positionBaseAddress = fs.Position - 4;
 
-                //各エントリオフセットの先頭を記録する
-                unknownpos.Add(fs.Position);
-
-                //スキップ数とオフセット値の読み取り
-                var unk     = CS.Byte2Int(br);
-                var n_set   = CS.Byte2Int(br);
-                unknown.Add(unk);
-                name_offset.Add(n_set);
-
-                //一番最初のエントリの場合
-                if (i == 0) continue;
-                
-                //Name_Offsetの数を記録
-                var counter = name_offset.Count();
-
-                //同じオフセット値の場合上書きする
-                if (name_offset[counter - 2] == name_offset[counter-1])
-                {
-                    unknownpos.RemoveRange(unknownpos.Count() - 2, 1);
-                    unknown.RemoveRange(unknown.Count()-2,1);
-                    name_offset.RemoveRange(name_offset.Count() - 2, 1);
-                    continue;
-                }
-            }
-
-            //現在地を記録する
-            offset2 = fs.Position;
+            ReadEntrySection(fs,br);
+            s_positionLastEntrySection = fs.Position;
 
             //配列を用意エントリー数を超える場合があるので最大値を0xFFにしています
-            string[] ListName = new string[0xFF];
+            //The maximum value is set to 0xFF because the number of entries in the array may be exceeded.
+            string[] NameArray = new string[0xFF];
+            ReadLabelSection(fs,br,ref NameArray);
 
-            //リスト名のカウンター
-            int testcount = 0;
-            Console.WriteLine(((offset + sec_size) - offset2).ToString("X"));
-            //LBL1セクションのラベル名セクションの処理
-            for (long k = 0; k < (offset+sec_size)-offset2; k++) {
+            var TemporaryMsbtListBoxIndexList = MsbtListBoxIndexList;
+            IOrderedEnumerable<int> MsbtListBoxIndexSorted 
+                = TemporaryMsbtListBoxIndexList.OrderBy(x => x);
 
-                //各ラベル名の先頭をその都度記録する
-                var lblfspos = fs.Position;
+            for (int l = 0; l < MsbtListBoxIndexList.Count; l++) 
+                MsbtListBox.Items.Add(NameArray[l]);
 
-                //ラベル名の項目を読み取る
-                var num = CS.Bytes2Byte(br);
-                var list_item = CS.Byte2Char(br, num);
-                var listNo = CS.Byte2Int(br);
-                ListName[listNo] = list_item;
-
-                //
-                var nameoffindex = name_offset.IndexOf((int)(lblfspos-offset));
-                if (-1 != nameoffindex)list_name.Add(list_item) ;
-                list_no.Add(listNo);
-
-                //文字数のカウント分と末尾のInt32(4byte)分進める
-                k += num;
-                k += 4;
-                testcount++;
-            }
-
-            var lino = list_no.ToList();
-            IOrderedEnumerable<int> list_No_sorted = lino.OrderBy(x => x);
-            var lino2 = list_No_sorted.ToArray();
-            for (int l = 0; l < testcount; l++) list1.Items.Add(ListName[l]);
             CS.Padding(br,fs.Position);
         }
 
+        /// <summary>
+        /// LBLのスキップ数(数値が違っても修復します)とオフセット値を読み込む<br/>
+        /// Read the number of skips in LBL (it will be repaired even if the numbers are different) and the offset value.
+        /// </summary>
+        /// <param name="fs"></param>
+        /// <param name="br"></param>
+        private void ReadEntrySection(FileStream fs , BinaryReader br) {
+            
+            for (int i = 0; i < Entries; i++)
+            {
+
+                BeginEntryAdressList.Add(fs.Position);
+
+                var SkipIntNum = CS.Byte2Int(br);
+                var NameOffsetIntNum = CS.Byte2Int(br);
+
+                HashSkipList.Add(SkipIntNum);
+                NameOffsetList.Add(NameOffsetIntNum);
+
+                if (i == 0) continue;
+
+                var BeforeNameOffsetIndex = NameOffsetList.Count() - 2;
+                var NowNameOffsetIndex = NameOffsetList.Count() - 1;
+
+                //同じオフセット値の場合ひとつ前のリストを削除する
+                //If the offset value is the same, the previous list will be deleted.
+                if (NameOffsetList[BeforeNameOffsetIndex] == NameOffsetList[NowNameOffsetIndex])
+                {
+                    BeginEntryAdressList.RemoveRange(BeforeNameOffsetIndex, 1);
+                    HashSkipList.RemoveRange(BeforeNameOffsetIndex, 1);
+                    NameOffsetList.RemoveRange(BeforeNameOffsetIndex, 1);
+                    continue;
+                }
+            }
+        }
+        /// <summary>
+        /// ラベルセクションを読み取ります。<br/>
+        /// Read the label section
+        /// </summary>
+        /// <param name="fs"></param>
+        /// <param name="br"></param>
+        /// <param name="NameArray"></param>
+        private void ReadLabelSection(FileStream fs , BinaryReader br , ref string[] NameArray) {
+
+            var PositionNameSectionBytesSize = (s_positionBaseAddress + s_sectionSize) - s_positionLastEntrySection;
+
+            
+
+            //リスト名のカウンター
+            //int testcount = 0;
+
+            //LBL1セクションのラベル名セクションの処理
+            for (long k = 0; k < PositionNameSectionBytesSize; k++)
+            {
+                var PositionFirstLabelName = fs.Position;
+                var LabelStringSize        = CS.Bytes2Byte(br);
+                var LabelString            = CS.Byte2Char(br, LabelStringSize);
+                var LabelMsbtListBoxIndex  = CS.Byte2Int(br);
+
+                NameArray[LabelMsbtListBoxIndex] = LabelString;
+
+                var NameOffset          = (int)(PositionFirstLabelName - s_positionBaseAddress);
+                var FindNameOffsetIndex = NameOffsetList.IndexOf(NameOffset);
+
+                if (-1 != FindNameOffsetIndex)
+                    NameList.Add(LabelString);
+
+                MsbtListBoxIndexList.Add(LabelMsbtListBoxIndex);
+
+                //文字数のカウント分と末尾のInt32(4byte)分進める
+                k += LabelStringSize;
+                k += 4;
+                //testcount++;
+            }
+        }
+        /// <summary>
+        /// LBL1セクションのデータを書き込みます
+        /// </summary>
+        /// <param name="bw"></param>
+        /// <param name="fs"></param>
         public void Write(BinaryWriter bw , FileStream fs) {
-            int itemcount = 0;
-            List<long> labelpos = new List<long>();
+
+            List<long> PositionIndividualLabelTop = new List<long>();
             HashData = new List<Hash_Data>();
 
-            //LBL1セクション
-            bw.Write(Encoding.ASCII.GetBytes("LBL1"));
+            var PositionEntrySizeAddress = fs.Position + 4;
 
-            //セクションサイズを後で追記するために位置を記憶させる
-            offset = fs.Position;
+            if (Entries <= 101) Entries = 101;
 
-            //セクションサイズをいったん0(4byte)
+            //ヘッダー情報の書き込み
+            CS.String_Writer(bw ,"LBL1");
             CS.Null_Writer_Int32(bw, 3);
+            CS.StringToBytesWriter(bw,(Entries).ToString("X8"));
 
-            //ラベルオフセットを記憶する
-            offset2 = fs.Position;
+            s_positionBaseAddress = fs.Position - 4;
 
-            //エントリーサイズをバイナリに書き込む
-            if (Entries<=101) Entries = 101;
-            bw.Write(CS.StringToBytes((Entries).ToString("X8")));
+            //データセクションを一時的に書き込み
+            TemporarilyWriteNullData(bw);
 
-            //ラベルindex(不明)とラベルオフセットを空白で埋める
-            for (int i = 0; i < Entries; i++) CS.Null_Writer_Int32(bw, 2);
-            
-            //ラベルのエリアの値を書き込む
-            foreach (var item in list1.Items){
+            HashData = LabelHashAndListIndexGet();
+            var HashDataArray = LabelHashAndListIndexSortToArray(HashData);
 
-                var str = item.ToString();
-                var strnum = (byte)str.Count();
-                //ハッシュ値とリスト番号をリストへ
-                HashData.Add(new Hash_Data(CS.MSBT_Hash(str, Entries), itemcount));
-                itemcount++;
-            }
+            //ラベルセクションを書き込む
+            LabelSectionWriter(fs,bw,HashDataArray,ref PositionIndividualLabelTop);
+            var PositionLabelLastAddress = fs.Position;
 
-            //ハッシュ値を並び替えリスト番号も順番変更
-            IOrderedEnumerable<Hash_Data> sorted = HashData.OrderBy(x => x.hash);
-            var hashdata = sorted.ToArray();
-
-
-            int hashcount = 0;
-            foreach (var hashdatsorted in hashdata) {
-                var index = hashdatsorted.listindex;
-                list1.SelectedIndex = (int)index;
-                labelpos.Add(fs.Position);
-                var str = list1.Text;
-                var strnum = (byte)str.Count();
-
-                bw.Write(CS.StringToBytes(strnum.ToString("X2")));
-                bw.Write(Encoding.GetEncoding(932).GetBytes(str));
-                bw.Write(CS.StringToBytes(hashdatsorted.listindex.ToString("X8")));
-                hashcount++;
-            }
-
-
-            var lblend = fs.Position;
-
-            //パディングの書き込み
             CS.Padding_Writer(bw, fs.Position);
-            var fspadend1 = fs.Position;
+            var PositionLBL1LastAddress = fs.Position;
 
-            //同じハッシュ値をチェックする数値
-            var samecheck = 0;
+            //ファイルストリームの位置をデータセクションの開始位置へ変更
+            fs.Seek(s_positionBaseAddress + 4, SeekOrigin.Begin);
 
-            //ファイルストリームの位置を変更
-            fs.Seek(offset2 + 4, SeekOrigin.Begin);
+            //データセクションに計算したデータを書き込む
+            DataSectionAllWriter(bw,HashDataArray,PositionIndividualLabelTop, PositionLabelLastAddress);
 
-            //
-            var entry_hash_counter = 0;
+            SectionSize = (int)(PositionLabelLastAddress - s_positionBaseAddress);
+            fs.Seek(PositionEntrySizeAddress, SeekOrigin.Begin);
+            CS.StringToBytesWriter(bw,SectionSize.ToString("X8"));
+            fs.Seek(PositionLBL1LastAddress, SeekOrigin.Begin);
+        }
+        /// <summary>
+        /// データセクションのデータを計算して全て書き込みます
+        /// </summary>
+        /// <param name="bw"></param>
+        /// <param name="HashDataArray"></param>
+        /// <param name="PositionIndividualLabelTop"></param>
+        /// <param name="PositionLabelLastAddress"></param>
+        private void DataSectionAllWriter(BinaryWriter bw , Hash_Data[] HashDataArray,List<long> PositionIndividualLabelTop,long PositionLabelLastAddress/*, ref int ActualDataCount*/) {
+            var ActualDataCount = 0;
+            for (int i = 0; i < HashData.Count(); i++)
+            {
+                var NowHash = HashDataArray[i].Hash;
+                var SkipDataCount = HashDataArray.Where(a => a.Hash.Equals(NowHash)).Count();
+                var LabelOffset = (int)PositionIndividualLabelTop[i] - 0x30;
 
-            //
-            var skipcounter = 1;
-
-            for (int i = 0; i < sorted.Count(); i++){
-                Console.WriteLine(hashdata[i].hash.ToString("X8"));
-                var skipindex = hashdata.Where(a => a.hash.Equals(hashdata[i].hash)).Count();
                 //初回のみの処理
                 if (i == 0)
                 {
-                    for (int j = 0; j < (hashdata[i].hash) + 1; j++)
-                    {
-                        if (j == (hashdata[i].hash))
-                        {
-                            bw.Write(CS.StringToInt32_byte((skipindex).ToString("X8")));
-                        }
-                        else
-                        {
-                            CS.Null_Writer_Int32(bw);
-                        }
-                        bw.Write(CS.StringToInt32_byte(((int)labelpos[i] - 0x30).ToString("X8")));
-                        entry_hash_counter++;
-                    }
+                    DataSectionActualDataWriter(bw, NowHash, SkipDataCount, LabelOffset, ref ActualDataCount, true);
                     continue;
                 }
-                
+
+                var BeforeHash = HashDataArray[i - 1].Hash;
+                var SubtractNowFromBeforeHash = NowHash - BeforeHash;
 
                 //同じハッシュ値の処理
-
-                if ((hashdata[i].hash) - (hashdata[i - 1].hash) == 0){
-                    samecheck++;
-                    skipcounter++;
-
-                    if ((sorted.Count() - 1) != i)
+                if (SubtractNowFromBeforeHash == 0)
+                {
+                    if ((HashData.Count() - 1) != i)
                     {
-                        if ((hashdata[i + 1].hash) - (hashdata[i].hash) == 0) continue;
-
+                        if (HashDataArray[i + 1].Hash - NowHash == 0)
+                            continue;
                     }
                 }
-                
-                for (int j = 0; j < (hashdata[i].hash) - (hashdata[i - 1].hash ); j++){
-                    
-                    if (j == (hashdata[i].hash) - (hashdata[i - 1].hash)-1){
-                        bw.Write(CS.StringToInt32_byte((skipindex).ToString("X8")));
-                    }
-                    else{
-                        CS.Null_Writer_Int32(bw);
-                    }
-                    bw.Write(CS.StringToInt32_byte(((int)labelpos[i] - 0x30).ToString("X8")));
-                    entry_hash_counter++;
-                }
-                skipcounter = 1;
 
+                //初回以外かつ同じハッシュ値以外
+                DataSectionActualDataWriter(bw, SubtractNowFromBeforeHash, SkipDataCount, LabelOffset, ref ActualDataCount, false);
             }
-            if (entry_hash_counter   < Entries) {
-                var remaining_offset = Entries - entry_hash_counter;
-                var padding_point = (int)(fs.Position + (remaining_offset*8) -0x30);
-
-                for (int a = 0; a<remaining_offset; a++) {
-                    bw.Write(BitConverter.GetBytes(0x00000000));
-                    bw.Write(CS.StringToInt32_byte((lblend-0x30).ToString("X8")));
-                }
-            
-            }
-            
-            var secsize = (int)(lblend - offset2);
-            fs.Seek(offset, SeekOrigin.Begin);
-            bw.Write(CS.StringToBytes(secsize.ToString("X8")));
-            fs.Seek(fspadend1, SeekOrigin.Begin);
+            DataSectionInsufficientDataWriter(bw, PositionLabelLastAddress, ActualDataCount);
         }
-       
+
+        /// <summary>
+        /// データセクションの不足データをパディングまでのオフセットで埋めます。
+        /// </summary>
+        /// <param name="bw"></param>
+        /// <param name="PositionLabelLastAddress"></param>
+        /// <param name="ActualDataCount"></param>
+        private void DataSectionInsufficientDataWriter(BinaryWriter bw,long PositionLabelLastAddress,int ActualDataCount) {
+            if (ActualDataCount < Entries)
+            {
+
+                var NumberOfInsufficientData = Entries - ActualDataCount;
+
+                for (int a = 0; a < NumberOfInsufficientData; a++)
+                {
+                    bw.Write(BitConverter.GetBytes(0x00000000));
+                    bw.Write(CS.StringToInt32_byte((PositionLabelLastAddress - 0x30).ToString("X8")));
+                }
+            }
+        }
+        /// <summary>
+        /// 実際のデータをデータセクションに書き込みます。
+        /// </summary>
+        /// <param name="bw"></param>
+        /// <param name="hash"></param>
+        /// <param name="SkipDataCount"></param>
+        /// <param name="LabelOffset"></param>
+        /// <param name="ActualDataCount"></param>
+        /// <param name="isTop"></param>
+        private void DataSectionActualDataWriter(BinaryWriter bw , uint hash , int SkipDataCount , int LabelOffset ,ref int ActualDataCount , bool isTop) {
+            var LoopCountChange = 0;
+            var BranchDataChenge = -1;
+            if (isTop) {
+                LoopCountChange = 1;
+                BranchDataChenge = 0;
+            }
+            for (int j = 0; j < (hash + LoopCountChange); j++)
+            {
+
+                if (j == hash + BranchDataChenge)
+                {
+                    CS.StringToBytesWriter(bw, (SkipDataCount).ToString("X8"));
+                }
+                else
+                {
+                    CS.Null_Writer_Int32(bw);
+                }
+                CS.StringToBytesWriter(bw, LabelOffset.ToString("X8"));
+                ActualDataCount++;
+            }
+        }
+
+        /// <summary>
+        /// nullSetNumで指定した数値分のInt32NullデータをLBL1のEntriesの数値分繰り返し書き込みます。
+        /// </summary>
+        /// <param name="bw"></param>
+        /// <param name="nullSetNum"></param>
+        private void TemporarilyWriteNullData(BinaryWriter bw , int nullSetNum = 2) {
+            //ラベルindex(不明)とラベルオフセットを空白で埋める
+            for (int i = 0; i < Entries; i++)
+                CS.Null_Writer_Int32(bw, nullSetNum);
+        }
+
+        /// <summary>
+        /// ラベルとMSBTリストのインデックス値のリストデータを取得します
+        /// </summary>
+        /// <returns></returns>
+        private List<Hash_Data> LabelHashAndListIndexGet() {
+            //ラベルのエリアの値を書き込む
+            List<Hash_Data> TemporarilyData = new List<Hash_Data>();
+            int itemcount = 0;
+            foreach (var item in MsbtListBox.Items)
+            {
+
+                var LabelName = item.ToString();
+                //var strnum = (byte)str.Count();
+                //ハッシュ値とリスト番号をリストへ
+                var LabelHash = CS.MSBT_Hash(LabelName, Entries);
+                TemporarilyData.Add(new Hash_Data(LabelHash, itemcount));
+                itemcount++;
+            }
+            return TemporarilyData;
+        }
+        /// <summary>
+        /// ハッシュデータとMSBTリストのインデックスのリストデータをハッシュ値順に並べ替えます。
+        /// </summary>
+        /// <param name="HashData"></param>
+        /// <returns></returns>
+        private Hash_Data[] LabelHashAndListIndexSortToArray(List<Hash_Data> HashData) {
+            IOrderedEnumerable<Hash_Data> HashDataSorted
+                    = HashData.OrderBy(x => x.Hash);
+            return HashDataSorted.ToArray();
+        }
+        /// <summary>
+        /// ラベルセクションをファイルに書き込みます
+        /// </summary>
+        /// <param name="fs"></param>
+        /// <param name="bw"></param>
+        /// <param name="HashDataArray"></param>
+        /// <param name="PositionIndividualLabelTop"></param>
+        private void LabelSectionWriter(FileStream fs , BinaryWriter bw , Hash_Data[] HashDataArray , ref List<long> PositionIndividualLabelTop) {
+            int hashcount = 0;
+            foreach (var hashdatsorted in HashDataArray)
+            {
+                var index = hashdatsorted.MsbtListBoxIndex;
+                MsbtListBox.SelectedIndex = (int)index;
+                PositionIndividualLabelTop.Add(fs.Position);
+                var LabelName = MsbtListBox.Text;
+                var LabelStringLength = (byte)LabelName.Count();
+
+                CS.StringToBytesWriter(bw, LabelStringLength.ToString("X2"));
+                CS.String_Writer(bw, LabelName, "Shift_JIS");
+                CS.StringToBytesWriter(bw, hashdatsorted.MsbtListBoxIndex.ToString("X8"));
+                hashcount++;
+            }
+        }
     }
 
 }

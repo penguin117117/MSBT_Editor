@@ -12,6 +12,7 @@ using MSBT_Editor.Formsys;
 using MSBT_Editor.Sectionsys;
 using System.IO;
 
+
 namespace MSBT_Editor
 {
     public partial class Form1 : Form
@@ -43,6 +44,8 @@ namespace MSBT_Editor
         private void 保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MSBTsys.MSBT_Header msbth = new MSBTsys.MSBT_Header();
+
+
             Action ac = () => Dialog.Save(msbth);
             Dialog.MSBT_Item_And_ListItem_Checker(ac);
         }
@@ -67,7 +70,7 @@ namespace MSBT_Editor
 
         public static readonly string[] IconNameJP01 = { "ピーチ", "クッパ", "キノピオ", "マリオ", "マリオ2", "チコ", "ヨッシー", "腹ペコチコ", "ルイージ", "ベビーチコ", "アシストチコ", "ベーゴマン", "クリボー" , "星ウサギ" };
         public static readonly string[] IconNameJP02 = { "彗星メダル", "コイン×3", "カラフルスターピース", "イエローチップ", "スターピース紫", "シルバースター", "スター", "グランドスター", "ブロンズスター", "コイン", "パープルコイン", "1UPキノコ", "ライフアップキノコ", "ブルースター", "スターリング", "ヨッシーキャプチャー花" , "ココナッツ","ブルーチップ","バルーンフルーツ","中間ポイント","グランドブロンズスター"};
-        public static readonly string[] IconNameJP03 = { "ポインター", "2Pポインター", "ハンドポインター選択", "Wiiリモコン", "Aボタン", "Bボタン", "Cボタン", "Zボタン", "十字ボタン", "十字ボタン下", "十字ボタン上", "スティック", "ヌンチャク", "照準", "マイナスボタン", "プラスボタン", "×(かける)アイコン", "グリーンコメット", "銀の王冠", "銀の王冠宝石付き", "金の王冠", "手紙", "矢印下", "ストップウォッチ" ,"1ボタン", "2ボタン", "ホームボタン", "ハンドポインター握り", "ハンドポインター", "？マーク", "イエローコメット", "？マーク緑", "空のスター", "空の彗星メダル", "空の彗星", "隠しシスター", "ブロンズコメット" };
+        public static readonly string[] IconNameJP03 = { "ポインター", "2Pポインター", "ハンドポインター選択", "Wiiリモコン", "Aボタン", "Bボタン", "Cボタン", "Zボタン", "十字ボタン", "十字ボタン下", "十字ボタン上", "スティック", "ヌンチャク", "照準", "マイナスボタン", "プラスボタン", "×(かける)アイコン", "グリーンコメット", "銀の王冠", "銀の王冠宝石付き", "金の王冠", "手紙", "矢印下", "ストップウォッチ" ,"1ボタン", "2ボタン", "ホームボタン", "ハンドポインター握り", "ハンドポインター", "？マーク", "イエローコメット", "？マーク緑", "空のスター", "空の彗星メダル", "空の彗星", "隠しスター", "ブロンズコメット" };
 
         public static readonly string[] IconNameEN01 = { "Peach", "Bowser", "Toad", "Mario", "Mario2", "Luma", "Yoshi", "HungryLuma", "Luigi", "MasterLuma", "Co-StarLuma", "Topman", "Goomba" , "StarBunny"};
         public static readonly string[] IconNameEN02 = { "CometMedal", "Coin×3", "RainbowStarBit", "YellowChip", "PurpleStarBit", "SilverStar", "Star", "GrandStar", "BronzeStar", "Coin", "PurpleCoin", "1UPMushroom", "LifeUpMushroom", "BlueStar", "StarRing", "YoshiCapture" , "Coconut","BlueChip", "BlueFruit", "CheckPointFlag","GrandBronzeStar"};
@@ -89,33 +92,37 @@ namespace MSBT_Editor
             
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void MsbtListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (MSBTsys.MSBT_Data.MSBT_All_Data.Text.Count > 0)
             {
-                if (listBox1.SelectedIndex < 0) listBox1.SelectedIndex = 0;
-                var selectnum = listBox1.SelectedIndex;
+                if (MsbtListBox.SelectedIndex < 0) 
+                    MsbtListBox.SelectedIndex = 0;
+
+                var MsbtSelectIndex = MsbtListBox.SelectedIndex;
+
                 MSBTsys.MSBT_Data.Data_List mad = MSBTsys.MSBT_Data.MSBT_All_Data;
                 List<string> nulldata =  MSBTsys.MSBT_Data.atr_nulldata;
-                textBox1.Text = mad.Text[selectnum];
+                textBox1.Text = mad.Text[MsbtSelectIndex];
 
-                textBox3.Text = mad.Item[selectnum].unknown1.ToString("X2");
-                textBox4.Text = mad.Item[selectnum].unknown2.ToString("X2");
-                textBox5.Text = mad.Item[selectnum].Dialog_Type.ToString("X2");
-                textBox6.Text = mad.Item[selectnum].unknown3.ToString("X2");
-                textBox7.Text = mad.Item[selectnum].unknown4.ToString("X4");
-                textBox8.Text = mad.Item[selectnum].unknown5.ToString("X2");
-                textBox9.Text = mad.Item[selectnum].unknown6.ToString("X2");
-                textBox10.Text = mad.Item[selectnum].null_offset.ToString("X8");
-                textBox11.Text = nulldata[selectnum];
+                var MADItem = mad.Item[MsbtSelectIndex];
+                Atr1Sound.Text = MADItem.unknown1.ToString("X2");
+                textBox4.Text = MADItem.unknown2.ToString("X2");
+                textBox5.Text = MADItem.Dialog_Type.ToString("X2");
+                textBox6.Text = MADItem.unknown3.ToString("X2");
+                textBox7.Text = MADItem.unknown4.ToString("X4");
+                textBox8.Text = MADItem.unknown5.ToString("X2");
+                textBox9.Text = MADItem.unknown6.ToString("X2");
+                textBox10.Text = MADItem.null_offset.ToString("X8");
+                textBox11.Text = nulldata[MsbtSelectIndex];
 
                 textBox35.Text = textBox1.Text;
 
-                var liststrs = listBox1.Text;
-                if (-1 != LBL1.list_name.IndexOf(liststrs))
+                var liststrs = MsbtListBox.Text;
+                if (-1 != LBL1.NameList.IndexOf(liststrs))
                 {
-                    var unknownlbldata = LBL1.unknownpos[LBL1.list_name.IndexOf(liststrs)].ToString("X");
-                    textBox12.Text = LBL1.unknown[LBL1.list_name.IndexOf(liststrs)].ToString("X8");
+                    var unknownlbldata = LBL1.BeginEntryAdressList[LBL1.NameList.IndexOf(liststrs)].ToString("X");
+                    textBox12.Text = LBL1.HashSkipList[LBL1.NameList.IndexOf(liststrs)].ToString("X8");
                 }
                 else {
                     textBox12.Text = "";
@@ -126,12 +133,12 @@ namespace MSBT_Editor
                 textBox1.Text = "null";
             }
 
-            label42.Text ="0x" + listBox1.SelectedIndex.ToString("X");
+            label42.Text ="0x" + MsbtListBox.SelectedIndex.ToString("X");
         }
 
-        private void textBox3_TextChanged(object sender, EventArgs e)
+        private void Atr1Sound_TextChanged(object sender, EventArgs e)
         {
-            ATR1.ATR1_Change(textBox3);
+            ATR1.ATR1_Change(Atr1Sound);
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
@@ -166,32 +173,32 @@ namespace MSBT_Editor
 
         private void textBox11_TextChanged(object sender, EventArgs e)
         {
-            ATR1.nulldata[listBox1.SelectedIndex] = textBox11.Text;
+            ATR1.nulldata[MsbtListBox.SelectedIndex] = textBox11.Text;
         }
 
-        private void textBox12_TextChanged(object sender, EventArgs e)
+        private void TextBox12_TextChanged(object sender, EventArgs e)
         {
-            var liststrs = listBox1.Text;
-            if (-1 != LBL1.list_name.IndexOf(liststrs))
+            var liststrs = MsbtListBox.Text;
+            if (-1 != LBL1.NameList.IndexOf(liststrs))
             {
-                var unknownlbldata = LBL1.unknownpos[LBL1.list_name.IndexOf(liststrs)].ToString("X");
-                LBL1.unknown[LBL1.list_name.IndexOf(liststrs)] = Int32.Parse(textBox12.Text,System.Globalization.NumberStyles.HexNumber);
+                var unknownlbldata = LBL1.BeginEntryAdressList[LBL1.NameList.IndexOf(liststrs)].ToString("X");
+                LBL1.HashSkipList[LBL1.NameList.IndexOf(liststrs)] = Int32.Parse(textBox12.Text,System.Globalization.NumberStyles.HexNumber);
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void TextBox1_TextChanged(object sender, EventArgs e)
         {
             
-            if (listBox1.Items.Count != 0)
+            if (MsbtListBox.Items.Count != 0)
             {
-                MSBTsys.MSBT_Data.MSBT_All_Data.Text[listBox1.SelectedIndex] = textBox1.Text;
+                MSBTsys.MSBT_Data.MSBT_All_Data.Text[MsbtListBox.SelectedIndex] = textBox1.Text;
             }
             
         }
 
         private void AddListText_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count != 0)
+            if (MsbtListBox.Items.Count != 0)
             {
                 //既存のデータに追加する場合
                 if (ListNameText.Text != "")
@@ -203,7 +210,7 @@ namespace MSBT_Editor
                     long listcounter = 0;
 
                     //リストボックス1のデータをハッシュデータ構造体に入れる
-                    foreach (var listname in listBox1.Items) {
+                    foreach (var listname in MsbtListBox.Items) {
                         lbl1.HashData.Add(new LBL1.Hash_Data(Calculation_System.MSBT_Hash(listname.ToString(), lbl1.Entries),listcounter));
                         listcounter++;
                     }
@@ -212,27 +219,27 @@ namespace MSBT_Editor
                     List<LBL1.Hash_Data> hashlist = new List< LBL1.Hash_Data >(lbl1.HashData);
 
                     //ハッシュリデータを昇順に並べ替えをする
-                    hashlist.Sort((a, b) => a.hash.CompareTo(b.hash));
+                    hashlist.Sort((a, b) => a.Hash.CompareTo(b.Hash));
 
                     //追加するリスト名をハッシュ値に変換
                     var newhash = Calculation_System.MSBT_Hash(ListNameText.Text, lbl1.Entries);
 
                     //ハッシュ値を比較して同じ値があった場合は数値を返して、それ以外の場合はdefaultを返す
-                    LBL1.Hash_Data equal_flag =  hashlist.LastOrDefault(x => x.hash == newhash);
+                    LBL1.Hash_Data equal_flag =  hashlist.LastOrDefault(x => x.Hash == newhash);
 
                     //ハッシュ値がデフォルトの場合、新しいハッシュ値がハッシュリストの値を超える値を返す
-                    if (equal_flag.hash == default) equal_flag = hashlist.LastOrDefault(x => x.hash  > newhash);
+                    if (equal_flag.Hash == default) equal_flag = hashlist.LastOrDefault(x => x.Hash  > newhash);
 
                     //ハッシュ値を基準に見つかったハッシュ構造体のリスト値に+1した値にリストを挿入する
-                    equal_flag.listindex++;
-                    listBox1.Items.Insert((int)equal_flag.listindex, ListNameText.Text);
+                    equal_flag.MsbtListBoxIndex++;
+                    MsbtListBox.Items.Insert((int)equal_flag.MsbtListBoxIndex, ListNameText.Text);
 
                     //リストボックスを名前順にソート
-                    listBox1.Sorted = true;
-                    listBox1.Sorted = false;
+                    MsbtListBox.Sorted = true;
+                    MsbtListBox.Sorted = false;
 
                     //追加したリスト名のインデックスを検索
-                    var testindex = listBox1.Items.IndexOf(ListNameText.Text);
+                    var testindex = MsbtListBox.Items.IndexOf(ListNameText.Text);
 
                     //MSBTのデータを先ほどのインデックス位置に挿入
                     MSBTsys.MSBT_Data.MSBT_All_Data.Text.Insert(testindex , "テキスト</End>");
@@ -243,32 +250,32 @@ namespace MSBT_Editor
                     IEnumerable<LBL1.Hash_Data> noduplicates = hashlist.Distinct();
                     hashlist = new List<LBL1.Hash_Data>(noduplicates);
 
-                    var foundhashlist = hashlist.LastOrDefault(x => x.hash == newhash);
-                    if (foundhashlist.hash == default) foundhashlist = hashlist.LastOrDefault(x => x.hash > newhash); ;
+                    var foundhashlist = hashlist.LastOrDefault(x => x.Hash == newhash);
+                    if (foundhashlist.Hash == default) foundhashlist = hashlist.LastOrDefault(x => x.Hash > newhash); ;
                     //ラベル情報を追加する
                     var lbl1_newindex = hashlist.LastIndexOf(foundhashlist);
                     //lbl1_newindex ++;
-                    foreach (var items in LBL1.list_name.Select((Value, Index) => (Value, Index)))
+                    foreach (var items in LBL1.NameList.Select((Value, Index) => (Value, Index)))
                     {
                         var hashdata = Calculation_System.MSBT_Hash(items.Value, lbl1.Entries);
-                        lbl1.Item_1st.Add(new LBL1.LBL_1st_Item(LBL1.unknown[items.Index], LBL1.list_name[items.Index], hashdata));
+                        lbl1.Item_1st.Add(new LBL1.LBL_1st_Item(LBL1.HashSkipList[items.Index], LBL1.NameList[items.Index], hashdata));
                         Console.WriteLine(hashdata.ToString("X8"));
                         Console.WriteLine(items.Value);
                     }
-                    lbl1.Item_1st.Sort((a, b) => a.hash.CompareTo(b.hash));
-                    var found1stitem = lbl1.Item_1st.LastOrDefault(x => x.hash == newhash);
-                    if (found1stitem.hash == default) found1stitem = lbl1.Item_1st.LastOrDefault(x => x.hash > newhash);
+                    lbl1.Item_1st.Sort((a, b) => a.Hash.CompareTo(b.Hash));
+                    var found1stitem = lbl1.Item_1st.LastOrDefault(x => x.Hash == newhash);
+                    if (found1stitem.Hash == default) found1stitem = lbl1.Item_1st.LastOrDefault(x => x.Hash > newhash);
 
                     var newindex = lbl1.Item_1st.LastIndexOf(found1stitem);
 
                     lbl1_newindex = /*testindex*/newindex;
                     Debugger.HashTxt("lbl newindex" + lbl1_newindex.ToString());
-                    LBL1.name_offset.Insert(lbl1_newindex,0);
-                    LBL1.list_name.Insert(lbl1_newindex, ListNameText.Text);
-                    LBL1.unknown.Insert(lbl1_newindex, 0x00000001);
-                    LBL1.unknownpos.Insert(lbl1_newindex, 0);
+                    LBL1.NameOffsetList.Insert(lbl1_newindex,0);
+                    LBL1.NameList.Insert(lbl1_newindex, ListNameText.Text);
+                    LBL1.HashSkipList.Insert(lbl1_newindex, 0x00000001);
+                    LBL1.BeginEntryAdressList.Insert(lbl1_newindex, 0);
 
-                    Console.WriteLine("listname"+LBL1.list_name.IndexOf(ListNameText.Text).ToString("X"));
+                    Console.WriteLine("listname"+LBL1.NameList.IndexOf(ListNameText.Text).ToString("X"));
                     //BattanKing002_Flow000
                     //ScenarioName_RedBlueExGalaxy3
                     //MSBFファイルのフロータイプ1の対象MSBTの挿入以降の番号に+1する
@@ -297,16 +304,16 @@ namespace MSBT_Editor
                     msbtdatalist.Item = new List<ATR1.Item>();
                     msbtdatalist.Text = new List<string>();
                     MSBTsys.MSBT_Data.atr_nulldata = new List<string>() ;
-                    LBL1.list_name = new List<string>();
-                    LBL1.unknown = new List<int>();
-                    LBL1.unknownpos = new List<long>();
-                    LBL1.name_offset = new List<int>();
+                    LBL1.NameList = new List<string>();
+                    LBL1.HashSkipList = new List<int>();
+                    LBL1.BeginEntryAdressList = new List<long>();
+                    LBL1.NameOffsetList = new List<int>();
 
                     //値を入れておく
                     MSBTsys.MSBT_Data.MSBT_All_Data = msbtdatalist;
 
                     //リストボックス1とMSBTのデータに追加する
-                    listBox1.Items.Add(ListNameText.Text);
+                    MsbtListBox.Items.Add(ListNameText.Text);
                     if (Properties.Settings.Default.言語 == "EN")
                     MSBTsys.MSBT_Data.MSBT_All_Data.Text.Add("Default Text</End>");
                     else
@@ -315,39 +322,39 @@ namespace MSBT_Editor
                     MSBTsys.MSBT_Data.atr_nulldata.Add("");
 
                     //ラベル情報を追加する
-                    LBL1.name_offset.Add(0);
-                    LBL1.list_name.Add(ListNameText.Text);
-                    LBL1.unknown.Add(1);
-                    LBL1.unknownpos.Add(0);
+                    LBL1.NameOffsetList.Add(0);
+                    LBL1.NameList.Add(ListNameText.Text);
+                    LBL1.HashSkipList.Add(1);
+                    LBL1.BeginEntryAdressList.Add(0);
                 }
             }
         }
 
         private void DeleteListText_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count != 0 && (MSBTsys.MSBT_Data.MSBT_All_Data.Item.Count !=0) && MSBTsys.MSBT_Data.MSBT_All_Data.Text.Count != 0)
+            if (MsbtListBox.Items.Count != 0 && (MSBTsys.MSBT_Data.MSBT_All_Data.Item.Count !=0) && MSBTsys.MSBT_Data.MSBT_All_Data.Text.Count != 0)
             {
-                var array_list_name = LBL1.list_name.ToArray();
-                var array_search = Array.IndexOf(array_list_name, listBox1.SelectedItem.ToString());
+                var array_list_name = LBL1.NameList.ToArray();
+                var array_search = Array.IndexOf(array_list_name, MsbtListBox.SelectedItem.ToString());
                 ////Console.WriteLine("array_search -1");
                 //if (array_search == -1) return;
                 //Console.WriteLine("array_search -1以外");
-                MSBTsys.MSBT_Data.MSBT_All_Data.Item.RemoveRange(listBox1.SelectedIndex,1);
-                MSBTsys.MSBT_Data.MSBT_All_Data.Text.RemoveRange(listBox1.SelectedIndex, 1);
-                MSBTsys.MSBT_Data.atr_nulldata.RemoveRange(listBox1.SelectedIndex , 1);
+                MSBTsys.MSBT_Data.MSBT_All_Data.Item.RemoveRange(MsbtListBox.SelectedIndex,1);
+                MSBTsys.MSBT_Data.MSBT_All_Data.Text.RemoveRange(MsbtListBox.SelectedIndex, 1);
+                MSBTsys.MSBT_Data.atr_nulldata.RemoveRange(MsbtListBox.SelectedIndex , 1);
 
 
                 //ハッシュスキップされている値の場合
                 if (array_search != -1) {
                     Debugger.HashTxt(array_search.ToString());
-                    Debugger.HashTxt(LBL1.list_name[array_search]);
-                    Debugger.HashTxt(LBL1.unknown[array_search].ToString());
-                    Debugger.HashTxt(LBL1.unknownpos[array_search].ToString());
+                    Debugger.HashTxt(LBL1.NameList[array_search]);
+                    Debugger.HashTxt(LBL1.HashSkipList[array_search].ToString());
+                    Debugger.HashTxt(LBL1.BeginEntryAdressList[array_search].ToString());
 
-                    LBL1.name_offset.RemoveAt(array_search);
-                    LBL1.list_name.RemoveAt(array_search);
-                    LBL1.unknown.RemoveAt(array_search);
-                    LBL1.unknownpos.RemoveAt(array_search);
+                    LBL1.NameOffsetList.RemoveAt(array_search);
+                    LBL1.NameList.RemoveAt(array_search);
+                    LBL1.HashSkipList.RemoveAt(array_search);
+                    LBL1.BeginEntryAdressList.RemoveAt(array_search);
 
 
                 }
@@ -355,12 +362,12 @@ namespace MSBT_Editor
                 //LBL1.list_name.RemoveRange(array_search , 1);
                 //LBL1.unknown.RemoveRange(array_search, 1);
                 //LBL1.unknownpos.RemoveRange(array_search, 1);
-                var listselect = listBox1.SelectedIndex;
-                listBox1.Items.RemoveAt(listselect);
+                var listselect = MsbtListBox.SelectedIndex;
+                MsbtListBox.Items.RemoveAt(listselect);
             }
         }
 
-        private void textBox14_TextChanged(object sender, EventArgs e)
+        private void TextBox14_TextChanged(object sender, EventArgs e)
         {
             LBL1 lbl1 = new LBL1();
             lbl1.Entries = Int32.Parse(textBox14.Text);
@@ -374,7 +381,7 @@ namespace MSBT_Editor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1 ) return ;
+            if (MsbtListBox.Items.Count < 1 ) return ;
 
             string color = "";
 
@@ -418,7 +425,7 @@ namespace MSBT_Editor
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
 
             string tag = "";
 
@@ -448,7 +455,7 @@ namespace MSBT_Editor
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
 
             string tag = "";
 
@@ -470,13 +477,15 @@ namespace MSBT_Editor
 
             Calculation_System.TextBoxInsert(textBox1, tag);
         }
-
+        
+        
         private void button4_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
 
             string tag = "";
 
+            
             switch (comboBox4.SelectedIndex)
             {
                 case 0:
@@ -495,7 +504,7 @@ namespace MSBT_Editor
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
             if (textBox16.Text == "" || textBox17.Text == "") return;
             string furigana = textBox16.Text;
             string kanji = textBox17.Text;
@@ -532,7 +541,7 @@ namespace MSBT_Editor
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
             if (textBox18.Text == "" ) return;
             string time = textBox18.Text;
             string tag = "</Timer=\"" + time + "\">";
@@ -541,28 +550,28 @@ namespace MSBT_Editor
 
         private void button7_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
             string tag = "</PlayCharacter>";
             Calculation_System.TextBoxInsert(textBox1, tag);
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
             string tag = "</StarShipTag>";
             Calculation_System.TextBoxInsert(textBox1, tag);
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
             string tag = "</ResultGalaxyName>";
             Calculation_System.TextBoxInsert(textBox1, tag);
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
             string tag = "</ResultScenarioName>";
             Calculation_System.TextBoxInsert(textBox1, tag);
         }
@@ -644,64 +653,64 @@ namespace MSBT_Editor
                     "<Icon=\"Kinopio\">",
                     "<Icon=\"BronzeComet\">", };
 
-                Calculation_System.TextBoxTagAdder(listBox1, textBox1, comboBox5, IconTag);
+                Calculation_System.TextBoxTagAdder(MsbtListBox, textBox1, comboBox5, IconTag);
             }
             else {
                 string[] IconTag = { "<Icon=\"Peach\">", "<Icon=\"Koopa\">", "<Icon=\"Kinopio\">", "<Icon=\"Mario\">", "<Icon=\"Mario2\">", "<Icon=\"Tico\">", "<Icon=\"Yoshi\">", "<Icon=\"HarapekoTico\">", "<Icon=\"Luigi\">", "<Icon=\"MasterTico\">", "<Icon=\"Columa\">", "<Icon=\"Begoman\">", "<Icon=\"Kuribo\">", "<Icon=\"Star Bunny\">" };
-                Calculation_System.TextBoxTagAdder(listBox1, textBox1, comboBox5, IconTag);
+                Calculation_System.TextBoxTagAdder(MsbtListBox, textBox1, comboBox5, IconTag);
             }
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
             string[] IconTag = { "<Icon=\"CometMedal\">", "<Icon=\"Coins\">", "<Icon=\"Starbit\">", "<Icon=\"StarPiece\">", "<Icon=\"PurpleStarbit\">", "<Icon=\"SilverStar\">", "<Icon=\"Star\">", "<Icon=\"GrandStar\">", "<Icon=\"BronzeStar\">", "<Icon=\"Coin\">", "<Icon=\"PurpleCoin\">", "<Icon=\"1UPMushroom\">", "<Icon=\"LifeUpMushroom\">", "<Icon=\"BlueStar\">", "<Icon=\"StarRing\">", "<Icon=\"Flower\">" , "<Icon=\"Coconut\">" , "<Icon=\"BlueChip\">" , "<Icon=\"BlueFruit\">" , "<Icon=\"CheckPointFlag\">" , "<Icon=\"GrandBronzeStar\">" };
-            Calculation_System.TextBoxTagAdder(listBox1, textBox1, comboBox6, IconTag);
+            Calculation_System.TextBoxTagAdder(MsbtListBox, textBox1, comboBox6, IconTag);
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
             string[] IconTag = { "<Icon=\"Pointer\">", "<Icon=\"PointerYellow\">", "<Icon=\"PointerHand\">", "<Icon=\"WiiMote\">", "<Icon=\"AButton\">", "<Icon=\"BButton\">", "<Icon=\"CButton\">", "<Icon=\"ZButton\">", "<Icon=\"DPad\">", "<Icon=\"DPadDown\">", "<Icon=\"DPadUp\">", "<Icon=\"JoyStick\">", "<Icon=\"Nunchuck\">", "<Icon=\"Aim\">", "<Icon=\"MButton\">", "<Icon=\"PButton\">", "<Icon=\"XIcon\">", "<Icon=\"GreenComet\">", "<Icon=\"SilverCrown\">", "<Icon=\"SilverCrownwJewel\">", "<Icon=\"GoldCrown\">", "<Icon=\"Letter\">", "<Icon=\"ArrowDown\">", "<Icon=\"StopWatch\">" , "<Icon=\"1Button\">", "<Icon=\"2Button\">", "<Icon=\"HomeButton\">" , "<Icon=\"PointerGrip\">" , "<Icon=\"PointerNonGrip\">" , "<Icon=\"QuestionMark\">" , "<Icon=\"YellowComet\">" , "<Icon=\"GreenQuestionMark\">" , "<Icon=\"EmptyStar\">" , "<Icon=\"EmptyCometMedal\">" , "<Icon=\"EmptyStarComet\">" , "<Icon=\"HiddenStar\">" , "<Icon=\"BronzeComet\">" };
-            Calculation_System.TextBoxTagAdder(listBox1, textBox1, comboBox7, IconTag);
+            Calculation_System.TextBoxTagAdder(MsbtListBox, textBox1, comboBox7, IconTag);
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
             string tag = "</Year01>";
             Calculation_System.TextBoxInsert(textBox1, tag);
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
             string tag = "</Year02>";
             Calculation_System.TextBoxInsert(textBox1, tag);
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
             string tag = "</Hour>";
             Calculation_System.TextBoxInsert(textBox1, tag);
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
             string tag = "</Minutes>";
             Calculation_System.TextBoxInsert(textBox1, tag);
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
             string tag = "</Seconds>";
             Calculation_System.TextBoxInsert(textBox1, tag);
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
             string tag = "</AfterTheDecimalPoint>";
             Calculation_System.TextBoxInsert(textBox1, tag);
         }
@@ -1132,7 +1141,7 @@ namespace MSBT_Editor
             Formsys.Langage.Langage_Check();
         }
 
-        public static TreeNode tvparenfinder(TreeView tv) {
+        public static TreeNode Tvparenfinder(TreeView tv) {
             var rootnode = tv.SelectedNode;
             //this.textBox25.TextChanged -= new EventHandler(this.textBox25_TextChanged)
             //this.treeView1.AfterSelect -= new EventHandler(this.treeView1_AfterSelect);
@@ -1150,7 +1159,7 @@ namespace MSBT_Editor
             if (treeView1.SelectedNode.Tag == default) return;
             
             var oldindex = treeView1.SelectedNode;
-            var rootnode = Form1.tvparenfinder(treeView1);
+            var rootnode = Form1.Tvparenfinder(treeView1);
 
             var rootnodelistbox3find = 0;
             if (listBox3.Items.Count != 0) { 
@@ -1165,8 +1174,8 @@ namespace MSBT_Editor
             switch (a.TypeCheck) {
                 case 1:
                     //Console.WriteLine("メッセージ");
-                    if (listBox1.Items.Count == 0) break;
-                    if (listBox1.Items.Count > a.Unknown3) listBox1.SelectedIndex = a.Unknown3;
+                    if (MsbtListBox.Items.Count == 0) break;
+                    if (MsbtListBox.Items.Count > a.Unknown3) MsbtListBox.SelectedIndex = a.Unknown3;
                     if (listBox2.Items.Count == 0) break;
                     if (listBox2.Items.Count > find) listBox2.SelectedIndex = find;
                     break;
@@ -1204,28 +1213,28 @@ namespace MSBT_Editor
 
         private void button26_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
             string tag = "</WorldNo>";
             Calculation_System.TextBoxInsert(textBox1, tag);
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
             string tag = "</Score01>";
             Calculation_System.TextBoxInsert(textBox1, tag);
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
             string tag = "</UserName>";
             Calculation_System.TextBoxInsert(textBox1, tag);
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
-            if (listBox1.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1) return;
             string tag = "</TotalPlayTime>";
             Calculation_System.TextBoxInsert(textBox1, tag);
         }
