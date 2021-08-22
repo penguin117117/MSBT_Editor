@@ -45,9 +45,9 @@ namespace MSBT_Editor.MSBTsys
             txt2.Read(br,fs);
             
             //データ記録
-            MSBT_All_Data = new Data_List(new List<string>(TXT2.Text_Data) , new List<ATR1.Item>(atr1.Element));
+            MSBT_All_Data = new Data_List(new List<string>(TXT2.Text_Data) , new List<ATR1.AttributeData>(atr1.AttributeDataList));
             atr_nulldata = new List<string>();
-            atr_nulldata = ATR1.nulldata;
+            atr_nulldata = ATR1.SpecialTextList;
 
             if(MsbtListBox.Items.Count > 0)
             MsbtListBox.SelectedIndex = 0;

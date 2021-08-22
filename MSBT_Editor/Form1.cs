@@ -106,14 +106,16 @@ namespace MSBT_Editor
                 textBox1.Text = mad.Text[MsbtSelectIndex];
 
                 var MADItem = mad.Item[MsbtSelectIndex];
-                Atr1Sound.Text = MADItem.unknown1.ToString("X2");
-                textBox4.Text = MADItem.unknown2.ToString("X2");
-                textBox5.Text = MADItem.Dialog_Type.ToString("X2");
-                textBox6.Text = MADItem.unknown3.ToString("X2");
-                textBox7.Text = MADItem.unknown4.ToString("X4");
-                textBox8.Text = MADItem.unknown5.ToString("X2");
+
+                Atr1Sound.Text = MADItem.SoundID.ToString("X2");
+                textBox4.Text = MADItem.SimpleCameraID.ToString("X2");
+                textBox5.Text = MADItem.DialogID.ToString("X2");
+                textBox6.Text = MADItem.WindowID.ToString("X2");
+                textBox7.Text = MADItem.EventCameraID.ToString("X4");
+                textBox8.Text = MADItem.MessageAreaID.ToString("X2");
                 textBox9.Text = MADItem.unknown6.ToString("X2");
-                textBox10.Text = MADItem.null_offset.ToString("X8");
+                textBox10.Text = MADItem.SpecialTextOffset.ToString("X8");
+
                 textBox11.Text = nulldata[MsbtSelectIndex];
 
                 textBox35.Text = textBox1.Text;
@@ -173,7 +175,9 @@ namespace MSBT_Editor
 
         private void textBox11_TextChanged(object sender, EventArgs e)
         {
-            ATR1.nulldata[MsbtListBox.SelectedIndex] = textBox11.Text;
+
+            ATR1.SpecialTextList[MsbtListBox.SelectedIndex] = textBox11.Text;
+
         }
 
         private void TextBox12_TextChanged(object sender, EventArgs e)
@@ -211,7 +215,9 @@ namespace MSBT_Editor
 
                     //リストボックス1のデータをハッシュデータ構造体に入れる
                     foreach (var listname in MsbtListBox.Items) {
-                        lbl1.HashData.Add(new LBL1.Hash_Data(Calculation_System.MSBT_Hash(listname.ToString(), lbl1.Entries),listcounter));
+
+                        lbl1.HashData.Add(new LBL1.Hash_Data(Calculation_System.MSBT_Hash(listname.ToString(), lbl1.EntrySize),listcounter));
+
                         listcounter++;
                     }
 
@@ -222,7 +228,7 @@ namespace MSBT_Editor
                     hashlist.Sort((a, b) => a.Hash.CompareTo(b.Hash));
 
                     //追加するリスト名をハッシュ値に変換
-                    var newhash = Calculation_System.MSBT_Hash(ListNameText.Text, lbl1.Entries);
+                    var newhash = Calculation_System.MSBT_Hash(ListNameText.Text, lbl1.EntrySize);
 
                     //ハッシュ値を比較して同じ値があった場合は数値を返して、それ以外の場合はdefaultを返す
                     LBL1.Hash_Data equal_flag =  hashlist.LastOrDefault(x => x.Hash == newhash);
@@ -243,7 +249,7 @@ namespace MSBT_Editor
 
                     //MSBTのデータを先ほどのインデックス位置に挿入
                     MSBTsys.MSBT_Data.MSBT_All_Data.Text.Insert(testindex , "テキスト</End>");
-                    MSBTsys.MSBT_Data.MSBT_All_Data.Item.Insert(testindex, new ATR1.Item(0x1, 0x0, 0x0, 0x0, 0x0, 0xFF, 0xFF, 0x00));
+                    MSBTsys.MSBT_Data.MSBT_All_Data.Item.Insert(testindex, new ATR1.AttributeData(0x1, 0x0, 0x0, 0x0, 0x0, 0xFF, 0xFF, 0x00));
                     MSBTsys.MSBT_Data.atr_nulldata.Insert(testindex , "");
 
                     //重複したデータを削除
@@ -257,7 +263,9 @@ namespace MSBT_Editor
                     //lbl1_newindex ++;
                     foreach (var items in LBL1.NameList.Select((Value, Index) => (Value, Index)))
                     {
-                        var hashdata = Calculation_System.MSBT_Hash(items.Value, lbl1.Entries);
+
+                        var hashdata = Calculation_System.MSBT_Hash(items.Value, lbl1.EntrySize);
+
                         lbl1.Item_1st.Add(new LBL1.LBL_1st_Item(LBL1.HashSkipList[items.Index], LBL1.NameList[items.Index], hashdata));
                         Console.WriteLine(hashdata.ToString("X8"));
                         Console.WriteLine(items.Value);
@@ -297,11 +305,11 @@ namespace MSBT_Editor
                 if (ListNameText.Text != "")
                 {
                     LBL1 lbl1 = new LBL1();
-                    lbl1.Entries = 101;
+                    lbl1.EntrySize = 101;
 
                     //初期化
                     MSBTsys.MSBT_Data.Data_List msbtdatalist = new MSBTsys.MSBT_Data.Data_List();
-                    msbtdatalist.Item = new List<ATR1.Item>();
+                    msbtdatalist.Item = new List<ATR1.AttributeData>();
                     msbtdatalist.Text = new List<string>();
                     MSBTsys.MSBT_Data.atr_nulldata = new List<string>() ;
                     LBL1.NameList = new List<string>();
@@ -318,7 +326,7 @@ namespace MSBT_Editor
                     MSBTsys.MSBT_Data.MSBT_All_Data.Text.Add("Default Text</End>");
                     else
                     MSBTsys.MSBT_Data.MSBT_All_Data.Text.Add("テキスト</End>");
-                    MSBTsys.MSBT_Data.MSBT_All_Data.Item.Add(new ATR1.Item(0x1, 0x0, 0x0, 0x0, 0x0, 0xFF, 0xFF, 0x00));
+                    MSBTsys.MSBT_Data.MSBT_All_Data.Item.Add(new ATR1.AttributeData(0x1, 0x0, 0x0, 0x0, 0x0, 0xFF, 0xFF, 0x00));
                     MSBTsys.MSBT_Data.atr_nulldata.Add("");
 
                     //ラベル情報を追加する
@@ -370,13 +378,13 @@ namespace MSBT_Editor
         private void TextBox14_TextChanged(object sender, EventArgs e)
         {
             LBL1 lbl1 = new LBL1();
-            lbl1.Entries = Int32.Parse(textBox14.Text);
+            lbl1.EntrySize = Int32.Parse(textBox14.Text);
         }
 
         private void textBox15_TextChanged(object sender, EventArgs e)
         {
             ATR1 atr1 = new ATR1();
-            atr1.Entries = Int32.Parse(textBox15.Text);
+            atr1.EntrySize = Int32.Parse(textBox15.Text);
         }
 
         private void button1_Click(object sender, EventArgs e)
