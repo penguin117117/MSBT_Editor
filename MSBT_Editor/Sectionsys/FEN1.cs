@@ -561,6 +561,7 @@ namespace MSBT_Editor.Sectionsys
                         bw.Write(CS.StringToBytes(pos_fen1_offset_entry_name[c.Index].ToString("X8")));
                     }
                 }
+                
             }
 
             if (pos_unknown_and_offsetend > fs.Position)

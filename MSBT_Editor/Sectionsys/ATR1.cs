@@ -155,7 +155,9 @@ namespace MSBT_Editor.Sectionsys
                 }
 
 
+
                 ATR1.AttributeData element = MSBT_Data.MSBT_All_Data.Item[MsbtListBox.SelectedIndex];
+
                 switch (textbox.Name)
                 {
                     case "Atr1Sound":
@@ -192,10 +194,12 @@ namespace MSBT_Editor.Sectionsys
             //ヘッダー情報を書き込む
             CS.String_Writer(bw,"ATR1");
             CS.Null_Writer_Int32(bw, 3);
+
             CS.StringToBytesWriter(bw,(MsbtListBox.Items.Count).ToString("X8"));
             CS.StringToBytesWriter(bw,(12).ToString("X8"));
             //bw.Write(CS.StringToInt32_byte((MsbtListBox.Items.Count).ToString("X8")));
             //bw.Write(CS.StringToInt32_byte((12).ToString("X8")));
+
 
             //エントリーの各データを書き込む
             var msbtcount =MSBT_Data.MSBT_All_Data.Item.Count();

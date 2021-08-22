@@ -106,6 +106,7 @@ namespace MSBT_Editor
                 textBox1.Text = mad.Text[MsbtSelectIndex];
 
                 var MADItem = mad.Item[MsbtSelectIndex];
+
                 Atr1Sound.Text = MADItem.SoundID.ToString("X2");
                 textBox4.Text = MADItem.SimpleCameraID.ToString("X2");
                 textBox5.Text = MADItem.DialogID.ToString("X2");
@@ -114,6 +115,7 @@ namespace MSBT_Editor
                 textBox8.Text = MADItem.MessageAreaID.ToString("X2");
                 textBox9.Text = MADItem.unknown6.ToString("X2");
                 textBox10.Text = MADItem.SpecialTextOffset.ToString("X8");
+
                 textBox11.Text = nulldata[MsbtSelectIndex];
 
                 textBox35.Text = textBox1.Text;
@@ -173,7 +175,9 @@ namespace MSBT_Editor
 
         private void textBox11_TextChanged(object sender, EventArgs e)
         {
+
             ATR1.SpecialTextList[MsbtListBox.SelectedIndex] = textBox11.Text;
+
         }
 
         private void TextBox12_TextChanged(object sender, EventArgs e)
@@ -211,7 +215,9 @@ namespace MSBT_Editor
 
                     //リストボックス1のデータをハッシュデータ構造体に入れる
                     foreach (var listname in MsbtListBox.Items) {
+
                         lbl1.HashData.Add(new LBL1.Hash_Data(Calculation_System.MSBT_Hash(listname.ToString(), lbl1.EntrySize),listcounter));
+
                         listcounter++;
                     }
 
@@ -257,7 +263,9 @@ namespace MSBT_Editor
                     //lbl1_newindex ++;
                     foreach (var items in LBL1.NameList.Select((Value, Index) => (Value, Index)))
                     {
+
                         var hashdata = Calculation_System.MSBT_Hash(items.Value, lbl1.EntrySize);
+
                         lbl1.Item_1st.Add(new LBL1.LBL_1st_Item(LBL1.HashSkipList[items.Index], LBL1.NameList[items.Index], hashdata));
                         Console.WriteLine(hashdata.ToString("X8"));
                         Console.WriteLine(items.Value);

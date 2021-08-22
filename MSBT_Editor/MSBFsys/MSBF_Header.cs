@@ -14,11 +14,12 @@ namespace MSBT_Editor.MSBFsys
     {
         public void Read(string path)
         {
+            
+
             list2.Items.Clear();
             list3.Items.Clear();
             FileStream fs = new FileStream(path, FileMode.Open);
             BinaryReader br = new BinaryReader(fs);
-
 
             //MSBTヘッダー情報
             Magic = CS.Byte2Char(br, 8);    //MsgFlwBn
@@ -60,6 +61,8 @@ namespace MSBT_Editor.MSBFsys
         }
 
         public void Write(string filepath) {
+
+            Console.WriteLine("MSBF処理に入りました");
             FileStream fs = new FileStream(filepath, FileMode.Create);
             BinaryWriter bw = new BinaryWriter(fs);
             long MSBF_File_Size_pos;
