@@ -31,10 +31,10 @@ namespace MSBT_Editor.MSBTsys
 
         public struct Data_List {
             public List<string> Text;
-            public List<ATR1.Item> Item;
-            public Data_List(List<string> list1, List<ATR1.Item> list2) {
+            public List<ATR1.AttributeData> Item;
+            public Data_List(List<string> list1, List<ATR1.AttributeData> list2) {
                 this.Text = new List<string>();
-                this.Item = new List<ATR1.Item>();
+                this.Item = new List<ATR1.AttributeData>();
                 this.Text = list1;
                 this.Item = list2;
             }

@@ -15,98 +15,97 @@ namespace MSBT_Editor.Sectionsys
 {
     public class ATR1:objects
     {
-        private static string magic;
-        private static int sec_size;
-        private static int unknown1;
-        private static int unknown2;
-        private static int entries;
-        private static int ent_size;
+        private static string s_magic;
+        private static int s_sec_size;
+        private static int s_unknown1;
+        private static int s_unknown2;
+        private static int s_entrySize;
+        private static int s_entryBytesSize;
 
-        public struct Item {
-            public byte unknown1;
-            public byte unknown2;
-            public byte Dialog_Type;
-            public byte unknown3;
-            public short unknown4;
-            public byte unknown5;
+        public struct AttributeData {
+            public byte SoundID;
+            public byte SimpleCameraID;
+            public byte DialogID;
+            public byte WindowID;
+            public short EventCameraID;
+            public byte MessageAreaID;
             public byte unknown6;
-            public int null_offset;
-            public Item(byte arg1 , byte arg2 , byte arg3 , byte arg4 , short arg5 , byte arg6 , byte arg7 , int arg8) {
-                this.unknown1 = arg1;
-                this.unknown2 = arg2;
-                this.Dialog_Type = arg3;
-                this.unknown3 = arg4;
-                this.unknown4 = arg5;
-                this.unknown5 = arg6;
-                this.unknown6 = arg7;
-                this.null_offset = arg8;
+            public int SpecialTextOffset;
+            public AttributeData(byte soundID , byte simpleCamID , byte dialogID , byte windowID , short eventCamID , byte messageAreaID , byte unknown , int specialTextOffset) {
+                this.SoundID = soundID;
+                this.SimpleCameraID = simpleCamID;
+                this.DialogID = dialogID;
+                this.WindowID = windowID;
+                this.EventCameraID = eventCamID;
+                this.MessageAreaID = messageAreaID;
+                this.unknown6 = unknown;
+                this.SpecialTextOffset = specialTextOffset;
             }
         }
 
-        public List<Item> Element;
-        public static List<string> nulldata;
+        public List<AttributeData> AttributeDataList;
+        public static List<string> SpecialTextList;
 
         public string Magic {
-            set => magic = value;
-            get => magic;
+            set => s_magic = value;
+            get => s_magic;
         }
 
         public int Section_Size {
-            set => sec_size = value;
-            get => sec_size;
+            set => s_sec_size = value;
+            get => s_sec_size;
         }
 
         public int Unknown1 {
-            set => unknown1 = value;
-            get => unknown1;
+            set => s_unknown1 = value;
+            get => s_unknown1;
         }
 
         public int Unknown2 {
-            set => unknown2 = value;
-            get => unknown2;
+            set => s_unknown2 = value;
+            get => s_unknown2;
         }
 
-        public int Entries {
+        public int EntrySize {
             set
             {
                 if (value != 101 || value != 102)
                 {
-                    entries = value;
-
+                    s_entrySize = value;
                 }
                 else
                 {
-                    entries = 101;
+                    s_entrySize = 101;
                 }
             }
-            get => entries;
+            get => s_entrySize;
         }
 
-        public int Entry_Size {
-            set => ent_size = value;
-            get => ent_size;
+        public int EntryBytesSize {
+            set => s_entryBytesSize = value;
+            get => s_entryBytesSize;
         }
 
         public void Read(BinaryReader br , FileStream fs) {
 
-            //初期化
             int notffcount = 0;
-            Element = new List<Item>();
-            nulldata = new List<string>();
+
+            AttributeDataList = new List<AttributeData>();
+            SpecialTextList   = new List<string>();
 
             //ヘッダー情報
-            Magic = CS.Byte2Char(br);
-            Section_Size = CS.Byte2Int(br);
-            Unknown1 = CS.Byte2Int(br);
-            Unknown2 = CS.Byte2Int(br);
-            Entries = CS.Byte2Int(br);
-            Entry_Size = CS.Byte2Int(br);
+            Magic          = CS.Byte2Char(br);
+            Section_Size   = CS.Byte2Int(br);
+            Unknown1       = CS.Byte2Int(br);
+            Unknown2       = CS.Byte2Int(br);
+            EntrySize      = CS.Byte2Int(br);
+            EntryBytesSize = CS.Byte2Int(br);
 
             //エントリーサイズをテキストボックスに
-            txtb15.Text = Entries.ToString();
+            txtb15.Text = EntrySize.ToString();
 
             //ATR1の各値を読み込む
-            for (int i = 0; i < Entries; i++)
+            for (int i = 0; i < EntrySize; i++)
             {
                 var arg1 = CS.Bytes2Byte(br);
                 var arg2 = CS.Bytes2Byte(br);
@@ -117,20 +116,21 @@ namespace MSBT_Editor.Sectionsys
                 var arg7 = CS.Bytes2Byte(br);
                 if (arg7 != 0xFF) notffcount++;
                 var arg8 = CS.Byte2Int(br);
-                Element.Add(new Item( arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
+                AttributeDataList.Add(new AttributeData( arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8));
             }
 
-            for (int j = 0; j<Element.Count; j++) {
+            for (int j = 0; j < AttributeDataList.Count; j++) {
                 
-                string null_table = "";
-                if (Element.Count - 1 == j){
-                    null_table = CS.Byte2Str_UTF16BE(br);
+                string SpecialText;
+                if (AttributeDataList.Count - 1 == j){
+                    SpecialText = CS.Byte2Str_UTF16BE(br);
                 }
                 else {
-                    var check = Element[j + 1].null_offset - Element[j].null_offset;
-                    null_table = CS.Byte2Str_UTF16BE(br, check);
+                    var SpecialTextBytesSize 
+                        = AttributeDataList[j + 1].SpecialTextOffset - AttributeDataList[j].SpecialTextOffset;
+                    SpecialText = CS.Byte2Str_UTF16BE(br, SpecialTextBytesSize);
                 }
-                nulldata.Add(null_table);
+                SpecialTextList.Add(SpecialText);
             }
 
             //パディング分バイナリリードを進める
@@ -139,7 +139,7 @@ namespace MSBT_Editor.Sectionsys
 
         public static void ATR1_Change(TextBox textbox)
         {
-            if (list1.Items.Count != 0)
+            if (MsbtListBox.Items.Count != 0)
             {
                 byte bit = 0x01;
                 short sh = 0x0000;
@@ -155,64 +155,59 @@ namespace MSBT_Editor.Sectionsys
                 }
 
 
-                ATR1.Item element = MSBT_Data.MSBT_All_Data.Item[list1.SelectedIndex];
+                ATR1.AttributeData element = MSBT_Data.MSBT_All_Data.Item[MsbtListBox.SelectedIndex];
                 switch (textbox.Name)
                 {
-                    case "textBox3":
-                        element.unknown1 = bit;
+                    case "Atr1Sound":
+                        element.SoundID = bit;
                         break;
                     case "textBox4":
-                        element.unknown2 = bit;
+                        element.SimpleCameraID = bit;
                         break;
                     case "textBox5":
-                        element.Dialog_Type = bit;
+                        element.DialogID = bit;
                         break;
                     case "textBox6":
-                        element.unknown3 = bit;
+                        element.WindowID = bit;
                         break;
                     case "textBox7":
-                        element.unknown4 = sh;
+                        element.EventCameraID = sh;
                         break;
                     case "textBox8":
-                        element.unknown5 = bit;
+                        element.MessageAreaID = bit;
                         break;
                     case "textBox9":
                         element.unknown6 = bit;
                         break;
                 }
-                MSBT_Data.MSBT_All_Data.Item[list1.SelectedIndex] = element;
+                MSBT_Data.MSBT_All_Data.Item[MsbtListBox.SelectedIndex] = element;
             }
         }
 
         public void Write(BinaryWriter bw , FileStream fs) {
 
-            //マジックの書き込み
-            bw.Write(Encoding.ASCII.GetBytes("ATR1"));
+            var SectionSizePosition = fs.Position + 0x04;
+            var BasePositionAddress = fs.Position + 0x10;
 
-            //セクションサイズの位置を記憶
-            var atr_sec_pos = fs.Position;
-
-            //セクションサイズとその他二つを書き込む(12バイト)
+            //ヘッダー情報を書き込む
+            CS.String_Writer(bw,"ATR1");
             CS.Null_Writer_Int32(bw, 3);
-
-            //ATR1オフセット位置を記憶
-            var atr_offset_pos = fs.Position;
-
-            //エントリー数と1エントリー当たりのバイト数を書き込む
-            bw.Write(CS.StringToInt32_byte((list1.Items.Count).ToString("X8")));
-            bw.Write(CS.StringToInt32_byte((12).ToString("X8")));
+            CS.StringToBytesWriter(bw,(MsbtListBox.Items.Count).ToString("X8"));
+            CS.StringToBytesWriter(bw,(12).ToString("X8"));
+            //bw.Write(CS.StringToInt32_byte((MsbtListBox.Items.Count).ToString("X8")));
+            //bw.Write(CS.StringToInt32_byte((12).ToString("X8")));
 
             //エントリーの各データを書き込む
             var msbtcount =MSBT_Data.MSBT_All_Data.Item.Count();
             List<long> nulloffsetpos = new List<long>();
             for (int i = 0; i < msbtcount; i++)
             {
-                bw.Write(MSBT_Data.MSBT_All_Data.Item[i].unknown1);
-                bw.Write(MSBT_Data.MSBT_All_Data.Item[i].unknown2);
-                bw.Write(MSBT_Data.MSBT_All_Data.Item[i].Dialog_Type);
-                bw.Write(MSBT_Data.MSBT_All_Data.Item[i].unknown3);
-                bw.Write(CS.StringToBytes(MSBT_Data.MSBT_All_Data.Item[i].unknown4.ToString("X4")));
-                bw.Write(MSBT_Data.MSBT_All_Data.Item[i].unknown5);
+                bw.Write(MSBT_Data.MSBT_All_Data.Item[i].SoundID);
+                bw.Write(MSBT_Data.MSBT_All_Data.Item[i].SimpleCameraID);
+                bw.Write(MSBT_Data.MSBT_All_Data.Item[i].DialogID);
+                bw.Write(MSBT_Data.MSBT_All_Data.Item[i].WindowID);
+                bw.Write(CS.StringToBytes(MSBT_Data.MSBT_All_Data.Item[i].EventCameraID.ToString("X4")));
+                bw.Write(MSBT_Data.MSBT_All_Data.Item[i].MessageAreaID);
                 bw.Write(MSBT_Data.MSBT_All_Data.Item[i].unknown6);
                 nulloffsetpos.Add(fs.Position);
                 CS.Null_Writer_Int32(bw);
@@ -220,17 +215,17 @@ namespace MSBT_Editor.Sectionsys
 
             //特殊テキストの書き込み
             List<long> sptextoffset = new List<long>();
-            for (int j = 0; j < list1.Items.Count; j++)
+            for (int j = 0; j < MsbtListBox.Items.Count; j++)
             {
-                list1.SelectedIndex = j;
+                MsbtListBox.SelectedIndex = j;
                 if (txtb11.Text == "")
                 {
-                    sptextoffset.Add(fs.Position - (atr_offset_pos));
+                    sptextoffset.Add(fs.Position - (BasePositionAddress));
                     bw.Write(CS.StringToBytes("0000"));
                 }
                 else
                 {
-                    sptextoffset.Add(fs.Position - (atr_offset_pos));
+                    sptextoffset.Add(fs.Position - (BasePositionAddress));
                     CS.UTF16BE_String_Writer(bw, txtb11.Text);
                     fs.Position += 2;
                 }
@@ -247,8 +242,8 @@ namespace MSBT_Editor.Sectionsys
             }
 
 
-            fs.Seek(atr_sec_pos, SeekOrigin.Begin);
-            bw.Write(CS.StringToBytes(((int)(sptextend_pos - atr_offset_pos)).ToString("X8")));
+            fs.Seek(SectionSizePosition, SeekOrigin.Begin);
+            bw.Write(CS.StringToBytes(((int)(sptextend_pos - BasePositionAddress)).ToString("X8")));
 
             fs.Position = sptextend_pos;
             CS.Padding_Writer(bw, fs.Position);
