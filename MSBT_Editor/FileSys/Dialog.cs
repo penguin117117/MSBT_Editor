@@ -21,6 +21,7 @@ namespace MSBT_Editor.FileSys
     {
         private static string Save_Path_Msbt = "None";
         private static string Save_Path_Msbf = "None";
+        private static string Save_Path_Arc  = "None";
         /// <summary>
         /// ファイルを選択して開く
         /// </summary>
@@ -32,7 +33,7 @@ namespace MSBT_Editor.FileSys
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.FileName = "default.msbt";
             ofd.InitialDirectory = @"C:\";
-            ofd.Filter = "メッセージファイル(*.msbt;*.Msbt)|*.msbt;*.Msbt|メッセージフローファイル(*.msbf;*.Msbf)|*.msbf;*.Msbf|すべてのファイル(*.*)|*.*";
+            ofd.Filter = "メッセージファイル(*.msbt;*.Msbt)|*.msbt;*.Msbt|メッセージフローファイル(*.msbf;*.Msbf)|*.msbf;*.Msbf|nintendoアーカイブファイル(*.arc;*.Arc)|*.arc;*.Arc|すべてのファイル(*.*)|*.*";
             ofd.FilterIndex = filenum;
             ofd.Title = "開くファイルを選択してください";
             ofd.RestoreDirectory = true;
@@ -224,6 +225,22 @@ namespace MSBT_Editor.FileSys
                     msbfh.Read(MSBF_File_Path);
                     tssl4.Text = Path.GetFileName(MSBF_File_Path);
                     break;
+                case ".arc":
+                    var IsYaz0 = MagicChecker(filepath,"Yaz0");
+                    if (IsYaz0 == true) return;
+                    Save_Path_Arc = filepath;
+                    tssl7.Text = "";
+                    ExternalFileExecutor.ARCToolExecutor(filepath);
+                    string[] DirectoryPathStrings = Directory.GetDirectories(Directory.GetParent(filepath).FullName+@"\"+Path.GetFileNameWithoutExtension(filepath), "*", SearchOption.AllDirectories);
+                    string[] FilePathStrings = Directory.GetFiles(Directory.GetParent(filepath).FullName + @"\" + Path.GetFileNameWithoutExtension(filepath), "*", SearchOption.AllDirectories);
+                    var DirConcatFile = DirectoryPathStrings.Concat(FilePathStrings);
+
+                    DirConcatFile = DirConcatFile.OrderBy(sort => sort);
+                    var SortedDirConcatFile = DirConcatFile.ToArray();
+
+                    foreach (var Dir in SortedDirConcatFile) Console.WriteLine(Dir);
+                    tssl7.Text = Path.GetFileName(Save_Path_Arc);
+                    break;
 
                 default:
                     MessageBox.Show("未対応のファイルです" + "\r\n" + "MSBTファイルのみ読み込めます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -234,6 +251,21 @@ namespace MSBT_Editor.FileSys
 
 
 
+        }
+
+        private static bool MagicChecker(string filePath , string checkString) {
+            FileStream fs = new FileStream(filePath, FileMode.Open);
+            BinaryReader br = new BinaryReader(fs);
+            var Magic = Calculation_System.Byte2Char(br);
+            if (Magic == checkString)
+            {
+                br.Close();
+                fs.Close();
+                return true;
+            }
+            br.Close();
+            fs.Close();
+            return false;
         }
     }
 }

@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "ARCTool_ver0.1.5.0/0.1.5.0": {
+        "runtime": {
+          "ARCTool_ver0.1.5.0.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ARCTool_ver0.1.5.0/0.1.5.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

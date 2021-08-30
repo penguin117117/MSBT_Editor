@@ -27,7 +27,7 @@ namespace MSBT_Editor.MSBTsys
         private static Int16 unknown8;
         private static Int16 unknown9;
         public static List<string> Txt2_Text_List;
-        public static List<string> atr_nulldata;
+        public static List<string> Atr1SpecialText;
 
         public struct Data_List {
             public List<string> Text;
@@ -97,7 +97,7 @@ namespace MSBT_Editor.MSBTsys
             set => unknown9 = value;
             get => unknown9;
         }
-        public int File_Size
+        public int FileSize
         {
             set => filesize = value;
             get => filesize;
