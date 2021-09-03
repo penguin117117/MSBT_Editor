@@ -29,6 +29,10 @@ namespace MSBT_Editor.Formsys
             }
             if (Properties.Settings.Default.言語 == "日本語")
             {
+                combo1.SelectedIndex = 0;
+                combo2.SelectedIndex = 0;
+                combo3.SelectedIndex = 0;
+                combo4.SelectedIndex = 0;
                 combo5.SelectedIndex = 0;
                 combo6.SelectedIndex = 0;
                 combo7.SelectedIndex = 0;

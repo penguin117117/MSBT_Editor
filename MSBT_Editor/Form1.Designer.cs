@@ -43,18 +43,18 @@ namespace MSBT_Editor
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ファイルToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.上書き保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Msbt上書き保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Msbt保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mSBF開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mSBF保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mSBF上書き保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Msbf上書き保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Msbf保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ARC開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aRC保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aRC名前を付けて保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MsbtListBox = new System.Windows.Forms.ListBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.MsbtText = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -90,15 +90,15 @@ namespace MSBT_Editor
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ColorTagInsertButton = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.CenterTagSelectComboBox = new System.Windows.Forms.ComboBox();
+            this.CenterTagInsertButton = new System.Windows.Forms.Button();
+            this.ColorTagSelectComboBox = new System.Windows.Forms.ComboBox();
+            this.LineControlTagInsertButton = new System.Windows.Forms.Button();
+            this.FontSizeTagSelectComboBox = new System.Windows.Forms.ComboBox();
+            this.FontSizeTagInsertButton = new System.Windows.Forms.Button();
+            this.LineControlTagSelectComboBox = new System.Windows.Forms.ComboBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.button6 = new System.Windows.Forms.Button();
@@ -135,6 +135,17 @@ namespace MSBT_Editor
             this.label20 = new System.Windows.Forms.Label();
             this.button11 = new System.Windows.Forms.Button();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.tabPage14 = new System.Windows.Forms.TabPage();
+            this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.MsbtSETagInsertButton = new System.Windows.Forms.Button();
+            this.label56 = new System.Windows.Forms.Label();
+            this.SETagInsertTextBox = new System.Windows.Forms.TextBox();
+            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.UserIconInsertButton = new System.Windows.Forms.Button();
+            this.UserIconInsertLabel = new System.Windows.Forms.Label();
+            this.UserIconInsertTextBox = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.button24 = new System.Windows.Forms.Button();
@@ -145,10 +156,10 @@ namespace MSBT_Editor
             this.button22 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
             this.label34 = new System.Windows.Forms.Label();
-            this.textBox30 = new System.Windows.Forms.TextBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.MsbtSelectedListName = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.DeleteListText = new System.Windows.Forms.Button();
             this.ListNameText = new System.Windows.Forms.TextBox();
@@ -156,9 +167,9 @@ namespace MSBT_Editor
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button31 = new System.Windows.Forms.Button();
-            this.textBox35 = new System.Windows.Forms.TextBox();
+            this.ReadOnlyMsbtText = new System.Windows.Forms.TextBox();
             this.label45 = new System.Windows.Forms.Label();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.MsbfTreeView = new System.Windows.Forms.TreeView();
             this.label33 = new System.Windows.Forms.Label();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.label32 = new System.Windows.Forms.Label();
@@ -218,7 +229,7 @@ namespace MSBT_Editor
             this.label38 = new System.Windows.Forms.Label();
             this.comboBox8 = new System.Windows.Forms.ComboBox();
             this.label40 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
+            this.MsbtListSelectIndex = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
             this.tabControl3 = new System.Windows.Forms.TabControl();
@@ -241,6 +252,9 @@ namespace MSBT_Editor
             this.tabPage8.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tabPage9.SuspendLayout();
+            this.tabPage14.SuspendLayout();
+            this.groupBox16.SuspendLayout();
+            this.groupBox15.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox12.SuspendLayout();
             this.groupBox11.SuspendLayout();
@@ -346,12 +360,12 @@ namespace MSBT_Editor
             // 
             this.ファイルToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.開くToolStripMenuItem,
-            this.保存ToolStripMenuItem,
-            this.上書き保存ToolStripMenuItem,
+            this.Msbt上書き保存ToolStripMenuItem,
+            this.Msbt保存ToolStripMenuItem,
             this.toolStripSeparator1,
             this.mSBF開くToolStripMenuItem,
-            this.mSBF保存ToolStripMenuItem,
-            this.mSBF上書き保存ToolStripMenuItem,
+            this.Msbf上書き保存ToolStripMenuItem,
+            this.Msbf保存ToolStripMenuItem,
             this.toolStripSeparator2,
             this.ARC開くToolStripMenuItem,
             this.aRC保存ToolStripMenuItem,
@@ -364,83 +378,86 @@ namespace MSBT_Editor
             // 
             this.開くToolStripMenuItem.Name = "開くToolStripMenuItem";
             this.開くToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.開くToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.開くToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             this.開くToolStripMenuItem.Text = "MSBT開く";
             this.開くToolStripMenuItem.Click += new System.EventHandler(this.開くToolStripMenuItem_Click);
             // 
-            // 保存ToolStripMenuItem
+            // Msbt上書き保存ToolStripMenuItem
             // 
-            this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
-            this.保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.保存ToolStripMenuItem.Text = "MSBT保存";
-            this.保存ToolStripMenuItem.Click += new System.EventHandler(this.保存ToolStripMenuItem_Click);
+            this.Msbt上書き保存ToolStripMenuItem.Name = "Msbt上書き保存ToolStripMenuItem";
+            this.Msbt上書き保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.Msbt上書き保存ToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.Msbt上書き保存ToolStripMenuItem.Text = "MSBT上書き保存";
+            this.Msbt上書き保存ToolStripMenuItem.Click += new System.EventHandler(this.Msbt上書き保存ToolStripMenuItem_Click);
             // 
-            // 上書き保存ToolStripMenuItem
+            // Msbt保存ToolStripMenuItem
             // 
-            this.上書き保存ToolStripMenuItem.Name = "上書き保存ToolStripMenuItem";
-            this.上書き保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.Msbt保存ToolStripMenuItem.Name = "Msbt保存ToolStripMenuItem";
+            this.Msbt保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.上書き保存ToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.上書き保存ToolStripMenuItem.Text = "MSBT上書き保存";
-            this.上書き保存ToolStripMenuItem.Click += new System.EventHandler(this.上書き保存ToolStripMenuItem_Click);
+            this.Msbt保存ToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.Msbt保存ToolStripMenuItem.Text = "MSBT保存";
+            this.Msbt保存ToolStripMenuItem.Click += new System.EventHandler(this.Msbt保存ToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(252, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(220, 6);
             // 
             // mSBF開くToolStripMenuItem
             // 
             this.mSBF開くToolStripMenuItem.Name = "mSBF開くToolStripMenuItem";
             this.mSBF開くToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.O)));
-            this.mSBF開くToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.mSBF開くToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             this.mSBF開くToolStripMenuItem.Text = "MSBF開く";
             this.mSBF開くToolStripMenuItem.Click += new System.EventHandler(this.MSBF開くToolStripMenuItem_Click);
             // 
-            // mSBF保存ToolStripMenuItem
+            // Msbf上書き保存ToolStripMenuItem
             // 
-            this.mSBF保存ToolStripMenuItem.Name = "mSBF保存ToolStripMenuItem";
-            this.mSBF保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            this.Msbf上書き保存ToolStripMenuItem.Name = "Msbf上書き保存ToolStripMenuItem";
+            this.Msbf上書き保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.S)));
-            this.mSBF保存ToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.mSBF保存ToolStripMenuItem.Text = "MSBF保存";
-            this.mSBF保存ToolStripMenuItem.Click += new System.EventHandler(this.MSBF保存ToolStripMenuItem_Click);
+            this.Msbf上書き保存ToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.Msbf上書き保存ToolStripMenuItem.Text = "MSBF上書き保存";
+            this.Msbf上書き保存ToolStripMenuItem.Click += new System.EventHandler(this.Msbf上書き保存ToolStripMenuItem_Click);
             // 
-            // mSBF上書き保存ToolStripMenuItem
+            // Msbf保存ToolStripMenuItem
             // 
-            this.mSBF上書き保存ToolStripMenuItem.Name = "mSBF上書き保存ToolStripMenuItem";
-            this.mSBF上書き保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            this.Msbf保存ToolStripMenuItem.Name = "Msbf保存ToolStripMenuItem";
+            this.Msbf保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.mSBF上書き保存ToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
-            this.mSBF上書き保存ToolStripMenuItem.Text = "MSBF上書き保存";
-            this.mSBF上書き保存ToolStripMenuItem.Click += new System.EventHandler(this.MSBF上書き保存ToolStripMenuItem_Click);
+            this.Msbf保存ToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.Msbf保存ToolStripMenuItem.Text = "MSBF保存";
+            this.Msbf保存ToolStripMenuItem.Click += new System.EventHandler(this.Msbf保存ToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(252, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(220, 6);
             // 
             // ARC開くToolStripMenuItem
             // 
             this.ARC開くToolStripMenuItem.Name = "ARC開くToolStripMenuItem";
-            this.ARC開くToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.ARC開くToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             this.ARC開くToolStripMenuItem.Text = "ARC開く";
+            this.ARC開くToolStripMenuItem.Visible = false;
             this.ARC開くToolStripMenuItem.Click += new System.EventHandler(this.ARC開くToolStripMenuItem_Click);
             // 
             // aRC保存ToolStripMenuItem
             // 
             this.aRC保存ToolStripMenuItem.Name = "aRC保存ToolStripMenuItem";
-            this.aRC保存ToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.aRC保存ToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             this.aRC保存ToolStripMenuItem.Text = "ARC上書き保存";
+            this.aRC保存ToolStripMenuItem.Visible = false;
             // 
             // aRC名前を付けて保存ToolStripMenuItem
             // 
             this.aRC名前を付けて保存ToolStripMenuItem.Name = "aRC名前を付けて保存ToolStripMenuItem";
-            this.aRC名前を付けて保存ToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.aRC名前を付けて保存ToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             this.aRC名前を付けて保存ToolStripMenuItem.Text = "ARC保存";
+            this.aRC名前を付けて保存ToolStripMenuItem.Visible = false;
             // 
             // MsbtListBox
             // 
@@ -454,15 +471,15 @@ namespace MSBT_Editor
             this.MsbtListBox.TabIndex = 2;
             this.MsbtListBox.SelectedIndexChanged += new System.EventHandler(this.MsbtListBox_SelectedIndexChanged);
             // 
-            // textBox1
+            // MsbtText
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 6);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(548, 256);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.TextChanged += new System.EventHandler(this.TextBox1_TextChanged);
+            this.MsbtText.Location = new System.Drawing.Point(6, 6);
+            this.MsbtText.Multiline = true;
+            this.MsbtText.Name = "MsbtText";
+            this.MsbtText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.MsbtText.Size = new System.Drawing.Size(548, 256);
+            this.MsbtText.TabIndex = 3;
+            this.MsbtText.TextChanged += new System.EventHandler(this.MsbtText_TextChanged);
             // 
             // textBox2
             // 
@@ -491,8 +508,6 @@ namespace MSBT_Editor
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.groupBox2);
-            this.tabPage1.Controls.Add(this.groupBox3);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -507,12 +522,13 @@ namespace MSBT_Editor
             this.groupBox2.Controls.Add(this.label39);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.textBox12);
-            this.groupBox2.Location = new System.Drawing.Point(275, 6);
+            this.groupBox2.Location = new System.Drawing.Point(283, 337);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(233, 91);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "LBL1";
+            this.groupBox2.Visible = false;
             // 
             // label39
             // 
@@ -549,12 +565,13 @@ namespace MSBT_Editor
             this.groupBox3.Controls.Add(this.label15);
             this.groupBox3.Controls.Add(this.textBox14);
             this.groupBox3.Controls.Add(this.label14);
-            this.groupBox3.Location = new System.Drawing.Point(6, 6);
+            this.groupBox3.Location = new System.Drawing.Point(14, 331);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(263, 91);
             this.groupBox3.TabIndex = 8;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "各セクションのエントリーサイズ";
+            this.groupBox3.Visible = false;
             // 
             // textBox15
             // 
@@ -606,7 +623,6 @@ namespace MSBT_Editor
             // 
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.Atr1SpecialText);
-            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
@@ -614,7 +630,6 @@ namespace MSBT_Editor
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.Atr1SpecialTextOffset);
             this.groupBox1.Controls.Add(this.Atr1Unknown6);
             this.groupBox1.Controls.Add(this.Atr1MessageAreaID);
             this.groupBox1.Controls.Add(this.Atr1EventCameraID);
@@ -622,17 +637,17 @@ namespace MSBT_Editor
             this.groupBox1.Controls.Add(this.Atr1DialogID);
             this.groupBox1.Controls.Add(this.Atr1SimpleCamID);
             this.groupBox1.Controls.Add(this.Atr1SoundID);
-            this.groupBox1.Location = new System.Drawing.Point(6, 103);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(548, 325);
+            this.groupBox1.Size = new System.Drawing.Size(548, 290);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "ATR1";
+            this.groupBox1.Text = "選択されたMsbtメッセージの詳細設定";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 236);
+            this.label9.Location = new System.Drawing.Point(6, 197);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(231, 12);
             this.label9.TabIndex = 17;
@@ -640,7 +655,7 @@ namespace MSBT_Editor
             // 
             // Atr1SpecialText
             // 
-            this.Atr1SpecialText.Location = new System.Drawing.Point(6, 251);
+            this.Atr1SpecialText.Location = new System.Drawing.Point(8, 212);
             this.Atr1SpecialText.Multiline = true;
             this.Atr1SpecialText.Name = "Atr1SpecialText";
             this.Atr1SpecialText.Size = new System.Drawing.Size(536, 68);
@@ -651,11 +666,12 @@ namespace MSBT_Editor
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 200);
+            this.label8.Location = new System.Drawing.Point(22, 297);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(105, 12);
             this.label8.TabIndex = 15;
             this.label8.Text = "nullオフセット触らない";
+            this.label8.Visible = false;
             // 
             // label7
             // 
@@ -723,11 +739,12 @@ namespace MSBT_Editor
             // Atr1SpecialTextOffset
             // 
             this.Atr1SpecialTextOffset.Enabled = false;
-            this.Atr1SpecialTextOffset.Location = new System.Drawing.Point(147, 197);
+            this.Atr1SpecialTextOffset.Location = new System.Drawing.Point(133, 294);
             this.Atr1SpecialTextOffset.MaxLength = 2;
             this.Atr1SpecialTextOffset.Name = "Atr1SpecialTextOffset";
             this.Atr1SpecialTextOffset.Size = new System.Drawing.Size(100, 19);
             this.Atr1SpecialTextOffset.TabIndex = 7;
+            this.Atr1SpecialTextOffset.Visible = false;
             // 
             // Atr1Unknown6
             // 
@@ -801,7 +818,7 @@ namespace MSBT_Editor
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.tabControl2);
-            this.tabPage2.Controls.Add(this.textBox1);
+            this.tabPage2.Controls.Add(this.MsbtText);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -816,6 +833,7 @@ namespace MSBT_Editor
             this.tabControl2.Controls.Add(this.tabPage7);
             this.tabControl2.Controls.Add(this.tabPage8);
             this.tabControl2.Controls.Add(this.tabPage9);
+            this.tabControl2.Controls.Add(this.tabPage14);
             this.tabControl2.Location = new System.Drawing.Point(6, 268);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
@@ -824,15 +842,15 @@ namespace MSBT_Editor
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.button1);
+            this.tabPage6.Controls.Add(this.ColorTagInsertButton);
             this.tabPage6.Controls.Add(this.button7);
-            this.tabPage6.Controls.Add(this.comboBox4);
-            this.tabPage6.Controls.Add(this.button4);
-            this.tabPage6.Controls.Add(this.comboBox1);
-            this.tabPage6.Controls.Add(this.button2);
-            this.tabPage6.Controls.Add(this.comboBox3);
-            this.tabPage6.Controls.Add(this.button3);
-            this.tabPage6.Controls.Add(this.comboBox2);
+            this.tabPage6.Controls.Add(this.CenterTagSelectComboBox);
+            this.tabPage6.Controls.Add(this.CenterTagInsertButton);
+            this.tabPage6.Controls.Add(this.ColorTagSelectComboBox);
+            this.tabPage6.Controls.Add(this.LineControlTagInsertButton);
+            this.tabPage6.Controls.Add(this.FontSizeTagSelectComboBox);
+            this.tabPage6.Controls.Add(this.FontSizeTagInsertButton);
+            this.tabPage6.Controls.Add(this.LineControlTagSelectComboBox);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
@@ -841,15 +859,15 @@ namespace MSBT_Editor
             this.tabPage6.Text = "汎用タグ";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // ColorTagInsertButton
             // 
-            this.button1.Location = new System.Drawing.Point(133, 7);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(152, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "カラータグ挿入";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.ColorTagInsertButton.Location = new System.Drawing.Point(133, 7);
+            this.ColorTagInsertButton.Name = "ColorTagInsertButton";
+            this.ColorTagInsertButton.Size = new System.Drawing.Size(152, 23);
+            this.ColorTagInsertButton.TabIndex = 5;
+            this.ColorTagInsertButton.Text = "カラータグ挿入";
+            this.ColorTagInsertButton.UseVisualStyleBackColor = true;
+            this.ColorTagInsertButton.Click += new System.EventHandler(this.ColorTagInsertButton_Click);
             // 
             // button7
             // 
@@ -861,32 +879,32 @@ namespace MSBT_Editor
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // comboBox4
+            // CenterTagSelectComboBox
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Items.AddRange(new object[] {
+            this.CenterTagSelectComboBox.FormattingEnabled = true;
+            this.CenterTagSelectComboBox.Items.AddRange(new object[] {
             "横方向",
             "縦方向"});
-            this.comboBox4.Location = new System.Drawing.Point(6, 90);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(121, 20);
-            this.comboBox4.TabIndex = 10;
-            this.comboBox4.Text = "横方向";
+            this.CenterTagSelectComboBox.Location = new System.Drawing.Point(6, 90);
+            this.CenterTagSelectComboBox.Name = "CenterTagSelectComboBox";
+            this.CenterTagSelectComboBox.Size = new System.Drawing.Size(121, 20);
+            this.CenterTagSelectComboBox.TabIndex = 10;
+            this.CenterTagSelectComboBox.Text = "横方向";
             // 
-            // button4
+            // CenterTagInsertButton
             // 
-            this.button4.Location = new System.Drawing.Point(133, 88);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(152, 23);
-            this.button4.TabIndex = 11;
-            this.button4.Text = "センタリングタグ挿入";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.CenterTagInsertButton.Location = new System.Drawing.Point(133, 88);
+            this.CenterTagInsertButton.Name = "CenterTagInsertButton";
+            this.CenterTagInsertButton.Size = new System.Drawing.Size(152, 23);
+            this.CenterTagInsertButton.TabIndex = 11;
+            this.CenterTagInsertButton.Text = "センタリングタグ挿入";
+            this.CenterTagInsertButton.UseVisualStyleBackColor = true;
+            this.CenterTagInsertButton.Click += new System.EventHandler(this.CenterTagInsertButton_Click);
             // 
-            // comboBox1
+            // ColorTagSelectComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.ColorTagSelectComboBox.FormattingEnabled = true;
+            this.ColorTagSelectComboBox.Items.AddRange(new object[] {
             "ブラック",
             "レッド",
             "グリーン",
@@ -896,57 +914,57 @@ namespace MSBT_Editor
             "オレンジ",
             "グレー",
             "カラーエンドタグ"});
-            this.comboBox1.Location = new System.Drawing.Point(6, 9);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 20);
-            this.comboBox1.TabIndex = 4;
-            this.comboBox1.Text = "ブラック";
+            this.ColorTagSelectComboBox.Location = new System.Drawing.Point(6, 9);
+            this.ColorTagSelectComboBox.Name = "ColorTagSelectComboBox";
+            this.ColorTagSelectComboBox.Size = new System.Drawing.Size(121, 20);
+            this.ColorTagSelectComboBox.TabIndex = 4;
+            this.ColorTagSelectComboBox.Text = "ブラック";
             // 
-            // button2
+            // LineControlTagInsertButton
             // 
-            this.button2.Location = new System.Drawing.Point(133, 36);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(152, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "行制御タグ挿入";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.LineControlTagInsertButton.Location = new System.Drawing.Point(133, 36);
+            this.LineControlTagInsertButton.Name = "LineControlTagInsertButton";
+            this.LineControlTagInsertButton.Size = new System.Drawing.Size(152, 23);
+            this.LineControlTagInsertButton.TabIndex = 7;
+            this.LineControlTagInsertButton.Text = "行制御タグ挿入";
+            this.LineControlTagInsertButton.UseVisualStyleBackColor = true;
+            this.LineControlTagInsertButton.Click += new System.EventHandler(this.LineControlTagInsertButton_Click);
             // 
-            // comboBox3
+            // FontSizeTagSelectComboBox
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
+            this.FontSizeTagSelectComboBox.FormattingEnabled = true;
+            this.FontSizeTagSelectComboBox.Items.AddRange(new object[] {
             "小",
             "普通",
             "大"});
-            this.comboBox3.Location = new System.Drawing.Point(6, 64);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 20);
-            this.comboBox3.TabIndex = 8;
-            this.comboBox3.Text = "普通";
+            this.FontSizeTagSelectComboBox.Location = new System.Drawing.Point(6, 64);
+            this.FontSizeTagSelectComboBox.Name = "FontSizeTagSelectComboBox";
+            this.FontSizeTagSelectComboBox.Size = new System.Drawing.Size(121, 20);
+            this.FontSizeTagSelectComboBox.TabIndex = 8;
+            this.FontSizeTagSelectComboBox.Text = "普通";
             // 
-            // button3
+            // FontSizeTagInsertButton
             // 
-            this.button3.Location = new System.Drawing.Point(133, 62);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(152, 23);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "サイズタグ挿入";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.FontSizeTagInsertButton.Location = new System.Drawing.Point(133, 62);
+            this.FontSizeTagInsertButton.Name = "FontSizeTagInsertButton";
+            this.FontSizeTagInsertButton.Size = new System.Drawing.Size(152, 23);
+            this.FontSizeTagInsertButton.TabIndex = 9;
+            this.FontSizeTagInsertButton.Text = "サイズタグ挿入";
+            this.FontSizeTagInsertButton.UseVisualStyleBackColor = true;
+            this.FontSizeTagInsertButton.Click += new System.EventHandler(this.FontSizeTagInsertButton_Click);
             // 
-            // comboBox2
+            // LineControlTagSelectComboBox
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.LineControlTagSelectComboBox.FormattingEnabled = true;
+            this.LineControlTagSelectComboBox.Items.AddRange(new object[] {
             "改行",
             "次のページ",
             "終了"});
-            this.comboBox2.Location = new System.Drawing.Point(6, 38);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 20);
-            this.comboBox2.TabIndex = 6;
-            this.comboBox2.Text = "改行";
+            this.LineControlTagSelectComboBox.Location = new System.Drawing.Point(6, 38);
+            this.LineControlTagSelectComboBox.Name = "LineControlTagSelectComboBox";
+            this.LineControlTagSelectComboBox.Size = new System.Drawing.Size(121, 20);
+            this.LineControlTagSelectComboBox.TabIndex = 6;
+            this.LineControlTagSelectComboBox.Text = "改行";
             // 
             // tabPage7
             // 
@@ -1323,11 +1341,122 @@ namespace MSBT_Editor
             this.comboBox5.TabIndex = 0;
             this.comboBox5.Text = "ピーチ";
             // 
+            // tabPage14
+            // 
+            this.tabPage14.Controls.Add(this.groupBox16);
+            this.tabPage14.Controls.Add(this.groupBox15);
+            this.tabPage14.Location = new System.Drawing.Point(4, 22);
+            this.tabPage14.Name = "tabPage14";
+            this.tabPage14.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage14.Size = new System.Drawing.Size(540, 141);
+            this.tabPage14.TabIndex = 4;
+            this.tabPage14.Text = "上級者向けタグ";
+            this.tabPage14.UseVisualStyleBackColor = true;
+            // 
+            // groupBox16
+            // 
+            this.groupBox16.Controls.Add(this.label57);
+            this.groupBox16.Controls.Add(this.MsbtSETagInsertButton);
+            this.groupBox16.Controls.Add(this.label56);
+            this.groupBox16.Controls.Add(this.SETagInsertTextBox);
+            this.groupBox16.Location = new System.Drawing.Point(6, 6);
+            this.groupBox16.Name = "groupBox16";
+            this.groupBox16.Size = new System.Drawing.Size(255, 129);
+            this.groupBox16.TabIndex = 13;
+            this.groupBox16.TabStop = false;
+            this.groupBox16.Text = "SEタグ";
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(6, 18);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(199, 24);
+            this.label57.TabIndex = 16;
+            this.label57.Text = "使えないステージがあります。\r\nハードコードされている可能性があります。";
+            // 
+            // MsbtSETagInsertButton
+            // 
+            this.MsbtSETagInsertButton.Location = new System.Drawing.Point(6, 100);
+            this.MsbtSETagInsertButton.Name = "MsbtSETagInsertButton";
+            this.MsbtSETagInsertButton.Size = new System.Drawing.Size(149, 23);
+            this.MsbtSETagInsertButton.TabIndex = 14;
+            this.MsbtSETagInsertButton.Text = "SEタグ挿入";
+            this.MsbtSETagInsertButton.UseVisualStyleBackColor = true;
+            this.MsbtSETagInsertButton.Click += new System.EventHandler(this.MsbtSETagInsertButton_Click);
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(6, 48);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(163, 24);
+            this.label56.TabIndex = 15;
+            this.label56.Text = "SEの名前を入力\r\n例：SE_BV_KOOPA_BURN_RUN";
+            // 
+            // SETagInsertTextBox
+            // 
+            this.SETagInsertTextBox.Location = new System.Drawing.Point(6, 75);
+            this.SETagInsertTextBox.Name = "SETagInsertTextBox";
+            this.SETagInsertTextBox.Size = new System.Drawing.Size(149, 19);
+            this.SETagInsertTextBox.TabIndex = 13;
+            // 
+            // groupBox15
+            // 
+            this.groupBox15.Controls.Add(this.label42);
+            this.groupBox15.Controls.Add(this.UserIconInsertButton);
+            this.groupBox15.Controls.Add(this.UserIconInsertLabel);
+            this.groupBox15.Controls.Add(this.UserIconInsertTextBox);
+            this.groupBox15.Location = new System.Drawing.Point(275, 6);
+            this.groupBox15.Name = "groupBox15";
+            this.groupBox15.Size = new System.Drawing.Size(259, 129);
+            this.groupBox15.TabIndex = 12;
+            this.groupBox15.TabStop = false;
+            this.groupBox15.Text = "カスタムアイコンタグ";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(6, 60);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(106, 12);
+            this.label42.TabIndex = 12;
+            this.label42.Text = "末尾6バイト(16進数)";
+            // 
+            // UserIconInsertButton
+            // 
+            this.UserIconInsertButton.Location = new System.Drawing.Point(8, 100);
+            this.UserIconInsertButton.Name = "UserIconInsertButton";
+            this.UserIconInsertButton.Size = new System.Drawing.Size(149, 23);
+            this.UserIconInsertButton.TabIndex = 10;
+            this.UserIconInsertButton.Text = "カスタムアイコン挿入";
+            this.UserIconInsertButton.UseVisualStyleBackColor = true;
+            this.UserIconInsertButton.Click += new System.EventHandler(this.UserIconInsertButton_Click);
+            // 
+            // UserIconInsertLabel
+            // 
+            this.UserIconInsertLabel.AutoSize = true;
+            this.UserIconInsertLabel.Location = new System.Drawing.Point(6, 18);
+            this.UserIconInsertLabel.Name = "UserIconInsertLabel";
+            this.UserIconInsertLabel.Size = new System.Drawing.Size(215, 24);
+            this.UserIconInsertLabel.TabIndex = 11;
+            this.UserIconInsertLabel.Text = "アイコンを作成した場合のみ使用可能\r\nそれ以外の場合で使用するとフリーズします。\r\n";
+            // 
+            // UserIconInsertTextBox
+            // 
+            this.UserIconInsertTextBox.Location = new System.Drawing.Point(8, 75);
+            this.UserIconInsertTextBox.MaxLength = 12;
+            this.UserIconInsertTextBox.Name = "UserIconInsertTextBox";
+            this.UserIconInsertTextBox.Size = new System.Drawing.Size(149, 19);
+            this.UserIconInsertTextBox.TabIndex = 9;
+            this.UserIconInsertTextBox.Text = "000000000000";
+            this.UserIconInsertTextBox.TextChanged += new System.EventHandler(this.UserIconInsertTextBox_TextChanged);
+            this.UserIconInsertTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UserIconInsertTextBox_KeyPress);
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.groupBox12);
             this.tabPage3.Controls.Add(this.groupBox11);
-            this.tabPage3.Controls.Add(this.textBox30);
             this.tabPage3.Controls.Add(this.groupBox10);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
@@ -1343,7 +1472,7 @@ namespace MSBT_Editor
             this.groupBox12.Controls.Add(this.button23);
             this.groupBox12.Controls.Add(this.textBox31);
             this.groupBox12.Controls.Add(this.label35);
-            this.groupBox12.Location = new System.Drawing.Point(6, 235);
+            this.groupBox12.Location = new System.Drawing.Point(3, 266);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(224, 119);
             this.groupBox12.TabIndex = 6;
@@ -1392,7 +1521,7 @@ namespace MSBT_Editor
             this.groupBox11.Controls.Add(this.button22);
             this.groupBox11.Controls.Add(this.button21);
             this.groupBox11.Controls.Add(this.label34);
-            this.groupBox11.Location = new System.Drawing.Point(6, 129);
+            this.groupBox11.Location = new System.Drawing.Point(6, 160);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(224, 100);
             this.groupBox11.TabIndex = 5;
@@ -1428,26 +1557,18 @@ namespace MSBT_Editor
             this.label34.TabIndex = 0;
             this.label34.Text = "この項目は名前が不要です";
             // 
-            // textBox30
-            // 
-            this.textBox30.Location = new System.Drawing.Point(260, 144);
-            this.textBox30.Name = "textBox30";
-            this.textBox30.Size = new System.Drawing.Size(204, 19);
-            this.textBox30.TabIndex = 1;
-            this.textBox30.Visible = false;
-            this.textBox30.TextChanged += new System.EventHandler(this.textBox30_TextChanged);
-            // 
             // groupBox10
             // 
             this.groupBox10.Controls.Add(this.label12);
             this.groupBox10.Controls.Add(this.label11);
+            this.groupBox10.Controls.Add(this.MsbtSelectedListName);
             this.groupBox10.Controls.Add(this.label13);
             this.groupBox10.Controls.Add(this.DeleteListText);
             this.groupBox10.Controls.Add(this.ListNameText);
             this.groupBox10.Controls.Add(this.AddListText);
             this.groupBox10.Location = new System.Drawing.Point(6, 6);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(224, 117);
+            this.groupBox10.Size = new System.Drawing.Size(224, 148);
             this.groupBox10.TabIndex = 4;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "MSBT";
@@ -1469,6 +1590,16 @@ namespace MSBT_Editor
             this.label11.Size = new System.Drawing.Size(115, 12);
             this.label11.TabIndex = 3;
             this.label11.Text = "追加するMSBTリスト名";
+            // 
+            // MsbtSelectedListName
+            // 
+            this.MsbtSelectedListName.Location = new System.Drawing.Point(8, 116);
+            this.MsbtSelectedListName.Name = "MsbtSelectedListName";
+            this.MsbtSelectedListName.ReadOnly = true;
+            this.MsbtSelectedListName.Size = new System.Drawing.Size(204, 19);
+            this.MsbtSelectedListName.TabIndex = 1;
+            this.MsbtSelectedListName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox30_MouseClick);
+            this.MsbtSelectedListName.TextChanged += new System.EventHandler(this.textBox30_TextChanged);
             // 
             // label13
             // 
@@ -1512,9 +1643,9 @@ namespace MSBT_Editor
             // 
             this.tabPage4.Controls.Add(this.checkBox1);
             this.tabPage4.Controls.Add(this.button31);
-            this.tabPage4.Controls.Add(this.textBox35);
+            this.tabPage4.Controls.Add(this.ReadOnlyMsbtText);
             this.tabPage4.Controls.Add(this.label45);
-            this.tabPage4.Controls.Add(this.treeView1);
+            this.tabPage4.Controls.Add(this.MsbfTreeView);
             this.tabPage4.Controls.Add(this.label33);
             this.tabPage4.Controls.Add(this.groupBox9);
             this.tabPage4.Controls.Add(this.groupBox7);
@@ -1547,15 +1678,16 @@ namespace MSBT_Editor
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
-            // textBox35
+            // ReadOnlyMsbtText
             // 
-            this.textBox35.Location = new System.Drawing.Point(6, 370);
-            this.textBox35.Multiline = true;
-            this.textBox35.Name = "textBox35";
-            this.textBox35.ReadOnly = true;
-            this.textBox35.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox35.Size = new System.Drawing.Size(548, 58);
-            this.textBox35.TabIndex = 17;
+            this.ReadOnlyMsbtText.Location = new System.Drawing.Point(6, 370);
+            this.ReadOnlyMsbtText.Multiline = true;
+            this.ReadOnlyMsbtText.Name = "ReadOnlyMsbtText";
+            this.ReadOnlyMsbtText.ReadOnly = true;
+            this.ReadOnlyMsbtText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.ReadOnlyMsbtText.Size = new System.Drawing.Size(548, 58);
+            this.ReadOnlyMsbtText.TabIndex = 17;
+            this.ReadOnlyMsbtText.TextChanged += new System.EventHandler(this.ReadOnlyMsbtText_TextChanged);
             // 
             // label45
             // 
@@ -1566,13 +1698,13 @@ namespace MSBT_Editor
             this.label45.TabIndex = 16;
             this.label45.Text = "テスト機能/Test function";
             // 
-            // treeView1
+            // MsbfTreeView
             // 
-            this.treeView1.Location = new System.Drawing.Point(329, 28);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(225, 304);
-            this.treeView1.TabIndex = 15;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            this.MsbfTreeView.Location = new System.Drawing.Point(329, 28);
+            this.MsbfTreeView.Name = "MsbfTreeView";
+            this.MsbfTreeView.Size = new System.Drawing.Size(225, 304);
+            this.MsbfTreeView.TabIndex = 15;
+            this.MsbfTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.MsbfTreeView_AfterSelect);
             // 
             // label33
             // 
@@ -1841,6 +1973,7 @@ namespace MSBT_Editor
             this.label53.Size = new System.Drawing.Size(107, 12);
             this.label53.TabIndex = 16;
             this.label53.Text = "MSBFハッシュ計算機";
+            this.label53.Visible = false;
             this.label53.Click += new System.EventHandler(this.label53_Click);
             // 
             // textBox34
@@ -1890,6 +2023,7 @@ namespace MSBT_Editor
             this.button25.TabIndex = 9;
             this.button25.Text = "計算";
             this.button25.UseVisualStyleBackColor = true;
+            this.button25.Visible = false;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
             // HashCalculation
@@ -1898,6 +2032,7 @@ namespace MSBT_Editor
             this.HashCalculation.Name = "HashCalculation";
             this.HashCalculation.Size = new System.Drawing.Size(262, 19);
             this.HashCalculation.TabIndex = 8;
+            this.HashCalculation.Visible = false;
             this.HashCalculation.TextChanged += new System.EventHandler(this.HashCalculation_TextChanged);
             // 
             // richTextBox1
@@ -1977,8 +2112,12 @@ namespace MSBT_Editor
             // 
             // tabPage11
             // 
+            this.tabPage11.Controls.Add(this.groupBox2);
+            this.tabPage11.Controls.Add(this.Atr1SpecialTextOffset);
+            this.tabPage11.Controls.Add(this.label8);
             this.tabPage11.Controls.Add(this.groupBox14);
             this.tabPage11.Controls.Add(this.groupBox13);
+            this.tabPage11.Controls.Add(this.groupBox3);
             this.tabPage11.Location = new System.Drawing.Point(4, 22);
             this.tabPage11.Name = "tabPage11";
             this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
@@ -2014,9 +2153,9 @@ namespace MSBT_Editor
             this.label54.AutoSize = true;
             this.label54.Location = new System.Drawing.Point(6, 33);
             this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(114, 12);
+            this.label54.Size = new System.Drawing.Size(112, 12);
             this.label54.TabIndex = 5;
-            this.label54.Text = "EnglishSettingAndFix";
+            this.label54.Text = "英語翻訳とコード修正";
             // 
             // label48
             // 
@@ -2166,14 +2305,14 @@ namespace MSBT_Editor
             this.label40.TabIndex = 10;
             this.label40.Text = "Langage";
             // 
-            // label42
+            // MsbtListSelectIndex
             // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(187, 14);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(23, 12);
-            this.label42.TabIndex = 11;
-            this.label42.Text = "null";
+            this.MsbtListSelectIndex.AutoSize = true;
+            this.MsbtListSelectIndex.Location = new System.Drawing.Point(187, 14);
+            this.MsbtListSelectIndex.Name = "MsbtListSelectIndex";
+            this.MsbtListSelectIndex.Size = new System.Drawing.Size(23, 12);
+            this.MsbtListSelectIndex.TabIndex = 11;
+            this.MsbtListSelectIndex.Text = "null";
             // 
             // label43
             // 
@@ -2229,7 +2368,7 @@ namespace MSBT_Editor
             this.tabPage13.Controls.Add(this.MsbtListBox);
             this.tabPage13.Controls.Add(this.label38);
             this.tabPage13.Controls.Add(this.listBox2);
-            this.tabPage13.Controls.Add(this.label42);
+            this.tabPage13.Controls.Add(this.MsbtListSelectIndex);
             this.tabPage13.Controls.Add(this.listBox3);
             this.tabPage13.Controls.Add(this.label37);
             this.tabPage13.Location = new System.Drawing.Point(4, 22);
@@ -2284,8 +2423,12 @@ namespace MSBT_Editor
             this.groupBox6.ResumeLayout(false);
             this.tabPage9.ResumeLayout(false);
             this.tabPage9.PerformLayout();
+            this.tabPage14.ResumeLayout(false);
+            this.groupBox16.ResumeLayout(false);
+            this.groupBox16.PerformLayout();
+            this.groupBox15.ResumeLayout(false);
+            this.groupBox15.PerformLayout();
             this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
             this.groupBox11.ResumeLayout(false);
@@ -2305,6 +2448,7 @@ namespace MSBT_Editor
             this.tabPage10.ResumeLayout(false);
             this.tabPage10.PerformLayout();
             this.tabPage11.ResumeLayout(false);
+            this.tabPage11.PerformLayout();
             this.groupBox14.ResumeLayout(false);
             this.groupBox14.PerformLayout();
             this.groupBox13.ResumeLayout(false);
@@ -2322,7 +2466,7 @@ namespace MSBT_Editor
 
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        public System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.TextBox MsbtText;
         public System.Windows.Forms.ListBox MsbtListBox;
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
@@ -2374,7 +2518,7 @@ namespace MSBT_Editor
         private System.Windows.Forms.GroupBox groupBox12;
         private System.Windows.Forms.TextBox textBox31;
         private System.Windows.Forms.GroupBox groupBox11;
-        private System.Windows.Forms.TextBox textBox30;
+        private System.Windows.Forms.TextBox MsbtSelectedListName;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label38;
@@ -2383,11 +2527,11 @@ namespace MSBT_Editor
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         public System.Windows.Forms.ToolStripMenuItem ファイルToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem 開くToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem 保存ToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem 上書き保存ToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem Msbt上書き保存ToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem Msbt保存ToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem mSBF開くToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem mSBF保存ToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem mSBF上書き保存ToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem Msbf上書き保存ToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem Msbf保存ToolStripMenuItem;
         public System.Windows.Forms.TabControl tabControl1;
         public System.Windows.Forms.TabPage tabPage1;
         public System.Windows.Forms.TabPage tabPage2;
@@ -2429,20 +2573,20 @@ namespace MSBT_Editor
         public System.Windows.Forms.TabPage tabPage7;
         public System.Windows.Forms.TabPage tabPage8;
         public System.Windows.Forms.TabPage tabPage9;
-        public System.Windows.Forms.ComboBox comboBox1;
-        public System.Windows.Forms.ComboBox comboBox2;
-        public System.Windows.Forms.ComboBox comboBox3;
-        public System.Windows.Forms.ComboBox comboBox4;
-        public System.Windows.Forms.Button button1;
-        public System.Windows.Forms.Button button2;
-        public System.Windows.Forms.Button button3;
-        public System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label label42;
+        public System.Windows.Forms.ComboBox ColorTagSelectComboBox;
+        public System.Windows.Forms.ComboBox LineControlTagSelectComboBox;
+        public System.Windows.Forms.ComboBox FontSizeTagSelectComboBox;
+        public System.Windows.Forms.ComboBox CenterTagSelectComboBox;
+        public System.Windows.Forms.Button ColorTagInsertButton;
+        public System.Windows.Forms.Button LineControlTagInsertButton;
+        public System.Windows.Forms.Button FontSizeTagInsertButton;
+        public System.Windows.Forms.Button CenterTagInsertButton;
+        private System.Windows.Forms.Label MsbtListSelectIndex;
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.Label label44;
         public System.Windows.Forms.GroupBox groupBox3;
         public System.Windows.Forms.Label label33;
-        public System.Windows.Forms.TreeView treeView1;
+        public System.Windows.Forms.TreeView MsbfTreeView;
         public System.Windows.Forms.TextBox UnknownTag;
         private System.Windows.Forms.Button button25;
         private System.Windows.Forms.TextBox HashCalculation;
@@ -2499,7 +2643,7 @@ namespace MSBT_Editor
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
         public System.Windows.Forms.ToolStripStatusLabel SavePathString;
         private System.Windows.Forms.TextBox textBox34;
-        private System.Windows.Forms.TextBox textBox35;
+        private System.Windows.Forms.TextBox ReadOnlyMsbtText;
         private System.Windows.Forms.Button button31;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         public System.Windows.Forms.CheckBox checkBox1;
@@ -2515,6 +2659,17 @@ namespace MSBT_Editor
         private System.Windows.Forms.TabPage tabPage13;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel7;
+        private System.Windows.Forms.Button UserIconInsertButton;
+        private System.Windows.Forms.TextBox UserIconInsertTextBox;
+        private System.Windows.Forms.GroupBox groupBox15;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label UserIconInsertLabel;
+        private System.Windows.Forms.TabPage tabPage14;
+        private System.Windows.Forms.Button MsbtSETagInsertButton;
+        private System.Windows.Forms.TextBox SETagInsertTextBox;
+        private System.Windows.Forms.GroupBox groupBox16;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label56;
     }
 }
 

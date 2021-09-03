@@ -30,15 +30,17 @@ namespace MSBT_Editor.FileSys
         public static void Open(int filenum)
         {
 
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.FileName = "default.msbt";
-            ofd.InitialDirectory = @"C:\";
-            ofd.Filter = "メッセージファイル(*.msbt;*.Msbt)|*.msbt;*.Msbt|メッセージフローファイル(*.msbf;*.Msbf)|*.msbf;*.Msbf|nintendoアーカイブファイル(*.arc;*.Arc)|*.arc;*.Arc|すべてのファイル(*.*)|*.*";
-            ofd.FilterIndex = filenum;
-            ofd.Title = "開くファイルを選択してください";
-            ofd.RestoreDirectory = true;
-            ofd.CheckFileExists = true;
-            ofd.CheckPathExists = true;
+            OpenFileDialog ofd = new OpenFileDialog
+            {
+                FileName = "default.msbt",
+                InitialDirectory = @"C:\",
+                Filter = "メッセージファイル(*.msbt;*.Msbt)|*.msbt;*.Msbt|メッセージフローファイル(*.msbf;*.Msbf)|*.msbf;*.Msbf|nintendoアーカイブファイル(*.arc;*.Arc)|*.arc;*.Arc|すべてのファイル(*.*)|*.*",
+                FilterIndex = filenum,
+                Title = "開くファイルを選択してください",
+                RestoreDirectory = true,
+                CheckFileExists = true,
+                CheckPathExists = true
+            };
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
@@ -106,16 +108,18 @@ namespace MSBT_Editor.FileSys
         public static void SaveAs(int filenum)
         {
             //SaveFileDialogクラスのインスタンスを作成
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.FileName = "新しいファイル.msbt";
-            if (filenum == 2) sfd.FileName = "新しいファイル.msbf";
-            sfd.InitialDirectory = @"C:\";
-            sfd.Filter = "メッセージファイル(*.msbt;*.Msbt)|*.msbt;*.Msbt|メッセージフローファイル(*.msbf;*.Msbf)|*.msbf;*.Msbf";
-            sfd.FilterIndex = filenum;
-            sfd.Title = "保存先のファイルを選択してください";
-            sfd.RestoreDirectory = true;
-            sfd.OverwritePrompt = true;
-            sfd.CheckPathExists = true;
+            string[] FileNameStrings = {string.Empty, "新しいファイル.msbt" , "新しいファイル.msbf" };
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                FileName = FileNameStrings[filenum],
+                InitialDirectory = @"C:\",
+                Filter = "メッセージファイル(*.msbt;*.Msbt)|*.msbt;*.Msbt|メッセージフローファイル(*.msbf;*.Msbf)|*.msbf;*.Msbf",
+                FilterIndex = filenum,
+                Title = "保存先のファイルを選択してください",
+                RestoreDirectory = true,
+                OverwritePrompt = true,
+                CheckPathExists = true
+            };
             //ダイアログを表示する
             if (sfd.ShowDialog() == DialogResult.OK)
             {
@@ -167,15 +171,15 @@ namespace MSBT_Editor.FileSys
                 MessageBox.Show("MSBFのFEN1の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            var msbf = action;
+            //var msbf = action;
             action();
             return true;
         }
 
         public static bool MSBT_Item_And_ListItem_Checker(Action action)
         {
-            FLW2 flw2 = new FLW2();
-            FEN1 fen1 = new FEN1();
+            //FLW2 flw2 = new FLW2();
+            //FEN1 fen1 = new FEN1();
 
             var list1_counter = MsbtListBox.Items.Count == 0;
             var msbt_all_item = MSBT_Data.MSBT_All_Data.Item == default;
@@ -187,7 +191,7 @@ namespace MSBT_Editor.FileSys
                 return false;
             }
 
-            var msbt = action;
+            //var msbt = action;
             action();
             return true;
         }
