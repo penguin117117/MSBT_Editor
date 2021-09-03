@@ -9,6 +9,10 @@ namespace MSBT_Editor.Formsys
 {
     public class Langage : objects
     {
+        private static readonly string[] IconNameJP01 = { "ピーチ", "クッパ", "キノピオ", "マリオ", "マリオ2", "チコ", "ヨッシー", "腹ペコチコ", "ルイージ", "ベビーチコ", "アシストチコ", "ベーゴマン", "クリボー", "星ウサギ" };
+        private static readonly string[] IconNameJP02 = { "彗星メダル", "コイン×3", "カラフルスターピース", "イエローチップ", "スターピース紫", "シルバースター", "スター", "グランドスター", "ブロンズスター", "コイン", "パープルコイン", "1UPキノコ", "ライフアップキノコ", "ブルースター", "スターリング", "ヨッシーキャプチャー花", "ココナッツ", "ブルーチップ", "バルーンフルーツ", "中間ポイント", "グランドブロンズスター" };
+        private static readonly string[] IconNameJP03 = { "ポインター", "2Pポインター", "ハンドポインター選択", "Wiiリモコン", "Aボタン", "Bボタン", "Cボタン", "Zボタン", "十字ボタン", "十字ボタン下", "十字ボタン上", "スティック", "ヌンチャク", "照準", "マイナスボタン", "プラスボタン", "×(かける)アイコン", "グリーンコメット", "銀の王冠", "銀の王冠宝石付き", "金の王冠", "手紙", "矢印下", "ストップウォッチ", "1ボタン", "2ボタン", "ホームボタン", "ハンドポインター握り", "ハンドポインター", "？マーク", "イエローコメット", "？マーク緑", "空のスター", "空の彗星メダル", "空の彗星", "隠しスター", "ブロンズコメット" };
+
         public static void Langage_Check()
         {
             switch (Properties.Settings.Default.言語)
@@ -25,6 +29,10 @@ namespace MSBT_Editor.Formsys
             }
             if (Properties.Settings.Default.言語 == "日本語")
             {
+                combo1.SelectedIndex = 0;
+                combo2.SelectedIndex = 0;
+                combo3.SelectedIndex = 0;
+                combo4.SelectedIndex = 0;
                 combo5.SelectedIndex = 0;
                 combo6.SelectedIndex = 0;
                 combo7.SelectedIndex = 0;
@@ -220,9 +228,9 @@ namespace MSBT_Editor.Formsys
             button12.Show();
             button13.Show();
             combo5.Text = "ピーチ";
-            combo5.Items.AddRange(Form1.IconNameJP01);
-            combo6.Items.AddRange(Form1.IconNameJP02);
-            combo7.Items.AddRange(Form1.IconNameJP03);
+            combo5.Items.AddRange(IconNameJP01);
+            combo6.Items.AddRange(IconNameJP02);
+            combo7.Items.AddRange(IconNameJP03);
         }
 
         public static void EN()

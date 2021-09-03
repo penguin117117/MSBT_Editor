@@ -21,18 +21,18 @@ namespace MSBT_Editor.MSBTsys
             BinaryReader br = new BinaryReader(fs);
 
             //MSBTヘッダー情報
-            Magic = CS.Byte2Char(br, 8);    //MsgStdBn
-            Endian = CS.Byte2Short(br);     //-257 = Big Endian
-            Unknown1 = CS.Byte2Short(br);   //常に0
-            Unknown2 = CS.Byte2Short(br);   //常に259
-            Unknown3 = CS.Byte2Short(br);   //常に3
-            Unknown4 = CS.Byte2Short(br);   //常に0
-            File_Size = CS.Byte2Int(br);    //ファイルサイズ
-            Unknown5 = CS.Byte2Short(br);   //以下10バイト常に0
+            Magic    = CS.Byte2Char(br, 8);    //MsgStdBn
+            Endian   = CS.Byte2Short(br);      //-257 = Big Endian
+            Unknown1 = CS.Byte2Short(br);      //常に0
+            Unknown2 = CS.Byte2Short(br);      //常に259
+            Unknown3 = CS.Byte2Short(br);      //常に3
+            Unknown4 = CS.Byte2Short(br);      //常に0
+            FileSize = CS.Byte2Int(br);        //ファイルサイズ
+            Unknown5 = CS.Byte2Short(br);      //以下10バイト常に0
             Unknown6 = CS.Byte2Short(br);
             Unknown7 = CS.Byte2Short(br);
             Unknown8 = CS.Byte2Short(br);
-            Unknown9 = CS.Byte2Short(br);   //ここまで
+            Unknown9 = CS.Byte2Short(br);     //ここまで
 
             //インスタンス生成
             LBL1 lbl1 = new LBL1();
@@ -46,8 +46,8 @@ namespace MSBT_Editor.MSBTsys
             
             //データ記録
             MSBT_All_Data = new Data_List(new List<string>(TXT2.Text_Data) , new List<ATR1.AttributeData>(atr1.AttributeDataList));
-            atr_nulldata = new List<string>();
-            atr_nulldata = ATR1.SpecialTextList;
+            Atr1SpecialText = new List<string>();
+            Atr1SpecialText = ATR1.SpecialTextList;
 
             if(MsbtListBox.Items.Count > 0)
             MsbtListBox.SelectedIndex = 0;

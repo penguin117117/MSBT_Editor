@@ -1264,6 +1264,7 @@ namespace MSBT_Editor.FileSys
         }
 
         public static void TextBoxInsert(TextBox tb , string str) {
+            if (str == string.Empty) return;
             tb.SelectedText = str;
         }
 

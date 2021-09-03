@@ -61,6 +61,46 @@ namespace MSBT_Editor.Properties {
         }
         
         /// <summary>
+        ///   型 System.Byte[] のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static byte[] ARCTool_ver0_1_5_0 {
+            get {
+                object obj = ResourceManager.GetObject("ARCTool_ver0_1_5_0", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Byte[] のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static byte[] ARCTool_ver0_1_5_0_deps {
+            get {
+                object obj = ResourceManager.GetObject("ARCTool_ver0_1_5_0_deps", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Byte[] のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static byte[] ARCTool_ver0_1_5_0_runtimeconfig {
+            get {
+                object obj = ResourceManager.GetObject("ARCTool_ver0_1_5_0_runtimeconfig", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Byte[] のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static byte[] ARCTool_ver0_1_5_01 {
+            get {
+                object obj = ResourceManager.GetObject("ARCTool_ver0_1_5_01", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
         /// </summary>
         internal static System.Drawing.Icon アイコン {

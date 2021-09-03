@@ -21,6 +21,7 @@ namespace MSBT_Editor.FileSys
     {
         private static string Save_Path_Msbt = "None";
         private static string Save_Path_Msbf = "None";
+        private static string Save_Path_Arc  = "None";
         /// <summary>
         /// ファイルを選択して開く
         /// </summary>
@@ -28,16 +29,18 @@ namespace MSBT_Editor.FileSys
         /// <remarks></remarks>
         public static void Open(int filenum)
         {
-
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.FileName = "default.msbt";
-            ofd.InitialDirectory = @"C:\";
-            ofd.Filter = "メッセージファイル(*.msbt;*.Msbt)|*.msbt;*.Msbt|メッセージフローファイル(*.msbf;*.Msbf)|*.msbf;*.Msbf|すべてのファイル(*.*)|*.*";
-            ofd.FilterIndex = filenum;
-            ofd.Title = "開くファイルを選択してください";
-            ofd.RestoreDirectory = true;
-            ofd.CheckFileExists = true;
-            ofd.CheckPathExists = true;
+            //nintendoアーカイブファイル(*.arc;*.Arc)|*.arc;*.Arc|
+            OpenFileDialog ofd = new OpenFileDialog
+            {
+                FileName = "default.msbt",
+                InitialDirectory = @"C:\",
+                Filter = "メッセージファイル(*.msbt;*.Msbt)|*.msbt;*.Msbt|メッセージフローファイル(*.msbf;*.Msbf)|*.msbf;*.Msbf|すべてのファイル(*.*)|*.*",
+                FilterIndex = filenum,
+                Title = "開くファイルを選択してください",
+                RestoreDirectory = true,
+                CheckFileExists = true,
+                CheckPathExists = true
+            };
 
             if (ofd.ShowDialog() == DialogResult.OK)
             {
@@ -105,16 +108,18 @@ namespace MSBT_Editor.FileSys
         public static void SaveAs(int filenum)
         {
             //SaveFileDialogクラスのインスタンスを作成
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.FileName = "新しいファイル.msbt";
-            if (filenum == 2) sfd.FileName = "新しいファイル.msbf";
-            sfd.InitialDirectory = @"C:\";
-            sfd.Filter = "メッセージファイル(*.msbt;*.Msbt)|*.msbt;*.Msbt|メッセージフローファイル(*.msbf;*.Msbf)|*.msbf;*.Msbf";
-            sfd.FilterIndex = filenum;
-            sfd.Title = "保存先のファイルを選択してください";
-            sfd.RestoreDirectory = true;
-            sfd.OverwritePrompt = true;
-            sfd.CheckPathExists = true;
+            string[] FileNameStrings = {string.Empty, "新しいファイル.msbt" , "新しいファイル.msbf" };
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                FileName = FileNameStrings[filenum],
+                InitialDirectory = @"C:\",
+                Filter = "メッセージファイル(*.msbt;*.Msbt)|*.msbt;*.Msbt|メッセージフローファイル(*.msbf;*.Msbf)|*.msbf;*.Msbf",
+                FilterIndex = filenum,
+                Title = "保存先のファイルを選択してください",
+                RestoreDirectory = true,
+                OverwritePrompt = true,
+                CheckPathExists = true
+            };
             //ダイアログを表示する
             if (sfd.ShowDialog() == DialogResult.OK)
             {
@@ -166,15 +171,15 @@ namespace MSBT_Editor.FileSys
                 MessageBox.Show("MSBFのFEN1の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            var msbf = action;
+            //var msbf = action;
             action();
             return true;
         }
 
         public static bool MSBT_Item_And_ListItem_Checker(Action action)
         {
-            FLW2 flw2 = new FLW2();
-            FEN1 fen1 = new FEN1();
+            //FLW2 flw2 = new FLW2();
+            //FEN1 fen1 = new FEN1();
 
             var list1_counter = MsbtListBox.Items.Count == 0;
             var msbt_all_item = MSBT_Data.MSBT_All_Data.Item == default;
@@ -186,7 +191,7 @@ namespace MSBT_Editor.FileSys
                 return false;
             }
 
-            var msbt = action;
+            //var msbt = action;
             action();
             return true;
         }
@@ -224,6 +229,22 @@ namespace MSBT_Editor.FileSys
                     msbfh.Read(MSBF_File_Path);
                     tssl4.Text = Path.GetFileName(MSBF_File_Path);
                     break;
+                //case ".arc":
+                //    var IsYaz0 = MagicChecker(filepath,"Yaz0");
+                //    if (IsYaz0 == true) return;
+                //    Save_Path_Arc = filepath;
+                //    tssl7.Text = "";
+                //    ExternalFileExecutor.ARCToolExecutor(filepath);
+                //    string[] DirectoryPathStrings = Directory.GetDirectories(Directory.GetParent(filepath).FullName+@"\"+Path.GetFileNameWithoutExtension(filepath), "*", SearchOption.AllDirectories);
+                //    string[] FilePathStrings = Directory.GetFiles(Directory.GetParent(filepath).FullName + @"\" + Path.GetFileNameWithoutExtension(filepath), "*", SearchOption.AllDirectories);
+                //    var DirConcatFile = DirectoryPathStrings.Concat(FilePathStrings);
+
+                //    DirConcatFile = DirConcatFile.OrderBy(sort => sort);
+                //    var SortedDirConcatFile = DirConcatFile.ToArray();
+
+                //    foreach (var Dir in SortedDirConcatFile) Console.WriteLine(Dir);
+                //    tssl7.Text = Path.GetFileName(Save_Path_Arc);
+                //    break;
 
                 default:
                     MessageBox.Show("未対応のファイルです" + "\r\n" + "MSBTファイルのみ読み込めます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -234,6 +255,21 @@ namespace MSBT_Editor.FileSys
 
 
 
+        }
+
+        private static bool MagicChecker(string filePath , string checkString) {
+            FileStream fs = new FileStream(filePath, FileMode.Open);
+            BinaryReader br = new BinaryReader(fs);
+            var Magic = Calculation_System.Byte2Char(br);
+            if (Magic == checkString)
+            {
+                br.Close();
+                fs.Close();
+                return true;
+            }
+            br.Close();
+            fs.Close();
+            return false;
         }
     }
 }

@@ -113,7 +113,6 @@ namespace MSBT_Editor.Sectionsys
             SectionSize = CS.Byte2Int(br);
             Unknown1    = CS.Byte2Int(br);
             Unknown2    = CS.Byte2Int(br);
-
             EntrySize   = CS.Byte2Int(br);
 
             //LBL1のベースアドレスを記憶 Stores the base address of LBL1
