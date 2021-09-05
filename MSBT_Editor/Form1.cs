@@ -20,13 +20,11 @@ namespace MSBT_Editor
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
+        public Form1() => InitializeComponent();
         private static Form1 _form1Instance;
 
+        //開発専用のメニューを表示します
+        public static readonly bool UseDevelopMenue = true;
 
         public static Form1 Form1Instance
         {
@@ -34,53 +32,32 @@ namespace MSBT_Editor
             get => _form1Instance;
         }
 
-        private void 開くToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Msbt開くToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Open(1);
+        private void Msbt保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.SaveAs(1);
+        private void Msbt上書き保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Save(Dialog.Save_Path_Msbt,1);
+        
+
+        private void MSBF開くToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Open(2);
+        private void Msbf保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.SaveAs(2);
+        private void Msbf上書き保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Save(Dialog.Save_Path_Msbf,2);
+
+        private void ARC開くToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Open(3);
+
+        private void ARC保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Dialog.Open(1);
+
         }
-        private void Msbt保存ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Action ac = () => Dialog.SaveAs(1);
-            Dialog.MSBT_Item_And_ListItem_Checker(ac);
-        }
-
-        private void Msbt上書き保存ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MSBTsys.MSBT_Header msbth = new MSBTsys.MSBT_Header();
-
-
-            Action ac = () => Dialog.Save(msbth);
-            Dialog.MSBT_Item_And_ListItem_Checker(ac);
-        }
-
-        private void MSBF開くToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Dialog.Open(2);
-        }
-
-        private void Msbf保存ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Action ac = () => Dialog.SaveAs(2);
-            Dialog.MSBF_Item_And_ListItem_Checker(ac);
-        }
-
-        private void Msbf上書き保存ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MSBFsys.MSBF_Header msbfh = new MSBFsys.MSBF_Header();
-            Action ac = () => Dialog.Save(msbfh);
-            Dialog.MSBF_Item_And_ListItem_Checker(ac);
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            Console.WriteLine("testes");
-
             Form1.Form1Instance = this;
 
-            //ARC機能の非表示
-            tabControl3.TabPages.Remove(tabPage12);
-
+            if (UseDevelopMenue == false) {
+                //ARC機能の非表示
+                tabControl3.TabPages.Remove(tabPage12);
+                ARC開くToolStripMenuItem.Visible = false;
+                ARC保存ToolStripMenuItem.Visible = false;
+                ARC名前を付けて保存ToolStripMenuItem.Visible = false;
+            }
             //言語設定
             comboBox8.Text = Properties.Settings.Default.言語;
             Langage.Langage_Check();
@@ -1239,10 +1216,7 @@ namespace MSBT_Editor
 
         }
 
-        private void ARC開くToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Dialog.Open(3);
-        }
+        
 
         private void toolStripStatusLabel7_Click(object sender, EventArgs e)
         {
@@ -1326,5 +1300,7 @@ namespace MSBT_Editor
         {
 
         }
+
+        
     }
 }

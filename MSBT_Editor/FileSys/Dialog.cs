@@ -19,9 +19,10 @@ namespace MSBT_Editor.FileSys
     /// <remarks>ファイルを開いたり保存する</remarks>
     public class Dialog : objects
     {
-        private static string Save_Path_Msbt = "None";
-        private static string Save_Path_Msbf = "None";
-        private static string Save_Path_Arc  = "None";
+        public static string Save_Path_Msbt = "None";
+        public static string Save_Path_Msbf = "None";
+        public static string Save_Path_Arc  = "None";
+        public static string Temp_Path_Arc  = "None";
         /// <summary>
         /// ファイルを選択して開く
         /// </summary>
@@ -34,7 +35,7 @@ namespace MSBT_Editor.FileSys
             {
                 FileName = "default.msbt",
                 InitialDirectory = @"C:\",
-                Filter = "メッセージファイル(*.msbt;*.Msbt)|*.msbt;*.Msbt|メッセージフローファイル(*.msbf;*.Msbf)|*.msbf;*.Msbf|すべてのファイル(*.*)|*.*",
+                Filter = "メッセージファイル(*.msbt;*.Msbt)|*.msbt;*.Msbt|メッセージフローファイル(*.msbf;*.Msbf)|*.msbf;*.Msbf|nintendoアーカイブファイル(*.arc;*.Arc)|*.arc;*.Arc|すべてのファイル(*.*)|*.*",
                 FilterIndex = filenum,
                 Title = "開くファイルを選択してください",
                 RestoreDirectory = true,
@@ -76,14 +77,15 @@ namespace MSBT_Editor.FileSys
 
         //}
 
-        public static void Save(MSBT_Header MSBTH)
+        public static void Save(string filePath, int fileNum)
         {
-
-            var hasPath = CheckSavePath(Save_Path_Msbt);
+            
+            var hasPath = CheckSavePath(filePath);
             if (hasPath) return;
-            MSBTH.Write(Save_Path_Msbt);
-            SaveStatusPathString.Text = Save_Path_Msbt;
-            SaveStatusPathString.ForeColor = Color.Green;
+            FileSave(filePath,fileNum);
+            //MSBTH.Write(Save_Path_Msbt);
+            //SaveStatusPathString.Text = Save_Path_Msbt;
+            //SaveStatusPathString.ForeColor = Color.Green;
         }
 
 
@@ -107,6 +109,7 @@ namespace MSBT_Editor.FileSys
 
         public static void SaveAs(int filenum)
         {
+            
             //SaveFileDialogクラスのインスタンスを作成
             string[] FileNameStrings = {string.Empty, "新しいファイル.msbt" , "新しいファイル.msbf" };
             SaveFileDialog sfd = new SaveFileDialog
@@ -123,39 +126,36 @@ namespace MSBT_Editor.FileSys
             //ダイアログを表示する
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                switch (filenum)
-                {
-                    case 1:
-                        MSBT_Header msbth = new MSBT_Header();
-                        //try
-                        //{
-
-                        msbth.Write(sfd.FileName);
-                        Save_Path_Msbt = sfd.FileName;
-                        SaveStatusPathString.Text = Save_Path_Msbt;
-                        SaveStatusPathString.ForeColor = Color.Green;
-                        //}
-                        //catch
-                        //{
-
-                        //}
-
-                        break;
-                    case 2:
-                        MSBF_Header msbfh = new MSBF_Header();
-                        msbfh.Write(sfd.FileName);
-                        Save_Path_Msbf = sfd.FileName;
-                        SaveStatusPathString.ForeColor = Color.Green;
-                        SaveStatusPathString.Text = Save_Path_Msbf;
-                        break;
-                    default:
-                        MessageBox.Show("このメッセージが表示されている場合\n\r" + "アプリ製作者のミスの可能性が高いので\n\r" + "至急このバージョンの制作者に連絡してください\n\r" + "ErrorName StaffMiss001 ", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                }
+                FileSave(sfd.FileName,filenum);
             }
         }
 
-        public static bool MSBF_Item_And_ListItem_Checker(Action action)
+        public static void FileSave(string fileName,int fileNum) {
+            switch (fileNum)
+            {
+                case 1:
+                    if(MSBT_Item_And_ListItem_Checker() == false) break;
+                    MSBT_Header msbth = new MSBT_Header();
+                    msbth.Write(fileName);
+                    Save_Path_Msbt = fileName;
+                    SaveStatusPathString.Text = Save_Path_Msbt;
+                    SaveStatusPathString.ForeColor = Color.Green;
+                    break;
+                case 2:
+                    if (MSBF_Item_And_ListItem_Checker() == false) break;
+                    MSBF_Header msbfh = new MSBF_Header();
+                    msbfh.Write(fileName);
+                    Save_Path_Msbf = fileName;
+                    SaveStatusPathString.ForeColor = Color.Green;
+                    SaveStatusPathString.Text = Save_Path_Msbf;
+                    break;
+                default:
+                    MessageBox.Show("このメッセージが表示されている場合\n\r" + "アプリ製作者のミスの可能性が高いので\n\r" + "至急このバージョンの制作者に連絡してください\n\r" + "ErrorName StaffMiss001 ", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+            }
+        }
+
+        public static bool MSBF_Item_And_ListItem_Checker()
         {
             FLW2 flw2 = new FLW2();
             FEN1 fen1 = new FEN1();
@@ -171,28 +171,21 @@ namespace MSBT_Editor.FileSys
                 MessageBox.Show("MSBFのFEN1の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            //var msbf = action;
-            action();
             return true;
         }
 
-        public static bool MSBT_Item_And_ListItem_Checker(Action action)
+        public static bool MSBT_Item_And_ListItem_Checker()
         {
-            //FLW2 flw2 = new FLW2();
-            //FEN1 fen1 = new FEN1();
+            var MsbtListCountZeroCheck  = MsbtListBox.Items.Count == 0;
+            var MsbtAllItemDefaultCheck = MSBT_Data.MSBT_All_Data.Item == default;
+            var MsbtAllTextDefaultCheck = MSBT_Data.MSBT_All_Data.Text == default;
 
-            var list1_counter = MsbtListBox.Items.Count == 0;
-            var msbt_all_item = MSBT_Data.MSBT_All_Data.Item == default;
-            var msbt_all_text = MSBT_Data.MSBT_All_Data.Text == default;
-
-            if (list1_counter || (msbt_all_item) || msbt_all_text)
+            if (MsbtListCountZeroCheck || (MsbtAllItemDefaultCheck) || MsbtAllTextDefaultCheck)
             {
                 MessageBox.Show("MSBTの項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            //var msbt = action;
-            action();
             return true;
         }
 
@@ -229,22 +222,29 @@ namespace MSBT_Editor.FileSys
                     msbfh.Read(MSBF_File_Path);
                     tssl4.Text = Path.GetFileName(MSBF_File_Path);
                     break;
-                //case ".arc":
-                //    var IsYaz0 = MagicChecker(filepath,"Yaz0");
-                //    if (IsYaz0 == true) return;
-                //    Save_Path_Arc = filepath;
-                //    tssl7.Text = "";
-                //    ExternalFileExecutor.ARCToolExecutor(filepath);
-                //    string[] DirectoryPathStrings = Directory.GetDirectories(Directory.GetParent(filepath).FullName+@"\"+Path.GetFileNameWithoutExtension(filepath), "*", SearchOption.AllDirectories);
-                //    string[] FilePathStrings = Directory.GetFiles(Directory.GetParent(filepath).FullName + @"\" + Path.GetFileNameWithoutExtension(filepath), "*", SearchOption.AllDirectories);
-                //    var DirConcatFile = DirectoryPathStrings.Concat(FilePathStrings);
+                case ".arc":
+                    if (Form1.UseDevelopMenue == false) break;
+                    var IsYaz0 = MagicChecker(filepath, "Yaz0");
+                    if (IsYaz0 == true) return;
+                    Save_Path_Arc = filepath;
+                    tssl7.Text = "";
 
-                //    DirConcatFile = DirConcatFile.OrderBy(sort => sort);
-                //    var SortedDirConcatFile = DirConcatFile.ToArray();
+                    var FileName = Path.GetFileName(filepath);
+                    var TempARCPath = Path.GetDirectoryName(Application.ExecutablePath) + "\\res\\" +FileName;
+                    Console.WriteLine(TempARCPath);
+                    File.Copy(filepath,TempARCPath,true);
 
-                //    foreach (var Dir in SortedDirConcatFile) Console.WriteLine(Dir);
-                //    tssl7.Text = Path.GetFileName(Save_Path_Arc);
-                //    break;
+                    ExternalFileExecutor.ARCToolExecutor(TempARCPath/*filepath*/);
+                    string[] DirectoryPathStrings = Directory.GetDirectories(Directory.GetParent(TempARCPath/*filepath*/).FullName + @"\" + Path.GetFileNameWithoutExtension(TempARCPath/*filepath*/), "*", SearchOption.AllDirectories);
+                    string[] FilePathStrings = Directory.GetFiles(Directory.GetParent(TempARCPath/*filepath*/).FullName + @"\" + Path.GetFileNameWithoutExtension(TempARCPath/*filepath*/), "*", SearchOption.AllDirectories);
+                    var DirConcatFile = DirectoryPathStrings.Concat(FilePathStrings);
+
+                    DirConcatFile = DirConcatFile.OrderBy(sort => sort);
+                    var SortedDirConcatFile = DirConcatFile.ToArray();
+
+                    foreach (var Dir in SortedDirConcatFile) Console.WriteLine(Dir);
+                    tssl7.Text = Path.GetFileName(Save_Path_Arc);
+                    break;
 
                 default:
                     MessageBox.Show("未対応のファイルです" + "\r\n" + "MSBTファイルのみ読み込めます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);

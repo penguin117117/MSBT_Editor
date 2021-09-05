@@ -42,7 +42,7 @@ namespace MSBT_Editor
             this.SavePathString = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ファイルToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Msbt開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Msbt上書き保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Msbt保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -51,27 +51,16 @@ namespace MSBT_Editor
             this.Msbf保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ARC開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aRC保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aRC名前を付けて保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ARC保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ARC名前を付けて保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MsbtListBox = new System.Windows.Forms.ListBox();
             this.MsbtText = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.Atr1SpecialText = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -79,7 +68,6 @@ namespace MSBT_Editor
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.Atr1SpecialTextOffset = new System.Windows.Forms.TextBox();
             this.Atr1Unknown6 = new System.Windows.Forms.TextBox();
             this.Atr1MessageAreaID = new System.Windows.Forms.TextBox();
             this.Atr1EventCameraID = new System.Windows.Forms.TextBox();
@@ -211,6 +199,12 @@ namespace MSBT_Editor
             this.textBox27 = new System.Windows.Forms.TextBox();
             this.button20 = new System.Windows.Forms.Button();
             this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.Atr1SpecialTextOffset = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox14 = new System.Windows.Forms.GroupBox();
             this.label55 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
@@ -222,6 +216,12 @@ namespace MSBT_Editor
             this.label49 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.listBox3 = new System.Windows.Forms.ListBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.label36 = new System.Windows.Forms.Label();
@@ -240,8 +240,6 @@ namespace MSBT_Editor
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -266,8 +264,10 @@ namespace MSBT_Editor
             this.tabPage5.SuspendLayout();
             this.tabPage10.SuspendLayout();
             this.tabPage11.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox14.SuspendLayout();
             this.groupBox13.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.tabControl3.SuspendLayout();
             this.tabPage12.SuspendLayout();
             this.tabPage13.SuspendLayout();
@@ -359,7 +359,7 @@ namespace MSBT_Editor
             // ファイルToolStripMenuItem
             // 
             this.ファイルToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.開くToolStripMenuItem,
+            this.Msbt開くToolStripMenuItem,
             this.Msbt上書き保存ToolStripMenuItem,
             this.Msbt保存ToolStripMenuItem,
             this.toolStripSeparator1,
@@ -368,19 +368,19 @@ namespace MSBT_Editor
             this.Msbf保存ToolStripMenuItem,
             this.toolStripSeparator2,
             this.ARC開くToolStripMenuItem,
-            this.aRC保存ToolStripMenuItem,
-            this.aRC名前を付けて保存ToolStripMenuItem});
+            this.ARC保存ToolStripMenuItem,
+            this.ARC名前を付けて保存ToolStripMenuItem});
             this.ファイルToolStripMenuItem.Name = "ファイルToolStripMenuItem";
             this.ファイルToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.ファイルToolStripMenuItem.Text = "ファイル";
             // 
-            // 開くToolStripMenuItem
+            // Msbt開くToolStripMenuItem
             // 
-            this.開くToolStripMenuItem.Name = "開くToolStripMenuItem";
-            this.開くToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.開くToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            this.開くToolStripMenuItem.Text = "MSBT開く";
-            this.開くToolStripMenuItem.Click += new System.EventHandler(this.開くToolStripMenuItem_Click);
+            this.Msbt開くToolStripMenuItem.Name = "Msbt開くToolStripMenuItem";
+            this.Msbt開くToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.Msbt開くToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.Msbt開くToolStripMenuItem.Text = "MSBT開く";
+            this.Msbt開くToolStripMenuItem.Click += new System.EventHandler(this.Msbt開くToolStripMenuItem_Click);
             // 
             // Msbt上書き保存ToolStripMenuItem
             // 
@@ -442,22 +442,20 @@ namespace MSBT_Editor
             this.ARC開くToolStripMenuItem.Name = "ARC開くToolStripMenuItem";
             this.ARC開くToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
             this.ARC開くToolStripMenuItem.Text = "ARC開く";
-            this.ARC開くToolStripMenuItem.Visible = false;
             this.ARC開くToolStripMenuItem.Click += new System.EventHandler(this.ARC開くToolStripMenuItem_Click);
             // 
-            // aRC保存ToolStripMenuItem
+            // ARC保存ToolStripMenuItem
             // 
-            this.aRC保存ToolStripMenuItem.Name = "aRC保存ToolStripMenuItem";
-            this.aRC保存ToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            this.aRC保存ToolStripMenuItem.Text = "ARC上書き保存";
-            this.aRC保存ToolStripMenuItem.Visible = false;
+            this.ARC保存ToolStripMenuItem.Name = "ARC保存ToolStripMenuItem";
+            this.ARC保存ToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.ARC保存ToolStripMenuItem.Text = "ARC上書き保存";
+            this.ARC保存ToolStripMenuItem.Click += new System.EventHandler(this.ARC保存ToolStripMenuItem_Click);
             // 
-            // aRC名前を付けて保存ToolStripMenuItem
+            // ARC名前を付けて保存ToolStripMenuItem
             // 
-            this.aRC名前を付けて保存ToolStripMenuItem.Name = "aRC名前を付けて保存ToolStripMenuItem";
-            this.aRC名前を付けて保存ToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            this.aRC名前を付けて保存ToolStripMenuItem.Text = "ARC保存";
-            this.aRC名前を付けて保存ToolStripMenuItem.Visible = false;
+            this.ARC名前を付けて保存ToolStripMenuItem.Name = "ARC名前を付けて保存ToolStripMenuItem";
+            this.ARC名前を付けて保存ToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.ARC名前を付けて保存ToolStripMenuItem.Text = "ARC保存";
             // 
             // MsbtListBox
             // 
@@ -517,108 +515,6 @@ namespace MSBT_Editor
             this.tabPage1.Text = "MSBTテキストの詳細設定";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label39);
-            this.groupBox2.Controls.Add(this.label10);
-            this.groupBox2.Controls.Add(this.textBox12);
-            this.groupBox2.Location = new System.Drawing.Point(283, 337);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(233, 91);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "LBL1";
-            this.groupBox2.Visible = false;
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.ForeColor = System.Drawing.Color.Red;
-            this.label39.Location = new System.Drawing.Point(6, 13);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(162, 24);
-            this.label39.TabIndex = 7;
-            this.label39.Text = "この項目が　0　の場合\r\nゲームにテキストが認識されません";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 47);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(86, 12);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "タグインデックス？";
-            // 
-            // textBox12
-            // 
-            this.textBox12.Enabled = false;
-            this.textBox12.Location = new System.Drawing.Point(127, 44);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(100, 19);
-            this.textBox12.TabIndex = 5;
-            this.textBox12.TextChanged += new System.EventHandler(this.TextBox12_TextChanged);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.textBox15);
-            this.groupBox3.Controls.Add(this.label16);
-            this.groupBox3.Controls.Add(this.label15);
-            this.groupBox3.Controls.Add(this.textBox14);
-            this.groupBox3.Controls.Add(this.label14);
-            this.groupBox3.Location = new System.Drawing.Point(14, 331);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(263, 91);
-            this.groupBox3.TabIndex = 8;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "各セクションのエントリーサイズ";
-            this.groupBox3.Visible = false;
-            // 
-            // textBox15
-            // 
-            this.textBox15.Enabled = false;
-            this.textBox15.Location = new System.Drawing.Point(147, 68);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(100, 19);
-            this.textBox15.TabIndex = 3;
-            this.textBox15.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 71);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(34, 12);
-            this.label16.TabIndex = 2;
-            this.label16.Text = "ATR1";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.ForeColor = System.Drawing.Color.Red;
-            this.label15.Location = new System.Drawing.Point(6, 13);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(146, 24);
-            this.label15.TabIndex = 2;
-            this.label15.Text = "※初心者は触らないでください\r\nデータが破損する恐れあり";
-            // 
-            // textBox14
-            // 
-            this.textBox14.Enabled = false;
-            this.textBox14.Location = new System.Drawing.Point(147, 44);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(100, 19);
-            this.textBox14.TabIndex = 1;
-            this.textBox14.TextChanged += new System.EventHandler(this.TextBox14_TextChanged);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 47);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(31, 12);
-            this.label14.TabIndex = 0;
-            this.label14.Text = "LBL1";
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label9);
@@ -662,16 +558,6 @@ namespace MSBT_Editor
             this.Atr1SpecialText.TabIndex = 16;
             this.Atr1SpecialText.TextChanged += new System.EventHandler(this.Atr1SpecialText_TextChanged);
             this.Atr1SpecialText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Atr1SpecialText_KeyPress);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(22, 297);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(105, 12);
-            this.label8.TabIndex = 15;
-            this.label8.Text = "nullオフセット触らない";
-            this.label8.Visible = false;
             // 
             // label7
             // 
@@ -735,16 +621,6 @@ namespace MSBT_Editor
             this.label1.Size = new System.Drawing.Size(42, 12);
             this.label1.TabIndex = 8;
             this.label1.Text = "サウンド";
-            // 
-            // Atr1SpecialTextOffset
-            // 
-            this.Atr1SpecialTextOffset.Enabled = false;
-            this.Atr1SpecialTextOffset.Location = new System.Drawing.Point(133, 294);
-            this.Atr1SpecialTextOffset.MaxLength = 2;
-            this.Atr1SpecialTextOffset.Name = "Atr1SpecialTextOffset";
-            this.Atr1SpecialTextOffset.Size = new System.Drawing.Size(100, 19);
-            this.Atr1SpecialTextOffset.TabIndex = 7;
-            this.Atr1SpecialTextOffset.Visible = false;
             // 
             // Atr1Unknown6
             // 
@@ -2126,6 +2002,67 @@ namespace MSBT_Editor
             this.tabPage11.Text = "Credit";
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label39);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.textBox12);
+            this.groupBox2.Location = new System.Drawing.Point(283, 337);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(233, 91);
+            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "LBL1";
+            this.groupBox2.Visible = false;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.ForeColor = System.Drawing.Color.Red;
+            this.label39.Location = new System.Drawing.Point(6, 13);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(162, 24);
+            this.label39.TabIndex = 7;
+            this.label39.Text = "この項目が　0　の場合\r\nゲームにテキストが認識されません";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 47);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(86, 12);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "タグインデックス？";
+            // 
+            // textBox12
+            // 
+            this.textBox12.Enabled = false;
+            this.textBox12.Location = new System.Drawing.Point(127, 44);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(100, 19);
+            this.textBox12.TabIndex = 5;
+            this.textBox12.TextChanged += new System.EventHandler(this.TextBox12_TextChanged);
+            // 
+            // Atr1SpecialTextOffset
+            // 
+            this.Atr1SpecialTextOffset.Enabled = false;
+            this.Atr1SpecialTextOffset.Location = new System.Drawing.Point(133, 294);
+            this.Atr1SpecialTextOffset.MaxLength = 2;
+            this.Atr1SpecialTextOffset.Name = "Atr1SpecialTextOffset";
+            this.Atr1SpecialTextOffset.Size = new System.Drawing.Size(100, 19);
+            this.Atr1SpecialTextOffset.TabIndex = 7;
+            this.Atr1SpecialTextOffset.Visible = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(22, 297);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(105, 12);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "nullオフセット触らない";
+            this.label8.Visible = false;
+            // 
             // groupBox14
             // 
             this.groupBox14.Controls.Add(this.label55);
@@ -2233,6 +2170,67 @@ namespace MSBT_Editor
             this.label46.Size = new System.Drawing.Size(36, 12);
             this.label46.TabIndex = 0;
             this.label46.Text = "Xenon";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.textBox15);
+            this.groupBox3.Controls.Add(this.label16);
+            this.groupBox3.Controls.Add(this.label15);
+            this.groupBox3.Controls.Add(this.textBox14);
+            this.groupBox3.Controls.Add(this.label14);
+            this.groupBox3.Location = new System.Drawing.Point(14, 331);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(263, 91);
+            this.groupBox3.TabIndex = 8;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "各セクションのエントリーサイズ";
+            this.groupBox3.Visible = false;
+            // 
+            // textBox15
+            // 
+            this.textBox15.Enabled = false;
+            this.textBox15.Location = new System.Drawing.Point(147, 68);
+            this.textBox15.Name = "textBox15";
+            this.textBox15.Size = new System.Drawing.Size(100, 19);
+            this.textBox15.TabIndex = 3;
+            this.textBox15.TextChanged += new System.EventHandler(this.textBox15_TextChanged);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 71);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(34, 12);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "ATR1";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.ForeColor = System.Drawing.Color.Red;
+            this.label15.Location = new System.Drawing.Point(6, 13);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(146, 24);
+            this.label15.TabIndex = 2;
+            this.label15.Text = "※初心者は触らないでください\r\nデータが破損する恐れあり";
+            // 
+            // textBox14
+            // 
+            this.textBox14.Enabled = false;
+            this.textBox14.Location = new System.Drawing.Point(147, 44);
+            this.textBox14.Name = "textBox14";
+            this.textBox14.Size = new System.Drawing.Size(100, 19);
+            this.textBox14.TabIndex = 1;
+            this.textBox14.TextChanged += new System.EventHandler(this.TextBox14_TextChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 47);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(31, 12);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "LBL1";
             // 
             // listBox3
             // 
@@ -2404,10 +2402,6 @@ namespace MSBT_Editor
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -2449,10 +2443,14 @@ namespace MSBT_Editor
             this.tabPage10.PerformLayout();
             this.tabPage11.ResumeLayout(false);
             this.tabPage11.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox14.ResumeLayout(false);
             this.groupBox14.PerformLayout();
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.tabControl3.ResumeLayout(false);
             this.tabPage12.ResumeLayout(false);
             this.tabPage13.ResumeLayout(false);
@@ -2526,7 +2524,7 @@ namespace MSBT_Editor
         private System.Windows.Forms.Label label40;
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         public System.Windows.Forms.ToolStripMenuItem ファイルToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem 開くToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem Msbt開くToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem Msbt上書き保存ToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem Msbt保存ToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem mSBF開くToolStripMenuItem;
@@ -2651,8 +2649,8 @@ namespace MSBT_Editor
         private System.Windows.Forms.Label label55;
         private System.Windows.Forms.Label label54;
         private System.Windows.Forms.ToolStripMenuItem ARC開くToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aRC保存ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aRC名前を付けて保存ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ARC保存ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ARC名前を付けて保存ToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage12;
         public System.Windows.Forms.TreeView ARCNodeTreeView;

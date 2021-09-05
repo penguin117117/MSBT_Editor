@@ -138,7 +138,7 @@ namespace MSBT_Editor.Formsys
 
         //menu
         protected static ToolStripMenuItem tlmi_file = Form1.Form1Instance.ファイルToolStripMenuItem;
-        protected static ToolStripMenuItem tlmi_msbt_open = Form1.Form1Instance.開くToolStripMenuItem;
+        protected static ToolStripMenuItem tlmi_msbt_open = Form1.Form1Instance.Msbt開くToolStripMenuItem;
         protected static ToolStripMenuItem tlmi_msbt_save = Form1.Form1Instance.Msbt上書き保存ToolStripMenuItem;
         protected static ToolStripMenuItem tlmi_msbt_save_as = Form1.Form1Instance.Msbt保存ToolStripMenuItem;
         protected static ToolStripMenuItem tlmi_msbf_open = Form1.Form1Instance.mSBF開くToolStripMenuItem;
