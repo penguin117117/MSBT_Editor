@@ -136,6 +136,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="RARC\" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\ARCTool_ver0.1.5.0.exe" />
   </ItemGroup>
   <ItemGroup>

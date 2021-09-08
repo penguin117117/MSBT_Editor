@@ -45,8 +45,14 @@ namespace MSBT_Editor
 
         private void ARC保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Dialog.SaveAs(3);
         }
+        private void ARC上書き保存ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Dialog.ArcSave();
+        }
+
+        
         private void Form1_Load(object sender, EventArgs e)
         {
             Form1.Form1Instance = this;
@@ -55,8 +61,8 @@ namespace MSBT_Editor
                 //ARC機能の非表示
                 tabControl3.TabPages.Remove(tabPage12);
                 ARC開くToolStripMenuItem.Visible = false;
+                ARC上書き保存ToolStripMenuItem.Visible = false;
                 ARC保存ToolStripMenuItem.Visible = false;
-                ARC名前を付けて保存ToolStripMenuItem.Visible = false;
             }
             //言語設定
             comboBox8.Text = Properties.Settings.Default.言語;
@@ -1299,6 +1305,20 @@ namespace MSBT_Editor
         private void ReadOnlyMsbtText_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var ResourceARCFolder = Path.GetDirectoryName(Application.ExecutablePath) + "\\res\\" + "ARC";
+            if (Directory.Exists(ResourceARCFolder)) Directory.Delete(ResourceARCFolder,true);
+        }
+
+        private void ARCListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Dialog.ArcInsideMsbtAndMsbfPath.Count < 1) return;
+            if (ARCListBox.Items.Count < 1) return;
+            var Index = ARCListBox.SelectedIndex;
+            Dialog.FileCheck(Dialog.ArcInsideMsbtAndMsbfPath[Index]);
         }
 
         

@@ -101,6 +101,7 @@ namespace MSBT_Editor.Formsys
         protected static ListBox MsbtListBox = Form1.Form1Instance.MsbtListBox;
         protected static ListBox list2 = Form1.Form1Instance.listBox2;
         protected static ListBox list3 = Form1.Form1Instance.listBox3;
+        protected static ListBox ARCListBox = Form1.Form1Instance.ARCListBox;
 
         //
         protected static TreeView treeview1 = Form1.Form1Instance.MsbfTreeView;

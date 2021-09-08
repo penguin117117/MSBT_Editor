@@ -51,8 +51,8 @@ namespace MSBT_Editor
             this.Msbf保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ARC開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ARC上書き保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ARC保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ARC名前を付けて保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MsbtListBox = new System.Windows.Forms.ListBox();
             this.MsbtText = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -234,8 +234,9 @@ namespace MSBT_Editor
             this.label44 = new System.Windows.Forms.Label();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage12 = new System.Windows.Forms.TabPage();
-            this.ARCNodeTreeView = new System.Windows.Forms.TreeView();
+            this.ARCListBox = new System.Windows.Forms.ListBox();
             this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.label58 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -368,8 +369,8 @@ namespace MSBT_Editor
             this.Msbf保存ToolStripMenuItem,
             this.toolStripSeparator2,
             this.ARC開くToolStripMenuItem,
-            this.ARC保存ToolStripMenuItem,
-            this.ARC名前を付けて保存ToolStripMenuItem});
+            this.ARC上書き保存ToolStripMenuItem,
+            this.ARC保存ToolStripMenuItem});
             this.ファイルToolStripMenuItem.Name = "ファイルToolStripMenuItem";
             this.ファイルToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.ファイルToolStripMenuItem.Text = "ファイル";
@@ -444,18 +445,19 @@ namespace MSBT_Editor
             this.ARC開くToolStripMenuItem.Text = "ARC開く";
             this.ARC開くToolStripMenuItem.Click += new System.EventHandler(this.ARC開くToolStripMenuItem_Click);
             // 
+            // ARC上書き保存ToolStripMenuItem
+            // 
+            this.ARC上書き保存ToolStripMenuItem.Name = "ARC上書き保存ToolStripMenuItem";
+            this.ARC上書き保存ToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.ARC上書き保存ToolStripMenuItem.Text = "ARC上書き保存";
+            this.ARC上書き保存ToolStripMenuItem.Click += new System.EventHandler(this.ARC上書き保存ToolStripMenuItem_Click);
+            // 
             // ARC保存ToolStripMenuItem
             // 
             this.ARC保存ToolStripMenuItem.Name = "ARC保存ToolStripMenuItem";
             this.ARC保存ToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            this.ARC保存ToolStripMenuItem.Text = "ARC上書き保存";
+            this.ARC保存ToolStripMenuItem.Text = "ARC保存";
             this.ARC保存ToolStripMenuItem.Click += new System.EventHandler(this.ARC保存ToolStripMenuItem_Click);
-            // 
-            // ARC名前を付けて保存ToolStripMenuItem
-            // 
-            this.ARC名前を付けて保存ToolStripMenuItem.Name = "ARC名前を付けて保存ToolStripMenuItem";
-            this.ARC名前を付けて保存ToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
-            this.ARC名前を付けて保存ToolStripMenuItem.Text = "ARC保存";
             // 
             // MsbtListBox
             // 
@@ -2342,7 +2344,8 @@ namespace MSBT_Editor
             // 
             // tabPage12
             // 
-            this.tabPage12.Controls.Add(this.ARCNodeTreeView);
+            this.tabPage12.Controls.Add(this.label58);
+            this.tabPage12.Controls.Add(this.ARCListBox);
             this.tabPage12.Location = new System.Drawing.Point(4, 22);
             this.tabPage12.Name = "tabPage12";
             this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
@@ -2351,12 +2354,15 @@ namespace MSBT_Editor
             this.tabPage12.Text = "ARCファイルの中身";
             this.tabPage12.UseVisualStyleBackColor = true;
             // 
-            // ARCNodeTreeView
+            // ARCListBox
             // 
-            this.ARCNodeTreeView.Location = new System.Drawing.Point(6, 6);
-            this.ARCNodeTreeView.Name = "ARCNodeTreeView";
-            this.ARCNodeTreeView.Size = new System.Drawing.Size(418, 232);
-            this.ARCNodeTreeView.TabIndex = 0;
+            this.ARCListBox.FormattingEnabled = true;
+            this.ARCListBox.ItemHeight = 12;
+            this.ARCListBox.Location = new System.Drawing.Point(6, 6);
+            this.ARCListBox.Name = "ARCListBox";
+            this.ARCListBox.Size = new System.Drawing.Size(418, 256);
+            this.ARCListBox.TabIndex = 0;
+            this.ARCListBox.SelectedIndexChanged += new System.EventHandler(this.ARCListBox_SelectedIndexChanged);
             // 
             // tabPage13
             // 
@@ -2377,6 +2383,16 @@ namespace MSBT_Editor
             this.tabPage13.Text = "MSBTとMSBF";
             this.tabPage13.UseVisualStyleBackColor = true;
             // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(6, 265);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(297, 60);
+            this.label58.TabIndex = 1;
+            this.label58.Text = "ARCファイルから開いた\r\nMsbtやMsbfの内容を変更した際は上書き保存をしてください。\r\n上書き保存してからリストを選択し直さないと、\r\n変更が保存されませ" +
+    "ん。\r\n全ての変更が終わったらARCを保存してください。";
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -2393,6 +2409,7 @@ namespace MSBT_Editor
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "MSBT_Editor_SMG2 By ぺんぐいん";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
@@ -2453,6 +2470,7 @@ namespace MSBT_Editor
             this.groupBox3.PerformLayout();
             this.tabControl3.ResumeLayout(false);
             this.tabPage12.ResumeLayout(false);
+            this.tabPage12.PerformLayout();
             this.tabPage13.ResumeLayout(false);
             this.tabPage13.PerformLayout();
             this.ResumeLayout(false);
@@ -2649,11 +2667,10 @@ namespace MSBT_Editor
         private System.Windows.Forms.Label label55;
         private System.Windows.Forms.Label label54;
         private System.Windows.Forms.ToolStripMenuItem ARC開くToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ARC上書き保存ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ARC保存ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ARC名前を付けて保存ToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage12;
-        public System.Windows.Forms.TreeView ARCNodeTreeView;
         private System.Windows.Forms.TabPage tabPage13;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel8;
         public System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel7;
@@ -2668,6 +2685,8 @@ namespace MSBT_Editor
         private System.Windows.Forms.GroupBox groupBox16;
         private System.Windows.Forms.Label label57;
         private System.Windows.Forms.Label label56;
+        public System.Windows.Forms.ListBox ARCListBox;
+        private System.Windows.Forms.Label label58;
     }
 }
 
