@@ -721,7 +721,7 @@ namespace MSBT_Editor.FileSys
             {
                 ps += Byte2Char(br, 1);
             }
-            Debugger.Text(ps);
+            //Debugger.Text(ps);
         }
 
         /// <summary>

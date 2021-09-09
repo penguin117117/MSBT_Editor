@@ -52,6 +52,9 @@ namespace MSBT_Editor.Formsys
         protected static Button button28 = Form1.Form1Instance.button28;
         protected static Button button29 = Form1.Form1Instance.button29;
 
+        protected static Button MsbtSETagInsertButton = Form1.Form1Instance.MsbtSETagInsertButton;
+        protected static Button UserIconInsertButton = Form1.Form1Instance.UserIconInsertButton;
+
         //label 0～9
         protected static Label labeltxt01 = Form1.Form1Instance.label1;
         protected static Label labeltxt02 = Form1.Form1Instance.label2;
@@ -96,6 +99,13 @@ namespace MSBT_Editor.Formsys
         protected static Label labeltxt35 = Form1.Form1Instance.label35;
         protected static Label labeltxt39 = Form1.Form1Instance.label39;
 
+        protected static Label Label58 = Form1.Form1Instance.label58;
+
+        protected static Label UserIconInsertLabel1 = Form1.Form1Instance.UserIconInsertLabel1;
+        protected static Label UserIconInsertLabel2 = Form1.Form1Instance.UserIconInsertLabel2;
+        protected static Label SETagInsertLabel1 = Form1.Form1Instance.SETagInsertLabel1;
+        protected static Label SETagInsertLabel2 = Form1.Form1Instance.SETagInsertLabel2;
+
         protected static TextBox msbtdebugtxt = Form1.Form1Instance.MSBT_Debug_Text;
         protected static TextBox txtb13 = Form1.Form1Instance.textBox13;
         protected static ListBox MsbtListBox = Form1.Form1Instance.MsbtListBox;
@@ -119,32 +129,43 @@ namespace MSBT_Editor.Formsys
         protected static ComboBox combo7 = Form1.Form1Instance.comboBox7;
 
         //groupbox
+        protected static GroupBox Atr1GroupBox = Form1.Form1Instance.Atr1GroupBox;
         protected static GroupBox groupbox3 = Form1.Form1Instance.groupBox3;
         protected static GroupBox groupbox4 = Form1.Form1Instance.groupBox4;
         protected static GroupBox groupbox5 = Form1.Form1Instance.groupBox5;
         protected static GroupBox groupbox6 = Form1.Form1Instance.groupBox6;
         protected static GroupBox groupbox8 = Form1.Form1Instance.groupBox8;
 
+        protected static GroupBox groupbox15 = Form1.Form1Instance.groupBox15;
+        protected static GroupBox groupbox16 = Form1.Form1Instance.groupBox16;
+
         //tab
         protected static TabControl tbc1 = Form1.Form1Instance.tabControl1;
+        protected static TabControl tbc3 = Form1.Form1Instance.tabControl3;
         protected static TabPage tabp1 = Form1.Form1Instance.tabPage1;
         protected static TabPage tabp2 = Form1.Form1Instance.tabPage2;
         protected static TabPage tabp3 = Form1.Form1Instance.tabPage3;
         protected static TabPage tabp4 = Form1.Form1Instance.tabPage4;
+        protected static TabPage AdvancedTagsTabPage = Form1.Form1Instance.AdvancedTagsTabPage;
 
         protected static TabPage tabp6 = Form1.Form1Instance.tabPage6;
         protected static TabPage tabp7 = Form1.Form1Instance.tabPage7;
         protected static TabPage tabp8 = Form1.Form1Instance.tabPage8;
         protected static TabPage tabp9 = Form1.Form1Instance.tabPage9;
+        protected static TabPage tabp12 = Form1.Form1Instance.tabPage12;
+        protected static TabPage tabp14 = Form1.Form1Instance.tabPage14;
 
         //menu
         protected static ToolStripMenuItem tlmi_file = Form1.Form1Instance.ファイルToolStripMenuItem;
-        protected static ToolStripMenuItem tlmi_msbt_open = Form1.Form1Instance.Msbt開くToolStripMenuItem;
+        protected static ToolStripMenuItem tlmi_msbt_open = Form1.Form1Instance.開くToolStripMenuItem;
         protected static ToolStripMenuItem tlmi_msbt_save = Form1.Form1Instance.Msbt上書き保存ToolStripMenuItem;
         protected static ToolStripMenuItem tlmi_msbt_save_as = Form1.Form1Instance.Msbt保存ToolStripMenuItem;
         protected static ToolStripMenuItem tlmi_msbf_open = Form1.Form1Instance.mSBF開くToolStripMenuItem;
         protected static ToolStripMenuItem tlmi_msbf_save = Form1.Form1Instance.Msbf上書き保存ToolStripMenuItem;
         protected static ToolStripMenuItem tlmi_msbf_save_as = Form1.Form1Instance.Msbf保存ToolStripMenuItem;
+        protected static ToolStripMenuItem tlmi_arc_open = Form1.Form1Instance.ARC開くToolStripMenuItem;
+        protected static ToolStripMenuItem tlmi_arc_save = Form1.Form1Instance.ARC上書き保存ToolStripMenuItem;
+        protected static ToolStripMenuItem tlmi_arc_save_as = Form1.Form1Instance.ARC保存ToolStripMenuItem;
 
         //stats
         protected static ToolStripStatusLabel tssl1 = Form1.Form1Instance.toolStripStatusLabel1;

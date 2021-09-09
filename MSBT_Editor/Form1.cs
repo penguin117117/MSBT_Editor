@@ -25,6 +25,7 @@ namespace MSBT_Editor
 
         //開発専用のメニューを表示します
         public static readonly bool UseDevelopMenue = true;
+        public static readonly bool UseDebugMenue   = false;
 
         public static Form1 Form1Instance
         {
@@ -32,7 +33,8 @@ namespace MSBT_Editor
             get => _form1Instance;
         }
 
-        private void Msbt開くToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Open(1);
+        #region 開く保存ボタン
+        private void 開くToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Open(1);
         private void Msbt保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.SaveAs(1);
         private void Msbt上書き保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Save(Dialog.Save_Path_Msbt,1);
         
@@ -42,42 +44,95 @@ namespace MSBT_Editor
         private void Msbf上書き保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Save(Dialog.Save_Path_Msbf,2);
 
         private void ARC開くToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Open(3);
+        private void ARC保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.SaveAs(3);
+        private void ARC上書き保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.ArcSave();
+        #endregion
 
-        private void ARC保存ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Dialog.SaveAs(3);
-        }
-        private void ARC上書き保存ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Dialog.ArcSave();
-        }
 
-        
         private void Form1_Load(object sender, EventArgs e)
         {
             Form1.Form1Instance = this;
 
-            if (UseDevelopMenue == false) {
-                //ARC機能の非表示
-                tabControl3.TabPages.Remove(tabPage12);
-                ARC開くToolStripMenuItem.Visible = false;
-                ARC上書き保存ToolStripMenuItem.Visible = false;
-                ARC保存ToolStripMenuItem.Visible = false;
-            }
+            //開発中のフォームパーツの表示非表示を設定する。
+            DebugFormPartsVisible();
+            DevFormPartsVisible();
+
+            VersionChecer();
+
             //言語設定
-            comboBox8.Text = Properties.Settings.Default.言語;
+            LangageComboBox.Text = Properties.Settings.Default.言語;
             Langage.Langage_Check();
 
             checkBox1.Checked = true;
 
-            
-
             //コマンドライン引数を配列で取得する
-            string[] files = Environment.GetCommandLineArgs();
-            if (files.Length > 1) Dialog.FileCheck(files[1]);
+            string[] FilePathStrings = Environment.GetCommandLineArgs();
+            if (FilePathStrings.Length > 1) Dialog.FileCheck(FilePathStrings[1]);
 
 
         }
+
+        private void VersionChecer() {
+            System.Diagnostics.FileVersionInfo ver =
+        System.Diagnostics.FileVersionInfo.GetVersionInfo(
+        System.Reflection.Assembly.GetExecutingAssembly().Location);
+            label65.Text = Path.GetFileNameWithoutExtension(ver.InternalName.ToString());
+            label65.Font = new Font(label65.Font.FontFamily,20);
+
+        }
+
+        #region デバッグと開発専用
+        private void MultipleFileRead(string[] fileName,out bool readFiles) {
+            readFiles = false;
+            foreach (var item in fileName)
+            {
+                Dialog.FileCheck(item);
+                if ((toolStripStatusLabel4.Text 
+                    == Langage.FileReadStatusJP[0])||
+                    (toolStripStatusLabel4.Text 
+                    == Langage.FileReadStatusUS[0])) 
+                    return;
+                string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                string msbtname = Path.GetFileNameWithoutExtension(toolStripStatusLabel4.Text);
+                string textpath = Path.Combine(Path.GetDirectoryName(appPath), "Debug_" + msbtname + ".txt");
+                textBox34.AppendText(textpath + Environment.NewLine);
+                //File.WriteAllText(textpath, UnknownTag.Text);
+            }
+            readFiles = true;
+        }
+
+        private void DebugFormPartsVisible() {
+            if (UseDebugMenue == false) 
+            {
+                label53.Visible = false;
+                HashCalculation.Visible = false;
+                button25.Visible = false;
+                textBox32.Visible = false;
+                textBox33.Visible = false;
+                textBox13.Visible = false;
+                textBox34.Visible = false;
+                textBox2.Visible = false;
+                textBox27.Visible = false;
+                button20.Visible = false;
+                MSBT_Debug_Text.Visible = false;
+                UnknownTag.Visible = false;
+                tabControl1.TabPages.Remove(tabPage5);
+                tabControl1.TabPages.Remove(tabPage10);
+            }
+        }
+
+        private void DevFormPartsVisible() {
+            if (UseDevelopMenue == false)
+            {
+                //ARC機能の非表示
+                //tabControl3.TabPages.Remove(tabPage12);
+                //ARC開くToolStripMenuItem.Visible = false;
+                //ARC上書き保存ToolStripMenuItem.Visible = false;
+                //ARC保存ToolStripMenuItem.Visible = false;
+            }
+        }
+        #endregion
+
         public static int ListBoxIndex_NegativeThenSetIndexZero(ListBox lb)
         {
             if (lb.SelectedIndex < 0)
@@ -95,7 +150,7 @@ namespace MSBT_Editor
             var Tmp             = MsbtAllData.Item[MsbtSelectIndex];
 
             MsbtText.Text              = MsbtAllData.Text[MsbtSelectIndex];
-            //ReadOnlyMsbtText.Text      = MsbtText.Text;
+            ReadOnlyMsbtText.Text      = MsbtText.Text;
             Atr1SoundID.Text           = Tmp.SoundID.ToString("X2");
             Atr1SimpleCamID.Text       = Tmp.SimpleCameraID.ToString("X2");
             Atr1DialogID.Text          = Tmp.DialogID.ToString("X2");
@@ -107,15 +162,18 @@ namespace MSBT_Editor
             Atr1SpecialText.Text       = SpecialText[MsbtSelectIndex];
             MsbtSelectedListName.Text  = MsbtListBox.Text;
             MsbtListSelectIndex.Text   = "0x" + MsbtListBox.SelectedIndex.ToString("X");
+
+            if (UseDebugMenue == false) return;
             //ハッシュスキップ数を表示
-            //var FindMsbtListTextIndexNum = LBL1.NameList.IndexOf(MsbtListBox.Text);
-            //if (-1 != FindMsbtListTextIndexNum)
-            //{
-            //    textBox12.Text = LBL1.HashSkipList[FindMsbtListTextIndexNum].ToString("X8");
-            //}
-            //else{
-            //    textBox12.Text = "";
-            //}
+            var FindMsbtListTextIndexNum = LBL1.NameList.IndexOf(MsbtListBox.Text);
+            if (-1 != FindMsbtListTextIndexNum)
+            {
+                textBox12.Text = LBL1.HashSkipList[FindMsbtListTextIndexNum].ToString("X8");
+            }
+            else
+            {
+                textBox12.Text = "";
+            }
         }
 
         private void Atr1SoundID_TextChanged(object sender, EventArgs e)
@@ -785,20 +843,13 @@ namespace MSBT_Editor
             string[] fileName = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             var filecount = fileName.Count();
 
-            //デバッグに必須なので消さない
-            //foreach (var item in fileName)
-            //{
-            //    UnknownTag.Text = "";
-            //    Dialog.FileCheck(item);
-            //    if (toolStripStatusLabel4.Text == " ") return;
-            //    //if (UnknownTag.Text == "") return;
-            //    string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            //    string msbtname = Path.GetFileNameWithoutExtension(toolStripStatusLabel4.Text);
-            //    string textpath = Path.Combine(Path.GetDirectoryName(appPath), "Debug_" + msbtname + ".txt");
-            //    textBox34.AppendText(textpath + Environment.NewLine);
-            //    //File.WriteAllText(textpath, UnknownTag.Text);
-            //}
-            //return;
+            if (UseDebugMenue == true) 
+            {
+                MultipleFileRead(fileName, out bool readFiles);
+                if (readFiles == true) return;
+            }
+            
+
             if (filecount == 2)
             {
                 var path1 = Path.GetExtension(fileName[0]);
@@ -1028,9 +1079,9 @@ namespace MSBT_Editor
 
         }
 
-        private void comboBox8_SelectedIndexChanged(object sender, EventArgs e)
+        private void LangageComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (comboBox8.SelectedIndex)
+            switch (LangageComboBox.SelectedIndex)
             {
                 case 0:
                     Properties.Settings.Default.言語 = "日本語";
@@ -1318,9 +1369,47 @@ namespace MSBT_Editor
             if (Dialog.ArcInsideMsbtAndMsbfPath.Count < 1) return;
             if (ARCListBox.Items.Count < 1) return;
             var Index = ARCListBox.SelectedIndex;
+
+            //連続で選択した際にデータが壊れないようにしています。
+            ARCListBox.Enabled = false;
             Dialog.FileCheck(Dialog.ArcInsideMsbtAndMsbfPath[Index]);
+            ARCListBox.Enabled = true ;
+            ARCListBox.Focus();
         }
 
-        
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.linkLabel2.LinkVisited = true;
+            System.Diagnostics.Process.Start("https://github.com/penguin117117/MSBT_Editor/releases");
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.linkLabel3.LinkVisited = true;
+            System.Diagnostics.Process.Start("https://github.com/penguin117117/MSBT_Editor");
+        }
+
+        private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.linkLabel4.LinkVisited = true;
+            System.Diagnostics.Process.Start("https://github.com/penguin117117/MSBT_Editor/issues");
+        }
+
+        private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.linkLabel5.LinkVisited = true;
+            System.Diagnostics.Process.Start("http://mariogalaxy2hack.wiki.fc2.com/wiki/MSBT_Editor");
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.linkLabel1.LinkVisited = true;
+            System.Diagnostics.Process.Start("https://discord.gg/B4EwY7h");
+        }
+
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
     }
 }

@@ -57,5 +57,9 @@ namespace MSBT_Editor.Formsys
         {
             e.Handled = !canWrite;
         }
+
+
+
+        
     }
 }
