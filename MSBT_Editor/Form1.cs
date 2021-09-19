@@ -20,13 +20,14 @@ namespace MSBT_Editor
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
+        public Form1() => InitializeComponent();
         private static Form1 _form1Instance;
 
+        //開発専用のメニューを表示します
+        public static readonly bool UseDevelopMenue = false;
+        public static readonly bool UseDebugMenue   = false;
+
+        private static bool s_useAutoSave = false;
 
         public static Form1 Form1Instance
         {
@@ -34,67 +35,106 @@ namespace MSBT_Editor
             get => _form1Instance;
         }
 
-        private void 開くToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Dialog.Open(1);
-        }
-        private void Msbt保存ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Action ac = () => Dialog.SaveAs(1);
-            Dialog.MSBT_Item_And_ListItem_Checker(ac);
-        }
+        #region 開く保存ボタン
+        private void 開くToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Open(1);
+        private void Msbt保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.SaveAs(1);
+        private void Msbt上書き保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Save(Dialog.Save_Path_Msbt,1);
+        
 
-        private void Msbt上書き保存ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MSBTsys.MSBT_Header msbth = new MSBTsys.MSBT_Header();
+        private void MSBF開くToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Open(2);
+        private void Msbf保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.SaveAs(2);
+        private void Msbf上書き保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Save(Dialog.Save_Path_Msbf,2);
 
+        private void ARC開くToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Open(3);
+        private void ARC保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.SaveAs(3);
+        private void ARC上書き保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.ArcSave();
+        #endregion
 
-            Action ac = () => Dialog.Save(msbth);
-            Dialog.MSBT_Item_And_ListItem_Checker(ac);
-        }
-
-        private void MSBF開くToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Dialog.Open(2);
-        }
-
-        private void Msbf保存ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Action ac = () => Dialog.SaveAs(2);
-            Dialog.MSBF_Item_And_ListItem_Checker(ac);
-        }
-
-        private void Msbf上書き保存ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MSBFsys.MSBF_Header msbfh = new MSBFsys.MSBF_Header();
-            Action ac = () => Dialog.Save(msbfh);
-            Dialog.MSBF_Item_And_ListItem_Checker(ac);
-        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            Console.WriteLine("testes");
-
             Form1.Form1Instance = this;
 
-            //ARC機能の非表示
-            tabControl3.TabPages.Remove(tabPage12);
+            //開発中のフォームパーツの表示非表示を設定する。
+            DebugFormPartsVisible();
+            DevFormPartsVisible();
+
+            VersionChecer();
 
             //言語設定
-            comboBox8.Text = Properties.Settings.Default.言語;
+            LangageComboBox.Text = Properties.Settings.Default.言語;
             Langage.Langage_Check();
 
             checkBox1.Checked = true;
 
-            
-
             //コマンドライン引数を配列で取得する
-            string[] files = Environment.GetCommandLineArgs();
-            if (files.Length > 1) Dialog.FileCheck(files[1]);
+            string[] FilePathStrings = Environment.GetCommandLineArgs();
+            if (FilePathStrings.Length > 1) Dialog.FileCheck(FilePathStrings[1]);
 
 
         }
+
+        private void VersionChecer() {
+            System.Diagnostics.FileVersionInfo ver =
+        System.Diagnostics.FileVersionInfo.GetVersionInfo(
+        System.Reflection.Assembly.GetExecutingAssembly().Location);
+            label65.Text = Path.GetFileNameWithoutExtension(ver.InternalName.ToString());
+            label65.Font = new Font(label65.Font.FontFamily,20);
+
+        }
+
+        #region デバッグと開発専用
+        private void MultipleFileRead(string[] fileName,out bool readFiles) {
+            readFiles = false;
+            foreach (var item in fileName)
+            {
+                Dialog.FileCheck(item);
+                if ((toolStripStatusLabel2.Text 
+                    == Langage.FileReadStatusJP[0])||
+                    (toolStripStatusLabel2.Text 
+                    == Langage.FileReadStatusUS[0])) 
+                    return;
+                string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                string msbtname = Path.GetFileNameWithoutExtension(toolStripStatusLabel2.Text);
+                string textpath = Path.Combine(Path.GetDirectoryName(appPath), "Debug_" + msbtname + ".txt");
+                textBox34.AppendText(textpath + Environment.NewLine);
+                //File.WriteAllText(textpath, UnknownTag.Text);
+            }
+            readFiles = true;
+        }
+
+        private void DebugFormPartsVisible() {
+            if (UseDebugMenue == false) 
+            {
+                label53.Visible = false;
+                HashCalculation.Visible = false;
+                button25.Visible = false;
+                textBox32.Visible = false;
+                textBox33.Visible = false;
+                textBox13.Visible = false;
+                textBox34.Visible = false;
+                textBox2.Visible = false;
+                textBox27.Visible = false;
+                button20.Visible = false;
+                MSBT_Debug_Text.Visible = false;
+                UnknownTag.Visible = false;
+                tabControl1.TabPages.Remove(tabPage5);
+                tabControl1.TabPages.Remove(tabPage10);
+            }
+        }
+
+        private void DevFormPartsVisible() {
+            if (UseDevelopMenue == false)
+            {
+                //ARC機能の非表示
+                //tabControl3.TabPages.Remove(tabPage12);
+                //ARC開くToolStripMenuItem.Visible = false;
+                //ARC上書き保存ToolStripMenuItem.Visible = false;
+                //ARC保存ToolStripMenuItem.Visible = false;
+            }
+        }
+        #endregion
+
         public static int ListBoxIndex_NegativeThenSetIndexZero(ListBox lb)
         {
             if (lb.SelectedIndex < 0)
@@ -112,7 +152,7 @@ namespace MSBT_Editor
             var Tmp             = MsbtAllData.Item[MsbtSelectIndex];
 
             MsbtText.Text              = MsbtAllData.Text[MsbtSelectIndex];
-            //ReadOnlyMsbtText.Text      = MsbtText.Text;
+            ReadOnlyMsbtText.Text      = MsbtText.Text;
             Atr1SoundID.Text           = Tmp.SoundID.ToString("X2");
             Atr1SimpleCamID.Text       = Tmp.SimpleCameraID.ToString("X2");
             Atr1DialogID.Text          = Tmp.DialogID.ToString("X2");
@@ -124,21 +164,24 @@ namespace MSBT_Editor
             Atr1SpecialText.Text       = SpecialText[MsbtSelectIndex];
             MsbtSelectedListName.Text  = MsbtListBox.Text;
             MsbtListSelectIndex.Text   = "0x" + MsbtListBox.SelectedIndex.ToString("X");
+
+            if (UseDebugMenue == false) return;
             //ハッシュスキップ数を表示
-            //var FindMsbtListTextIndexNum = LBL1.NameList.IndexOf(MsbtListBox.Text);
-            //if (-1 != FindMsbtListTextIndexNum)
-            //{
-            //    textBox12.Text = LBL1.HashSkipList[FindMsbtListTextIndexNum].ToString("X8");
-            //}
-            //else{
-            //    textBox12.Text = "";
-            //}
+            var FindMsbtListTextIndexNum = LBL1.NameList.IndexOf(MsbtListBox.Text);
+            if (-1 != FindMsbtListTextIndexNum)
+            {
+                textBox12.Text = LBL1.HashSkipList[FindMsbtListTextIndexNum].ToString("X8");
+            }
+            else
+            {
+                textBox12.Text = "";
+            }
         }
 
         private void Atr1SoundID_TextChanged(object sender, EventArgs e)
         {
             if (MsbtListBox.Items.Count < 1) return;
-
+            //Console.WriteLine(e.GetType().FullName);
             var Element = MSBT_Data.MSBT_All_Data.Item[MsbtListBox.SelectedIndex];
             Element.SoundID = ATR1.ATR1TextBoxChange(Atr1SoundID, Element.SoundID);
             MSBT_Data.MSBT_All_Data.Item[MsbtListBox.SelectedIndex] = Element;
@@ -646,20 +689,20 @@ namespace MSBT_Editor
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.textBox25.TextChanged -= new EventHandler(this.textBox25_TextChanged);
-            this.textBox26.TextChanged -= new EventHandler(this.textBox26_TextChanged);
+            this.Flw2Branch1Text.TextChanged -= new EventHandler(this.Flw2Branch1Text_TextChanged);
+            this.Flw2Branch2Text.TextChanged -= new EventHandler(this.Flw2Branch2Text_TextChanged);
 
             if (listBox2.Items.Count == 0) return;
             var index = listBox2.SelectedIndex;
             if (index == -1) index = 0;
             FLW2 flw2 = new FLW2();
             //Console.WriteLine(index);
-            textBox19.Text = flw2.Item[index].TypeCheck.ToString("X4");
-            textBox20.Text = flw2.Item[index].Unknown1.ToString("X4");
-            textBox21.Text = flw2.Item[index].Unknown2.ToString("X4");
-            textBox22.Text = flw2.Item[index].Unknown3.ToString("X4");
-            textBox23.Text = flw2.Item[index].Unknown4.ToString("X4");
-            textBox24.Text = flw2.Item[index].Unknown5.ToString("X4");
+            Flw2FllowTypeText.Text = flw2.Item[index].TypeCheck.ToString("X4");
+            Flw2PaddingText.Text = flw2.Item[index].Unknown1.ToString("X4");
+            Flw2Arg1Text.Text = flw2.Item[index].Unknown2.ToString("X4");
+            Flw2Arg2Text.Text = flw2.Item[index].Unknown3.ToString("X4");
+            Flw2Arg3Text.Text = flw2.Item[index].Unknown4.ToString("X4");
+            Flw2Arg4Text.Text = flw2.Item[index].Unknown5.ToString("X4");
 
             switch (flw2.Item[index].TypeCheck.ToString("X4"))
             {
@@ -727,74 +770,74 @@ namespace MSBT_Editor
             if (blnc != bnc)
             {
                 label43.Text = "0x" + listBox2.SelectedIndex.ToString("X");
-                this.textBox25.TextChanged += new EventHandler(this.textBox25_TextChanged);
-                this.textBox26.TextChanged += new EventHandler(this.textBox26_TextChanged);
+                this.Flw2Branch1Text.TextChanged += new EventHandler(this.Flw2Branch1Text_TextChanged);
+                this.Flw2Branch2Text.TextChanged += new EventHandler(this.Flw2Branch2Text_TextChanged);
                 return;
             }
             if (-1 == flw2.Branch_List_No.IndexOf(index))
             {
 
-                textBox25.Text = "";
-                textBox26.Text = "";
+                Flw2Branch1Text.Text = "";
+                Flw2Branch2Text.Text = "";
                 label43.Text = "0x" + listBox2.SelectedIndex.ToString("X");
-                this.textBox25.TextChanged += new EventHandler(this.textBox25_TextChanged);
-                this.textBox26.TextChanged += new EventHandler(this.textBox26_TextChanged);
+                this.Flw2Branch1Text.TextChanged += new EventHandler(this.Flw2Branch1Text_TextChanged);
+                this.Flw2Branch2Text.TextChanged += new EventHandler(this.Flw2Branch2Text_TextChanged);
                 return;
             }
             textBox27.AppendText(Environment.NewLine + "selectlist");
             textBox27.AppendText(Environment.NewLine + flw2.Branch_No[flw2.Branch_List_No.IndexOf(index)].ToString("X4") + "___" + flw2.Branch_List_No.IndexOf(index));
 
-            textBox25.Text = flw2.Branch_No[(flw2.Branch_List_No.IndexOf(index) * 2)].ToString("X4");
-            textBox26.Text = flw2.Branch_No[(flw2.Branch_List_No.IndexOf(index) * 2) + 1].ToString("X4");
+            Flw2Branch1Text.Text = flw2.Branch_No[(flw2.Branch_List_No.IndexOf(index) * 2)].ToString("X4");
+            Flw2Branch2Text.Text = flw2.Branch_No[(flw2.Branch_List_No.IndexOf(index) * 2) + 1].ToString("X4");
 
             label43.Text = "0x" + listBox2.SelectedIndex.ToString("X");
-            this.textBox25.TextChanged += new EventHandler(this.textBox25_TextChanged);
-            this.textBox26.TextChanged += new EventHandler(this.textBox26_TextChanged);
+            this.Flw2Branch1Text.TextChanged += new EventHandler(this.Flw2Branch1Text_TextChanged);
+            this.Flw2Branch2Text.TextChanged += new EventHandler(this.Flw2Branch2Text_TextChanged);
         }
 
-        private void textBox19_TextChanged(object sender, EventArgs e)
+        private void Flw2FllowTypeText_TextChanged(object sender, EventArgs e)
         {
             this.listBox2.SelectedIndexChanged -= new EventHandler(this.listBox2_SelectedIndexChanged);
-            FLW2.FLW2_Item_Change(listBox2, textBox19);
+            FLW2.FLW2_Item_Change(listBox2, Flw2FllowTypeText);
             this.listBox2.SelectedIndexChanged += new EventHandler(this.listBox2_SelectedIndexChanged);
         }
 
-        private void textBox20_TextChanged(object sender, EventArgs e)
+        private void Flw2PaddingText_TextChanged(object sender, EventArgs e)
         {
             this.listBox2.SelectedIndexChanged -= new EventHandler(this.listBox2_SelectedIndexChanged);
-            FLW2.FLW2_Item_Change(listBox2, textBox20);
+            FLW2.FLW2_Item_Change(listBox2, Flw2PaddingText);
             this.listBox2.SelectedIndexChanged += new EventHandler(this.listBox2_SelectedIndexChanged);
         }
 
-        private void textBox21_TextChanged(object sender, EventArgs e)
+        private void Flw2Arg1Text_TextChanged(object sender, EventArgs e)
         {
-            FLW2.FLW2_Item_Change(listBox2, textBox21);
+            FLW2.FLW2_Item_Change(listBox2, Flw2Arg1Text);
         }
 
-        private void textBox22_TextChanged(object sender, EventArgs e)
+        private void Flw2Arg2Text_TextChanged(object sender, EventArgs e)
         {
-            FLW2.FLW2_Item_Change(listBox2, textBox22);
+            FLW2.FLW2_Item_Change(listBox2, Flw2Arg2Text);
         }
 
-        private void textBox23_TextChanged(object sender, EventArgs e)
+        private void Flw2Arg3Text_TextChanged(object sender, EventArgs e)
         {
-            FLW2.FLW2_Item_Change(listBox2, textBox23);
+            FLW2.FLW2_Item_Change(listBox2, Flw2Arg3Text);
         }
 
-        private void textBox24_TextChanged(object sender, EventArgs e)
+        private void Flw2Arg4Text_TextChanged(object sender, EventArgs e)
         {
-            FLW2.FLW2_Item_Change(listBox2, textBox24);
+            FLW2.FLW2_Item_Change(listBox2, Flw2Arg4Text);
         }
 
-        private void textBox25_TextChanged(object sender, EventArgs e)
+        private void Flw2Branch1Text_TextChanged(object sender, EventArgs e)
         {
             textBox27.AppendText(Environment.NewLine + "25text");
-            FLW2.FLW2_FlowType2_Branch(listBox2, textBox25);
+            FLW2.FLW2_FlowType2_Branch(listBox2, Flw2Branch1Text);
         }
 
-        private void textBox26_TextChanged(object sender, EventArgs e)
+        private void Flw2Branch2Text_TextChanged(object sender, EventArgs e)
         {
-            FLW2.FLW2_FlowType2_Branch(listBox2, textBox26);
+            FLW2.FLW2_FlowType2_Branch(listBox2, Flw2Branch2Text);
         }
 
         private void Form1_DragDrop(object sender, DragEventArgs e)
@@ -802,20 +845,13 @@ namespace MSBT_Editor
             string[] fileName = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             var filecount = fileName.Count();
 
-            //デバッグに必須なので消さない
-            //foreach (var item in fileName)
-            //{
-            //    UnknownTag.Text = "";
-            //    Dialog.FileCheck(item);
-            //    if (toolStripStatusLabel4.Text == " ") return;
-            //    //if (UnknownTag.Text == "") return;
-            //    string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            //    string msbtname = Path.GetFileNameWithoutExtension(toolStripStatusLabel4.Text);
-            //    string textpath = Path.Combine(Path.GetDirectoryName(appPath), "Debug_" + msbtname + ".txt");
-            //    textBox34.AppendText(textpath + Environment.NewLine);
-            //    //File.WriteAllText(textpath, UnknownTag.Text);
-            //}
-            //return;
+            if (UseDebugMenue == true) 
+            {
+                MultipleFileRead(fileName, out bool readFiles);
+                if (readFiles == true) return;
+            }
+            
+
             if (filecount == 2)
             {
                 var path1 = Path.GetExtension(fileName[0]);
@@ -1045,9 +1081,9 @@ namespace MSBT_Editor
 
         }
 
-        private void comboBox8_SelectedIndexChanged(object sender, EventArgs e)
+        private void LangageComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (comboBox8.SelectedIndex)
+            switch (LangageComboBox.SelectedIndex)
             {
                 case 0:
                     Properties.Settings.Default.言語 = "日本語";
@@ -1209,7 +1245,12 @@ namespace MSBT_Editor
             var yesno = MessageBox.Show("ツリーを更新しますか？", "質問", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
             if (yesno == DialogResult.No) return;
             FEN1 fen1 = new FEN1();
-            FEN1.TreeLoder(fen1.Item2);
+            try { FEN1.TreeLoder(fen1.Item2); }
+            catch (Exception ex){
+                MsbfTreeView.Nodes.Clear();
+                Console.WriteLine("errrrrrror"); 
+            }
+            
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -1239,10 +1280,7 @@ namespace MSBT_Editor
 
         }
 
-        private void ARC開くToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Dialog.Open(3);
-        }
+        
 
         private void toolStripStatusLabel7_Click(object sender, EventArgs e)
         {
@@ -1310,6 +1348,8 @@ namespace MSBT_Editor
             KeyPressEventSupport.OnlyHexChar(e, true);
         }
 
+        
+
         private void MsbtSETagInsertButton_Click(object sender, EventArgs e)
         {
             //<SE="SE_BV_KOOPA_BURN_RUN">
@@ -1325,6 +1365,168 @@ namespace MSBT_Editor
         private void ReadOnlyMsbtText_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var ResourceARCFolder = Path.GetDirectoryName(Application.ExecutablePath) + "\\res\\" + "ARC";
+            if (Directory.Exists(ResourceARCFolder)) Directory.Delete(ResourceARCFolder,true);
+        }
+
+        
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.linkLabel2.LinkVisited = true;
+            System.Diagnostics.Process.Start("https://github.com/penguin117117/MSBT_Editor/releases");
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.linkLabel3.LinkVisited = true;
+            System.Diagnostics.Process.Start("https://github.com/penguin117117/MSBT_Editor");
+        }
+
+        private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.linkLabel4.LinkVisited = true;
+            System.Diagnostics.Process.Start("https://github.com/penguin117117/MSBT_Editor/issues");
+        }
+
+        private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.linkLabel5.LinkVisited = true;
+            System.Diagnostics.Process.Start("http://mariogalaxy2hack.wiki.fc2.com/wiki/MSBT_Editor");
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.linkLabel1.LinkVisited = true;
+            System.Diagnostics.Process.Start("https://discord.gg/B4EwY7h");
+        }
+
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void Flw2FllowTypeText_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true); 
+
+        private void Flw2Branch1Text_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string[] OldStrings = UnknownTag.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            UnknownTag.Text = string.Empty;
+            var Sorted = OldStrings.OrderBy(sort => sort).ToArray();
+
+            foreach (var tes in Sorted) UnknownTag.AppendText(tes+Environment.NewLine);
+        }
+
+        private void MsbtMsbfAutoSaveCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if (MsbtMsbfAutoSaveCheckBox.Checked == false)
+            {
+                s_useAutoSave = false;
+            }
+            else
+            {
+                s_useAutoSave = true;
+            }
+        }
+
+        private void ARCListBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine(ARCListBox.SelectedValue);
+        }
+        private void ARCListBox_SelectedIndexChanged(object sender, EventArgs e/*EventHandler e*/)
+        {
+            
+            var SaveSelect = DialogResult;
+            if (Dialog.ArcInsideMsbtAndMsbfPath.Count < 1) return;
+            if (ARCListBox.Items.Count < 1) return;
+            var Index = ARCListBox.SelectedIndex;
+            if (Properties.Settings.Default.ARCListIndexOld == -1) 
+            {
+                Properties.Settings.Default.ARCListIndexOld = Index;
+                Properties.Settings.Default.Save();
+            }
+
+            if (s_useAutoSave == false && Properties.Settings.Default.ARCListIndexOld != Index)
+            {
+                SaveSelect =
+                MessageBox.Show(
+                    "ファイルを上書きしますか？",
+                    "質問",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button2
+                );
+            }
+
+            
+
+            //noの処理
+            if (DialogResult.No == SaveSelect) 
+            {
+                if (Properties.Settings.Default.ARCListIndexOld < 0) return;
+                ARCListBox.SelectedIndex = Properties.Settings.Default.ARCListIndexOld;
+                return;
+            }
+
+            if (s_useAutoSave == true) SaveSelect = DialogResult.Yes;
+
+            //連続で選択した際にデータが壊れないようにしています。
+            ARCListBox.Enabled = false;
+
+            var PathExtention = Path.GetExtension(ARCListBox.Text).ToLower();
+            //Dialog.FileCheckの処理中にこのイベントを発生させないようにしている。
+            this.ARCListBox.SelectedIndexChanged -= new EventHandler(this.ARCListBox_SelectedIndexChanged);
+            
+
+            if (PathExtention == ".msbt" && Dialog.Save_Path_Msbt != ARCListBox.Text)
+            {
+                if (File.Exists(Dialog.Save_Path_Msbt)) Dialog.Save(Dialog.Save_Path_Msbt, 1);
+                
+                
+            }
+            else if (PathExtention == ".msbf" && Dialog.Save_Path_Msbf != ARCListBox.Text)
+            {
+                if (File.Exists(Dialog.Save_Path_Msbf)) Dialog.Save(Dialog.Save_Path_Msbt, 2);
+            }
+            else 
+            {
+                return;
+            }
+
+            //Dialog.SaveAs(1);
+            Dialog.FileCheck(Dialog.ArcInsideMsbtAndMsbfPath[Index]);
+            this.ARCListBox.SelectedIndexChanged += new EventHandler(this.ARCListBox_SelectedIndexChanged);
+
+            //古いリストのセレクト番号を上書き
+            Properties.Settings.Default.ARCListIndexOld = Index;
+            Properties.Settings.Default.Save();
+
+            ARCListBox.Enabled = true;
+            ARCListBox.Focus();
+            //this.textBox28.TextChanged -= new EventHandler(this.textBox28_TextChanged);
+        }
+
+        private void ARCListBox_CursorChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine(ARCListBox.SelectedValue);
+        }
+
+        private void ARCListBox_Validating(object sender, CancelEventArgs e)
+        {
+            Console.WriteLine(ARCListBox.SelectedValue);
+        }
+
+        private void ARCListBox_ChangeUICues(object sender, UICuesEventArgs e)
+        {
+            
+            Console.WriteLine(ARCListBox.SelectedValue);
         }
     }
 }

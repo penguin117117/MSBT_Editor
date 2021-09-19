@@ -34,5 +34,17 @@ namespace MSBT_Editor.Properties {
                 this["言語"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int ARCListIndexOld {
+            get {
+                return ((int)(this["ARCListIndexOld"]));
+            }
+            set {
+                this["ARCListIndexOld"] = value;
+            }
+        }
     }
 }

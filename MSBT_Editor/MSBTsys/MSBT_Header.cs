@@ -55,6 +55,12 @@ namespace MSBT_Editor.MSBTsys
             //終了処理
             fs.Close();
             br.Close();
+            for (var i = 0; i < MsbtListBox.Items.Count; i++)
+            {
+                MsbtListBox.SelectedIndex = i;
+                Debugger.Unknowntagwriter(MsbtListBox.Text, true);
+                //Console.WriteLine(MsbtListBox.Text);
+            }
         }
 
 
@@ -97,6 +103,8 @@ namespace MSBT_Editor.MSBTsys
             //終了処理
             fs.Close();
             bw.Close();
+            
+
         }
 
     }

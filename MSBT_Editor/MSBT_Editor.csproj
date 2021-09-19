@@ -7,7 +7,7 @@
     <ProjectGuid>{5594784E-060D-4312-A41B-8CB9C47050B1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>MSBT_Editor</RootNamespace>
-    <AssemblyName>MSBT_And_MSBF_Editor_ver0.6.3.2</AssemblyName>
+    <AssemblyName>MSBT_And_MSBF_Editor_ver0.6.5.0</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,7 +42,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\MSBT_And_MSBF_Editor_ver0.6.3.1\</OutputPath>
+    <OutputPath>bin\Release\MSBT_And_MSBF_Editor_ver0.6.5.0\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -102,6 +102,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="bin\Debug\res\ARCTool_ver0.1.5.0.deps.json" />
+    <None Include="bin\Debug\res\ARCTool_ver0.1.5.0.runtimeconfig.json" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -116,8 +118,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ARCTool_ver0.1.5.0.deps.json" />
-    <None Include="Resources\ARCTool_ver0.1.5.0.runtimeconfig.json" />
+    <Content Include="Resources\ARCTool_ver0.1.5.0.deps.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ARCTool_ver0.1.5.0.runtimeconfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\アイコン.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -136,10 +142,21 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ARCTool_ver0.1.5.0.exe" />
+    <Folder Include="RARC\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ARCTool_ver0.1.5.0.dll" />
+    <None Include="bin\Debug\res\ARCTool_ver0.1.5.0.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\res\ARCTool_ver0.1.5.0.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\ARCTool_ver0.1.5.0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\ARCTool_ver0.1.5.0.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

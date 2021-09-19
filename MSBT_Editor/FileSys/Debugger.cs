@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using MSBT_Editor.Formsys;
 using EN = System.Environment;
 namespace MSBT_Editor.FileSys
@@ -58,8 +59,24 @@ namespace MSBT_Editor.FileSys
             }
         }
 
-        public static void Unknowntagwriter(string str) {
-            unknowntag.AppendText(str);
+        public static void Unknowntagwriter(string str,bool dupeDelete = false) {
+
+            //var spl = str.Split('_');
+            //spl = spl.Replace("_End","");
+
+            //var rem = Regex.Replace(str, "([0-9][0-9][0-9$])|((_End|_Flow|_sub)[0-9][0-9][0-9$])", "");
+            var rem = Regex.Replace(str, "([0-9][0-9][0-9$])", "XXX");
+            //var match = Regex.Match(str, "([0-9][0-9][0-9$])|((_End|_Flow|_sub)[0-9][0-9][0-9$])");
+
+            //if (match == Match.Empty) return;
+
+            if (dupeDelete) {
+                
+                var find = unknowntag.Text.IndexOf(rem+"\r\n");
+                //Console.WriteLine(spl[0] + find);
+                if (find != -1) return;
+            }
+            unknowntag.AppendText(rem + EN.NewLine);
         }
     }
 }
