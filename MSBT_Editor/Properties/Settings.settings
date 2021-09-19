@@ -5,5 +5,8 @@
     <Setting Name="言語" Type="System.String" Scope="User">
       <Value Profile="(Default)">日本語</Value>
     </Setting>
+    <Setting Name="ARCListIndexOld" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

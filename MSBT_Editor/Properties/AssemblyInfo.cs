@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // 制御されます。アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更します。
 
-[assembly: AssemblyTitle("MSBT_And_MSBF_Editor_ver0.6.5.0α")]
+[assembly: AssemblyTitle("MSBT_And_MSBF_Editor_ver0.6.5.0")]
 
 [assembly: AssemblyDescription("SMG2のテキスト編集できるツールMSBFの編集も可能です")]
 [assembly: AssemblyConfiguration("")]

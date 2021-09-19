@@ -43,6 +43,7 @@ namespace MSBT_Editor
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ファイルToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.Msbt上書き保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Msbt保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -93,6 +94,7 @@ namespace MSBT_Editor
             this.label19 = new System.Windows.Forms.Label();
             this.textBox18 = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label42 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -167,21 +169,21 @@ namespace MSBT_Editor
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.label41 = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.textBox26 = new System.Windows.Forms.TextBox();
-            this.textBox25 = new System.Windows.Forms.TextBox();
+            this.Flw2Branch2Text = new System.Windows.Forms.TextBox();
+            this.Flw2Branch1Text = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
-            this.textBox24 = new System.Windows.Forms.TextBox();
-            this.textBox23 = new System.Windows.Forms.TextBox();
-            this.textBox22 = new System.Windows.Forms.TextBox();
-            this.textBox21 = new System.Windows.Forms.TextBox();
-            this.textBox20 = new System.Windows.Forms.TextBox();
+            this.Flw2Arg4Text = new System.Windows.Forms.TextBox();
+            this.Flw2Arg3Text = new System.Windows.Forms.TextBox();
+            this.Flw2Arg2Text = new System.Windows.Forms.TextBox();
+            this.Flw2Arg1Text = new System.Windows.Forms.TextBox();
+            this.Flw2PaddingText = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
-            this.textBox19 = new System.Windows.Forms.TextBox();
+            this.Flw2FllowTypeText = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.label53 = new System.Windows.Forms.Label();
@@ -194,6 +196,7 @@ namespace MSBT_Editor
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.textBox13 = new System.Windows.Forms.TextBox();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.UnknownTag = new System.Windows.Forms.TextBox();
             this.MSBT_Debug_Text = new System.Windows.Forms.TextBox();
             this.textBox27 = new System.Windows.Forms.TextBox();
@@ -250,10 +253,10 @@ namespace MSBT_Editor
             this.label44 = new System.Windows.Forms.Label();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.MsbtMsbfAutoSaveCheckBox = new System.Windows.Forms.CheckBox();
             this.label58 = new System.Windows.Forms.Label();
             this.ARCListBox = new System.Windows.Forms.ListBox();
             this.tabPage13 = new System.Windows.Forms.TabPage();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -405,6 +408,11 @@ namespace MSBT_Editor
             this.開くToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.開くToolStripMenuItem.Text = "開く";
             this.開くToolStripMenuItem.Click += new System.EventHandler(this.開くToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(197, 6);
             // 
             // Msbt上書き保存ToolStripMenuItem
             // 
@@ -885,7 +893,7 @@ namespace MSBT_Editor
             this.groupBox5.Controls.Add(this.button6);
             this.groupBox5.Controls.Add(this.label19);
             this.groupBox5.Controls.Add(this.textBox18);
-            this.groupBox5.Location = new System.Drawing.Point(249, 6);
+            this.groupBox5.Location = new System.Drawing.Point(361, 6);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(173, 129);
             this.groupBox5.TabIndex = 3;
@@ -894,7 +902,7 @@ namespace MSBT_Editor
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(67, 91);
+            this.button6.Location = new System.Drawing.Point(67, 41);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(100, 23);
             this.button6.TabIndex = 2;
@@ -921,6 +929,7 @@ namespace MSBT_Editor
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label42);
             this.groupBox4.Controls.Add(this.button5);
             this.groupBox4.Controls.Add(this.label18);
             this.groupBox4.Controls.Add(this.label17);
@@ -928,14 +937,23 @@ namespace MSBT_Editor
             this.groupBox4.Controls.Add(this.textBox17);
             this.groupBox4.Location = new System.Drawing.Point(6, 6);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(237, 129);
+            this.groupBox4.Size = new System.Drawing.Size(349, 129);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "ルビ";
             // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(6, 67);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(285, 24);
+            this.label42.TabIndex = 5;
+            this.label42.Text = "例：<Rubi=\"9\" Target=\"5\">しんぎんがていこく新銀河帝国\r\n漢字の数は5文字まで対応ふりがなの上限は不明";
+            // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(131, 91);
+            this.button5.Location = new System.Drawing.Point(185, 41);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(100, 23);
             this.button5.TabIndex = 4;
@@ -963,7 +981,7 @@ namespace MSBT_Editor
             // 
             // textBox16
             // 
-            this.textBox16.Location = new System.Drawing.Point(131, 18);
+            this.textBox16.Location = new System.Drawing.Point(79, 18);
             this.textBox16.Name = "textBox16";
             this.textBox16.Size = new System.Drawing.Size(100, 19);
             this.textBox16.TabIndex = 0;
@@ -971,7 +989,7 @@ namespace MSBT_Editor
             // 
             // textBox17
             // 
-            this.textBox17.Location = new System.Drawing.Point(131, 43);
+            this.textBox17.Location = new System.Drawing.Point(79, 43);
             this.textBox17.Name = "textBox17";
             this.textBox17.Size = new System.Drawing.Size(100, 19);
             this.textBox17.TabIndex = 1;
@@ -1374,7 +1392,7 @@ namespace MSBT_Editor
             this.groupBox12.Controls.Add(this.button23);
             this.groupBox12.Controls.Add(this.textBox31);
             this.groupBox12.Controls.Add(this.label35);
-            this.groupBox12.Location = new System.Drawing.Point(3, 266);
+            this.groupBox12.Location = new System.Drawing.Point(3, 270);
             this.groupBox12.Name = "groupBox12";
             this.groupBox12.Size = new System.Drawing.Size(224, 119);
             this.groupBox12.TabIndex = 6;
@@ -1423,7 +1441,7 @@ namespace MSBT_Editor
             this.groupBox11.Controls.Add(this.button22);
             this.groupBox11.Controls.Add(this.button21);
             this.groupBox11.Controls.Add(this.label34);
-            this.groupBox11.Location = new System.Drawing.Point(6, 160);
+            this.groupBox11.Location = new System.Drawing.Point(3, 164);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(224, 100);
             this.groupBox11.TabIndex = 5;
@@ -1468,9 +1486,9 @@ namespace MSBT_Editor
             this.groupBox10.Controls.Add(this.DeleteListText);
             this.groupBox10.Controls.Add(this.ListNameText);
             this.groupBox10.Controls.Add(this.AddListText);
-            this.groupBox10.Location = new System.Drawing.Point(6, 6);
+            this.groupBox10.Location = new System.Drawing.Point(3, 6);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(224, 148);
+            this.groupBox10.Size = new System.Drawing.Size(224, 152);
             this.groupBox10.TabIndex = 4;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "MSBT";
@@ -1673,13 +1691,13 @@ namespace MSBT_Editor
             this.groupBox7.Controls.Add(this.label27);
             this.groupBox7.Controls.Add(this.label26);
             this.groupBox7.Controls.Add(this.label25);
-            this.groupBox7.Controls.Add(this.textBox24);
-            this.groupBox7.Controls.Add(this.textBox23);
-            this.groupBox7.Controls.Add(this.textBox22);
-            this.groupBox7.Controls.Add(this.textBox21);
-            this.groupBox7.Controls.Add(this.textBox20);
+            this.groupBox7.Controls.Add(this.Flw2Arg4Text);
+            this.groupBox7.Controls.Add(this.Flw2Arg3Text);
+            this.groupBox7.Controls.Add(this.Flw2Arg2Text);
+            this.groupBox7.Controls.Add(this.Flw2Arg1Text);
+            this.groupBox7.Controls.Add(this.Flw2PaddingText);
             this.groupBox7.Controls.Add(this.label24);
-            this.groupBox7.Controls.Add(this.textBox19);
+            this.groupBox7.Controls.Add(this.Flw2FllowTypeText);
             this.groupBox7.Controls.Add(this.label23);
             this.groupBox7.Location = new System.Drawing.Point(6, 10);
             this.groupBox7.Name = "groupBox7";
@@ -1699,8 +1717,8 @@ namespace MSBT_Editor
             // 
             // groupBox8
             // 
-            this.groupBox8.Controls.Add(this.textBox26);
-            this.groupBox8.Controls.Add(this.textBox25);
+            this.groupBox8.Controls.Add(this.Flw2Branch2Text);
+            this.groupBox8.Controls.Add(this.Flw2Branch1Text);
             this.groupBox8.Controls.Add(this.label30);
             this.groupBox8.Controls.Add(this.label29);
             this.groupBox8.Location = new System.Drawing.Point(28, 37);
@@ -1710,23 +1728,25 @@ namespace MSBT_Editor
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "フロータイプ2の場合のみ";
             // 
-            // textBox26
+            // Flw2Branch2Text
             // 
-            this.textBox26.Location = new System.Drawing.Point(150, 41);
-            this.textBox26.Name = "textBox26";
-            this.textBox26.Size = new System.Drawing.Size(100, 19);
-            this.textBox26.TabIndex = 3;
-            this.textBox26.TextChanged += new System.EventHandler(this.textBox26_TextChanged);
-            this.textBox26.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox26_KeyPress);
+            this.Flw2Branch2Text.Location = new System.Drawing.Point(150, 41);
+            this.Flw2Branch2Text.MaxLength = 4;
+            this.Flw2Branch2Text.Name = "Flw2Branch2Text";
+            this.Flw2Branch2Text.Size = new System.Drawing.Size(100, 19);
+            this.Flw2Branch2Text.TabIndex = 3;
+            this.Flw2Branch2Text.TextChanged += new System.EventHandler(this.Flw2Branch2Text_TextChanged);
+            this.Flw2Branch2Text.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Flw2Branch1Text_KeyPress);
             // 
-            // textBox25
+            // Flw2Branch1Text
             // 
-            this.textBox25.Location = new System.Drawing.Point(150, 16);
-            this.textBox25.Name = "textBox25";
-            this.textBox25.Size = new System.Drawing.Size(100, 19);
-            this.textBox25.TabIndex = 2;
-            this.textBox25.TextChanged += new System.EventHandler(this.textBox25_TextChanged);
-            this.textBox25.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox25_KeyPress);
+            this.Flw2Branch1Text.Location = new System.Drawing.Point(150, 16);
+            this.Flw2Branch1Text.MaxLength = 4;
+            this.Flw2Branch1Text.Name = "Flw2Branch1Text";
+            this.Flw2Branch1Text.Size = new System.Drawing.Size(100, 19);
+            this.Flw2Branch1Text.TabIndex = 2;
+            this.Flw2Branch1Text.TextChanged += new System.EventHandler(this.Flw2Branch1Text_TextChanged);
+            this.Flw2Branch1Text.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Flw2Branch1Text_KeyPress);
             // 
             // label30
             // 
@@ -1782,45 +1802,55 @@ namespace MSBT_Editor
             this.label25.TabIndex = 8;
             this.label25.Text = "不明2";
             // 
-            // textBox24
+            // Flw2Arg4Text
             // 
-            this.textBox24.Location = new System.Drawing.Point(178, 215);
-            this.textBox24.Name = "textBox24";
-            this.textBox24.Size = new System.Drawing.Size(100, 19);
-            this.textBox24.TabIndex = 7;
-            this.textBox24.TextChanged += new System.EventHandler(this.textBox24_TextChanged);
+            this.Flw2Arg4Text.Location = new System.Drawing.Point(178, 215);
+            this.Flw2Arg4Text.MaxLength = 4;
+            this.Flw2Arg4Text.Name = "Flw2Arg4Text";
+            this.Flw2Arg4Text.Size = new System.Drawing.Size(100, 19);
+            this.Flw2Arg4Text.TabIndex = 7;
+            this.Flw2Arg4Text.TextChanged += new System.EventHandler(this.Flw2Arg4Text_TextChanged);
+            this.Flw2Arg4Text.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Flw2Branch1Text_KeyPress);
             // 
-            // textBox23
+            // Flw2Arg3Text
             // 
-            this.textBox23.Location = new System.Drawing.Point(178, 190);
-            this.textBox23.Name = "textBox23";
-            this.textBox23.Size = new System.Drawing.Size(100, 19);
-            this.textBox23.TabIndex = 6;
-            this.textBox23.TextChanged += new System.EventHandler(this.textBox23_TextChanged);
+            this.Flw2Arg3Text.Location = new System.Drawing.Point(178, 190);
+            this.Flw2Arg3Text.MaxLength = 4;
+            this.Flw2Arg3Text.Name = "Flw2Arg3Text";
+            this.Flw2Arg3Text.Size = new System.Drawing.Size(100, 19);
+            this.Flw2Arg3Text.TabIndex = 6;
+            this.Flw2Arg3Text.TextChanged += new System.EventHandler(this.Flw2Arg3Text_TextChanged);
+            this.Flw2Arg3Text.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Flw2Branch1Text_KeyPress);
             // 
-            // textBox22
+            // Flw2Arg2Text
             // 
-            this.textBox22.Location = new System.Drawing.Point(178, 165);
-            this.textBox22.Name = "textBox22";
-            this.textBox22.Size = new System.Drawing.Size(100, 19);
-            this.textBox22.TabIndex = 5;
-            this.textBox22.TextChanged += new System.EventHandler(this.textBox22_TextChanged);
+            this.Flw2Arg2Text.Location = new System.Drawing.Point(178, 165);
+            this.Flw2Arg2Text.MaxLength = 4;
+            this.Flw2Arg2Text.Name = "Flw2Arg2Text";
+            this.Flw2Arg2Text.Size = new System.Drawing.Size(100, 19);
+            this.Flw2Arg2Text.TabIndex = 5;
+            this.Flw2Arg2Text.TextChanged += new System.EventHandler(this.Flw2Arg2Text_TextChanged);
+            this.Flw2Arg2Text.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Flw2Branch1Text_KeyPress);
             // 
-            // textBox21
+            // Flw2Arg1Text
             // 
-            this.textBox21.Location = new System.Drawing.Point(178, 140);
-            this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(100, 19);
-            this.textBox21.TabIndex = 4;
-            this.textBox21.TextChanged += new System.EventHandler(this.textBox21_TextChanged);
+            this.Flw2Arg1Text.Location = new System.Drawing.Point(178, 140);
+            this.Flw2Arg1Text.MaxLength = 4;
+            this.Flw2Arg1Text.Name = "Flw2Arg1Text";
+            this.Flw2Arg1Text.Size = new System.Drawing.Size(100, 19);
+            this.Flw2Arg1Text.TabIndex = 4;
+            this.Flw2Arg1Text.TextChanged += new System.EventHandler(this.Flw2Arg1Text_TextChanged);
+            this.Flw2Arg1Text.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Flw2Branch1Text_KeyPress);
             // 
-            // textBox20
+            // Flw2PaddingText
             // 
-            this.textBox20.Location = new System.Drawing.Point(178, 115);
-            this.textBox20.Name = "textBox20";
-            this.textBox20.Size = new System.Drawing.Size(100, 19);
-            this.textBox20.TabIndex = 3;
-            this.textBox20.TextChanged += new System.EventHandler(this.textBox20_TextChanged);
+            this.Flw2PaddingText.Location = new System.Drawing.Point(178, 115);
+            this.Flw2PaddingText.MaxLength = 4;
+            this.Flw2PaddingText.Name = "Flw2PaddingText";
+            this.Flw2PaddingText.Size = new System.Drawing.Size(100, 19);
+            this.Flw2PaddingText.TabIndex = 3;
+            this.Flw2PaddingText.TextChanged += new System.EventHandler(this.Flw2PaddingText_TextChanged);
+            this.Flw2PaddingText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Flw2Branch1Text_KeyPress);
             // 
             // label24
             // 
@@ -1831,13 +1861,15 @@ namespace MSBT_Editor
             this.label24.TabIndex = 2;
             this.label24.Text = "パディング？";
             // 
-            // textBox19
+            // Flw2FllowTypeText
             // 
-            this.textBox19.Location = new System.Drawing.Point(178, 12);
-            this.textBox19.Name = "textBox19";
-            this.textBox19.Size = new System.Drawing.Size(100, 19);
-            this.textBox19.TabIndex = 1;
-            this.textBox19.TextChanged += new System.EventHandler(this.textBox19_TextChanged);
+            this.Flw2FllowTypeText.Location = new System.Drawing.Point(178, 12);
+            this.Flw2FllowTypeText.MaxLength = 4;
+            this.Flw2FllowTypeText.Name = "Flw2FllowTypeText";
+            this.Flw2FllowTypeText.Size = new System.Drawing.Size(100, 19);
+            this.Flw2FllowTypeText.TabIndex = 1;
+            this.Flw2FllowTypeText.TextChanged += new System.EventHandler(this.Flw2FllowTypeText_TextChanged);
+            this.Flw2FllowTypeText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Flw2FllowTypeText_KeyPress);
             // 
             // label23
             // 
@@ -1951,6 +1983,7 @@ namespace MSBT_Editor
             // 
             // tabPage10
             // 
+            this.tabPage10.Controls.Add(this.button1);
             this.tabPage10.Controls.Add(this.UnknownTag);
             this.tabPage10.Controls.Add(this.MSBT_Debug_Text);
             this.tabPage10.Controls.Add(this.textBox27);
@@ -1964,14 +1997,23 @@ namespace MSBT_Editor
             this.tabPage10.Text = "デバッグ";
             this.tabPage10.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(345, 393);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(209, 35);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "TextSort";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // UnknownTag
             // 
             this.UnknownTag.Location = new System.Drawing.Point(6, 265);
             this.UnknownTag.Multiline = true;
             this.UnknownTag.Name = "UnknownTag";
             this.UnknownTag.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.UnknownTag.ShortcutsEnabled = false;
-            this.UnknownTag.Size = new System.Drawing.Size(548, 163);
+            this.UnknownTag.Size = new System.Drawing.Size(548, 122);
             this.UnknownTag.TabIndex = 14;
             // 
             // MSBT_Debug_Text
@@ -2529,6 +2571,7 @@ namespace MSBT_Editor
             // 
             // tabPage12
             // 
+            this.tabPage12.Controls.Add(this.MsbtMsbfAutoSaveCheckBox);
             this.tabPage12.Controls.Add(this.label58);
             this.tabPage12.Controls.Add(this.ARCListBox);
             this.tabPage12.Location = new System.Drawing.Point(4, 22);
@@ -2539,10 +2582,21 @@ namespace MSBT_Editor
             this.tabPage12.Text = "ARCファイルの中身";
             this.tabPage12.UseVisualStyleBackColor = true;
             // 
+            // MsbtMsbfAutoSaveCheckBox
+            // 
+            this.MsbtMsbfAutoSaveCheckBox.AutoSize = true;
+            this.MsbtMsbfAutoSaveCheckBox.Location = new System.Drawing.Point(223, 268);
+            this.MsbtMsbfAutoSaveCheckBox.Name = "MsbtMsbfAutoSaveCheckBox";
+            this.MsbtMsbfAutoSaveCheckBox.Size = new System.Drawing.Size(201, 16);
+            this.MsbtMsbfAutoSaveCheckBox.TabIndex = 2;
+            this.MsbtMsbfAutoSaveCheckBox.Text = "(Msbt Msbf) オートセーブ/AutoSave";
+            this.MsbtMsbfAutoSaveCheckBox.UseVisualStyleBackColor = true;
+            this.MsbtMsbfAutoSaveCheckBox.CheckedChanged += new System.EventHandler(this.MsbtMsbfAutoSaveCheckBox_CheckedChanged);
+            // 
             // label58
             // 
             this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(6, 265);
+            this.label58.Location = new System.Drawing.Point(6, 287);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(297, 60);
             this.label58.TabIndex = 1;
@@ -2558,6 +2612,10 @@ namespace MSBT_Editor
             this.ARCListBox.Size = new System.Drawing.Size(418, 256);
             this.ARCListBox.TabIndex = 0;
             this.ARCListBox.SelectedIndexChanged += new System.EventHandler(this.ARCListBox_SelectedIndexChanged);
+            this.ARCListBox.SelectedValueChanged += new System.EventHandler(this.ARCListBox_SelectedValueChanged);
+            this.ARCListBox.CursorChanged += new System.EventHandler(this.ARCListBox_CursorChanged);
+            this.ARCListBox.ChangeUICues += new System.Windows.Forms.UICuesEventHandler(this.ARCListBox_ChangeUICues);
+            this.ARCListBox.Validating += new System.ComponentModel.CancelEventHandler(this.ARCListBox_Validating);
             // 
             // tabPage13
             // 
@@ -2577,11 +2635,6 @@ namespace MSBT_Editor
             this.tabPage13.TabIndex = 1;
             this.tabPage13.Text = "MSBTとMSBF";
             this.tabPage13.UseVisualStyleBackColor = true;
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(197, 6);
             // 
             // Form1
             // 
@@ -2709,15 +2762,15 @@ namespace MSBT_Editor
         private System.Windows.Forms.Label label16;
         public System.Windows.Forms.TextBox textBox15;
         private System.Windows.Forms.Button button20;
-        private System.Windows.Forms.TextBox textBox26;
-        private System.Windows.Forms.TextBox textBox25;
+        private System.Windows.Forms.TextBox Flw2Branch2Text;
+        private System.Windows.Forms.TextBox Flw2Branch1Text;
         private System.Windows.Forms.GroupBox groupBox7;
-        public System.Windows.Forms.TextBox textBox24;
-        public System.Windows.Forms.TextBox textBox23;
-        public System.Windows.Forms.TextBox textBox22;
-        public System.Windows.Forms.TextBox textBox21;
-        public System.Windows.Forms.TextBox textBox20;
-        public System.Windows.Forms.TextBox textBox19;
+        public System.Windows.Forms.TextBox Flw2Arg4Text;
+        public System.Windows.Forms.TextBox Flw2Arg3Text;
+        public System.Windows.Forms.TextBox Flw2Arg2Text;
+        public System.Windows.Forms.TextBox Flw2Arg1Text;
+        public System.Windows.Forms.TextBox Flw2PaddingText;
+        public System.Windows.Forms.TextBox Flw2FllowTypeText;
         public System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.TabPage tabPage10;
         public System.Windows.Forms.TextBox textBox27;
@@ -2905,6 +2958,9 @@ namespace MSBT_Editor
         public System.Windows.Forms.Label SETagInsertLabel2;
         public System.Windows.Forms.TabPage tabPage14;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.CheckBox MsbtMsbfAutoSaveCheckBox;
     }
 }
 

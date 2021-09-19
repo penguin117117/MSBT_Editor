@@ -14,7 +14,7 @@ namespace MSBT_Editor.Formsys
         protected static TextBox txtb11 = Form1.Form1Instance.Atr1SpecialText;
         protected static TextBox txtb14 = Form1.Form1Instance.textBox14;
         protected static TextBox txtb15 = Form1.Form1Instance.textBox15;
-        protected static TextBox txtb24 = Form1.Form1Instance.textBox24;
+        protected static TextBox txtb24 = Form1.Form1Instance.Flw2Arg4Text;
         protected static TextBox txtb27 = Form1.Form1Instance.textBox27;
 
         //button 1~9

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace MSBT_Editor.FileSys
 {
+    
     /// <summary>
     /// 外部の実行ファイルを実行するクラス
     /// </summary>
@@ -41,43 +42,42 @@ namespace MSBT_Editor.FileSys
             File.WriteAllBytes(ARCToolDllSetPath, ARCToolDllBinaryData);
             File.WriteAllBytes(ARCToolDepsJsonSetPath, ARCToolDepsJsonBinaryData);
             File.WriteAllBytes(ARCToolRuntimeJsonSetPath, ARCToolRuntimeJsonBinaryData);
-            Console.WriteLine("ok");
         }
-        public static void ARCToolExecutor(string filepath) {
+        public void ARCToolExecutor(string filepath,bool isFolder = false) {
             string ARCToolExecutorSetDirectoryPath = string.Empty;
             string ARCToolExecutorSetPath = string.Empty;
 
             ARCToolExeCutorCreator(ref ARCToolExecutorSetDirectoryPath, ref ARCToolExecutorSetPath);
-            //return;
-            var dir = Directory.GetParent(filepath).FullName;
-            
+            string OutputCMD; 
+
+            Process p = new Process();
+            var psi = new ProcessStartInfo()
+            {
+                FileName = ARCToolExecutorSetPath/*dir + @"\res" + @"\ARCTool_ver0.1.1.0.exe"*/,
+                WorkingDirectory = ARCToolExecutorSetDirectoryPath/*Path.Combine(dir, "res")*/,
+                //スペースを含むパスの処理に"\""で挟み込む必要がある。
+                //例：新しいフォルダー (11)など
+                Arguments = "\"" + filepath + "\"",
+                //CreateNoWindow = true,
+                UseShellExecute = false,
+                RedirectStandardError = true,
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true
+            };
+
+            p.StartInfo = psi;
+            p.Start();
+            OutputCMD = p.StandardOutput.ReadToEnd();
 
             
-            
-
-            ProcessStartInfo psi = new ProcessStartInfo();
-
-            psi.FileName = ARCToolExecutorSetPath/*dir + @"\res" + @"\ARCTool_ver0.1.1.0.exe"*/;
-            psi.WorkingDirectory = ARCToolExecutorSetDirectoryPath/*Path.Combine(dir, "res")*/;
-            //スペースを含むパスの処理に"\""で挟み込む必要がある。
-            //例：新しいフォルダー (11)など
-            psi.Arguments = "\""+ filepath + "\"";
-            psi.UseShellExecute = false;
-            psi.RedirectStandardError = true;
-            psi.RedirectStandardInput = true;
-            psi.RedirectStandardOutput = true;
-
-            Process p = Process.Start(psi);
-
-            var ErrorCMD = p.StandardError.ReadToEnd();
-            var OutputCMD = p.StandardOutput.ReadToEnd();
-
             p.WaitForExit();
+            if (!p.HasExited) Console.WriteLine(p.StandardError.ReadToEnd());
             
+            p.Close();
+            p.Dispose();
 
-            Console.WriteLine(ErrorCMD);
             Console.WriteLine(OutputCMD);
-            
         }
+
     }
 }

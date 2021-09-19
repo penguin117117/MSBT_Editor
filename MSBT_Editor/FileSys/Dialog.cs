@@ -21,8 +21,8 @@ namespace MSBT_Editor.FileSys
     {
         public static string Save_Path_Msbt = "None";
         public static string Save_Path_Msbf = "None";
-        public static string Save_Path_Arc  = "None";
-        public static string Temp_Path_Arc  = "None";
+        public static string Save_Path_Arc = "None";
+        public static string Temp_Path_Arc = "None";
         public static List<string> ArcInsideMsbtAndMsbfPath;
 
         /// <summary>
@@ -51,6 +51,11 @@ namespace MSBT_Editor.FileSys
             }
         }
 
+        private static string SaveMissTime()
+        {
+            DateTime dt = DateTime.Now;
+            return "｜失敗日時" + dt.ToString();
+        }
 
         /// <summary>
         /// ファイルパスが設定されているかをチェックします。
@@ -63,8 +68,8 @@ namespace MSBT_Editor.FileSys
             {
                 MessageBox.Show(
                     "ファイルを開くまたは保存先を指定してください",
-                    "エラー", 
-                    MessageBoxButtons.OK, 
+                    "エラー",
+                    MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                     );
                 return true;
@@ -72,14 +77,14 @@ namespace MSBT_Editor.FileSys
             return false;
         }
 
-        
+
 
         public static void Save(string filePath, int fileNum)
         {
-            
+
             var hasPath = CheckSavePath(filePath);
             if (hasPath) return;
-            FileSave(filePath,fileNum);
+            FileSave(filePath, fileNum);
         }
 
 
@@ -94,11 +99,22 @@ namespace MSBT_Editor.FileSys
 
         public static void SaveAs(int filenum)
         {
-            string[] FileNameStrings = {string.Empty, "新しいファイル.msbt" , "新しいファイル.msbf" , "NewFile.arc"};
+            string[] NewFileNames = { string.Empty, "新しいファイル.msbt", "新しいファイル.msbf", "NewFile.arc" };
+            string[] SetFileNames = { string.Empty, Save_Path_Msbt, Save_Path_Msbf, Save_Path_Arc };
+            string SetDirectoryPath = @"C:\";
+            //string[] FileNameStrings = new string[4];
+            //FileNameStrings = NewFileNames;
+            if (SetFileNames[filenum] != "None" && SetFileNames[filenum] != string.Empty)
+            {
+                SetDirectoryPath = Path.GetDirectoryName(SetFileNames[filenum]) + "\\";
+                Console.WriteLine(SetDirectoryPath);
+                //return;
+            }
+
             SaveFileDialog sfd = new SaveFileDialog
             {
-                FileName = FileNameStrings[filenum],
-                InitialDirectory = @"C:\",
+                FileName = NewFileNames[filenum],
+                InitialDirectory = SetDirectoryPath,
                 Filter = "メッセージファイル(*.msbt;*.Msbt)|*.msbt;*.Msbt|メッセージフローファイル(*.msbf;*.Msbf)|*.msbf;*.Msbf|nintendoアーカイブファイル(*.arc;*.Arc)|*.arc;*.Arc",
                 FilterIndex = filenum,
                 Title = "保存先のファイルを選択してください",
@@ -108,15 +124,25 @@ namespace MSBT_Editor.FileSys
             };
 
             if (sfd.ShowDialog() == DialogResult.OK)
-                FileSave(sfd.FileName,filenum);
-            
+            {
+                FileSave(sfd.FileName, filenum);
+            }
+            else
+            {
+                SaveStatusPathString.Text = "保存がキャンセルされました。" + SaveMissTime();
+                SaveStatusPathString.ForeColor = Color.Red;
+            }
+
         }
 
-        public static void FileSave(string fileName,int fileNum) {
+        public static void FileSave(string fileName, int fileNum)
+        {
             switch (fileNum)
             {
                 case 1:
-                    if(MSBT_Item_And_ListItem_Checker() == false) break;
+                    SaveStatusPathString.Text = "Msbtを保存できませんでした" + SaveMissTime();
+                    SaveStatusPathString.ForeColor = Color.Red;
+                    if (MSBT_Item_And_ListItem_Checker() == false) break;
                     MSBT_Header msbth = new MSBT_Header();
                     msbth.Write(fileName);
                     Save_Path_Msbt = fileName;
@@ -124,6 +150,8 @@ namespace MSBT_Editor.FileSys
                     SaveStatusPathString.ForeColor = Color.Green;
                     break;
                 case 2:
+                    SaveStatusPathString.ForeColor = Color.Red;
+                    SaveStatusPathString.Text = "Msbfを保存できませんでした。" + SaveMissTime();
                     if (MSBF_Item_And_ListItem_Checker() == false) break;
                     MSBF_Header msbfh = new MSBF_Header();
                     msbfh.Write(fileName);
@@ -161,7 +189,7 @@ namespace MSBT_Editor.FileSys
 
         public static bool MSBT_Item_And_ListItem_Checker()
         {
-            var MsbtListCountZeroCheck  = MsbtListBox.Items.Count == 0;
+            var MsbtListCountZeroCheck = MsbtListBox.Items.Count == 0;
             var MsbtAllItemDefaultCheck = MSBT_Data.MSBT_All_Data.Item == default;
             var MsbtAllTextDefaultCheck = MSBT_Data.MSBT_All_Data.Text == default;
 
@@ -195,7 +223,7 @@ namespace MSBT_Editor.FileSys
             {
                 case ".msbt":
                     Save_Path_Msbt = filePath;
-                    Langage.DefaultStatusBarLabel(tssl2,Langage.FileReadStatusJP[0],Langage.FileReadStatusUS[0]);
+                    Langage.DefaultStatusBarLabel(tssl2, Langage.FileReadStatusJP[0], Langage.FileReadStatusUS[0]);
                     MSBT_Header msbth = new MSBT_Header();
                     msbth.Read(filePath);
                     tssl2.Text = Path.GetFileName(filePath);
@@ -210,11 +238,12 @@ namespace MSBT_Editor.FileSys
                 case ".arc":
                     //if (Form1.UseDevelopMenue == false) break;
                     var IsYaz0 = MagicChecker(filePath, "Yaz0");
-                    if (IsYaz0 == true){
+                    if (IsYaz0 == true)
+                    {
                         MessageBox.Show(
                             "Yaz0は未対応です\r\n" +
                             "RARCタイプのARCファイルのみ読み込めます\r\n" +
-                            "Yaz0 is not supported.\r\n" + 
+                            "Yaz0 is not supported.\r\n" +
                             "Only RARC type ARC files can be read.", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
@@ -225,34 +254,39 @@ namespace MSBT_Editor.FileSys
                     Langage.DefaultStatusBarLabel(tssl7, Langage.FileReadStatusJP[2], Langage.FileReadStatusUS[2]);
 
                     //パスを取得
-                    var FileName            = Path.GetFileName(filePath);
-                    var MsbtEditorExePath   = Path.GetDirectoryName(Application.ExecutablePath);
-                    var TempARCPath         = MsbtEditorExePath + "\\res\\" + "ARC\\" +FileName;
+                    var FileName = Path.GetFileName(filePath);
+                    var MsbtEditorExePath = Path.GetDirectoryName(Application.ExecutablePath);
+                    var TempARCPath = MsbtEditorExePath + "\\res\\" + "ARC\\" + FileName;
 
                     //作業ディレクトリを作成しそこに、データをコピーする
                     Directory.CreateDirectory(MsbtEditorExePath + "\\res");
                     Directory.CreateDirectory(MsbtEditorExePath + "\\res\\" + "ARC");
-                    File.Copy(filePath,TempARCPath,true);
+                    File.Copy(filePath, TempARCPath, true);
 
                     //ARCToolの実行
-                    ExternalFileExecutor.ARCToolExecutor(TempARCPath);
+                    ExternalFileExecutor efe = new ExternalFileExecutor();
+                    efe.ARCToolExecutor(TempARCPath);
 
 
-                    var TempParent                  = Directory.GetParent(TempARCPath).FullName;
-                    var TempWorkingDirName          = Path.GetFileNameWithoutExtension(TempARCPath);
-                    string[] FilePathStrings        = Directory.GetFiles(TempParent + @"\" + TempWorkingDirName, "*", SearchOption.AllDirectories);
-                    
+                    var TempParent = Directory.GetParent(TempARCPath).FullName;
+                    var TempWorkingDirName = Path.GetFileNameWithoutExtension(TempARCPath);
+                    string[] FilePathStrings = Directory.GetFiles(TempParent + @"\" + TempWorkingDirName, "*", SearchOption.AllDirectories);
+
                     ArcInsideMsbtAndMsbfPath = new List<string>();
-                    foreach (var FilePath in FilePathStrings) {
+                    foreach (var FilePath in FilePathStrings)
+                    {
                         var FilePathExtension = Path.GetExtension(FilePath).ToLower();
                         if (FilePathExtension == ".msbt" || FilePathExtension == ".msbf")
                         {
                             ArcInsideMsbtAndMsbfPath.Add(FilePath);
                             ARCListBox.Items.Add(Path.GetFileName(FilePath));
-                                
+
                         }
                     }
                     Temp_Path_Arc = TempARCPath;
+
+                    Console.WriteLine("★"+TempARCPath);
+                    File.Delete(TempARCPath);
                     tssl7.Text = Path.GetFileName(Save_Path_Arc);
                     break;
 
@@ -267,20 +301,63 @@ namespace MSBT_Editor.FileSys
 
         }
 
-        public static void ArcSave(string newArcSavePath = "") {
+        public static void ArcSave(string newArcSavePath = "")
+        {
+            SaveStatusPathString.ForeColor = Color.Red;
+            SaveStatusPathString.Text = "Arcを保存できませんでした。" + SaveMissTime();
             if (ARCListBox.Items.Count < 1) return;
-            if (ArcInsideMsbtAndMsbfPath.Count < 1) return; 
-            
+            if (ArcInsideMsbtAndMsbfPath.Count < 1) return;
             if (newArcSavePath != string.Empty) Save_Path_Arc = newArcSavePath;
 
-            ExternalFileExecutor.ARCToolExecutor(Temp_Path_Arc);
+            var PathReplace = Temp_Path_Arc.Substring(0, Temp_Path_Arc.Length - 4);
+            //Console.WriteLine(PathReplace);
+            //Console.ReadKey();
+            //var PathReplace = path.Substring(0, path.Length - 1);
+            //Console.WriteLine("pathreplace    "+PathReplace);
+            //if (Directory.Exists(PathReplace))
+            //{
+            //    Console.WriteLine("圧縮フォルダパス" + PathReplace);
+            //    var DirStrs = ARCTool.FileSys.DirectoryFileEdit.DirectoryNameSort(PathReplace)/*Directory.GetDirectories(PathReplace, "*", SearchOption.AllDirectories).OrderBy(sort => sort)*/;
+            //    var FileStrs = ARCTool.FileSys.DirectoryFileEdit.FileNameSort(PathReplace);/*Directory.GetFiles(PathReplace, "*", SearchOption.AllDirectories).OrderBy(sort => sort)*/;
+            //    //if (DirStrs.Count() < 1) continue;
+            //    //if (FileStrs.Count() < 1) continue;
+
+
+            //    var arcfile = Path.GetFileName(PathReplace);
+            //    var arcfolder = Path.GetDirectoryName(PathReplace);
+
+            //    ARCTool.FileSys.RARC rarc = new ARCTool.FileSys.RARC() ;
+
+            //    //if (yesno == 'y')
+            //    //{
+            //    //    rarc.Archive(arcfolder + @"\" + arcfile + ".rarc", DirStrs, FileStrs);
+            //    //    Console.WriteLine("yaz0処理に入りました");
+            //    //    Yaz0 yaz0 = new();
+            //    //    yaz0.Encode(arcfolder + @"\" + arcfile + ".rarc");
+            //    //    Console.WriteLine("Yaz0圧縮できました");
+            //    //    continue;
+            //    //}
+            //    //Console.WriteLine("path     " + arcfolder + @"\" + arcfile + ".arc", DirStrs, FileStrs);
+            //    //Console.ReadKey();
+            //    Console.WriteLine(arcfile.Count());
+            //    rarc.Archive(arcfolder + @"\" + arcfile + ".arc", DirStrs, FileStrs);
+            //    Console.WriteLine("Yaz0処理をしていません");
+            //}
+
+            ExternalFileExecutor efe = new ExternalFileExecutor();
+            efe.ARCToolExecutor((Temp_Path_Arc.Substring(0, Temp_Path_Arc.Length - 4)), true);
+            //RARC.Archive(Temp_Path_Arc.Substring(0, Temp_Path_Arc.Length - 4)));
+            //System.Threading.Thread.Sleep(5000);
             File.Copy(Temp_Path_Arc, Save_Path_Arc, true);
+            Console.WriteLine(Temp_Path_Arc);
+            Console.WriteLine(Save_Path_Arc);
             SaveStatusPathString.ForeColor = Color.Green;
             SaveStatusPathString.Text = Save_Path_Arc;
             Console.WriteLine("ARCを保存しました");
         }
 
-        private static bool MagicChecker(string filePath , string checkString) {
+        private static bool MagicChecker(string filePath, string checkString)
+        {
             FileStream fs = new FileStream(filePath, FileMode.Open);
             BinaryReader br = new BinaryReader(fs);
             var Magic = Calculation_System.Byte2Char(br);

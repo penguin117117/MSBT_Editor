@@ -194,6 +194,8 @@ namespace MSBT_Editor.Sectionsys
                 var LabelString            = CS.Byte2Char(br, LabelStringSize);
                 var LabelMsbtListBoxIndex  = CS.Byte2Int(br);
 
+                
+
                 NameArray[LabelMsbtListBoxIndex] = LabelString;
 
                 var NameOffset          = (int)(PositionFirstLabelName - s_positionBaseAddress);

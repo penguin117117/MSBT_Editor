@@ -162,10 +162,12 @@ namespace MSBT_Editor.FileSys
                     var rubi = (bit12 >> 1);
                     var target = (bit10 >> 1);
                     tagstrs = "<Rubi=\"" + rubi.ToString() + "\" Target=\"" + target.ToString() + "\">";
-                    
+                    //Debugger.Unknowntagwriter(tagstrs,true);
                     break;
                 case 0x03:
                     tagstrs = Tag_Colors(bit10);
+                    break;
+                default:
                     break;
             }
 
@@ -213,7 +215,7 @@ namespace MSBT_Editor.FileSys
 
         public static bool Tag01(BinaryReader br, FileStream fs, List<byte> list, byte bit5, byte bit6, byte bit7, byte bit8) {
 
-            string tagstrs = "< Unknown =\"Tag01\">";
+            string tagstrs = "<Unknown =\"Tag01\">";
             var bit9 = Bytes2Byte(br);
             var bit10 = Bytes2Byte(br);
             switch (bit6) {
@@ -223,7 +225,7 @@ namespace MSBT_Editor.FileSys
                     {
                         var time = (bit9 << 8) + bit10;
                         tagstrs = "</Timer=\"" + time.ToString() + "\">";
-
+                        //Debugger.Unknowntagwriter(tagstrs,true);
                     }
                     break;
                 case 0x01:
@@ -286,7 +288,7 @@ namespace MSBT_Editor.FileSys
 
             UTF16BE(tagstrs, list);
             //if (tagstrs.Substring(1, 7) == "Unknown") Debugger.Unknowntagwriter(tagstrs);
-            Debugger.Unknowntagwriter(tagstrs + EN.NewLine);
+            //Debugger.Unknowntagwriter(tagstrs,true);
             return true;
         }
 
@@ -296,7 +298,7 @@ namespace MSBT_Editor.FileSys
             var bit10 = Bytes2Byte(br);
 
             var icon_num = "0003" + bit5.ToString("X2") + bit6.ToString("X2") + bit7.ToString("X2") + bit8.ToString("X2") + bit9.ToString("X2") + bit10.ToString("X2");
-            Console.WriteLine(icon_num);
+            //Console.WriteLine(icon_num);
 
             string tagstrs = "<UserIcon=\"" + "000E" + icon_num + "\">";
             switch (icon_num)
@@ -542,7 +544,6 @@ namespace MSBT_Editor.FileSys
                     break;
 
             }
-            Console.WriteLine(tagstrs + "_てす");
             UTF16BE(tagstrs, list);
             if (tagstrs.Substring(1, 7) == "Unknown") Debugger.Unknowntagwriter(tagstrs);
             return true;
@@ -560,7 +561,6 @@ namespace MSBT_Editor.FileSys
                     tagstrs = "</PlayCharacter>";
                     break;
             }
-            Console.WriteLine(tagstrs + "_てす");
             UTF16BE(tagstrs, list);
             if (tagstrs.Substring(1, 7) == "Unknown") Debugger.Unknowntagwriter(tagstrs);
             return true;
@@ -635,7 +635,7 @@ namespace MSBT_Editor.FileSys
             }
             UTF16BE(tagstrs, list);
             if (tagstrs.Length > 8) {
-                Console.WriteLine("tagname   " + tagstrs.Substring(1, 7));
+                //Console.WriteLine("tagname   " + tagstrs.Substring(1, 7));
                 if (tagstrs.Substring(1, 7) == "Unknown" && tagstrs.Length > 8) Debugger.Unknowntagwriter(tagstrs);
             }
             

@@ -295,8 +295,8 @@ namespace MSBT_Editor.Sectionsys
 
 
             var numhex = Int16.Parse(tb.Text, System.Globalization.NumberStyles.HexNumber);
-            switch (tb.Name.Substring(tb.Name.Length-2,2)) {
-                case "19":
+            switch (tb.Name) {
+                case "Flw2FllowTypeText":
                     //2以外→2
                     if (item.TypeCheck != 2 && numhex == 2)
                     {
@@ -448,19 +448,19 @@ namespace MSBT_Editor.Sectionsys
                     flw2.Item[index] = item;
 
                     break;
-                case "20":
+                case "Flw2PaddingText":
                     item.Unknown1 = numhex;
                     break;
-                case "21":
+                case "Flw2Arg1Text":
                     item.Unknown2 = numhex;
                     break;
-                case "22":
+                case "Flw2Arg2Text":
                     item.Unknown3 = numhex;
                     break;
-                case "23":
+                case "Flw2Arg3Text":
                     item.Unknown4 = numhex;
                     break;
-                case "24":
+                case "Flw2Arg4Text":
                     item.Unknown5 = numhex;
                     break;
             }
@@ -498,16 +498,16 @@ namespace MSBT_Editor.Sectionsys
             Console.WriteLine("★" + lb.Items.Count);
             Console.WriteLine(branchindex1+"_"+branchindex2+"__"+ FLW2.branch_list_no.IndexOf(index));
             //ジャンプ先1と2の書き換え
-            switch (tb.Name.Substring(tb.Name.Length - 2, 2))
+            switch (tb.Name)
             {
-                case "25":
+                case "Flw2Branch1Text":
                     branch_no[branchindex1] = Int16.Parse(tb.Text, System.Globalization.NumberStyles.HexNumber);
-                    Console.WriteLine("25__" + branch_no[branchindex1]);
+                    Console.WriteLine("Flw2Branch1Text__" + branch_no[branchindex1]);
                     
                     break;
-                case "26":
+                case "Flw2Branch2Text":
                     branch_no[branchindex2] = Int16.Parse(tb.Text, System.Globalization.NumberStyles.HexNumber);
-                    Console.WriteLine("26__" + branch_no[branchindex2] +"__"+ Int16.Parse(tb.Text, System.Globalization.NumberStyles.HexNumber));
+                    Console.WriteLine("Flw2Branch2Text__" + branch_no[branchindex2] +"__"+ Int16.Parse(tb.Text, System.Globalization.NumberStyles.HexNumber));
                     break;
             }
         }
