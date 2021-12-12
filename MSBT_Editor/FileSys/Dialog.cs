@@ -226,6 +226,10 @@ namespace MSBT_Editor.FileSys
                     Langage.DefaultStatusBarLabel(tssl2, Langage.FileReadStatusJP[0], Langage.FileReadStatusUS[0]);
                     MSBT_Header msbth = new MSBT_Header();
                     msbth.Read(filePath);
+                    //ARCListBox.Items.Clear();
+                    //Save_Path_Arc = "None";
+                    //Temp_Path_Arc = "None";
+                    //Langage.DefaultStatusBarLabel(tssl7, Langage.FileReadStatusJP[2], Langage.FileReadStatusUS[2]);
                     tssl2.Text = Path.GetFileName(filePath);
                     break;
                 case ".msbf":
@@ -233,9 +237,26 @@ namespace MSBT_Editor.FileSys
                     Langage.DefaultStatusBarLabel(tssl4, Langage.FileReadStatusJP[1], Langage.FileReadStatusUS[1]);
                     MSBF_Header msbfh = new MSBF_Header();
                     msbfh.Read(MSBF_File_Path);
+                    //ARCListBox.Items.Clear();
+                    //Save_Path_Arc = "None";
+                    //Temp_Path_Arc = "None";
+                    //Langage.DefaultStatusBarLabel(tssl7, Langage.FileReadStatusJP[2], Langage.FileReadStatusUS[2]);
                     tssl4.Text = Path.GetFileName(MSBF_File_Path);
                     break;
                 case ".arc":
+                    Properties.Settings.Default.ARCListIndexOld = 0;
+                    Properties.Settings.Default.Save();
+                    Dialog.Save_Path_Msbt = "None";
+                    Dialog.Save_Path_Msbf = "None";
+                    tssl2.Text = Langage.FileReadStatusJP[0];
+                    tssl4.Text = Langage.FileReadStatusJP[1];
+                    if (Properties.Settings.Default.言語 == "EN") 
+                    {
+                        tssl2.Text = Langage.FileReadStatusUS[0];
+                        tssl4.Text = Langage.FileReadStatusUS[1];
+                    }
+                    Langage.StatusBarLabelChenger(tssl2, Langage.FileReadStatusUS[0], Langage.FileReadStatusJP[0]);
+                    Langage.StatusBarLabelChenger(tssl4, Langage.FileReadStatusUS[1], Langage.FileReadStatusJP[1]);
                     //if (Form1.UseDevelopMenue == false) break;
                     var IsYaz0 = MagicChecker(filePath, "Yaz0");
                     if (IsYaz0 == true)
@@ -287,6 +308,10 @@ namespace MSBT_Editor.FileSys
 
                     Console.WriteLine("★"+TempARCPath);
                     File.Delete(TempARCPath);
+                    //MsbtListBox.Items.Clear();
+                    //list2.Items.Clear();
+                    //list3.Items.Clear();
+
                     tssl7.Text = Path.GetFileName(Save_Path_Arc);
                     break;
 

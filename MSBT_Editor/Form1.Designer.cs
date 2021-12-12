@@ -257,6 +257,7 @@ namespace MSBT_Editor
             this.label58 = new System.Windows.Forms.Label();
             this.ARCListBox = new System.Windows.Forms.ListBox();
             this.tabPage13 = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -1983,6 +1984,7 @@ namespace MSBT_Editor
             // 
             // tabPage10
             // 
+            this.tabPage10.Controls.Add(this.textBox1);
             this.tabPage10.Controls.Add(this.button1);
             this.tabPage10.Controls.Add(this.UnknownTag);
             this.tabPage10.Controls.Add(this.MSBT_Debug_Text);
@@ -2636,6 +2638,14 @@ namespace MSBT_Editor
             this.tabPage13.Text = "MSBTとMSBF";
             this.tabPage13.UseVisualStyleBackColor = true;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(357, 155);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 19);
+            this.textBox1.TabIndex = 16;
+            this.textBox1.Visible = false;
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -2961,6 +2971,7 @@ namespace MSBT_Editor
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.CheckBox MsbtMsbfAutoSaveCheckBox;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
