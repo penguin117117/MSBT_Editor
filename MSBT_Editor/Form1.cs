@@ -187,9 +187,17 @@ namespace MSBT_Editor
             MSBT_Data.MSBT_All_Data.Item[MsbtListBox.SelectedIndex] = Element;
         }
 
+        private void ATR1_TextChanged(object sender, EventArgs e)
+        {
+            //ATR1セクションのテキストボックスの変更を
+            //纏めるためのメソッドを作成中
+            Console.WriteLine(((TextBox)sender).Name);
+            ATR1.ATR1_Change(Atr1SimpleCamID);
+        }
 
         private void Atr1SimpleCamID_TextChanged(object sender, EventArgs e)
         {
+            
             ATR1.ATR1_Change(Atr1SimpleCamID);
         }
 
@@ -1442,65 +1450,126 @@ namespace MSBT_Editor
         }
         private void ARCListBox_SelectedIndexChanged(object sender, EventArgs e/*EventHandler e*/)
         {
-            
+
             var SaveSelect = DialogResult;
+
             if (Dialog.ArcInsideMsbtAndMsbfPath.Count < 1) return;
-            if (ARCListBox.Items.Count < 1) return;
+            if (ARCListBox.Items.Count < 0) return;
+
             var Index = ARCListBox.SelectedIndex;
-            if (Properties.Settings.Default.ARCListIndexOld == -1) 
+            if (Properties.Settings.Default.ARCListIndexOld == -1)
             {
                 Properties.Settings.Default.ARCListIndexOld = Index;
                 Properties.Settings.Default.Save();
             }
 
-            if (s_useAutoSave == false && Properties.Settings.Default.ARCListIndexOld != Index)
-            {
-                SaveSelect =
-                MessageBox.Show(
-                    "ファイルを上書きしますか？",
-                    "質問",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button2
-                );
-            }
+            //if (s_useAutoSave == false && Properties.Settings.Default.ARCListIndexOld != Index)
+            //{
+            //    SaveSelect =
+            //    MessageBox.Show(
+            //        "ファイルを上書きしますか？",
+            //        "質問",
+            //        MessageBoxButtons.YesNo,
+            //        MessageBoxIcon.Information,
+            //        MessageBoxDefaultButton.Button2
+            //    );
+            //}
 
-            
+            //if (DialogResult.No == SaveSelect) 
+            //{
+            //    if (Properties.Settings.Default.ARCListIndexOld < 0) return;
+            //    ARCListBox.SelectedIndex = Properties.Settings.Default.ARCListIndexOld;
+            //    return;
+            //}
 
-            //noの処理
-            if (DialogResult.No == SaveSelect) 
-            {
-                if (Properties.Settings.Default.ARCListIndexOld < 0) return;
-                ARCListBox.SelectedIndex = Properties.Settings.Default.ARCListIndexOld;
-                return;
-            }
-
-            if (s_useAutoSave == true) SaveSelect = DialogResult.Yes;
+            //if (s_useAutoSave == true) SaveSelect = DialogResult.Yes;
 
             //連続で選択した際にデータが壊れないようにしています。
             ARCListBox.Enabled = false;
 
             var PathExtention = Path.GetExtension(ARCListBox.Text).ToLower();
+            var PathFileName = ARCListBox.Text;
             //Dialog.FileCheckの処理中にこのイベントを発生させないようにしている。
             this.ARCListBox.SelectedIndexChanged -= new EventHandler(this.ARCListBox_SelectedIndexChanged);
-            
 
-            if (PathExtention == ".msbt" && Dialog.Save_Path_Msbt != ARCListBox.Text)
+            //if (Path.GetExtension()) ;
+            var OldPath = ARCListBox.Items[Properties.Settings.Default.ARCListIndexOld].ToString();
+
+
+            var MsbtOldName = toolStripStatusLabel2.Text;
+            var MsbfOldName = toolStripStatusLabel4.Text;
+
+            bool IsMsbtDef = false;
+            bool IsMsbfDef = false;
+
+            if (MsbtOldName == Langage.FileReadStatusJP[0]) IsMsbtDef = true;
+            if (MsbfOldName == Langage.FileReadStatusJP[1]) IsMsbfDef = true;
+
+
+            if (Properties.Settings.Default.言語 == "EN") 
             {
+                if (MsbtOldName == Langage.FileReadStatusUS[0]) IsMsbtDef = true;
+                if (MsbfOldName == Langage.FileReadStatusUS[1]) IsMsbfDef = true;
+            }
+            
+            if ((PathExtention == ".msbt") && (Dialog.Save_Path_Msbt != ARCListBox.Text))
+            {
+
+                if ((s_useAutoSave == false) &&  (MsbtOldName != PathFileName) && IsMsbtDef == false)
+                {
+                    SaveSelect =
+                    MessageBox.Show(
+                        "ファイルを上書きしますか？",
+                        "質問",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Information,
+                        MessageBoxDefaultButton.Button2
+                    );
+                }
+
+                if (DialogResult.No == SaveSelect)
+                {
+                    if (Properties.Settings.Default.ARCListIndexOld < 0) return;
+                    ARCListBox.SelectedIndex = Properties.Settings.Default.ARCListIndexOld;
+                    return;
+                }
+
+                if (s_useAutoSave == true) SaveSelect = DialogResult.Yes;
                 if (File.Exists(Dialog.Save_Path_Msbt)) Dialog.Save(Dialog.Save_Path_Msbt, 1);
                 
                 
             }
-            else if (PathExtention == ".msbf" && Dialog.Save_Path_Msbf != ARCListBox.Text)
+            else if ((PathExtention == ".msbf") && (Dialog.Save_Path_Msbf != ARCListBox.Text))
             {
-                if (File.Exists(Dialog.Save_Path_Msbf)) Dialog.Save(Dialog.Save_Path_Msbt, 2);
+                if ((s_useAutoSave == false)  && (MsbfOldName != PathFileName) && IsMsbfDef == false)
+                {
+                    SaveSelect =
+                    MessageBox.Show(
+                        "ファイルを上書きしますか？",
+                        "質問",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Information,
+                        MessageBoxDefaultButton.Button2
+                    );
+                }
+
+                if (DialogResult.No == SaveSelect)
+                {
+                    if (Properties.Settings.Default.ARCListIndexOld < 0) return;
+                    ARCListBox.SelectedIndex = Properties.Settings.Default.ARCListIndexOld;
+                    ARCListBox.Enabled = true;
+                    return;
+                }
+
+                if (s_useAutoSave == true) SaveSelect = DialogResult.Yes;
+                if (File.Exists(Dialog.Save_Path_Msbf)) Dialog.Save(Dialog.Save_Path_Msbf, 2);
             }
             else 
             {
+                this.ARCListBox.SelectedIndexChanged += new EventHandler(this.ARCListBox_SelectedIndexChanged);
+                ARCListBox.Enabled = true;
                 return;
             }
-
-            //Dialog.SaveAs(1);
             Dialog.FileCheck(Dialog.ArcInsideMsbtAndMsbfPath[Index]);
             this.ARCListBox.SelectedIndexChanged += new EventHandler(this.ARCListBox_SelectedIndexChanged);
 
@@ -1510,7 +1579,6 @@ namespace MSBT_Editor
 
             ARCListBox.Enabled = true;
             ARCListBox.Focus();
-            //this.textBox28.TextChanged -= new EventHandler(this.textBox28_TextChanged);
         }
 
         private void ARCListBox_CursorChanged(object sender, EventArgs e)
