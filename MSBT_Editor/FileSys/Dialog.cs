@@ -10,6 +10,7 @@ using MSBT_Editor.Formsys;
 using MSBT_Editor.MSBFsys;
 using MSBT_Editor.Sectionsys;
 using System.Drawing;
+using MSBT_Editor.MSBX;
 
 namespace MSBT_Editor.FileSys
 {
@@ -25,6 +26,8 @@ namespace MSBT_Editor.FileSys
         public static string Temp_Path_Arc = "None";
         public static List<string> ArcInsideMsbtAndMsbfPath;
 
+
+
         /// <summary>
         /// ファイルを選択して開く
         /// </summary>
@@ -32,7 +35,6 @@ namespace MSBT_Editor.FileSys
         /// <remarks></remarks>
         public static void Open(int filenum)
         {
-            //nintendoアーカイブファイル(*.arc;*.Arc)|*.arc;*.Arc|
             OpenFileDialog ofd = new OpenFileDialog
             {
                 FileName = "default.msbt",
@@ -50,6 +52,8 @@ namespace MSBT_Editor.FileSys
                 FileCheck(ofd.FileName);
             }
         }
+
+        
 
         private static string SaveMissTime()
         {

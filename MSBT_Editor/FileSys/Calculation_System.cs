@@ -589,11 +589,11 @@ namespace MSBT_Editor.FileSys
                     break;
                 case 0x02:
                     if (bit8 != 08) break;
-                    tagstrs = "</Year01>";
+                    tagstrs = "</GLE_StarNum>";
                     break;
                 case 0x03:
                     if (bit8 != 08) break;
-                    tagstrs = "</Year02>";
+                    tagstrs = "</Year>";
                     break;
                 case 0x04:
                     if (bit8 != 08) break;
@@ -1154,10 +1154,10 @@ namespace MSBT_Editor.FileSys
                 case "/StarShipTag":
                     bits = StringToBytes("000E0006000100080000000000000000");
                     break;
-                case "/Year01":
+                case "/GLE_StarNum":
                     bits = StringToBytes("000E0006000200080000000000000000");
                     break;
-                case "/Year02":
+                case "/Year":
                     bits = StringToBytes("000E0006000300080000000000000000");
                     break;
                 case "/Hour":
