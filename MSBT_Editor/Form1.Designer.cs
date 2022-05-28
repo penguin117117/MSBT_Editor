@@ -196,6 +196,7 @@ namespace MSBT_Editor
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.textBox13 = new System.Windows.Forms.TextBox();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.UnknownTag = new System.Windows.Forms.TextBox();
             this.MSBT_Debug_Text = new System.Windows.Forms.TextBox();
@@ -257,7 +258,6 @@ namespace MSBT_Editor
             this.label58 = new System.Windows.Forms.Label();
             this.ARCListBox = new System.Windows.Forms.ListBox();
             this.tabPage13 = new System.Windows.Forms.TabPage();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -1061,7 +1061,7 @@ namespace MSBT_Editor
             // 
             // button26
             // 
-            this.button26.Location = new System.Drawing.Point(6, 100);
+            this.button26.Location = new System.Drawing.Point(6, 76);
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(149, 23);
             this.button26.TabIndex = 10;
@@ -1111,37 +1111,37 @@ namespace MSBT_Editor
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(355, 47);
+            this.button15.Location = new System.Drawing.Point(355, 74);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(84, 23);
             this.button15.TabIndex = 5;
-            this.button15.Text = "年02？";
+            this.button15.Text = "参照値3";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(355, 18);
+            this.button14.Location = new System.Drawing.Point(355, 47);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(84, 23);
             this.button14.TabIndex = 4;
-            this.button14.Text = "年01？";
+            this.button14.Text = "参照値2";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(6, 18);
+            this.button8.Location = new System.Drawing.Point(355, 18);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(149, 23);
+            this.button8.Size = new System.Drawing.Size(84, 23);
             this.button8.TabIndex = 1;
-            this.button8.Text = "星船不明タグ";
+            this.button8.Text = "参照値1";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(6, 74);
+            this.button10.Location = new System.Drawing.Point(6, 47);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(149, 23);
             this.button10.TabIndex = 3;
@@ -1151,7 +1151,7 @@ namespace MSBT_Editor
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(6, 47);
+            this.button9.Location = new System.Drawing.Point(6, 18);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(149, 23);
             this.button9.TabIndex = 2;
@@ -1999,6 +1999,14 @@ namespace MSBT_Editor
             this.tabPage10.Text = "デバッグ";
             this.tabPage10.UseVisualStyleBackColor = true;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(357, 155);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 19);
+            this.textBox1.TabIndex = 16;
+            this.textBox1.Visible = false;
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(345, 393);
@@ -2637,14 +2645,6 @@ namespace MSBT_Editor
             this.tabPage13.TabIndex = 1;
             this.tabPage13.Text = "MSBTとMSBF";
             this.tabPage13.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(357, 155);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 19);
-            this.textBox1.TabIndex = 16;
-            this.textBox1.Visible = false;
             // 
             // Form1
             // 
