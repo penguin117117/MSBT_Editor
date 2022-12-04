@@ -216,7 +216,7 @@ namespace MSBT_Editor.Formsys
             button5.Text = "ルビタグ挿入";
             button6.Text = "タイマータグ挿入";
             button7.Text = "プレイキャラクター";
-            button8.Text = "星船不明タグ";
+            button8.Text = "参照値1";
             button9.Text = "リザルトギャラクシー名";
 
 
@@ -224,8 +224,8 @@ namespace MSBT_Editor.Formsys
             button11.Text = "NPC,キャラタグ挿入";
             button12.Text = "アイテム,オブジェクトタグ挿入";
             button13.Text = "操作,その他タグ挿入";
-            button14.Text = "年01？";
-            button15.Text = "年02？";
+            button14.Text = "参照値2";
+            button15.Text = "参照値3";
             button16.Text = "時間";
             button17.Text = "分";
             button18.Text = "秒";
@@ -394,14 +394,14 @@ namespace MSBT_Editor.Formsys
             button5.Text = "Insert Rubi";
             button6.Text = "Insert Timer";
             button7.Text = "Player";
-            button8.Text = "Starship Unknown";
+            button8.Text = "Reference Value1";
             button9.Text = "Result Galaxy Name";
             button10.Text = "Result Scenario Name";
             button11.Text = "Insert Character Tag";
             button12.Text = "Insert Item,Object Tag";
             button13.Text = "Insert Operation Tag";
-            button14.Text = "Year 01?";
-            button15.Text = "Year 02?";
+            button14.Text = "Reference Value2";
+            button15.Text = "Reference Value3";
             button16.Text = "Hour";
             button17.Text = "Minute";
             button18.Text = "Second";

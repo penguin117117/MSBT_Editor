@@ -525,7 +525,7 @@ namespace MSBT_Editor
         private void button8_Click(object sender, EventArgs e)
         {
             if (MsbtListBox.Items.Count < 1) return;
-            string tag = "</StarShipTag>";
+            string tag = "</ReferenceValue1>";
             Calculation_System.TextBoxInsert(MsbtText, tag);
         }
 
@@ -644,14 +644,14 @@ namespace MSBT_Editor
         private void button14_Click(object sender, EventArgs e)
         {
             if (MsbtListBox.Items.Count < 1) return;
-            string tag = "</Year01>";
+            string tag = "</ReferenceValue2>";
             Calculation_System.TextBoxInsert(MsbtText, tag);
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
             if (MsbtListBox.Items.Count < 1) return;
-            string tag = "</Year02>";
+            string tag = "</ReferenceValue3>";
             Calculation_System.TextBoxInsert(MsbtText, tag);
         }
 
