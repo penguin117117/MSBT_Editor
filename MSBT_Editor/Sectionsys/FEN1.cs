@@ -242,6 +242,8 @@ namespace MSBT_Editor.Sectionsys
 
             //エントリーの読み込み
             Item1 = EntryReader(br, Entry);
+            foreach(var a in Item1)
+            Debugger.MSBF_Text(a.tagflag.ToString("X4")+a.unknown2.ToString("X4"));
 
             //エントリーネームを読み込む
             Item2 = EntryNameReader(fs,br,Entry,pos_SectionEnd,Item1);
