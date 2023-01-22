@@ -24,8 +24,8 @@ namespace MSBT_Editor
         private static Form1 _form1Instance;
 
         //開発専用のメニューを表示します
-        public static readonly bool UseDevelopMenue = false;
-        public static readonly bool UseDebugMenue   = false;
+        public static readonly bool UseDevelopMenue = true;
+        public static readonly bool UseDebugMenue   = true;
 
         private static bool s_useAutoSave = false;
 
@@ -137,7 +137,9 @@ namespace MSBT_Editor
 
         public static int ListBoxIndex_NegativeThenSetIndexZero(ListBox lb)
         {
-            if (lb.SelectedIndex < 0)
+            if ((lb.SelectedIndex < 0))
+                lb.SelectedIndex = 0;
+            if (lb.SelectedIndex > MSBT_Data.MSBT_All_Data.Item.Count())
                 lb.SelectedIndex = 0;
             return lb.SelectedIndex;
         }
@@ -149,7 +151,17 @@ namespace MSBT_Editor
             var MsbtSelectIndex = ListBoxIndex_NegativeThenSetIndexZero(MsbtListBox);
             var MsbtAllData     = MSBT_Data.MSBT_All_Data;
             var SpecialText     = MSBT_Data.Atr1SpecialText;
-            var Tmp             = MsbtAllData.Item[MsbtSelectIndex];
+            ATR1.AttributeData Tmp;
+            try
+            {
+                 Tmp = MsbtAllData.Item[MsbtSelectIndex];
+            }
+            catch (Exception)
+            {
+                MsbtSelectIndex = MsbtListBox.SelectedIndex = 0;
+                 Tmp = MsbtAllData.Item[MsbtSelectIndex];
+            }
+            
 
             MsbtText.Text              = MsbtAllData.Text[MsbtSelectIndex];
             ReadOnlyMsbtText.Text      = MsbtText.Text;

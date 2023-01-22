@@ -42,7 +42,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>embedded</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\MSBT_And_MSBF_Editor_ver0.6.7.0α\</OutputPath>
+    <OutputPath>bin\Release\MSBT_And_MSBF_Editor_ver0.6.7.0\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
