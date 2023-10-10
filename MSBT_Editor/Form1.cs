@@ -1541,13 +1541,29 @@ namespace MSBT_Editor
 
                 if (DialogResult.No == SaveSelect)
                 {
-                    if (Properties.Settings.Default.ARCListIndexOld < 0) return;
-                    ARCListBox.SelectedIndex = Properties.Settings.Default.ARCListIndexOld;
-                    return;
+                    if (Properties.Settings.Default.ARCListIndexOld < 0) 
+                    {
+                        //if (ARCListBox.Items.Count < 1) 
+                        //{
+                        //    throw new Exception("ARCListの数が0以下です。");
+                        //}
+                        //this.ARCListBox.SelectedIndexChanged += new EventHandler(this.ARCListBox_SelectedIndexChanged);
+
+                        return;
+                    }
+                    //ARCListBox.Enabled = true;
+                    //ARCListBox.SelectedIndex = Properties.Settings.Default.ARCListIndexOld;
+                    //this.ARCListBox.SelectedIndexChanged += new EventHandler(this.ARCListBox_SelectedIndexChanged);
+                    //ARCListBox.Focus();
+                    //return;
                 }
 
-                if (s_useAutoSave == true) SaveSelect = DialogResult.Yes;
-                if (File.Exists(Dialog.Save_Path_Msbt)) Dialog.Save(Dialog.Save_Path_Msbt, 1);
+                if (s_useAutoSave == true) 
+                {
+                    SaveSelect = DialogResult.Yes;
+                    if (File.Exists(Dialog.Save_Path_Msbt)) Dialog.Save(Dialog.Save_Path_Msbt, 1);
+                } 
+                
                 
                 
             }
@@ -1573,8 +1589,11 @@ namespace MSBT_Editor
                     return;
                 }
 
-                if (s_useAutoSave == true) SaveSelect = DialogResult.Yes;
+                if (s_useAutoSave == true) 
+                {
+                SaveSelect = DialogResult.Yes;
                 if (File.Exists(Dialog.Save_Path_Msbf)) Dialog.Save(Dialog.Save_Path_Msbf, 2);
+                } 
             }
             else 
             {
@@ -1582,6 +1601,7 @@ namespace MSBT_Editor
                 ARCListBox.Enabled = true;
                 return;
             }
+
             Dialog.FileCheck(Dialog.ArcInsideMsbtAndMsbfPath[Index]);
             this.ARCListBox.SelectedIndexChanged += new EventHandler(this.ARCListBox_SelectedIndexChanged);
 

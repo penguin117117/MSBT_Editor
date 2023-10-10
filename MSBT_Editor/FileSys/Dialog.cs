@@ -11,6 +11,7 @@ using MSBT_Editor.MSBFsys;
 using MSBT_Editor.Sectionsys;
 using System.Drawing;
 using MSBT_Editor.MSBX;
+using System.Diagnostics;
 
 namespace MSBT_Editor.FileSys
 {
@@ -146,8 +147,9 @@ namespace MSBT_Editor.FileSys
                 case 1:
                     SaveStatusPathString.Text = "Msbtを保存できませんでした" + SaveMissTime();
                     SaveStatusPathString.ForeColor = Color.Red;
-                    if (MSBT_Item_And_ListItem_Checker() == false) break;
+                    
                     MSBT_Header msbth = new MSBT_Header();
+                    if (MSBT_Item_And_ListItem_Checker() == false) break;
                     msbth.Write(fileName);
                     Save_Path_Msbt = fileName;
                     SaveStatusPathString.Text = Save_Path_Msbt;
@@ -183,7 +185,7 @@ namespace MSBT_Editor.FileSys
                 MessageBox.Show("MSBFのFLW2の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            if (list3.Items.Count == 0 || (fen1.Hashes.Count == 0) || (fen1.Item2.Count == 0))
+            if (list3.Items.Count == 0 || ((fen1.Hashes.Count == 0) || (fen1.Item2.Count == 0)))
             {
                 MessageBox.Show("MSBFのFEN1の項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -197,9 +199,10 @@ namespace MSBT_Editor.FileSys
             var MsbtAllItemDefaultCheck = MSBT_Data.MSBT_All_Data.Item == default;
             var MsbtAllTextDefaultCheck = MSBT_Data.MSBT_All_Data.Text == default;
 
-            if (MsbtListCountZeroCheck || (MsbtAllItemDefaultCheck) || MsbtAllTextDefaultCheck)
+            if (MsbtListCountZeroCheck && (MsbtAllItemDefaultCheck || MsbtAllTextDefaultCheck))
             {
                 MessageBox.Show("MSBTの項目が設定されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine("★　★_" + MsbtListCountZeroCheck + "_" + MsbtAllItemDefaultCheck + "_" + MsbtAllTextDefaultCheck);
                 return false;
             }
 
