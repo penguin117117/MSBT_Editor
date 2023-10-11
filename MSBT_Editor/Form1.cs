@@ -146,6 +146,24 @@ namespace MSBT_Editor
 
         private void MsbtListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //if (MSBT_Data.MSBT_All_Data.Text.Count == default)
+            //{
+            //    MsbtText.Clear();
+            //    ReadOnlyMsbtText.Clear();
+            //    Atr1SoundID.Clear();
+            //    Atr1SimpleCamID.Clear();
+            //    Atr1DialogID.Clear();
+            //    Atr1WindowID.Clear();
+            //    Atr1EventCameraID.Clear();
+            //    Atr1MessageAreaID.Clear();
+            //    Atr1Unknown6.Clear();
+            //    Atr1SpecialTextOffset.Clear();
+            //    Atr1SpecialText.Clear();
+            //    MsbtSelectedListName.Clear();
+            //    MsbtListSelectIndex.Text = "0x00";
+            //    return;
+            //}
+
             if (MSBT_Data.MSBT_All_Data.Text.Count < 1) return;
 
             var MsbtSelectIndex = ListBoxIndex_NegativeThenSetIndexZero(MsbtListBox);
@@ -1602,7 +1620,25 @@ namespace MSBT_Editor
                 return;
             }
 
+            //MSBTの内容を一度全て消す
+            MsbtText.Clear();
+            ReadOnlyMsbtText.Clear();
+            Atr1SoundID.Clear();
+            Atr1SimpleCamID.Clear();
+            Atr1DialogID.Clear();
+            Atr1WindowID.Clear();
+            Atr1EventCameraID.Clear();
+            Atr1MessageAreaID.Clear();
+            Atr1Unknown6.Clear();
+            Atr1SpecialTextOffset.Clear();
+            Atr1SpecialText.Clear();
+            MsbtSelectedListName.Clear();
+            MsbtListSelectIndex.Text = "0x00";
+
             Dialog.FileCheck(Dialog.ArcInsideMsbtAndMsbfPath[Index]);
+
+            
+
             this.ARCListBox.SelectedIndexChanged += new EventHandler(this.ARCListBox_SelectedIndexChanged);
 
             //古いリストのセレクト番号を上書き
