@@ -249,7 +249,7 @@ namespace MSBT_Editor.Sectionsys
             Item2 = EntryNameReader(fs,br,Entry,pos_SectionEnd,Item1);
 
             //ツリーの読み込み
-            if(chb1.Checked)TreeLoder(Item2);
+            if(chk1.Checked)TreeLoder(Item2);
             
             //パディング
             CS.MSBF_Padding(br, fs.Position);
