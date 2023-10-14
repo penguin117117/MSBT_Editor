@@ -65,7 +65,7 @@ namespace MSBT_Editor
             cmbLanguage.Text = Properties.Settings.Default.言語;
             Langage.Langage_Check();
 
-            chkShowTvwMSBFFlow.Checked = true;
+            chkShowTvwMsbfFlow.Checked = true;
 
             //コマンドライン引数を配列で取得する
             string[] FilePathStrings = Environment.GetCommandLineArgs();
@@ -91,13 +91,13 @@ namespace MSBT_Editor
             foreach (var item in fileName)
             {
                 Dialog.FileCheck(item);
-                if ((stbOpenedMSBTName.Text
+                if ((stbOpenedMsbtName.Text
                     == Langage.FileReadStatusJP[0]) ||
-                    (stbOpenedMSBTName.Text
+                    (stbOpenedMsbtName.Text
                     == Langage.FileReadStatusUS[0]))
                     return;
                 string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-                string msbtname = Path.GetFileNameWithoutExtension(stbOpenedMSBTName.Text);
+                string msbtname = Path.GetFileNameWithoutExtension(stbOpenedMsbtName.Text);
                 string textpath = Path.Combine(Path.GetDirectoryName(appPath), "Debug_" + msbtname + ".txt");
                 textBox34.AppendText(textpath + Environment.NewLine);
                 //File.WriteAllText(textpath, UnknownTag.Text);
@@ -109,19 +109,19 @@ namespace MSBT_Editor
         {
             if (UseDebugMenue == false)
             {
-                lblMSBFHashCalculator.Visible = false;
+                lblMsbfHashCalculator.Visible = false;
                 txtListNameToCalculateHash.Visible = false;
                 btnCalculateHash.Visible = false;
                 textBox32.Visible = false;
                 textBox33.Visible = false;
-                textBox13.Visible = false;
+                txtFlw2DebugHex.Visible = false;
                 textBox34.Visible = false;
                 textBox2.Visible = false;
                 textBox27.Visible = false;
                 btnReleaseDebugTextFile.Visible = false;
                 MSBT_Debug_Text.Visible = false;
-                UnknownTag.Visible = false;
-                tabControl1.TabPages.Remove(tbpDebugMSBF);
+                txtUnknownTag.Visible = false;
+                tabControl1.TabPages.Remove(tbpDebugMsbf);
                 tabControl1.TabPages.Remove(tbpDebug);
             }
         }
@@ -148,7 +148,7 @@ namespace MSBT_Editor
             return lb.SelectedIndex;
         }
 
-        private void LstListsInsideMSBT_SelectedIndexChanged(object sender, EventArgs e)
+        private void LstListsInsideMsbt_SelectedIndexChanged(object sender, EventArgs e)
         {
             //if (MSBT_Data.MSBT_All_Data.Text.Count == default)
             //{
@@ -170,7 +170,7 @@ namespace MSBT_Editor
 
             if (MSBT_Data.MSBT_All_Data.Text.Count < 1) return;
 
-            var MsbtSelectIndex = ListBoxIndex_NegativeThenSetIndexZero(lstListsInsideMSBT);
+            var MsbtSelectIndex = ListBoxIndex_NegativeThenSetIndexZero(lstListsInsideMsbt);
             var MsbtAllData = MSBT_Data.MSBT_All_Data;
             var SpecialText = MSBT_Data.Atr1SpecialText;
             ATR1.AttributeData Tmp;
@@ -180,45 +180,45 @@ namespace MSBT_Editor
             }
             catch (Exception)
             {
-                MsbtSelectIndex = lstListsInsideMSBT.SelectedIndex = 0;
+                MsbtSelectIndex = lstListsInsideMsbt.SelectedIndex = 0;
                 Tmp = MsbtAllData.Item[MsbtSelectIndex];
             }
 
 
-            txtMSBTText.Text = MsbtAllData.Text[MsbtSelectIndex];
-            txtReadOnlyMSBTText.Text = txtMSBTText.Text;
-            txtATR1SoundID.Text = Tmp.SoundID.ToString("X2");
-            txtATR1SimpleCamID.Text = Tmp.SimpleCameraID.ToString("X2");
-            txtATR1DialogID.Text = Tmp.DialogID.ToString("X2");
-            txtATR1WindowID.Text = Tmp.WindowID.ToString("X2");
-            txtATR1EventCameraID.Text = Tmp.EventCameraID.ToString("X4");
-            txtATR1MessageAreaID.Text = Tmp.MessageAreaID.ToString("X2");
-            txtATR1Unknown6.Text = Tmp.unknown6.ToString("X2");
-            txtATR1SpecialTextOffset.Text = Tmp.SpecialTextOffset.ToString("X8");
-            txtATR1SpecialText.Text = SpecialText[MsbtSelectIndex];
-            txtSelectedMSBTListName.Text = lstListsInsideMSBT.Text;
-            lblMSBTListSelectIndex.Text = "0x" + lstListsInsideMSBT.SelectedIndex.ToString("X");
+            txtMsbtText.Text = MsbtAllData.Text[MsbtSelectIndex];
+            txtReadOnlyMsbtText.Text = txtMsbtText.Text;
+            txtAtr1SoundID.Text = Tmp.SoundID.ToString("X2");
+            txtAtr1SimpleCamID.Text = Tmp.SimpleCameraID.ToString("X2");
+            txtAtr1DialogID.Text = Tmp.DialogID.ToString("X2");
+            txtAtr1WindowID.Text = Tmp.WindowID.ToString("X2");
+            txtAtr1EventCameraID.Text = Tmp.EventCameraID.ToString("X4");
+            txtAtr1MessageAreaID.Text = Tmp.MessageAreaID.ToString("X2");
+            txtAtr1Unknown6.Text = Tmp.unknown6.ToString("X2");
+            txtAtr1SpecialTextOffset.Text = Tmp.SpecialTextOffset.ToString("X8");
+            txtAtr1SpecialText.Text = SpecialText[MsbtSelectIndex];
+            txtSelectedMsbtListName.Text = lstListsInsideMsbt.Text;
+            lblMsbtListSelectIndex.Text = "0x" + lstListsInsideMsbt.SelectedIndex.ToString("X");
 
             if (UseDebugMenue == false) return;
             //ハッシュスキップ数を表示
-            var FindMsbtListTextIndexNum = LBL1.NameList.IndexOf(lstListsInsideMSBT.Text);
+            var FindMsbtListTextIndexNum = LBL1.NameList.IndexOf(lstListsInsideMsbt.Text);
             if (-1 != FindMsbtListTextIndexNum)
             {
-                txtLBL1TagIndex.Text = LBL1.HashSkipList[FindMsbtListTextIndexNum].ToString("X8");
+                txtLbl1TagIndex.Text = LBL1.HashSkipList[FindMsbtListTextIndexNum].ToString("X8");
             }
             else
             {
-                txtLBL1TagIndex.Text = "";
+                txtLbl1TagIndex.Text = "";
             }
         }
 
         private void TxtATR1SoundID_TextChanged(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
             //Console.WriteLine(e.GetType().FullName);
-            var Element = MSBT_Data.MSBT_All_Data.Item[lstListsInsideMSBT.SelectedIndex];
-            Element.SoundID = ATR1.ATR1TextBoxChange(txtATR1SoundID, Element.SoundID);
-            MSBT_Data.MSBT_All_Data.Item[lstListsInsideMSBT.SelectedIndex] = Element;
+            var Element = MSBT_Data.MSBT_All_Data.Item[lstListsInsideMsbt.SelectedIndex];
+            Element.SoundID = ATR1.ATR1TextBoxChange(txtAtr1SoundID, Element.SoundID);
+            MSBT_Data.MSBT_All_Data.Item[lstListsInsideMsbt.SelectedIndex] = Element;
         }
 
         private void ATR1_TextChanged(object sender, EventArgs e)
@@ -226,74 +226,74 @@ namespace MSBT_Editor
             //ATR1セクションのテキストボックスの変更を
             //纏めるためのメソッドを作成中
             Console.WriteLine(((TextBox)sender).Name);
-            ATR1.ATR1_Change(txtATR1SimpleCamID);
+            ATR1.ATR1_Change(txtAtr1SimpleCamID);
         }
 
-        private void TxtATR1SimpleCamID_TextChanged(object sender, EventArgs e)
+        private void TxtAtr1SimpleCamID_TextChanged(object sender, EventArgs e)
         {
 
-            ATR1.ATR1_Change(txtATR1SimpleCamID);
+            ATR1.ATR1_Change(txtAtr1SimpleCamID);
         }
 
-        private void TxtATR1DialogID_TextChanged(object sender, EventArgs e)
+        private void TxtAtr1DialogID_TextChanged(object sender, EventArgs e)
         {
-            ATR1.ATR1_Change(txtATR1DialogID);
+            ATR1.ATR1_Change(txtAtr1DialogID);
         }
 
-        private void TxtATR1WindowID_TextChanged(object sender, EventArgs e)
+        private void TxtAtr1WindowID_TextChanged(object sender, EventArgs e)
         {
-            ATR1.ATR1_Change(txtATR1WindowID);
+            ATR1.ATR1_Change(txtAtr1WindowID);
         }
 
-        private void TxtATR1EventCameraID_TextChanged(object sender, EventArgs e)
+        private void TxtAtr1EventCameraID_TextChanged(object sender, EventArgs e)
         {
-            ATR1.ATR1_Change(txtATR1EventCameraID);
+            ATR1.ATR1_Change(txtAtr1EventCameraID);
         }
 
-        private void TxtATR1MessageAreaID_TextChanged(object sender, EventArgs e)
+        private void TxtAtr1MessageAreaID_TextChanged(object sender, EventArgs e)
         {
-            ATR1.ATR1_Change(txtATR1MessageAreaID);
+            ATR1.ATR1_Change(txtAtr1MessageAreaID);
         }
 
-        private void TxtATR1Unknown6_TextChanged(object sender, EventArgs e)
+        private void TxtAtr1Unknown6_TextChanged(object sender, EventArgs e)
         {
-            ATR1.ATR1_Change(txtATR1Unknown6);
+            ATR1.ATR1_Change(txtAtr1Unknown6);
         }
 
-        private void TxtATR1SpecialText_TextChanged(object sender, EventArgs e)
+        private void TxtAtr1SpecialText_TextChanged(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count < 1) return;
-            ATR1.SpecialTextList[lstListsInsideMSBT.SelectedIndex] = txtATR1SpecialText.Text;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
+            ATR1.SpecialTextList[lstListsInsideMsbt.SelectedIndex] = txtAtr1SpecialText.Text;
 
         }
 
-        private void TxtLBL1TagIndex_TextChanged(object sender, EventArgs e)
+        private void TxtLbl1TagIndex_TextChanged(object sender, EventArgs e)
         {
-            var liststrs = lstListsInsideMSBT.Text;
+            var liststrs = lstListsInsideMsbt.Text;
             if (-1 != LBL1.NameList.IndexOf(liststrs))
             {
                 var unknownlbldata = LBL1.BeginEntryAdressList[LBL1.NameList.IndexOf(liststrs)].ToString("X");
-                LBL1.HashSkipList[LBL1.NameList.IndexOf(liststrs)] = Int32.Parse(txtLBL1TagIndex.Text, NumberStyles.HexNumber);
+                LBL1.HashSkipList[LBL1.NameList.IndexOf(liststrs)] = Int32.Parse(txtLbl1TagIndex.Text, NumberStyles.HexNumber);
             }
         }
 
         private void TxtMsbtText_TextChanged(object sender, EventArgs e)
         {
 
-            if (lstListsInsideMSBT.Items.Count != 0)
+            if (lstListsInsideMsbt.Items.Count != 0)
             {
-                MSBT_Data.MSBT_All_Data.Text[lstListsInsideMSBT.SelectedIndex] = txtMSBTText.Text;
+                MSBT_Data.MSBT_All_Data.Text[lstListsInsideMsbt.SelectedIndex] = txtMsbtText.Text;
             }
 
         }
 
         //非常によくない複雑で長い処理。改善する必要があります。
         //修正すると複数箇所に影響を及ぼすので慎重に修復する必要があります。
-        private void BtnAddMSBTList_Click(object sender, EventArgs e)
+        private void BtnAddMsbtList_Click(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count != 0)
+            if (lstListsInsideMsbt.Items.Count != 0)
             {
-                if (txtMSBTListName.Text == string.Empty) return;
+                if (txtMsbtListName.Text == string.Empty) return;
 
                 LBL1 lbl1 = new LBL1
                 {
@@ -303,7 +303,7 @@ namespace MSBT_Editor
                 long ListCounter = 0;
 
                 //リストボックス1のデータをハッシュデータ構造体に入れる
-                foreach (var ListName in lstListsInsideMSBT.Items)
+                foreach (var ListName in lstListsInsideMsbt.Items)
                 {
                     var Hash = Calculation_System.MSBT_Hash(ListName.ToString(), lbl1.EntrySize);
                     lbl1.HashData.Add(new LBL1.Hash_Data(Hash, ListCounter));
@@ -312,7 +312,7 @@ namespace MSBT_Editor
 
                 var HashList = new List<LBL1.Hash_Data>(lbl1.HashData);
                 HashList.Sort((a, b) => a.Hash.CompareTo(b.Hash));
-                var NewHash = Calculation_System.MSBT_Hash(txtMSBTListName.Text, lbl1.EntrySize);
+                var NewHash = Calculation_System.MSBT_Hash(txtMsbtListName.Text, lbl1.EntrySize);
                 var HashMatchData = HashList.LastOrDefault(Old => Old.Hash == NewHash);
 
                 //ハッシュ値がデフォルトの場合、新しいハッシュ値がハッシュリストの値を超える値を返す
@@ -321,13 +321,13 @@ namespace MSBT_Editor
 
                 //ハッシュ値を基準に見つかったハッシュ構造体のリスト値に+1した値にリストを挿入する
                 HashMatchData.MsbtListBoxIndex++;
-                lstListsInsideMSBT.Items.Insert((int)HashMatchData.MsbtListBoxIndex, txtMSBTListName.Text);
+                lstListsInsideMsbt.Items.Insert((int)HashMatchData.MsbtListBoxIndex, txtMsbtListName.Text);
 
                 //リストボックスを名前順にソート
-                lstListsInsideMSBT.Sorted = true;
-                lstListsInsideMSBT.Sorted = false;
+                lstListsInsideMsbt.Sorted = true;
+                lstListsInsideMsbt.Sorted = false;
 
-                var MsbtTextMatchData = lstListsInsideMSBT.Items.IndexOf(txtMSBTListName.Text);
+                var MsbtTextMatchData = lstListsInsideMsbt.Items.IndexOf(txtMsbtListName.Text);
 
                 MSBT_Data.MSBT_All_Data.Text.Insert(MsbtTextMatchData, "テキスト</End>");
                 MSBT_Data.MSBT_All_Data.Item.Insert(MsbtTextMatchData, new ATR1.AttributeData(0x1, 0x0, 0x0, 0x0, 0x0, 0xFF, 0xFF, 0x00));
@@ -364,7 +364,7 @@ namespace MSBT_Editor
                 {
                     //Debugger.HashTxt("lbl newindex" + lbl1_newindex.ToString());
                     LBL1.NameOffsetList.Insert(lbl1_newindex, 0);
-                    LBL1.NameList.Insert(lbl1_newindex, txtMSBTListName.Text);
+                    LBL1.NameList.Insert(lbl1_newindex, txtMsbtListName.Text);
                     LBL1.HashSkipList.Insert(lbl1_newindex, 0x00000001);
                     LBL1.BeginEntryAdressList.Insert(lbl1_newindex, 0);
                 }
@@ -372,7 +372,7 @@ namespace MSBT_Editor
                 //BattanKing002_Flow000
                 //ScenarioName_RedBlueExGalaxy3
                 //MSBFファイルのフロータイプ1の対象MSBTの挿入以降の番号に+1する
-                if (lstListsInsideFLW2.Items.Count == 0 || lstListsInsideFEN1.Items.Count == 0) return;
+                if (lstListsInsideFlw2.Items.Count == 0 || lstListsInsideFen1.Items.Count == 0) return;
                 FLW2 flw2 = new FLW2();
                 List<FLW2.flw2_item> copyitem = new List<FLW2.flw2_item>(flw2.Item);
                 foreach (var flw2item in copyitem.Select((Value, Index) => (Value, Index)))
@@ -389,7 +389,7 @@ namespace MSBT_Editor
             else
             {
                 //初回にデータを入れる場合
-                if (txtMSBTListName.Text != "")
+                if (txtMsbtListName.Text != "")
                 {
                     LBL1 lbl1 = new LBL1();
                     lbl1.EntrySize = 101;
@@ -409,7 +409,7 @@ namespace MSBT_Editor
                     MSBT_Data.MSBT_All_Data = msbtdatalist;
 
                     //リストボックス1とMSBTのデータに追加する
-                    lstListsInsideMSBT.Items.Add(txtMSBTListName.Text);
+                    lstListsInsideMsbt.Items.Add(txtMsbtListName.Text);
                     if (Properties.Settings.Default.言語 == "EN")
                         MSBT_Data.MSBT_All_Data.Text.Add("Default Text</End>");
                     else
@@ -419,25 +419,25 @@ namespace MSBT_Editor
 
                     //ラベル情報を追加する
                     LBL1.NameOffsetList.Add(0);
-                    LBL1.NameList.Add(txtMSBTListName.Text);
+                    LBL1.NameList.Add(txtMsbtListName.Text);
                     LBL1.HashSkipList.Add(1);
                     LBL1.BeginEntryAdressList.Add(0);
                 }
             }
         }
 
-        private void BtnDeleteMSBTList_Click(object sender, EventArgs e)
+        private void BtnDeleteMsbtList_Click(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count != 0 && (MSBT_Data.MSBT_All_Data.Item.Count != 0) && MSBT_Data.MSBT_All_Data.Text.Count != 0)
+            if (lstListsInsideMsbt.Items.Count != 0 && (MSBT_Data.MSBT_All_Data.Item.Count != 0) && MSBT_Data.MSBT_All_Data.Text.Count != 0)
             {
                 var array_list_name = LBL1.NameList.ToArray();
-                var array_search = Array.IndexOf(array_list_name, lstListsInsideMSBT.SelectedItem.ToString());
+                var array_search = Array.IndexOf(array_list_name, lstListsInsideMsbt.SelectedItem.ToString());
                 ////Console.WriteLine("array_search -1");
                 //if (array_search == -1) return;
                 //Console.WriteLine("array_search -1以外");
-                MSBT_Data.MSBT_All_Data.Item.RemoveRange(lstListsInsideMSBT.SelectedIndex, 1);
-                MSBT_Data.MSBT_All_Data.Text.RemoveRange(lstListsInsideMSBT.SelectedIndex, 1);
-                MSBT_Data.Atr1SpecialText.RemoveRange(lstListsInsideMSBT.SelectedIndex, 1);
+                MSBT_Data.MSBT_All_Data.Item.RemoveRange(lstListsInsideMsbt.SelectedIndex, 1);
+                MSBT_Data.MSBT_All_Data.Text.RemoveRange(lstListsInsideMsbt.SelectedIndex, 1);
+                MSBT_Data.Atr1SpecialText.RemoveRange(lstListsInsideMsbt.SelectedIndex, 1);
 
 
                 //ハッシュスキップされている値の場合
@@ -459,24 +459,24 @@ namespace MSBT_Editor
                 //LBL1.list_name.RemoveRange(array_search , 1);
                 //LBL1.unknown.RemoveRange(array_search, 1);
                 //LBL1.unknownpos.RemoveRange(array_search, 1);
-                var listselect = lstListsInsideMSBT.SelectedIndex;
-                lstListsInsideMSBT.Items.RemoveAt(listselect);
+                var listselect = lstListsInsideMsbt.SelectedIndex;
+                lstListsInsideMsbt.Items.RemoveAt(listselect);
             }
         }
 
-        private void TxtLBL1EntrySize_TextChanged(object sender, EventArgs e)
+        private void TxtLbl1EntrySize_TextChanged(object sender, EventArgs e)
         {
             _ = new LBL1
             {
-                EntrySize = Int32.Parse(txtLBL1EntrySize.Text)
+                EntrySize = Int32.Parse(txtLbl1EntrySize.Text)
             };
         }
 
-        private void TxtATR1EntrySize_TextChanged(object sender, EventArgs e)
+        private void TxtAtr1EntrySize_TextChanged(object sender, EventArgs e)
         {
             _ = new ATR1
             {
-                EntrySize = Int32.Parse(txtATR1EntrySize.Text)
+                EntrySize = Int32.Parse(txtAtr1EntrySize.Text)
             };
         }
 
@@ -485,8 +485,8 @@ namespace MSBT_Editor
             var ColorTag = new MSBT_TagData.TagInsertModified(new MSBT_TagData.ColorTag())
             {
                 TagComboBox = cmbColorTag,
-                MsbtListBox = lstListsInsideMSBT,
-                MsbtTextBox = txtMSBTText
+                MsbtListBox = lstListsInsideMsbt,
+                MsbtTextBox = txtMsbtText
             };
             ColorTag.ToMsbtTextBoxInsert();
         }
@@ -496,8 +496,8 @@ namespace MSBT_Editor
             var LineControlTag = new MSBT_TagData.TagInsertModified(new MSBT_TagData.LineControlTag())
             {
                 TagComboBox = cmbLineControlTag,
-                MsbtListBox = lstListsInsideMSBT,
-                MsbtTextBox = txtMSBTText
+                MsbtListBox = lstListsInsideMsbt,
+                MsbtTextBox = txtMsbtText
             };
             LineControlTag.ToMsbtTextBoxInsert();
         }
@@ -507,8 +507,8 @@ namespace MSBT_Editor
             var FontSizeTag = new MSBT_TagData.TagInsertModified(new MSBT_TagData.FontSizeTag())
             {
                 TagComboBox = cmbFontSizeTag,
-                MsbtListBox = lstListsInsideMSBT,
-                MsbtTextBox = txtMSBTText
+                MsbtListBox = lstListsInsideMsbt,
+                MsbtTextBox = txtMsbtText
             };
             FontSizeTag.ToMsbtTextBoxInsert();
         }
@@ -519,20 +519,20 @@ namespace MSBT_Editor
             var CenterTag = new MSBT_TagData.TagInsertModified(new MSBT_TagData.CenterTag())
             {
                 TagComboBox = cmbCenterTag,
-                MsbtListBox = lstListsInsideMSBT,
-                MsbtTextBox = txtMSBTText
+                MsbtListBox = lstListsInsideMsbt,
+                MsbtTextBox = txtMsbtText
             };
             CenterTag.ToMsbtTextBoxInsert();
         }
 
         private void BtnInsertRubiTag_Click(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
             if (txtRubiTagRubiCount.Text == "" || txtRubiTagKanjiCount.Text == "") return;
             string furigana = txtRubiTagRubiCount.Text;
             string kanji = txtRubiTagKanjiCount.Text;
             string tag = "<Rubi=\"" + furigana + "\" Target=\"" + kanji + "\">";
-            Calculation_System.TextBoxInsert(txtMSBTText, tag);
+            Calculation_System.TextBoxInsert(txtMsbtText, tag);
         }
 
         private void TxtRubiTagRubiCount_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyDecChar(e);
@@ -542,39 +542,39 @@ namespace MSBT_Editor
 
         private void BtnInsertTimerTag_Click(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
             if (txtTimerTagDelayTime.Text == "") return;
             string time = txtTimerTagDelayTime.Text;
             string tag = "</Timer=\"" + time + "\">";
-            Calculation_System.TextBoxInsert(txtMSBTText, tag);
+            Calculation_System.TextBoxInsert(txtMsbtText, tag);
         }
 
         private void BtnInsertPlayerCharacterTag_Click(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
             string tag = "</PlayCharacter>";
-            Calculation_System.TextBoxInsert(txtMSBTText, tag);
+            Calculation_System.TextBoxInsert(txtMsbtText, tag);
         }
 
         private void BtnInsertVariableInt3DigitsTag_Click(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
             string tag = "</ReferenceValue1>";
-            Calculation_System.TextBoxInsert(txtMSBTText, tag);
+            Calculation_System.TextBoxInsert(txtMsbtText, tag);
         }
 
         private void BtnInsertResultGalaxyNameTag_Click(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
             string tag = "</ResultGalaxyName>";
-            Calculation_System.TextBoxInsert(txtMSBTText, tag);
+            Calculation_System.TextBoxInsert(txtMsbtText, tag);
         }
 
         private void BtnInsertResultScenarioNameTag_Click(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
             string tag = "</ResultScenarioName>";
-            Calculation_System.TextBoxInsert(txtMSBTText, tag);
+            Calculation_System.TextBoxInsert(txtMsbtText, tag);
         }
 
         private void BtnInsertCharacterIconTag_Click(object sender, EventArgs e)
@@ -654,154 +654,154 @@ namespace MSBT_Editor
                     "<Icon=\"Kinopio\">",
                     "<Icon=\"BronzeComet\">", };
 
-                Calculation_System.TextBoxTagAdder(lstListsInsideMSBT, txtMSBTText, cmbCharacterIconTag, IconTag);
+                Calculation_System.TextBoxTagAdder(lstListsInsideMsbt, txtMsbtText, cmbCharacterIconTag, IconTag);
             }
             else
             {
                 string[] IconTag = { "<Icon=\"Peach\">", "<Icon=\"Koopa\">", "<Icon=\"Kinopio\">", "<Icon=\"Mario\">", "<Icon=\"Mario2\">", "<Icon=\"Tico\">", "<Icon=\"Yoshi\">", "<Icon=\"HarapekoTico\">", "<Icon=\"Luigi\">", "<Icon=\"MasterTico\">", "<Icon=\"Columa\">", "<Icon=\"Begoman\">", "<Icon=\"Kuribo\">", "<Icon=\"Star Bunny\">" };
-                Calculation_System.TextBoxTagAdder(lstListsInsideMSBT, txtMSBTText, cmbCharacterIconTag, IconTag);
+                Calculation_System.TextBoxTagAdder(lstListsInsideMsbt, txtMsbtText, cmbCharacterIconTag, IconTag);
             }
         }
 
         private void BtnInsertObjectIconTag_Click(object sender, EventArgs e)
         {
             string[] IconTag = { "<Icon=\"CometMedal\">", "<Icon=\"Coins\">", "<Icon=\"Starbit\">", "<Icon=\"StarPiece\">", "<Icon=\"PurpleStarbit\">", "<Icon=\"SilverStar\">", "<Icon=\"Star\">", "<Icon=\"GrandStar\">", "<Icon=\"BronzeStar\">", "<Icon=\"Coin\">", "<Icon=\"PurpleCoin\">", "<Icon=\"1UPMushroom\">", "<Icon=\"LifeUpMushroom\">", "<Icon=\"BlueStar\">", "<Icon=\"StarRing\">", "<Icon=\"Flower\">", "<Icon=\"Coconut\">", "<Icon=\"BlueChip\">", "<Icon=\"BlueFruit\">", "<Icon=\"CheckPointFlag\">", "<Icon=\"GrandBronzeStar\">" };
-            Calculation_System.TextBoxTagAdder(lstListsInsideMSBT, txtMSBTText, cmbObjectIconTag, IconTag);
+            Calculation_System.TextBoxTagAdder(lstListsInsideMsbt, txtMsbtText, cmbObjectIconTag, IconTag);
         }
 
         private void BtnInsertOthersIconTag_Click(object sender, EventArgs e)
         {
             string[] IconTag = { "<Icon=\"Pointer\">", "<Icon=\"PointerYellow\">", "<Icon=\"PointerHand\">", "<Icon=\"WiiMote\">", "<Icon=\"AButton\">", "<Icon=\"BButton\">", "<Icon=\"CButton\">", "<Icon=\"ZButton\">", "<Icon=\"DPad\">", "<Icon=\"DPadDown\">", "<Icon=\"DPadUp\">", "<Icon=\"JoyStick\">", "<Icon=\"Nunchuck\">", "<Icon=\"Aim\">", "<Icon=\"MButton\">", "<Icon=\"PButton\">", "<Icon=\"XIcon\">", "<Icon=\"GreenComet\">", "<Icon=\"SilverCrown\">", "<Icon=\"SilverCrownwJewel\">", "<Icon=\"GoldCrown\">", "<Icon=\"Letter\">", "<Icon=\"ArrowDown\">", "<Icon=\"StopWatch\">", "<Icon=\"1Button\">", "<Icon=\"2Button\">", "<Icon=\"HomeButton\">", "<Icon=\"PointerGrip\">", "<Icon=\"PointerNonGrip\">", "<Icon=\"QuestionMark\">", "<Icon=\"YellowComet\">", "<Icon=\"GreenQuestionMark\">", "<Icon=\"EmptyStar\">", "<Icon=\"EmptyCometMedal\">", "<Icon=\"EmptyStarComet\">", "<Icon=\"HiddenStar\">", "<Icon=\"BronzeComet\">" };
-            Calculation_System.TextBoxTagAdder(lstListsInsideMSBT, txtMSBTText, cmbOthersIconTag, IconTag);
+            Calculation_System.TextBoxTagAdder(lstListsInsideMsbt, txtMsbtText, cmbOthersIconTag, IconTag);
         }
 
         private void BtnInsertVariableInt4DigitsTag_Click(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
             string tag = "</ReferenceValue2>";
-            Calculation_System.TextBoxInsert(txtMSBTText, tag);
+            Calculation_System.TextBoxInsert(txtMsbtText, tag);
         }
 
         private void BtnInsertVariableInt5DigitsTag_Click(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
             string tag = "</ReferenceValue3>";
-            Calculation_System.TextBoxInsert(txtMSBTText, tag);
+            Calculation_System.TextBoxInsert(txtMsbtText, tag);
         }
 
         private void BtnInsertHourTag_Click(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
             string tag = "</Hour>";
-            Calculation_System.TextBoxInsert(txtMSBTText, tag);
+            Calculation_System.TextBoxInsert(txtMsbtText, tag);
         }
 
         private void BtnInsertMinuteTag_Click(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
             string tag = "</Minutes>";
-            Calculation_System.TextBoxInsert(txtMSBTText, tag);
+            Calculation_System.TextBoxInsert(txtMsbtText, tag);
         }
 
         private void BtnInsertSecondTag_Click(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
             string tag = "</Seconds>";
-            Calculation_System.TextBoxInsert(txtMSBTText, tag);
+            Calculation_System.TextBoxInsert(txtMsbtText, tag);
         }
 
         private void BtnInsertNumbersBelowDecimalPoint_Click(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
             string tag = "</AfterTheDecimalPoint>";
-            Calculation_System.TextBoxInsert(txtMSBTText, tag);
+            Calculation_System.TextBoxInsert(txtMsbtText, tag);
         }
 
         private void BtnReleaseDebugTextFile_Click(object sender, EventArgs e)
         {
-            if (stbOpenedMSBTName.Text == " ") return;
-            if (textBox13.Text == "") return;
+            if (stbOpenedMsbtName.Text == " ") return;
+            if (txtFlw2DebugHex.Text == "") return;
             string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            string msbtname = Path.GetFileNameWithoutExtension(stbOpenedMSBTName.Text);
+            string msbtname = Path.GetFileNameWithoutExtension(stbOpenedMsbtName.Text);
             string textpath = Path.Combine(Path.GetDirectoryName(appPath), msbtname + ".txt");
             //Console.WriteLine(textpath);
 
-            File.WriteAllText(textpath, textBox13.Text);
+            File.WriteAllText(textpath, txtFlw2DebugHex.Text);
         }
 
-        private void LstListsInsideFLW2_SelectedIndexChanged(object sender, EventArgs e)
+        private void LstListsInsideFlw2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.txtFLW2BranchTrue.TextChanged -= new EventHandler(this.TxtFLW2BranchTrue_TextChanged);
-            this.txtFLW2BranchFalse.TextChanged -= new EventHandler(this.TxtFLW2BranchFalse_TextChanged);
+            this.txtFlw2BranchTrue.TextChanged -= new EventHandler(this.TxtFlw2BranchTrue_TextChanged);
+            this.txtFlw2BranchFalse.TextChanged -= new EventHandler(this.TxtFlw2BranchFalse_TextChanged);
 
-            if (lstListsInsideFLW2.Items.Count == 0) return;
-            var index = lstListsInsideFLW2.SelectedIndex;
+            if (lstListsInsideFlw2.Items.Count == 0) return;
+            var index = lstListsInsideFlw2.SelectedIndex;
             if (index == -1) index = 0;
             FLW2 flw2 = new FLW2();
             //Console.WriteLine(index);
-            txtFLW2FlowType.Text = flw2.Item[index].TypeCheck.ToString("X4");
-            txtFLW2Padding.Text = flw2.Item[index].Unknown1.ToString("X4");
-            txtFLW2Arg1.Text = flw2.Item[index].Unknown2.ToString("X4");
-            txtFLW2Arg2.Text = flw2.Item[index].Unknown3.ToString("X4");
-            txtFLW2Arg3.Text = flw2.Item[index].Unknown4.ToString("X4");
-            txtFLW2Arg4.Text = flw2.Item[index].Unknown5.ToString("X4");
+            txtFlw2FlowType.Text = flw2.Item[index].TypeCheck.ToString("X4");
+            txtFlw2Padding.Text = flw2.Item[index].Unknown1.ToString("X4");
+            txtFlw2Arg1.Text = flw2.Item[index].Unknown2.ToString("X4");
+            txtFlw2Arg2.Text = flw2.Item[index].Unknown3.ToString("X4");
+            txtFlw2Arg3.Text = flw2.Item[index].Unknown4.ToString("X4");
+            txtFlw2Arg4.Text = flw2.Item[index].Unknown5.ToString("X4");
 
             switch (flw2.Item[index].TypeCheck.ToString("X4"))
             {
                 case "0001":
-                    lblFLW2Arg1.Text = "グループ番号";
-                    lblFLW2Arg2.Text = "Msbtテキストlist番号";
-                    lblFLW2Arg3.Text = "FLW2オフセット";
-                    lblFLW2Arg4.Text = "不明5";
+                    lblFlw2Arg1.Text = "グループ番号";
+                    lblFlw2Arg2.Text = "Msbtテキストlist番号";
+                    lblFlw2Arg3.Text = "FLW2オフセット";
+                    lblFlw2Arg4.Text = "不明5";
                     if (Properties.Settings.Default.言語 == "日本語") break;
-                    lblFLW2Arg1.Text = "Group number";
-                    lblFLW2Arg2.Text = "MSBT Entry";
-                    lblFLW2Arg3.Text = "Next Flow";
-                    lblFLW2Arg4.Text = "Unknown5";
+                    lblFlw2Arg1.Text = "Group number";
+                    lblFlw2Arg2.Text = "MSBT Entry";
+                    lblFlw2Arg3.Text = "Next Flow";
+                    lblFlw2Arg4.Text = "Unknown5";
                     break;
                 case "0002":
-                    lblFLW2Arg1.Text = "0002固定";
-                    lblFLW2Arg2.Text = "不明3";
-                    lblFLW2Arg3.Text = "不明4";
-                    lblFLW2Arg4.Text = "分岐先オフセット";
+                    lblFlw2Arg1.Text = "0002固定";
+                    lblFlw2Arg2.Text = "不明3";
+                    lblFlw2Arg3.Text = "不明4";
+                    lblFlw2Arg4.Text = "分岐先オフセット";
                     if (Properties.Settings.Default.言語 == "日本語") break;
-                    lblFLW2Arg1.Text = "Always 0002";
-                    lblFLW2Arg2.Text = "Condition ID";
-                    lblFLW2Arg3.Text = "Unknown4";
-                    lblFLW2Arg4.Text = "Unknown5";
+                    lblFlw2Arg1.Text = "Always 0002";
+                    lblFlw2Arg2.Text = "Condition ID";
+                    lblFlw2Arg3.Text = "Unknown4";
+                    lblFlw2Arg4.Text = "Unknown5";
                     break;
                 case "0004":
-                    lblFLW2Arg1.Text = "ジャンプ先";
-                    lblFLW2Arg2.Text = "不明3";
-                    lblFLW2Arg3.Text = "不明4";
-                    lblFLW2Arg4.Text = "不明5";
+                    lblFlw2Arg1.Text = "ジャンプ先";
+                    lblFlw2Arg2.Text = "不明3";
+                    lblFlw2Arg3.Text = "不明4";
+                    lblFlw2Arg4.Text = "不明5";
                     if (Properties.Settings.Default.言語 == "日本語") break;
-                    lblFLW2Arg1.Text = "Next Flow ID";
-                    lblFLW2Arg2.Text = "Unknown3";
-                    lblFLW2Arg3.Text = "Unknown4";
-                    lblFLW2Arg4.Text = "Unknown5";
+                    lblFlw2Arg1.Text = "Next Flow ID";
+                    lblFlw2Arg2.Text = "Unknown3";
+                    lblFlw2Arg3.Text = "Unknown4";
+                    lblFlw2Arg4.Text = "Unknown5";
                     break;
                 case "0003":
-                    lblFLW2Arg1.Text = "イベント番号";
-                    lblFLW2Arg2.Text = "FLWオフセット";
-                    lblFLW2Arg3.Text = "不明4";
-                    lblFLW2Arg4.Text = "不明5";
+                    lblFlw2Arg1.Text = "イベント番号";
+                    lblFlw2Arg2.Text = "FLWオフセット";
+                    lblFlw2Arg3.Text = "不明4";
+                    lblFlw2Arg4.Text = "不明5";
                     if (Properties.Settings.Default.言語 == "日本語") break;
-                    lblFLW2Arg1.Text = "Event ID";
-                    lblFLW2Arg2.Text = "Next Flow";
-                    lblFLW2Arg3.Text = "Unknown4";
-                    lblFLW2Arg4.Text = "Unknown5";
+                    lblFlw2Arg1.Text = "Event ID";
+                    lblFlw2Arg2.Text = "Next Flow";
+                    lblFlw2Arg3.Text = "Unknown4";
+                    lblFlw2Arg4.Text = "Unknown5";
                     break;
                 default:
-                    lblFLW2Arg1.Text = "不明2";
-                    lblFLW2Arg2.Text = "不明3";
-                    lblFLW2Arg3.Text = "不明4";
-                    lblFLW2Arg4.Text = "不明5";
+                    lblFlw2Arg1.Text = "不明2";
+                    lblFlw2Arg2.Text = "不明3";
+                    lblFlw2Arg3.Text = "不明4";
+                    lblFlw2Arg4.Text = "不明5";
                     if (Properties.Settings.Default.言語 == "日本語") break;
-                    lblFLW2Arg1.Text = "Unknown2";
-                    lblFLW2Arg2.Text = "Unknown3";
-                    lblFLW2Arg3.Text = "Unknown4";
-                    lblFLW2Arg4.Text = "Unknown5";
+                    lblFlw2Arg1.Text = "Unknown2";
+                    lblFlw2Arg2.Text = "Unknown3";
+                    lblFlw2Arg3.Text = "Unknown4";
+                    lblFlw2Arg4.Text = "Unknown5";
                     break;
 
             }
@@ -811,75 +811,75 @@ namespace MSBT_Editor
 
             if (blnc != bnc)
             {
-                lblFLW2ListSelectIndex.Text = "0x" + lstListsInsideFLW2.SelectedIndex.ToString("X");
-                this.txtFLW2BranchTrue.TextChanged += new EventHandler(this.TxtFLW2BranchTrue_TextChanged);
-                this.txtFLW2BranchFalse.TextChanged += new EventHandler(this.TxtFLW2BranchFalse_TextChanged);
+                lblFlw2ListSelectIndex.Text = "0x" + lstListsInsideFlw2.SelectedIndex.ToString("X");
+                this.txtFlw2BranchTrue.TextChanged += new EventHandler(this.TxtFlw2BranchTrue_TextChanged);
+                this.txtFlw2BranchFalse.TextChanged += new EventHandler(this.TxtFlw2BranchFalse_TextChanged);
                 return;
             }
             if (-1 == flw2.Branch_List_No.IndexOf(index))
             {
 
-                txtFLW2BranchTrue.Text = "";
-                txtFLW2BranchFalse.Text = "";
-                lblFLW2ListSelectIndex.Text = "0x" + lstListsInsideFLW2.SelectedIndex.ToString("X");
-                this.txtFLW2BranchTrue.TextChanged += new EventHandler(this.TxtFLW2BranchTrue_TextChanged);
-                this.txtFLW2BranchFalse.TextChanged += new EventHandler(this.TxtFLW2BranchFalse_TextChanged);
+                txtFlw2BranchTrue.Text = "";
+                txtFlw2BranchFalse.Text = "";
+                lblFlw2ListSelectIndex.Text = "0x" + lstListsInsideFlw2.SelectedIndex.ToString("X");
+                this.txtFlw2BranchTrue.TextChanged += new EventHandler(this.TxtFlw2BranchTrue_TextChanged);
+                this.txtFlw2BranchFalse.TextChanged += new EventHandler(this.TxtFlw2BranchFalse_TextChanged);
                 return;
             }
             textBox27.AppendText(Environment.NewLine + "selectlist");
             textBox27.AppendText(Environment.NewLine + flw2.Branch_No[flw2.Branch_List_No.IndexOf(index)].ToString("X4") + "___" + flw2.Branch_List_No.IndexOf(index));
 
-            txtFLW2BranchTrue.Text = flw2.Branch_No[(flw2.Branch_List_No.IndexOf(index) * 2)].ToString("X4");
-            txtFLW2BranchFalse.Text = flw2.Branch_No[(flw2.Branch_List_No.IndexOf(index) * 2) + 1].ToString("X4");
+            txtFlw2BranchTrue.Text = flw2.Branch_No[(flw2.Branch_List_No.IndexOf(index) * 2)].ToString("X4");
+            txtFlw2BranchFalse.Text = flw2.Branch_No[(flw2.Branch_List_No.IndexOf(index) * 2) + 1].ToString("X4");
 
-            lblFLW2ListSelectIndex.Text = "0x" + lstListsInsideFLW2.SelectedIndex.ToString("X");
-            this.txtFLW2BranchTrue.TextChanged += new EventHandler(this.TxtFLW2BranchTrue_TextChanged);
-            this.txtFLW2BranchFalse.TextChanged += new EventHandler(this.TxtFLW2BranchFalse_TextChanged);
+            lblFlw2ListSelectIndex.Text = "0x" + lstListsInsideFlw2.SelectedIndex.ToString("X");
+            this.txtFlw2BranchTrue.TextChanged += new EventHandler(this.TxtFlw2BranchTrue_TextChanged);
+            this.txtFlw2BranchFalse.TextChanged += new EventHandler(this.TxtFlw2BranchFalse_TextChanged);
         }
 
-        private void TxtFLW2FlowType_TextChanged(object sender, EventArgs e)
+        private void TxtFlw2FlowType_TextChanged(object sender, EventArgs e)
         {
-            this.lstListsInsideFLW2.SelectedIndexChanged -= new EventHandler(this.LstListsInsideFLW2_SelectedIndexChanged);
-            FLW2.FLW2_Item_Change(lstListsInsideFLW2, txtFLW2FlowType);
-            this.lstListsInsideFLW2.SelectedIndexChanged += new EventHandler(this.LstListsInsideFLW2_SelectedIndexChanged);
+            this.lstListsInsideFlw2.SelectedIndexChanged -= new EventHandler(this.LstListsInsideFlw2_SelectedIndexChanged);
+            FLW2.FLW2_Item_Change(lstListsInsideFlw2, txtFlw2FlowType);
+            this.lstListsInsideFlw2.SelectedIndexChanged += new EventHandler(this.LstListsInsideFlw2_SelectedIndexChanged);
         }
 
-        private void TxtFLW2Padding_TextChanged(object sender, EventArgs e)
+        private void TxtFlw2Padding_TextChanged(object sender, EventArgs e)
         {
-            this.lstListsInsideFLW2.SelectedIndexChanged -= new EventHandler(this.LstListsInsideFLW2_SelectedIndexChanged);
-            FLW2.FLW2_Item_Change(lstListsInsideFLW2, txtFLW2Padding);
-            this.lstListsInsideFLW2.SelectedIndexChanged += new EventHandler(this.LstListsInsideFLW2_SelectedIndexChanged);
+            this.lstListsInsideFlw2.SelectedIndexChanged -= new EventHandler(this.LstListsInsideFlw2_SelectedIndexChanged);
+            FLW2.FLW2_Item_Change(lstListsInsideFlw2, txtFlw2Padding);
+            this.lstListsInsideFlw2.SelectedIndexChanged += new EventHandler(this.LstListsInsideFlw2_SelectedIndexChanged);
         }
 
-        private void TxtFLW2Arg1_TextChanged(object sender, EventArgs e)
+        private void TxtFlw2Arg1_TextChanged(object sender, EventArgs e)
         {
-            FLW2.FLW2_Item_Change(lstListsInsideFLW2, txtFLW2Arg1);
+            FLW2.FLW2_Item_Change(lstListsInsideFlw2, txtFlw2Arg1);
         }
 
-        private void TxtFLW2Arg2_TextChanged(object sender, EventArgs e)
+        private void TxtFlw2Arg2_TextChanged(object sender, EventArgs e)
         {
-            FLW2.FLW2_Item_Change(lstListsInsideFLW2, txtFLW2Arg2);
+            FLW2.FLW2_Item_Change(lstListsInsideFlw2, txtFlw2Arg2);
         }
 
-        private void TxtFLW2Arg3_TextChanged(object sender, EventArgs e)
+        private void TxtFlw2Arg3_TextChanged(object sender, EventArgs e)
         {
-            FLW2.FLW2_Item_Change(lstListsInsideFLW2, txtFLW2Arg3);
+            FLW2.FLW2_Item_Change(lstListsInsideFlw2, txtFlw2Arg3);
         }
 
-        private void TxtFLW2Arg4_TextChanged(object sender, EventArgs e)
+        private void TxtFlw2Arg4_TextChanged(object sender, EventArgs e)
         {
-            FLW2.FLW2_Item_Change(lstListsInsideFLW2, txtFLW2Arg4);
+            FLW2.FLW2_Item_Change(lstListsInsideFlw2, txtFlw2Arg4);
         }
 
-        private void TxtFLW2BranchTrue_TextChanged(object sender, EventArgs e)
+        private void TxtFlw2BranchTrue_TextChanged(object sender, EventArgs e)
         {
             textBox27.AppendText(Environment.NewLine + "25text");
-            FLW2.FLW2_FlowType2_Branch(lstListsInsideFLW2, txtFLW2BranchTrue);
+            FLW2.FLW2_FlowType2_Branch(lstListsInsideFlw2, txtFlw2BranchTrue);
         }
 
-        private void TxtFLW2BranchFalse_TextChanged(object sender, EventArgs e)
+        private void TxtFlw2BranchFalse_TextChanged(object sender, EventArgs e)
         {
-            FLW2.FLW2_FlowType2_Branch(lstListsInsideFLW2, txtFLW2BranchFalse);
+            FLW2.FLW2_FlowType2_Branch(lstListsInsideFlw2, txtFlw2BranchFalse);
         }
 
         private void Form1_DragDrop(object sender, DragEventArgs e)
@@ -937,37 +937,37 @@ namespace MSBT_Editor
 
         }
 
-        private void TxtFEN1Arg0_TextChanged(object sender, EventArgs e)
+        private void TxtFen1Arg0_TextChanged(object sender, EventArgs e)
         {
-            FEN1.FEN1_Item_Change(lstListsInsideFEN1, txtFEN1Arg0);
+            FEN1.FEN1_Item_Change(lstListsInsideFen1, txtFen1Arg0);
         }
 
-        private void TxtFEN1StartIndex_TextChanged(object sender, EventArgs e)
+        private void TxtFen1StartIndex_TextChanged(object sender, EventArgs e)
         {
-            FEN1.FEN1_Item_Change(lstListsInsideFEN1, txtFEN1StartIndex);
+            FEN1.FEN1_Item_Change(lstListsInsideFen1, txtFen1StartIndex);
         }
 
-        private void LstListsInsideFEN1_SelectedIndexChanged(object sender, EventArgs e)
+        private void LstListsInsideFen1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.txtFEN1Arg0.TextChanged -= new EventHandler(this.TxtFEN1Arg0_TextChanged);
-            this.txtFEN1StartIndex.TextChanged -= new EventHandler(this.TxtFEN1StartIndex_TextChanged);
+            this.txtFen1Arg0.TextChanged -= new EventHandler(this.TxtFen1Arg0_TextChanged);
+            this.txtFen1StartIndex.TextChanged -= new EventHandler(this.TxtFen1StartIndex_TextChanged);
 
-            if (lstListsInsideFEN1.Items.Count == 0) return;
-            var index = lstListsInsideFEN1.SelectedIndex;
+            if (lstListsInsideFen1.Items.Count == 0) return;
+            var index = lstListsInsideFen1.SelectedIndex;
             if (index == -1) index = 0;
 
             FEN1 fen1 = new FEN1();
             var hashes = Calculation_System.MSBT_Hash(fen1.Item2[index].tagname, 0x3B);
 
             //textBox28.Text = fen1.Item1[index].tagflag.ToString("X8");
-            txtFEN1Arg0.Text = fen1.Hashes[index].tagflag.ToString("X8");
-            txtFEN1StartIndex.Text = fen1.Item2[index].tagnum.ToString("X8");
+            txtFen1Arg0.Text = fen1.Hashes[index].tagflag.ToString("X8");
+            txtFen1StartIndex.Text = fen1.Item2[index].tagnum.ToString("X8");
 
-            if (lstListsInsideFLW2.Items.Count > fen1.Item2[index].tagnum) lstListsInsideFLW2.SelectedIndex = fen1.Item2[index].tagnum;
+            if (lstListsInsideFlw2.Items.Count > fen1.Item2[index].tagnum) lstListsInsideFlw2.SelectedIndex = fen1.Item2[index].tagnum;
 
-            lblFEN1ListSelectIndex.Text = "0x" + lstListsInsideFEN1.SelectedIndex.ToString("X");
-            this.txtFEN1Arg0.TextChanged += new EventHandler(this.TxtFEN1Arg0_TextChanged);
-            this.txtFEN1StartIndex.TextChanged += new EventHandler(this.TxtFEN1StartIndex_TextChanged);
+            lblFen1ListSelectIndex.Text = "0x" + lstListsInsideFen1.SelectedIndex.ToString("X");
+            this.txtFen1Arg0.TextChanged += new EventHandler(this.TxtFen1Arg0_TextChanged);
+            this.txtFen1StartIndex.TextChanged += new EventHandler(this.TxtFen1StartIndex_TextChanged);
 
         }
 
@@ -976,41 +976,39 @@ namespace MSBT_Editor
 
         }
 
-        private void TxtFEN1ListName_TextChanged(object sender, EventArgs e)
+        private void TxtFen1ListName_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void BtnAddFLW2List_Click(object sender, EventArgs e)
+        private void BtnAddFlw2List_Click(object sender, EventArgs e)
         {
             FLW2 flw2 = new FLW2();
-            if (lstListsInsideFLW2.Items.Count != 0)
+            if (lstListsInsideFlw2.Items.Count != 0)
             {
-                lstListsInsideFLW2.Items.Add(Langage.FLW2_List_Langage(4));
+                lstListsInsideFlw2.Items.Add(Langage.FLW2_List_Langage(4));
                 flw2.Item.Add(new FLW2.flw2_item(4, 0, 0, 0, 0, 0));
-                lstListsInsideFLW2.EndUpdate();
+                lstListsInsideFlw2.EndUpdate();
             }
             else
             {
-                lstListsInsideFLW2.Items.Add(Langage.FLW2_List_Langage(4));
+                lstListsInsideFlw2.Items.Add(Langage.FLW2_List_Langage(4));
                 flw2.Item = new List<FLW2.flw2_item>();
                 flw2.Item.Add(new FLW2.flw2_item(4, 0, 0, 0, 0, 0));
                 flw2.Branch_List_No = new List<int>();
                 flw2.Branch_No = new List<short>();
-                lstListsInsideFLW2.EndUpdate();
+                lstListsInsideFlw2.EndUpdate();
             }
         }
 
-        private void BtnDeleteFLW2List_Click(object sender, EventArgs e)
+        private void BtnDeleteFlw2List_Click(object sender, EventArgs e)
         {
             FLW2 flw2 = new FLW2();
 
-            if (lstListsInsideFLW2.Items.Count != 0 && (flw2.Item.Count != 0) && (flw2.Branch_List_No != null) && (flw2.Branch_No != null))
+            if (lstListsInsideFlw2.Items.Count != 0 && (flw2.Item.Count != 0) && (flw2.Branch_List_No != null) && (flw2.Branch_No != null))
             {
-
-
-                var listselect = lstListsInsideFLW2.SelectedIndex;
-                lstListsInsideFLW2.Items.RemoveAt(listselect);
+                var listselect = lstListsInsideFlw2.SelectedIndex;
+                lstListsInsideFlw2.Items.RemoveAt(listselect);
                 if (flw2.Item[listselect].TypeCheck == 2)
                 {
                     flw2.Branch_No.RemoveAt((flw2.Branch_List_No.IndexOf(listselect)) * 2);
@@ -1020,22 +1018,22 @@ namespace MSBT_Editor
             }
         }
 
-        private void BtnAddFEN1List_Click(object sender, EventArgs e)
+        private void BtnAddFen1List_Click(object sender, EventArgs e)
         {
             FEN1 fen1 = new FEN1();
             FLW2 flw2 = new FLW2();
 
             short list2count = 0;
-            if (lstListsInsideFEN1.Items.Count != 0)
+            if (lstListsInsideFen1.Items.Count != 0)
             {
                 list2count = (short)fen1.Item2.Count;
-                if (txtFEN1ListName.Text != "")
+                if (txtFen1ListName.Text != "")
                 {
-                    lstListsInsideFEN1.Items.Add(txtFEN1ListName.Text);
+                    lstListsInsideFen1.Items.Add(txtFen1ListName.Text);
                     fen1.Item1.Add(new FEN1.Element(1, 0));
                     var item2count = fen1.Item2.Count;
-                    fen1.Item2.Add(new FEN1.ElementTag(txtFEN1ListName.Text, lstListsInsideFLW2.Items.Count));
-                    var hash = Calculation_System.MSBT_Hash(txtFEN1ListName.Text, 0x3B);
+                    fen1.Item2.Add(new FEN1.ElementTag(txtFen1ListName.Text, lstListsInsideFlw2.Items.Count));
+                    var hash = Calculation_System.MSBT_Hash(txtFen1ListName.Text, 0x3B);
                     fen1.Hashes.Add(new FEN1.Hash_And_Unknown(1, hash));
                     //treeView1.Nodes.Add(textBox31.Text);
 
@@ -1060,18 +1058,18 @@ namespace MSBT_Editor
             }
             else
             {
-                if (txtFEN1ListName.Text != "")
+                if (txtFen1ListName.Text != "")
                 {
                     fen1.Item1 = new List<FEN1.Element>();
                     fen1.Item2 = new List<FEN1.ElementTag>();
                     fen1.Hashes = new List<FEN1.Hash_And_Unknown>();
 
 
-                    lstListsInsideFEN1.Items.Add(txtFEN1ListName.Text);
+                    lstListsInsideFen1.Items.Add(txtFen1ListName.Text);
                     fen1.Item1.Add(new FEN1.Element(1, 0));
-                    fen1.Item2.Add(new FEN1.ElementTag(txtFEN1ListName.Text, lstListsInsideFLW2.Items.Count));
+                    fen1.Item2.Add(new FEN1.ElementTag(txtFen1ListName.Text, lstListsInsideFlw2.Items.Count));
 
-                    var hash = Calculation_System.MSBT_Hash(txtFEN1ListName.Text, 0x3B);
+                    var hash = Calculation_System.MSBT_Hash(txtFen1ListName.Text, 0x3B);
                     fen1.Hashes.Add(new FEN1.Hash_And_Unknown(1, hash));
                     //treeView1.Nodes.Add(textBox31.Text);
 
@@ -1095,11 +1093,11 @@ namespace MSBT_Editor
             }
         }
 
-        private void BtnDeleteFEN1List_Click(object sender, EventArgs e)
+        private void BtnDeleteFen1List_Click(object sender, EventArgs e)
         {
             FEN1 fen1 = new FEN1();
 
-            if (lstListsInsideFEN1.Items.Count != 0 && (fen1.Item1.Count != 0) && (fen1.Item2.Count != 0) && (fen1.Hashes.Count != 0))
+            if (lstListsInsideFen1.Items.Count != 0 && (fen1.Item1.Count != 0) && (fen1.Item2.Count != 0) && (fen1.Hashes.Count != 0))
             {
                 Console.WriteLine(fen1.Item1.Count());
                 Console.WriteLine(fen1.Item2.Count());
@@ -1107,18 +1105,18 @@ namespace MSBT_Editor
 
 
 
-                var listselect = lstListsInsideFEN1.SelectedIndex;
+                var listselect = lstListsInsideFen1.SelectedIndex;
 
 
                 //fen1.Item1.RemoveAt(listselect);
                 fen1.Item2.RemoveAt(listselect);
                 fen1.Hashes.RemoveAt(listselect);
 
-                lstListsInsideFEN1.Items.RemoveAt(listselect);
+                lstListsInsideFen1.Items.RemoveAt(listselect);
             }
         }
 
-        private void TxtMSBTListName_TextChanged(object sender, EventArgs e)
+        private void TxtMsbtListName_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -1154,49 +1152,49 @@ namespace MSBT_Editor
             return rootnode;
         }
 
-        private void TvwMSBFFlow_AfterSelect(object sender, TreeViewEventArgs e)
+        private void TvwMsbfFlow_AfterSelect(object sender, TreeViewEventArgs e)
         {
             FLW2 flw2 = new FLW2();
-            if (tvwMSBFFlow.Nodes.Count == 0) return;
-            if (tvwMSBFFlow.SelectedNode.Tag == default) return;
+            if (tvwMsbfFlow.Nodes.Count == 0) return;
+            if (tvwMsbfFlow.SelectedNode.Tag == default) return;
 
             //var oldindex = MsbfTreeView.SelectedNode;
-            var rootnode = Form1.Tvparenfinder(tvwMSBFFlow);
+            var rootnode = Form1.Tvparenfinder(tvwMsbfFlow);
 
             var rootnodelistbox3find = 0;
-            if (lstListsInsideFEN1.Items.Count != 0)
+            if (lstListsInsideFen1.Items.Count != 0)
             {
-                rootnodelistbox3find = lstListsInsideFEN1.Items.IndexOf(rootnode.Text);
-                lstListsInsideFEN1.SelectedIndex = rootnodelistbox3find;
+                rootnodelistbox3find = lstListsInsideFen1.Items.IndexOf(rootnode.Text);
+                lstListsInsideFen1.SelectedIndex = rootnodelistbox3find;
             }
 
 
             var roottag = (FLW2.flw2_item)rootnode.Tag;
-            var a = (FLW2.flw2_item)tvwMSBFFlow.SelectedNode.Tag;
+            var a = (FLW2.flw2_item)tvwMsbfFlow.SelectedNode.Tag;
             var find = flw2.Item.IndexOf(a);
             switch (a.TypeCheck)
             {
                 case 1:
                     //Console.WriteLine("メッセージ");
-                    if (lstListsInsideMSBT.Items.Count == 0) break;
-                    if (lstListsInsideMSBT.Items.Count > a.Unknown3) lstListsInsideMSBT.SelectedIndex = a.Unknown3;
-                    if (lstListsInsideFLW2.Items.Count == 0) break;
-                    if (lstListsInsideFLW2.Items.Count > find) lstListsInsideFLW2.SelectedIndex = find;
+                    if (lstListsInsideMsbt.Items.Count == 0) break;
+                    if (lstListsInsideMsbt.Items.Count > a.Unknown3) lstListsInsideMsbt.SelectedIndex = a.Unknown3;
+                    if (lstListsInsideFlw2.Items.Count == 0) break;
+                    if (lstListsInsideFlw2.Items.Count > find) lstListsInsideFlw2.SelectedIndex = find;
                     break;
                 case 2:
                     //Console.WriteLine("分岐");
-                    if (lstListsInsideFLW2.Items.Count == 0) break;
-                    if (lstListsInsideFLW2.Items.Count > find) lstListsInsideFLW2.SelectedIndex = find;
+                    if (lstListsInsideFlw2.Items.Count == 0) break;
+                    if (lstListsInsideFlw2.Items.Count > find) lstListsInsideFlw2.SelectedIndex = find;
                     break;
                 case 3:
                     //Console.WriteLine("イベント");
-                    if (lstListsInsideFLW2.Items.Count == 0) break;
-                    if (lstListsInsideFLW2.Items.Count > find) lstListsInsideFLW2.SelectedIndex = find;
+                    if (lstListsInsideFlw2.Items.Count == 0) break;
+                    if (lstListsInsideFlw2.Items.Count > find) lstListsInsideFlw2.SelectedIndex = find;
                     break;
                 case 4:
                     //Console.WriteLine("エントリーポイント");
-                    if (lstListsInsideFLW2.Items.Count == 0) break;
-                    if (lstListsInsideFLW2.Items.Count > find) lstListsInsideFLW2.SelectedIndex = find;
+                    if (lstListsInsideFlw2.Items.Count == 0) break;
+                    if (lstListsInsideFlw2.Items.Count > find) lstListsInsideFlw2.SelectedIndex = find;
                     break;
                 default:
 
@@ -1217,30 +1215,30 @@ namespace MSBT_Editor
 
         private void BtnInsertWorldNoTag_Click(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
             string tag = "</WorldNo>";
-            Calculation_System.TextBoxInsert(txtMSBTText, tag);
+            Calculation_System.TextBoxInsert(txtMsbtText, tag);
         }
 
         private void BtnInsertScoreTag_Click(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
             string tag = "</Score01>";
-            Calculation_System.TextBoxInsert(txtMSBTText, tag);
+            Calculation_System.TextBoxInsert(txtMsbtText, tag);
         }
 
         private void BtnInsertUserNameTag_Click(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
             string tag = "</UserName>";
-            Calculation_System.TextBoxInsert(txtMSBTText, tag);
+            Calculation_System.TextBoxInsert(txtMsbtText, tag);
         }
 
         private void BtnInsertTotalPlayTimeTag_Click(object sender, EventArgs e)
         {
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
             string tag = "</TotalPlayTime>";
-            Calculation_System.TextBoxInsert(txtMSBTText, tag);
+            Calculation_System.TextBoxInsert(txtMsbtText, tag);
         }
 
         private void textBox32_TextChanged(object sender, EventArgs e)
@@ -1281,7 +1279,7 @@ namespace MSBT_Editor
 
         }
 
-        private void BtnReloadTvwMSBFFlow_Click(object sender, EventArgs e)
+        private void BtnReloadTvwMsbfFlow_Click(object sender, EventArgs e)
         {
             var yesno = MessageBox.Show("ツリーを更新しますか？", "質問", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
             if (yesno == DialogResult.No) return;
@@ -1289,26 +1287,26 @@ namespace MSBT_Editor
             try { FEN1.TreeLoder(fen1.Item2); }
             catch (Exception ex)
             {
-                tvwMSBFFlow.Nodes.Clear();
+                tvwMsbfFlow.Nodes.Clear();
                 Console.WriteLine("errrrrrror");
             }
 
         }
 
-        private void ChkShowTvwMSBFFlow_CheckedChanged(object sender, EventArgs e)
+        private void ChkShowTvwMsbfFlow_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkShowTvwMSBFFlow.Checked)
+            if (chkShowTvwMsbfFlow.Checked)
             {
-                btnReloadTvwMSBFFlow.Enabled = true;
-                tvwMSBFFlow.Enabled = true;
-                chkShowTvwMSBFFlow.Text = "ON";
+                btnReloadTvwMsbfFlow.Enabled = true;
+                tvwMsbfFlow.Enabled = true;
+                chkShowTvwMsbfFlow.Text = "ON";
             }
             else
             {
-                btnReloadTvwMSBFFlow.Enabled = false;
-                tvwMSBFFlow.Enabled = false;
-                tvwMSBFFlow.Nodes.Clear();
-                chkShowTvwMSBFFlow.Text = "OFF";
+                btnReloadTvwMsbfFlow.Enabled = false;
+                tvwMsbfFlow.Enabled = false;
+                tvwMsbfFlow.Nodes.Clear();
+                chkShowTvwMsbfFlow.Text = "OFF";
             }
         }
 
@@ -1324,39 +1322,38 @@ namespace MSBT_Editor
 
 
 
-        private void StbOpenedRARCName_Click(object sender, EventArgs e)
+        private void StbOpenedRarcName_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void LblMSBFHashCalculator_Click(object sender, EventArgs e)
+        private void LblMsbfHashCalculator_Click(object sender, EventArgs e)
         {
 
         }
         //ATR1セクションテキストボックスのキープレスイベント
-        private void TxtATR1SoundID_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
+        private void TxtAtr1SoundID_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
 
-        private void TxtATR1SimpleCamID_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
+        private void TxtAtr1SimpleCamID_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
 
-        private void TxtATR1DialogID_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
+        private void TxtAtr1DialogID_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
 
-        private void TxtATR1WindowID_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
+        private void TxtAtr1WindowID_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
 
-        private void TxtATR1EventCameraID_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
+        private void TxtAtr1EventCameraID_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
 
-        private void TxtATR1MessageAreaID_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
+        private void TxtAtr1MessageAreaID_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
 
-        private void TxtATR1Unknown6_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
+        private void TxtAtr1Unknown6_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
 
-        private void TxtATR1SpecialText_KeyPress(object sender, KeyPressEventArgs e)
+        private void TxtAtr1SpecialText_KeyPress(object sender, KeyPressEventArgs e)
         {
-
             KeyPressEventSupport.CanWriteChar(e, true);
         }
 
         private void textBox30_MouseClick(object sender, MouseEventArgs e)
         {
-            this.txtSelectedMSBTListName.SelectAll();
+            this.txtSelectedMsbtListName.SelectAll();
         }
 
         private void BtnInsertCustomIconTag_Click(object sender, EventArgs e)
@@ -1369,14 +1366,14 @@ namespace MSBT_Editor
             //例:<UserIcon="000E0003 00350002003A">
             if (StrCount != 12) return;
 
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
 
             Tag = "<UserIcon=\"000E0003" + Tag + "\">";
 
 
 
 
-            Calculation_System.TextBoxInsert(txtMSBTText, Tag);
+            Calculation_System.TextBoxInsert(txtMsbtText, Tag);
         }
 
         private void UserIconInsertTextBox_TextChanged(object sender, EventArgs e)
@@ -1398,52 +1395,52 @@ namespace MSBT_Editor
             var Tag = txtSoundEffectName.Text;
             if (Tag == string.Empty) return;
 
-            if (lstListsInsideMSBT.Items.Count < 1) return;
+            if (lstListsInsideMsbt.Items.Count < 1) return;
 
             Tag = "<SE=\"" + Tag + "\">";
-            Calculation_System.TextBoxInsert(txtMSBTText, Tag);
+            Calculation_System.TextBoxInsert(txtMsbtText, Tag);
         }
 
-        private void TxtReadOnlyMSBTText_TextChanged(object sender, EventArgs e)
+        private void TxtReadOnlyMsbtText_TextChanged(object sender, EventArgs e)
         {
 
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var ResourceARCFolder = Path.GetDirectoryName(Application.ExecutablePath) + "\\res\\" + "ARC";
-            if (Directory.Exists(ResourceARCFolder)) Directory.Delete(ResourceARCFolder, true);
+            var ResourceRarcFolder = Path.GetDirectoryName(Application.ExecutablePath) + "\\res\\" + "ARC";
+            if (Directory.Exists(ResourceRarcFolder)) Directory.Delete(ResourceRarcFolder, true);
         }
 
 
 
-        private void LlbGitHubReleasesURL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LlbGitHubReleasesUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.llbGitHubReleasesURL.LinkVisited = true;
+            this.llbGitHubReleasesUrl.LinkVisited = true;
             System.Diagnostics.Process.Start("https://github.com/penguin117117/MSBT_Editor/releases");
         }
 
-        private void LlbGitHubRepositoryURL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LlbGitHubRepositoryUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.llbGitHubRepositoryURL.LinkVisited = true;
+            this.llbGitHubRepositoryUrl.LinkVisited = true;
             System.Diagnostics.Process.Start("https://github.com/penguin117117/MSBT_Editor");
         }
 
-        private void LlbGitHubIssuesURL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LlbGitHubIssuesUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.llbGitHubIssuesURL.LinkVisited = true;
+            this.llbGitHubIssuesUrl.LinkVisited = true;
             System.Diagnostics.Process.Start("https://github.com/penguin117117/MSBT_Editor/issues");
         }
 
-        private void LlbSMG2HackWikiURL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LlbSMG2HackWikiUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.llbSMG2HackWikiURL.LinkVisited = true;
+            this.llbSMG2HackWikiUrl.LinkVisited = true;
             System.Diagnostics.Process.Start("http://mariogalaxy2hack.wiki.fc2.com/wiki/MSBT_Editor");
         }
 
-        private void LlbSMG2HackDiscordURL_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LlbSMG2HackDiscordUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.llbSMG2HackDiscordURL.LinkVisited = true;
+            this.llbSMG2HackDiscordUrl.LinkVisited = true;
             System.Diagnostics.Process.Start("https://discord.gg/B4EwY7h");
         }
 
@@ -1452,23 +1449,23 @@ namespace MSBT_Editor
 
         }
 
-        private void TxtFLW2FlowType_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
+        private void TxtFlw2FlowType_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
 
-        private void TxtFLW2BranchTrue_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
+        private void TxtFlw2BranchTrue_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
 
-        private void button1_Click(object sender, EventArgs e)
+        private void BtnTextSort_Click(object sender, EventArgs e)
         {
-            string[] OldStrings = UnknownTag.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-            UnknownTag.Text = string.Empty;
+            string[] OldStrings = txtUnknownTag.Text.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            txtUnknownTag.Text = string.Empty;
             var Sorted = OldStrings.OrderBy(sort => sort).ToArray();
 
-            foreach (var tes in Sorted) UnknownTag.AppendText(tes + Environment.NewLine);
+            foreach (var tes in Sorted) txtUnknownTag.AppendText(tes + Environment.NewLine);
         }
 
-        private void ChkMSBAutoSave_CheckedChanged(object sender, EventArgs e)
+        private void ChkMsbAutoSave_CheckedChanged(object sender, EventArgs e)
         {
 
-            if (chkMSBAutoSave.Checked == false)
+            if (chkMsbAutoSave.Checked == false)
             {
                 s_useAutoSave = false;
             }
@@ -1478,19 +1475,19 @@ namespace MSBT_Editor
             }
         }
 
-        private void LstFilesInsideRARC_SelectedValueChanged(object sender, EventArgs e)
+        private void LstFilesInsideRarc_SelectedValueChanged(object sender, EventArgs e)
         {
-            Console.WriteLine(lstFilesInsideRARC.SelectedValue);
+            Console.WriteLine(lstFilesInsideRarc.SelectedValue);
         }
-        private void LstFilesInsideRARC_SelectedIndexChanged(object sender, EventArgs e/*EventHandler e*/)
+        private void LstFilesInsideRarc_SelectedIndexChanged(object sender, EventArgs e/*EventHandler e*/)
         {
 
             var SaveSelect = DialogResult;
 
             if (Dialog.ArcInsideMsbtAndMsbfPath.Count < 1) return;
-            if (lstFilesInsideRARC.Items.Count < 0) return;
+            if (lstFilesInsideRarc.Items.Count < 0) return;
 
-            var Index = lstFilesInsideRARC.SelectedIndex;
+            var Index = lstFilesInsideRarc.SelectedIndex;
             if (Properties.Settings.Default.ARCListIndexOld == -1)
             {
                 Properties.Settings.Default.ARCListIndexOld = Index;
@@ -1519,19 +1516,19 @@ namespace MSBT_Editor
             //if (s_useAutoSave == true) SaveSelect = DialogResult.Yes;
 
             //連続で選択した際にデータが壊れないようにしています。
-            lstFilesInsideRARC.Enabled = false;
+            lstFilesInsideRarc.Enabled = false;
 
-            var PathExtention = Path.GetExtension(lstFilesInsideRARC.Text).ToLower();
-            var PathFileName = lstFilesInsideRARC.Text;
+            var PathExtention = Path.GetExtension(lstFilesInsideRarc.Text).ToLower();
+            var PathFileName = lstFilesInsideRarc.Text;
             //Dialog.FileCheckの処理中にこのイベントを発生させないようにしている。
-            this.lstFilesInsideRARC.SelectedIndexChanged -= new EventHandler(this.LstFilesInsideRARC_SelectedIndexChanged);
+            this.lstFilesInsideRarc.SelectedIndexChanged -= new EventHandler(this.LstFilesInsideRarc_SelectedIndexChanged);
 
             //if (Path.GetExtension()) ;
-            var OldPath = lstFilesInsideRARC.Items[Properties.Settings.Default.ARCListIndexOld].ToString();
+            var OldPath = lstFilesInsideRarc.Items[Properties.Settings.Default.ARCListIndexOld].ToString();
 
 
-            var MsbtOldName = stbOpenedMSBTName.Text;
-            var MsbfOldName = stbOpenedMSBFName.Text;
+            var MsbtOldName = stbOpenedMsbtName.Text;
+            var MsbfOldName = stbOpenedMsbfName.Text;
 
             bool IsMsbtDef = false;
             bool IsMsbfDef = false;
@@ -1546,7 +1543,7 @@ namespace MSBT_Editor
                 if (MsbfOldName == Langage.FileReadStatusUS[1]) IsMsbfDef = true;
             }
 
-            if ((PathExtention == ".msbt") && (Dialog.Save_Path_Msbt != lstFilesInsideRARC.Text))
+            if ((PathExtention == ".msbt") && (Dialog.Save_Path_Msbt != lstFilesInsideRarc.Text))
             {
 
                 if ((s_useAutoSave == false) && (MsbtOldName != PathFileName) && IsMsbtDef == false)
@@ -1589,7 +1586,7 @@ namespace MSBT_Editor
 
 
             }
-            else if ((PathExtention == ".msbf") && (Dialog.Save_Path_Msbf != lstFilesInsideRARC.Text))
+            else if ((PathExtention == ".msbf") && (Dialog.Save_Path_Msbf != lstFilesInsideRarc.Text))
             {
                 if ((s_useAutoSave == false) && (MsbfOldName != PathFileName) && IsMsbfDef == false)
                 {
@@ -1606,8 +1603,8 @@ namespace MSBT_Editor
                 if (DialogResult.No == SaveSelect)
                 {
                     if (Properties.Settings.Default.ARCListIndexOld < 0) return;
-                    lstFilesInsideRARC.SelectedIndex = Properties.Settings.Default.ARCListIndexOld;
-                    lstFilesInsideRARC.Enabled = true;
+                    lstFilesInsideRarc.SelectedIndex = Properties.Settings.Default.ARCListIndexOld;
+                    lstFilesInsideRarc.Enabled = true;
                     return;
                 }
 
@@ -1619,54 +1616,54 @@ namespace MSBT_Editor
             }
             else
             {
-                this.lstFilesInsideRARC.SelectedIndexChanged += new EventHandler(this.LstFilesInsideRARC_SelectedIndexChanged);
-                lstFilesInsideRARC.Enabled = true;
+                this.lstFilesInsideRarc.SelectedIndexChanged += new EventHandler(this.LstFilesInsideRarc_SelectedIndexChanged);
+                lstFilesInsideRarc.Enabled = true;
                 return;
             }
 
             //MSBTの内容を一度全て消す
-            txtMSBTText.Clear();
-            txtReadOnlyMSBTText.Clear();
-            txtATR1SoundID.Clear();
-            txtATR1SimpleCamID.Clear();
-            txtATR1DialogID.Clear();
-            txtATR1WindowID.Clear();
-            txtATR1EventCameraID.Clear();
-            txtATR1MessageAreaID.Clear();
-            txtATR1Unknown6.Clear();
-            txtATR1SpecialTextOffset.Clear();
-            txtATR1SpecialText.Clear();
-            txtSelectedMSBTListName.Clear();
-            lblMSBTListSelectIndex.Text = "0x00";
+            txtMsbtText.Clear();
+            txtReadOnlyMsbtText.Clear();
+            txtAtr1SoundID.Clear();
+            txtAtr1SimpleCamID.Clear();
+            txtAtr1DialogID.Clear();
+            txtAtr1WindowID.Clear();
+            txtAtr1EventCameraID.Clear();
+            txtAtr1MessageAreaID.Clear();
+            txtAtr1Unknown6.Clear();
+            txtAtr1SpecialTextOffset.Clear();
+            txtAtr1SpecialText.Clear();
+            txtSelectedMsbtListName.Clear();
+            lblMsbtListSelectIndex.Text = "0x00";
 
             Dialog.FileCheck(Dialog.ArcInsideMsbtAndMsbfPath[Index]);
 
 
 
-            this.lstFilesInsideRARC.SelectedIndexChanged += new EventHandler(this.LstFilesInsideRARC_SelectedIndexChanged);
+            this.lstFilesInsideRarc.SelectedIndexChanged += new EventHandler(this.LstFilesInsideRarc_SelectedIndexChanged);
 
             //古いリストのセレクト番号を上書き
             Properties.Settings.Default.ARCListIndexOld = Index;
             Properties.Settings.Default.Save();
 
-            lstFilesInsideRARC.Enabled = true;
-            lstFilesInsideRARC.Focus();
+            lstFilesInsideRarc.Enabled = true;
+            lstFilesInsideRarc.Focus();
         }
 
-        private void LstFilesInsideRARC_CursorChanged(object sender, EventArgs e)
+        private void LstFilesInsideRarc_CursorChanged(object sender, EventArgs e)
         {
-            Console.WriteLine(lstFilesInsideRARC.SelectedValue);
+            Console.WriteLine(lstFilesInsideRarc.SelectedValue);
         }
 
-        private void LstFilesInsideRARC_Validating(object sender, CancelEventArgs e)
+        private void LstFilesInsideRarc_Validating(object sender, CancelEventArgs e)
         {
-            Console.WriteLine(lstFilesInsideRARC.SelectedValue);
+            Console.WriteLine(lstFilesInsideRarc.SelectedValue);
         }
 
-        private void LstFilesInsideRARC_ChangeUICues(object sender, UICuesEventArgs e)
+        private void LstFilesInsideRarc_ChangeUICues(object sender, UICuesEventArgs e)
         {
 
-            Console.WriteLine(lstFilesInsideRARC.SelectedValue);
+            Console.WriteLine(lstFilesInsideRarc.SelectedValue);
         }
     }
 }
