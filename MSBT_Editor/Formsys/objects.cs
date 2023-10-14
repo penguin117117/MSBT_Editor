@@ -9,17 +9,17 @@ namespace MSBT_Editor.Formsys
 {
     public class objects
     {
-        protected static TextBox txtb1 = Form1.Form1Instance.txtMSBTText;
+        protected static TextBox txtb1 = Form1.Form1Instance.txtMsbtText;
         protected static TextBox txtb2 = Form1.Form1Instance.textBox2;
-        protected static TextBox txtb11 = Form1.Form1Instance.txtATR1SpecialText;
-        protected static TextBox txtb14 = Form1.Form1Instance.txtLBL1EntrySize;
-        protected static TextBox txtb15 = Form1.Form1Instance.txtATR1EntrySize;
-        protected static TextBox txtb24 = Form1.Form1Instance.txtFLW2Arg4;
+        protected static TextBox txtb11 = Form1.Form1Instance.txtAtr1SpecialText;
+        protected static TextBox txtb14 = Form1.Form1Instance.txtLbl1EntrySize;
+        protected static TextBox txtb15 = Form1.Form1Instance.txtAtr1EntrySize;
+        protected static TextBox txtb24 = Form1.Form1Instance.txtFlw2Arg4;
         protected static TextBox txtb27 = Form1.Form1Instance.textBox27;
 
         //button 1~9
-        protected static Button listadd = Form1.Form1Instance.btnAddMSBTList;
-        protected static Button listdelete = Form1.Form1Instance.btnDeleteMSBTList;
+        protected static Button listadd = Form1.Form1Instance.btnAddMsbtList;
+        protected static Button listdelete = Form1.Form1Instance.btnDeleteMsbtList;
         protected static Button button1 = Form1.Form1Instance.btnInsertColorTag;
         protected static Button button2 = Form1.Form1Instance.btnInsertLineControlTag;
         protected static Button button3 = Form1.Form1Instance.btnInsertFontSizeTag;
@@ -42,10 +42,10 @@ namespace MSBT_Editor.Formsys
         protected static Button button18 = Form1.Form1Instance.btnInsertSecondTag;
         protected static Button button19 = Form1.Form1Instance.btnInsertNumbersBelowDecimalPoint;
 
-        protected static Button button21 = Form1.Form1Instance.btnAddFLW2List;
-        protected static Button button22 = Form1.Form1Instance.btnDeleteFLW2List;
-        protected static Button button23 = Form1.Form1Instance.btnAddFEN1List;
-        protected static Button button24 = Form1.Form1Instance.btnDeleteFEN1List;
+        protected static Button button21 = Form1.Form1Instance.btnAddFlw2List;
+        protected static Button button22 = Form1.Form1Instance.btnDeleteFlw2List;
+        protected static Button button23 = Form1.Form1Instance.btnAddFen1List;
+        protected static Button button24 = Form1.Form1Instance.btnDeleteFen1List;
 
         protected static Button button26 = Form1.Form1Instance.btnInsertWorldNoTag;
         protected static Button button27 = Form1.Form1Instance.btnInsertScoreTag;
@@ -56,22 +56,22 @@ namespace MSBT_Editor.Formsys
         protected static Button UserIconInsertButton = Form1.Form1Instance.btnInsertCustomIconTag;
 
         //label 0～9
-        protected static Label labeltxt01 = Form1.Form1Instance.lblATR1SoundID;
-        protected static Label labeltxt02 = Form1.Form1Instance.lblATR1SimpleCamID;
-        protected static Label labeltxt03 = Form1.Form1Instance.lblATR1DialogID;
-        protected static Label labeltxt04 = Form1.Form1Instance.lblATR1WindowID;
-        protected static Label labeltxt05 = Form1.Form1Instance.lblATR1EventCameraID;
-        protected static Label labeltxt06 = Form1.Form1Instance.lblATR1MessageAreaID;
-        protected static Label labeltxt07 = Form1.Form1Instance.lblATR1Unknown6;
-        protected static Label labeltxt08 = Form1.Form1Instance.lblATR1SpecialTextOffset;
-        protected static Label labeltxt09 = Form1.Form1Instance.lblATR1SpecialText;
+        protected static Label labeltxt01 = Form1.Form1Instance.lblAtr1SoundID;
+        protected static Label labeltxt02 = Form1.Form1Instance.lblAtr1SimpleCamID;
+        protected static Label labeltxt03 = Form1.Form1Instance.lblAtr1DialogID;
+        protected static Label labeltxt04 = Form1.Form1Instance.lblAtr1WindowID;
+        protected static Label labeltxt05 = Form1.Form1Instance.lblAtr1EventCameraID;
+        protected static Label labeltxt06 = Form1.Form1Instance.lblAtr1MessageAreaID;
+        protected static Label labeltxt07 = Form1.Form1Instance.lblAtr1Unknown6;
+        protected static Label labeltxt08 = Form1.Form1Instance.lblAtr1SpecialTextOffset;
+        protected static Label labeltxt09 = Form1.Form1Instance.lblAtr1SpecialText;
 
         //label 10～19
-        protected static Label labeltxt10 = Form1.Form1Instance.lblLBL1TagIndex;
-        protected static Label labeltxt11 = Form1.Form1Instance.lblMSBTListName;
-        protected static Label labeltxt12 = Form1.Form1Instance.lblMSBTListEditDiscription;
-        protected static Label labeltxt13 = Form1.Form1Instance.lblMSBTListEditNote;
-        protected static Label labeltxt15 = Form1.Form1Instance.lblCreditSectionEntrySizegbxCreditSectionEntrySizeNote;
+        protected static Label labeltxt10 = Form1.Form1Instance.lblLbl1TagIndex;
+        protected static Label labeltxt11 = Form1.Form1Instance.lblMsbtListName;
+        protected static Label labeltxt12 = Form1.Form1Instance.lblMsbtListEditDiscription;
+        protected static Label labeltxt13 = Form1.Form1Instance.lblMsbtListEditNote;
+        protected static Label labeltxt15 = Form1.Form1Instance.lblCreditSectionEntrySize;
 
         protected static Label labeltxt17 = Form1.Form1Instance.lblRubiTagRubiCount;
         protected static Label labeltxt18 = Form1.Form1Instance.lblRubiTagKanjiCount;
@@ -82,22 +82,22 @@ namespace MSBT_Editor.Formsys
         protected static Label labeltxt20 = Form1.Form1Instance.lblCharacterIconTag;
         protected static Label labeltxt21 = Form1.Form1Instance.lblObjectIconTag;
         protected static Label labeltxt22 = Form1.Form1Instance.lblOthersIconTag;
-        protected static Label labeltxt23 = Form1.Form1Instance.lblFLW2FlowType;
-        protected static Label labeltxt24 = Form1.Form1Instance.lblFLW2Padding;
-        protected static Label labeltxt25 = Form1.Form1Instance.lblFLW2Arg1;
-        protected static Label labeltxt26 = Form1.Form1Instance.lblFLW2Arg2;
-        protected static Label labeltxt27 = Form1.Form1Instance.lblFLW2Arg3;
-        protected static Label labeltxt28 = Form1.Form1Instance.lblFLW2Arg4;
-        protected static Label labeltxt29 = Form1.Form1Instance.lblFLW2BranchTrue;
+        protected static Label labeltxt23 = Form1.Form1Instance.lblFlw2FlowType;
+        protected static Label labeltxt24 = Form1.Form1Instance.lblFlw2Padding;
+        protected static Label labeltxt25 = Form1.Form1Instance.lblFlw2Arg1;
+        protected static Label labeltxt26 = Form1.Form1Instance.lblFlw2Arg2;
+        protected static Label labeltxt27 = Form1.Form1Instance.lblFlw2Arg3;
+        protected static Label labeltxt28 = Form1.Form1Instance.lblFlw2Arg4;
+        protected static Label labeltxt29 = Form1.Form1Instance.lblFlw2BranchTrue;
 
         //label 30～39
-        protected static Label labeltxt30 = Form1.Form1Instance.lblFLW2BranchFalse;
-        protected static Label labeltxt31 = Form1.Form1Instance.lblFEN1Arg0;
-        protected static Label labeltxt32 = Form1.Form1Instance.lblFLW2StartIndex;
-        protected static Label labeltxt33 = Form1.Form1Instance.lblMSBFSettingNote;
-        protected static Label labeltxt34 = Form1.Form1Instance.lblFLW2ListEditDiscription;
-        protected static Label labeltxt35 = Form1.Form1Instance.lblFEN1ListName;
-        protected static Label labeltxt39 = Form1.Form1Instance.lblCreditLBL1Note;
+        protected static Label labeltxt30 = Form1.Form1Instance.lblFlw2BranchFalse;
+        protected static Label labeltxt31 = Form1.Form1Instance.lblFen1Arg0;
+        protected static Label labeltxt32 = Form1.Form1Instance.lblFlw2StartIndex;
+        protected static Label labeltxt33 = Form1.Form1Instance.lblMsbfSettingNote;
+        protected static Label labeltxt34 = Form1.Form1Instance.lblFlw2ListEditDiscription;
+        protected static Label labeltxt35 = Form1.Form1Instance.lblFen1ListName;
+        protected static Label labeltxt39 = Form1.Form1Instance.lblCreditLbl1Note;
 
         protected static Label Label58 = Form1.Form1Instance.lblSaveSystemDiscription;
 
@@ -107,17 +107,17 @@ namespace MSBT_Editor.Formsys
         protected static Label SETagInsertLabel2 = Form1.Form1Instance.lblSoundEffectTagDiscription2;
 
         protected static TextBox msbtdebugtxt = Form1.Form1Instance.MSBT_Debug_Text;
-        protected static TextBox txtb13 = Form1.Form1Instance.textBox13;
-        protected static ListBox MsbtListBox = Form1.Form1Instance.lstListsInsideMSBT;
-        protected static ListBox list2 = Form1.Form1Instance.lstListsInsideFLW2;
-        protected static ListBox list3 = Form1.Form1Instance.lstListsInsideFEN1;
-        protected static ListBox ARCListBox = Form1.Form1Instance.lstFilesInsideRARC;
+        protected static TextBox txtb13 = Form1.Form1Instance.txtFlw2DebugHex;
+        protected static ListBox MsbtListBox = Form1.Form1Instance.lstListsInsideMsbt;
+        protected static ListBox list2 = Form1.Form1Instance.lstListsInsideFlw2;
+        protected static ListBox list3 = Form1.Form1Instance.lstListsInsideFen1;
+        protected static ListBox ARCListBox = Form1.Form1Instance.lstFilesInsideRarc;
 
         //
-        protected static TreeView treeview1 = Form1.Form1Instance.tvwMSBFFlow;
+        protected static TreeView treeview1 = Form1.Form1Instance.tvwMsbfFlow;
 
         //
-        protected static CheckBox chk1 = Form1.Form1Instance.chkShowTvwMSBFFlow;
+        protected static CheckBox chk1 = Form1.Form1Instance.chkShowTvwMsbfFlow;
 
         //combbox
         protected static ComboBox combo1 = Form1.Form1Instance.cmbColorTag;
@@ -129,12 +129,12 @@ namespace MSBT_Editor.Formsys
         protected static ComboBox combo7 = Form1.Form1Instance.cmbOthersIconTag;
 
         //groupbox
-        protected static GroupBox Atr1GroupBox = Form1.Form1Instance.gbxMSBTSettingsATR1;
+        protected static GroupBox Atr1GroupBox = Form1.Form1Instance.gbxMsbtSettingsAtr1;
         protected static GroupBox groupbox3 = Form1.Form1Instance.gbxCreditSectionEntrySize;
         protected static GroupBox groupbox4 = Form1.Form1Instance.gbxRubiTag;
         protected static GroupBox groupbox5 = Form1.Form1Instance.gbxTimerTag;
         protected static GroupBox groupbox6 = Form1.Form1Instance.gbxSpecialTag;
-        protected static GroupBox groupbox8 = Form1.Form1Instance.gbxFLW2Branch;
+        protected static GroupBox groupbox8 = Form1.Form1Instance.gbxFlw2Branch;
 
         protected static GroupBox groupbox15 = Form1.Form1Instance.gbxCustomIconTag;
         protected static GroupBox groupbox16 = Form1.Form1Instance.gbxSoundEffectTag;
@@ -142,17 +142,17 @@ namespace MSBT_Editor.Formsys
         //tab
         protected static TabControl tbc1 = Form1.Form1Instance.tabControl1;
         protected static TabControl tbc3 = Form1.Form1Instance.tabControl3;
-        protected static TabPage tabp1 = Form1.Form1Instance.tbpMSBTSettings;
-        protected static TabPage tabp2 = Form1.Form1Instance.tabPage2;
+        protected static TabPage tabp1 = Form1.Form1Instance.tbpMsbtSetting;
+        protected static TabPage tabp2 = Form1.Form1Instance.tbpMsbtTextEdit;
         protected static TabPage tabp3 = Form1.Form1Instance.tbpListEdit;
-        protected static TabPage tabp4 = Form1.Form1Instance.tbpMSBFSetting;
+        protected static TabPage tabp4 = Form1.Form1Instance.tbpMsbfSetting;
         protected static TabPage AdvancedTagsTabPage = Form1.Form1Instance.AdvancedTagsTabPage;
 
-        protected static TabPage tabp6 = Form1.Form1Instance.tabPage6;
-        protected static TabPage tabp7 = Form1.Form1Instance.tabPage7;
-        protected static TabPage tabp8 = Form1.Form1Instance.tabPage8;
-        protected static TabPage tabp9 = Form1.Form1Instance.tabPage9;
-        protected static TabPage tabp12 = Form1.Form1Instance.tbpFilesInsideRARC;
+        protected static TabPage tabp6 = Form1.Form1Instance.tbpGeneralTag;
+        protected static TabPage tabp7 = Form1.Form1Instance.tbpValueTag;
+        protected static TabPage tabp8 = Form1.Form1Instance.tbpSpecialTag;
+        protected static TabPage tabp9 = Form1.Form1Instance.tbpIconTag;
+        protected static TabPage tabp12 = Form1.Form1Instance.tbpFilesInsideRarc;
         protected static TabPage tabp14 = Form1.Form1Instance.tbpInfomation;
 
         //menu
@@ -169,14 +169,14 @@ namespace MSBT_Editor.Formsys
 
         //stats
         protected static ToolStripStatusLabel tssl1 = Form1.Form1Instance.stbStatusLabel;
-        protected static ToolStripStatusLabel tssl2 = Form1.Form1Instance.stbOpenedMSBTName;
-        protected static ToolStripStatusLabel tssl4 = Form1.Form1Instance.stbOpenedMSBFName;
+        protected static ToolStripStatusLabel tssl2 = Form1.Form1Instance.stbOpenedMsbtName;
+        protected static ToolStripStatusLabel tssl4 = Form1.Form1Instance.stbOpenedMsbfName;
         protected static ToolStripStatusLabel tssl6 = Form1.Form1Instance.stbSavedFilePathLabel;
-        protected static ToolStripStatusLabel tssl7 = Form1.Form1Instance.stbOpenedRARCName;
+        protected static ToolStripStatusLabel tssl7 = Form1.Form1Instance.stbOpenedRarcName;
         protected static ToolStripStatusLabel SaveStatusPathString = Form1.Form1Instance.stbSavedFilePath;
 
         //
-        protected static TextBox unknowntag = Form1.Form1Instance.UnknownTag;
+        protected static TextBox unknowntag = Form1.Form1Instance.txtUnknownTag;
        
     }
 }
