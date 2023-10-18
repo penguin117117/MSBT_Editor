@@ -1151,6 +1151,7 @@ namespace MSBT_Editor.FileSys
                     break;
 
                 case "/World_No":
+                case "/WorldNo":
                     bits = StringToBytes("000E0006000000080000000000000000");
                     break;
                 case "/ReferenceValue1":

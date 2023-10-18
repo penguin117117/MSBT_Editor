@@ -14,7 +14,6 @@ namespace MSBT_Editor.MSBTsys
 {
     public class MSBT_Header : MSBT_Data
     {
-        
         public void Read(string path)
         {
             FileStream fs = new FileStream(path, FileMode.Open);
@@ -49,8 +48,7 @@ namespace MSBT_Editor.MSBTsys
             Atr1SpecialText = new List<string>();
             Atr1SpecialText = ATR1.SpecialTextList;
 
-            if(MsbtListBox.Items.Count > 0)
-            MsbtListBox.SelectedIndex = 0;
+            if (MsbtListBox.Items.Count > 0) MsbtListBox.SelectedIndex = 0;
 
             //終了処理
             fs.Close();
