@@ -280,7 +280,7 @@ namespace MSBT_Editor.Sectionsys
                 treeview1.Nodes.Add(item.Value.tagname);
                 
                 //エントリーポイントをサブノードに追加
-                treeviewnodeadder(flw2item, treeview1.Nodes[item.Index]);
+                TreeViewNodeAdder(flw2item, treeview1.Nodes[item.Index]);
             }
         }
 
@@ -289,7 +289,7 @@ namespace MSBT_Editor.Sectionsys
         {
             FLW2 flw2 = new FLW2();
             var subnode_element = flw2.Item[subfunc];
-            subnodename = Langage.FLW2_List_Langage(subnode_element.TypeCheck);
+            subnodename = Language.FLW2_List_Language(subnode_element.TypeCheck);
 
             switch (type)
             {
@@ -380,7 +380,7 @@ namespace MSBT_Editor.Sectionsys
             
         }
 
-        public static void treeviewnodeadder(FLW2.flw2_item flw2item, TreeNode tn, int brancno = 0)
+        public static void TreeViewNodeAdder(FLW2.flw2_item flw2item, TreeNode tn, int brancno = 0)
         {
             tn.Tag = flw2item;
             //構文をサブノードに追加する
@@ -388,7 +388,7 @@ namespace MSBT_Editor.Sectionsys
             FLW2 flw2 = new FLW2();
             var subfunc = flw2item.Unknown2;
             var subnode_element = flw2.Item[subfunc];
-            var subnodename = Langage.FLW2_List_Langage(subnode_element.TypeCheck);
+            var subnodename = Language.FLW2_List_Language(subnode_element.TypeCheck);
             //AllJumpAddres.Add(subnode_element.Unknown2);
             TreeView_Fllow_Type_Checker(subfunc, subnode_element.TypeCheck, subnodename, tn);
             //return 0;
@@ -403,7 +403,7 @@ namespace MSBT_Editor.Sectionsys
 
             var subfunc = flw2item.Unknown4;
             var subnode_element = flw2.Item[subfunc];
-            var subnodename = Langage.FLW2_List_Langage(subnode_element.TypeCheck);
+            var subnodename = Language.FLW2_List_Language(subnode_element.TypeCheck);
             TreeView_Fllow_Type_Checker(subfunc, subnode_element.TypeCheck, subnodename, tn);
             
         }
@@ -417,7 +417,7 @@ namespace MSBT_Editor.Sectionsys
             subfunc += brancno;
             var subbranchfunc = flw2.Branch_No[subfunc];
             var subnode_element = flw2.Item[subbranchfunc];
-            var subnodename = Langage.FLW2_List_Langage(subnode_element.TypeCheck);
+            var subnodename = Language.FLW2_List_Language(subnode_element.TypeCheck);
             TreeView_Fllow_Type_Checker(subbranchfunc, subnode_element.TypeCheck, subnodename, tn);
         }
 
@@ -430,7 +430,7 @@ namespace MSBT_Editor.Sectionsys
             var subfunc = flw2item.Unknown3;
             //Console.WriteLine("" + subfunc.ToString("X"));
             var subnode_element = flw2.Item[subfunc];
-            var subnodename = Langage.FLW2_List_Langage(subnode_element.TypeCheck);
+            var subnodename = Language.FLW2_List_Language(subnode_element.TypeCheck);
             TreeView_Fllow_Type_Checker(subfunc, subnode_element.TypeCheck, subnodename, tn);
             
         }

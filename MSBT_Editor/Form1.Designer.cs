@@ -47,19 +47,19 @@ namespace MSBT_Editor
             this.Msbt上書き保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Msbt保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mSBF開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Msbf開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Msbf上書き保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Msbf保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.ARC開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ARC上書き保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ARC保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Arc開くToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Arc上書き保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Arc保存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lstListsInsideMsbt = new System.Windows.Forms.ListBox();
             this.txtMsbtText = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tbpMsbtSetting = new System.Windows.Forms.TabPage();
-            this.gbxMsbtSettingsAtr1 = new System.Windows.Forms.GroupBox();
+            this.gbxMsbtSettingAtr1 = new System.Windows.Forms.GroupBox();
             this.lblAtr1SpecialText = new System.Windows.Forms.Label();
             this.txtAtr1SpecialText = new System.Windows.Forms.TextBox();
             this.lblAtr1Unknown6 = new System.Windows.Forms.Label();
@@ -106,7 +106,7 @@ namespace MSBT_Editor
             this.btnInsertUserNameTag = new System.Windows.Forms.Button();
             this.btnInsertScoreTag = new System.Windows.Forms.Button();
             this.btnInsertWorldNoTag = new System.Windows.Forms.Button();
-            this.btnInsertNumbersBelowDecimalPoint = new System.Windows.Forms.Button();
+            this.btnInsertNumbersBelowDecimalPointTag = new System.Windows.Forms.Button();
             this.btnInsertSecondTag = new System.Windows.Forms.Button();
             this.btnInsertMinuteTag = new System.Windows.Forms.Button();
             this.btnInsertHourTag = new System.Windows.Forms.Button();
@@ -116,16 +116,16 @@ namespace MSBT_Editor
             this.btnInsertResultScenarioNameTag = new System.Windows.Forms.Button();
             this.btnInsertResultGalaxyNameTag = new System.Windows.Forms.Button();
             this.tbpIconTag = new System.Windows.Forms.TabPage();
-            this.btnInsertOthersIconTag = new System.Windows.Forms.Button();
-            this.cmbOthersIconTag = new System.Windows.Forms.ComboBox();
-            this.lblOthersIconTag = new System.Windows.Forms.Label();
+            this.btnInsertOtherIconTag = new System.Windows.Forms.Button();
+            this.cmbOtherIconTag = new System.Windows.Forms.ComboBox();
+            this.lblOtherIconTag = new System.Windows.Forms.Label();
             this.lblObjectIconTag = new System.Windows.Forms.Label();
             this.btnInsertObjectIconTag = new System.Windows.Forms.Button();
             this.cmbObjectIconTag = new System.Windows.Forms.ComboBox();
             this.lblCharacterIconTag = new System.Windows.Forms.Label();
             this.btnInsertCharacterIconTag = new System.Windows.Forms.Button();
             this.cmbCharacterIconTag = new System.Windows.Forms.ComboBox();
-            this.AdvancedTagsTabPage = new System.Windows.Forms.TabPage();
+            this.AdvancedTagTabPage = new System.Windows.Forms.TabPage();
             this.gbxSoundEffectTag = new System.Windows.Forms.GroupBox();
             this.lblSoundEffectTagDiscription1 = new System.Windows.Forms.Label();
             this.btnInsertSoundEffectTag = new System.Windows.Forms.Button();
@@ -220,7 +220,7 @@ namespace MSBT_Editor
             this.lblCreditXenon = new System.Windows.Forms.Label();
             this.lblCreditDossun = new System.Windows.Forms.Label();
             this.lblCreditPorto = new System.Windows.Forms.Label();
-            this.lblCreditHiiraghi = new System.Windows.Forms.Label();
+            this.lblCreditHiiragi = new System.Windows.Forms.Label();
             this.lblCreditEigen = new System.Windows.Forms.Label();
             this.gbxCreditSectionEntrySize = new System.Windows.Forms.GroupBox();
             this.txtAtr1EntrySize = new System.Windows.Forms.TextBox();
@@ -262,7 +262,7 @@ namespace MSBT_Editor
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tbpMsbtSetting.SuspendLayout();
-            this.gbxMsbtSettingsAtr1.SuspendLayout();
+            this.gbxMsbtSettingAtr1.SuspendLayout();
             this.tbpMsbtTextEdit.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tbpGeneralTag.SuspendLayout();
@@ -272,7 +272,7 @@ namespace MSBT_Editor
             this.tbpSpecialTag.SuspendLayout();
             this.gbxSpecialTag.SuspendLayout();
             this.tbpIconTag.SuspendLayout();
-            this.AdvancedTagsTabPage.SuspendLayout();
+            this.AdvancedTagTabPage.SuspendLayout();
             this.gbxSoundEffectTag.SuspendLayout();
             this.gbxCustomIconTag.SuspendLayout();
             this.tbpListEdit.SuspendLayout();
@@ -351,9 +351,8 @@ namespace MSBT_Editor
             // stbOpenedRarcName
             // 
             this.stbOpenedRarcName.Name = "stbOpenedRarcName";
-            this.stbOpenedRarcName.Size = new System.Drawing.Size(104, 17);
-            this.stbOpenedRarcName.Text = "<RARCファイルなし>";
-            this.stbOpenedRarcName.Click += new System.EventHandler(this.StbOpenedRarcName_Click);
+            this.stbOpenedRarcName.Size = new System.Drawing.Size(97, 17);
+            this.stbOpenedRarcName.Text = "<ARCファイルなし>";
             // 
             // toolStripStatusLabel8
             // 
@@ -391,13 +390,13 @@ namespace MSBT_Editor
             this.Msbt上書き保存ToolStripMenuItem,
             this.Msbt保存ToolStripMenuItem,
             this.toolStripSeparator1,
-            this.mSBF開くToolStripMenuItem,
+            this.Msbf開くToolStripMenuItem,
             this.Msbf上書き保存ToolStripMenuItem,
             this.Msbf保存ToolStripMenuItem,
             this.toolStripSeparator2,
-            this.ARC開くToolStripMenuItem,
-            this.ARC上書き保存ToolStripMenuItem,
-            this.ARC保存ToolStripMenuItem});
+            this.Arc開くToolStripMenuItem,
+            this.Arc上書き保存ToolStripMenuItem,
+            this.Arc保存ToolStripMenuItem});
             this.ファイルToolStripMenuItem.Name = "ファイルToolStripMenuItem";
             this.ファイルToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.ファイルToolStripMenuItem.Text = "ファイル";
@@ -437,13 +436,13 @@ namespace MSBT_Editor
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(197, 6);
             // 
-            // mSBF開くToolStripMenuItem
+            // Msbf開くToolStripMenuItem
             // 
-            this.mSBF開くToolStripMenuItem.Name = "mSBF開くToolStripMenuItem";
-            this.mSBF開くToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.mSBF開くToolStripMenuItem.Text = "MSBF開く";
-            this.mSBF開くToolStripMenuItem.Visible = false;
-            this.mSBF開くToolStripMenuItem.Click += new System.EventHandler(this.MSBF開くToolStripMenuItem_Click);
+            this.Msbf開くToolStripMenuItem.Name = "Msbf開くToolStripMenuItem";
+            this.Msbf開くToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.Msbf開くToolStripMenuItem.Text = "MSBF開く";
+            this.Msbf開くToolStripMenuItem.Visible = false;
+            this.Msbf開くToolStripMenuItem.Click += new System.EventHandler(this.Msbf開くToolStripMenuItem_Click);
             // 
             // Msbf上書き保存ToolStripMenuItem
             // 
@@ -469,28 +468,28 @@ namespace MSBT_Editor
             // 
             // ARC開くToolStripMenuItem
             // 
-            this.ARC開くToolStripMenuItem.Name = "ARC開くToolStripMenuItem";
-            this.ARC開くToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.ARC開くToolStripMenuItem.Text = "ARC開く";
-            this.ARC開くToolStripMenuItem.Visible = false;
-            this.ARC開くToolStripMenuItem.Click += new System.EventHandler(this.ARC開くToolStripMenuItem_Click);
+            this.Arc開くToolStripMenuItem.Name = "ARC開くToolStripMenuItem";
+            this.Arc開くToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.Arc開くToolStripMenuItem.Text = "ARC開く";
+            this.Arc開くToolStripMenuItem.Visible = false;
+            this.Arc開くToolStripMenuItem.Click += new System.EventHandler(this.Arc開くToolStripMenuItem_Click);
             // 
             // ARC上書き保存ToolStripMenuItem
             // 
-            this.ARC上書き保存ToolStripMenuItem.Name = "ARC上書き保存ToolStripMenuItem";
-            this.ARC上書き保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.ARC上書き保存ToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.ARC上書き保存ToolStripMenuItem.Text = "ARC上書き保存";
-            this.ARC上書き保存ToolStripMenuItem.Click += new System.EventHandler(this.ARC上書き保存ToolStripMenuItem_Click);
+            this.Arc上書き保存ToolStripMenuItem.Name = "ARC上書き保存ToolStripMenuItem";
+            this.Arc上書き保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.Arc上書き保存ToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.Arc上書き保存ToolStripMenuItem.Text = "ARC上書き保存";
+            this.Arc上書き保存ToolStripMenuItem.Click += new System.EventHandler(this.Arc上書き保存ToolStripMenuItem_Click);
             // 
             // ARC保存ToolStripMenuItem
             // 
-            this.ARC保存ToolStripMenuItem.Name = "ARC保存ToolStripMenuItem";
-            this.ARC保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            this.Arc保存ToolStripMenuItem.Name = "ARC保存ToolStripMenuItem";
+            this.Arc保存ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.ARC保存ToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-            this.ARC保存ToolStripMenuItem.Text = "ARC保存";
-            this.ARC保存ToolStripMenuItem.Click += new System.EventHandler(this.ARC保存ToolStripMenuItem_Click);
+            this.Arc保存ToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+            this.Arc保存ToolStripMenuItem.Text = "ARC保存";
+            this.Arc保存ToolStripMenuItem.Click += new System.EventHandler(this.Arc保存ToolStripMenuItem_Click);
             // 
             // lstListsInsideMsbt
             // 
@@ -541,7 +540,7 @@ namespace MSBT_Editor
             // 
             // tbpMsbtSetting
             // 
-            this.tbpMsbtSetting.Controls.Add(this.gbxMsbtSettingsAtr1);
+            this.tbpMsbtSetting.Controls.Add(this.gbxMsbtSettingAtr1);
             this.tbpMsbtSetting.Location = new System.Drawing.Point(4, 22);
             this.tbpMsbtSetting.Name = "tbpMsbtSetting";
             this.tbpMsbtSetting.Padding = new System.Windows.Forms.Padding(3);
@@ -550,30 +549,30 @@ namespace MSBT_Editor
             this.tbpMsbtSetting.Text = "MSBTテキストの詳細設定";
             this.tbpMsbtSetting.UseVisualStyleBackColor = true;
             // 
-            // gbxMsbtSettingsAtr1
+            // gbxMsbtSettingAtr1
             // 
-            this.gbxMsbtSettingsAtr1.Controls.Add(this.lblAtr1SpecialText);
-            this.gbxMsbtSettingsAtr1.Controls.Add(this.txtAtr1SpecialText);
-            this.gbxMsbtSettingsAtr1.Controls.Add(this.lblAtr1Unknown6);
-            this.gbxMsbtSettingsAtr1.Controls.Add(this.lblAtr1MessageAreaID);
-            this.gbxMsbtSettingsAtr1.Controls.Add(this.lblAtr1EventCameraID);
-            this.gbxMsbtSettingsAtr1.Controls.Add(this.lblAtr1WindowID);
-            this.gbxMsbtSettingsAtr1.Controls.Add(this.lblAtr1DialogID);
-            this.gbxMsbtSettingsAtr1.Controls.Add(this.lblAtr1SimpleCamID);
-            this.gbxMsbtSettingsAtr1.Controls.Add(this.lblAtr1SoundID);
-            this.gbxMsbtSettingsAtr1.Controls.Add(this.txtAtr1Unknown6);
-            this.gbxMsbtSettingsAtr1.Controls.Add(this.txtAtr1MessageAreaID);
-            this.gbxMsbtSettingsAtr1.Controls.Add(this.txtAtr1EventCameraID);
-            this.gbxMsbtSettingsAtr1.Controls.Add(this.txtAtr1WindowID);
-            this.gbxMsbtSettingsAtr1.Controls.Add(this.txtAtr1DialogID);
-            this.gbxMsbtSettingsAtr1.Controls.Add(this.txtAtr1SimpleCamID);
-            this.gbxMsbtSettingsAtr1.Controls.Add(this.txtAtr1SoundID);
-            this.gbxMsbtSettingsAtr1.Location = new System.Drawing.Point(6, 6);
-            this.gbxMsbtSettingsAtr1.Name = "gbxMsbtSettingsAtr1";
-            this.gbxMsbtSettingsAtr1.Size = new System.Drawing.Size(548, 290);
-            this.gbxMsbtSettingsAtr1.TabIndex = 4;
-            this.gbxMsbtSettingsAtr1.TabStop = false;
-            this.gbxMsbtSettingsAtr1.Text = "選択されたMSBTメッセージの詳細設定";
+            this.gbxMsbtSettingAtr1.Controls.Add(this.lblAtr1SpecialText);
+            this.gbxMsbtSettingAtr1.Controls.Add(this.txtAtr1SpecialText);
+            this.gbxMsbtSettingAtr1.Controls.Add(this.lblAtr1Unknown6);
+            this.gbxMsbtSettingAtr1.Controls.Add(this.lblAtr1MessageAreaID);
+            this.gbxMsbtSettingAtr1.Controls.Add(this.lblAtr1EventCameraID);
+            this.gbxMsbtSettingAtr1.Controls.Add(this.lblAtr1WindowID);
+            this.gbxMsbtSettingAtr1.Controls.Add(this.lblAtr1DialogID);
+            this.gbxMsbtSettingAtr1.Controls.Add(this.lblAtr1SimpleCamID);
+            this.gbxMsbtSettingAtr1.Controls.Add(this.lblAtr1SoundID);
+            this.gbxMsbtSettingAtr1.Controls.Add(this.txtAtr1Unknown6);
+            this.gbxMsbtSettingAtr1.Controls.Add(this.txtAtr1MessageAreaID);
+            this.gbxMsbtSettingAtr1.Controls.Add(this.txtAtr1EventCameraID);
+            this.gbxMsbtSettingAtr1.Controls.Add(this.txtAtr1WindowID);
+            this.gbxMsbtSettingAtr1.Controls.Add(this.txtAtr1DialogID);
+            this.gbxMsbtSettingAtr1.Controls.Add(this.txtAtr1SimpleCamID);
+            this.gbxMsbtSettingAtr1.Controls.Add(this.txtAtr1SoundID);
+            this.gbxMsbtSettingAtr1.Location = new System.Drawing.Point(6, 6);
+            this.gbxMsbtSettingAtr1.Name = "gbxMsbtSettingAtr1";
+            this.gbxMsbtSettingAtr1.Size = new System.Drawing.Size(548, 290);
+            this.gbxMsbtSettingAtr1.TabIndex = 4;
+            this.gbxMsbtSettingAtr1.TabStop = false;
+            this.gbxMsbtSettingAtr1.Text = "選択されたMSBTメッセージの詳細設定";
             // 
             // lblAtr1SpecialText
             // 
@@ -599,9 +598,9 @@ namespace MSBT_Editor
             this.lblAtr1Unknown6.AutoSize = true;
             this.lblAtr1Unknown6.Location = new System.Drawing.Point(6, 175);
             this.lblAtr1Unknown6.Name = "lblAtr1Unknown6";
-            this.lblAtr1Unknown6.Size = new System.Drawing.Size(61, 12);
+            this.lblAtr1Unknown6.Size = new System.Drawing.Size(35, 12);
             this.lblAtr1Unknown6.TabIndex = 14;
-            this.lblAtr1Unknown6.Text = "分からない6";
+            this.lblAtr1Unknown6.Text = "不明6";
             // 
             // lblAtr1MessageAreaID
             // 
@@ -723,7 +722,7 @@ namespace MSBT_Editor
             this.txtAtr1SoundID.Name = "txtAtr1SoundID";
             this.txtAtr1SoundID.Size = new System.Drawing.Size(100, 19);
             this.txtAtr1SoundID.TabIndex = 0;
-            this.txtAtr1SoundID.TextChanged += new System.EventHandler(this.TxtATR1SoundID_TextChanged);
+            this.txtAtr1SoundID.TextChanged += new System.EventHandler(this.TxtAtr1SoundID_TextChanged);
             this.txtAtr1SoundID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtAtr1SoundID_KeyPress);
             // 
             // tbpMsbtTextEdit
@@ -744,7 +743,7 @@ namespace MSBT_Editor
             this.tabControl2.Controls.Add(this.tbpValueTag);
             this.tabControl2.Controls.Add(this.tbpSpecialTag);
             this.tabControl2.Controls.Add(this.tbpIconTag);
-            this.tabControl2.Controls.Add(this.AdvancedTagsTabPage);
+            this.tabControl2.Controls.Add(this.AdvancedTagTabPage);
             this.tabControl2.Location = new System.Drawing.Point(6, 268);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
@@ -950,7 +949,7 @@ namespace MSBT_Editor
             this.lblRubiTagDiscription.Name = "lblRubiTagDiscription";
             this.lblRubiTagDiscription.Size = new System.Drawing.Size(285, 24);
             this.lblRubiTagDiscription.TabIndex = 5;
-            this.lblRubiTagDiscription.Text = "例：<Rubi=\"9\" Target=\"5\">しんぎんがていこく新銀河帝国\r\n漢字の数は5文字まで対応ふりがなの上限は不明";
+            this.lblRubiTagDiscription.Text = "例：<Rubi=\"9\" Target=\"5\">しんぎんがていこく新銀河帝国\r\n漢字の数は5文字まで対応（ふりがなの上限は不明）";
             // 
             // btnInsertRubiTag
             // 
@@ -1013,7 +1012,7 @@ namespace MSBT_Editor
             this.gbxSpecialTag.Controls.Add(this.btnInsertUserNameTag);
             this.gbxSpecialTag.Controls.Add(this.btnInsertScoreTag);
             this.gbxSpecialTag.Controls.Add(this.btnInsertWorldNoTag);
-            this.gbxSpecialTag.Controls.Add(this.btnInsertNumbersBelowDecimalPoint);
+            this.gbxSpecialTag.Controls.Add(this.btnInsertNumbersBelowDecimalPointTag);
             this.gbxSpecialTag.Controls.Add(this.btnInsertSecondTag);
             this.gbxSpecialTag.Controls.Add(this.btnInsertMinuteTag);
             this.gbxSpecialTag.Controls.Add(this.btnInsertHourTag);
@@ -1071,13 +1070,13 @@ namespace MSBT_Editor
             // 
             // btnInsertNumbersBelowDecimalPoint
             // 
-            this.btnInsertNumbersBelowDecimalPoint.Location = new System.Drawing.Point(355, 100);
-            this.btnInsertNumbersBelowDecimalPoint.Name = "btnInsertNumbersBelowDecimalPoint";
-            this.btnInsertNumbersBelowDecimalPoint.Size = new System.Drawing.Size(167, 23);
-            this.btnInsertNumbersBelowDecimalPoint.TabIndex = 9;
-            this.btnInsertNumbersBelowDecimalPoint.Text = "小数点以下";
-            this.btnInsertNumbersBelowDecimalPoint.UseVisualStyleBackColor = true;
-            this.btnInsertNumbersBelowDecimalPoint.Click += new System.EventHandler(this.BtnInsertNumbersBelowDecimalPoint_Click);
+            this.btnInsertNumbersBelowDecimalPointTag.Location = new System.Drawing.Point(355, 100);
+            this.btnInsertNumbersBelowDecimalPointTag.Name = "btnInsertNumbersBelowDecimalPoint";
+            this.btnInsertNumbersBelowDecimalPointTag.Size = new System.Drawing.Size(167, 23);
+            this.btnInsertNumbersBelowDecimalPointTag.TabIndex = 9;
+            this.btnInsertNumbersBelowDecimalPointTag.Text = "小数点以下";
+            this.btnInsertNumbersBelowDecimalPointTag.UseVisualStyleBackColor = true;
+            this.btnInsertNumbersBelowDecimalPointTag.Click += new System.EventHandler(this.BtnInsertNumbersBelowDecimalPointTag_Click);
             // 
             // btnInsertSecondTag
             // 
@@ -1161,9 +1160,9 @@ namespace MSBT_Editor
             // 
             // tbpIconTag
             // 
-            this.tbpIconTag.Controls.Add(this.btnInsertOthersIconTag);
-            this.tbpIconTag.Controls.Add(this.cmbOthersIconTag);
-            this.tbpIconTag.Controls.Add(this.lblOthersIconTag);
+            this.tbpIconTag.Controls.Add(this.btnInsertOtherIconTag);
+            this.tbpIconTag.Controls.Add(this.cmbOtherIconTag);
+            this.tbpIconTag.Controls.Add(this.lblOtherIconTag);
             this.tbpIconTag.Controls.Add(this.lblObjectIconTag);
             this.tbpIconTag.Controls.Add(this.btnInsertObjectIconTag);
             this.tbpIconTag.Controls.Add(this.cmbObjectIconTag);
@@ -1180,31 +1179,31 @@ namespace MSBT_Editor
             // 
             // btnInsertOthersIconTag
             // 
-            this.btnInsertOthersIconTag.Location = new System.Drawing.Point(135, 100);
-            this.btnInsertOthersIconTag.Name = "btnInsertOthersIconTag";
-            this.btnInsertOthersIconTag.Size = new System.Drawing.Size(149, 23);
-            this.btnInsertOthersIconTag.TabIndex = 8;
-            this.btnInsertOthersIconTag.Text = "操作,その他タグ挿入";
-            this.btnInsertOthersIconTag.UseVisualStyleBackColor = true;
-            this.btnInsertOthersIconTag.Click += new System.EventHandler(this.BtnInsertOthersIconTag_Click);
+            this.btnInsertOtherIconTag.Location = new System.Drawing.Point(135, 100);
+            this.btnInsertOtherIconTag.Name = "btnInsertOthersIconTag";
+            this.btnInsertOtherIconTag.Size = new System.Drawing.Size(149, 23);
+            this.btnInsertOtherIconTag.TabIndex = 8;
+            this.btnInsertOtherIconTag.Text = "操作,その他タグ挿入";
+            this.btnInsertOtherIconTag.UseVisualStyleBackColor = true;
+            this.btnInsertOtherIconTag.Click += new System.EventHandler(this.BtnInsertOtherIconTag_Click);
             // 
             // cmbOthersIconTag
             // 
-            this.cmbOthersIconTag.FormattingEnabled = true;
-            this.cmbOthersIconTag.Location = new System.Drawing.Point(8, 102);
-            this.cmbOthersIconTag.Name = "cmbOthersIconTag";
-            this.cmbOthersIconTag.Size = new System.Drawing.Size(121, 20);
-            this.cmbOthersIconTag.TabIndex = 7;
-            this.cmbOthersIconTag.Text = "ポインター";
+            this.cmbOtherIconTag.FormattingEnabled = true;
+            this.cmbOtherIconTag.Location = new System.Drawing.Point(8, 102);
+            this.cmbOtherIconTag.Name = "cmbOthersIconTag";
+            this.cmbOtherIconTag.Size = new System.Drawing.Size(121, 20);
+            this.cmbOtherIconTag.TabIndex = 7;
+            this.cmbOtherIconTag.Text = "ポインター";
             // 
             // lblOthersIconTag
             // 
-            this.lblOthersIconTag.AutoSize = true;
-            this.lblOthersIconTag.Location = new System.Drawing.Point(6, 87);
-            this.lblOthersIconTag.Name = "lblOthersIconTag";
-            this.lblOthersIconTag.Size = new System.Drawing.Size(68, 12);
-            this.lblOthersIconTag.TabIndex = 6;
-            this.lblOthersIconTag.Text = "操作、その他";
+            this.lblOtherIconTag.AutoSize = true;
+            this.lblOtherIconTag.Location = new System.Drawing.Point(6, 87);
+            this.lblOtherIconTag.Name = "lblOthersIconTag";
+            this.lblOtherIconTag.Size = new System.Drawing.Size(68, 12);
+            this.lblOtherIconTag.TabIndex = 6;
+            this.lblOtherIconTag.Text = "操作、その他";
             // 
             // lblObjectIconTag
             // 
@@ -1262,17 +1261,17 @@ namespace MSBT_Editor
             this.cmbCharacterIconTag.TabIndex = 0;
             this.cmbCharacterIconTag.Text = "ピーチ";
             // 
-            // AdvancedTagsTabPage
+            // AdvancedTagTabPage
             // 
-            this.AdvancedTagsTabPage.Controls.Add(this.gbxSoundEffectTag);
-            this.AdvancedTagsTabPage.Controls.Add(this.gbxCustomIconTag);
-            this.AdvancedTagsTabPage.Location = new System.Drawing.Point(4, 22);
-            this.AdvancedTagsTabPage.Name = "AdvancedTagsTabPage";
-            this.AdvancedTagsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.AdvancedTagsTabPage.Size = new System.Drawing.Size(540, 141);
-            this.AdvancedTagsTabPage.TabIndex = 4;
-            this.AdvancedTagsTabPage.Text = "上級者向けタグ";
-            this.AdvancedTagsTabPage.UseVisualStyleBackColor = true;
+            this.AdvancedTagTabPage.Controls.Add(this.gbxSoundEffectTag);
+            this.AdvancedTagTabPage.Controls.Add(this.gbxCustomIconTag);
+            this.AdvancedTagTabPage.Location = new System.Drawing.Point(4, 22);
+            this.AdvancedTagTabPage.Name = "AdvancedTagTabPage";
+            this.AdvancedTagTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.AdvancedTagTabPage.Size = new System.Drawing.Size(540, 141);
+            this.AdvancedTagTabPage.TabIndex = 4;
+            this.AdvancedTagTabPage.Text = "上級者向けタグ";
+            this.AdvancedTagTabPage.UseVisualStyleBackColor = true;
             // 
             // gbxSoundEffectTag
             // 
@@ -1371,7 +1370,6 @@ namespace MSBT_Editor
             this.txtCustomIconHex.Size = new System.Drawing.Size(149, 19);
             this.txtCustomIconHex.TabIndex = 9;
             this.txtCustomIconHex.Text = "000000000000";
-            this.txtCustomIconHex.TextChanged += new System.EventHandler(this.UserIconInsertTextBox_TextChanged);
             this.txtCustomIconHex.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UserIconInsertTextBox_KeyPress);
             // 
             // tbpListEdit
@@ -1426,7 +1424,6 @@ namespace MSBT_Editor
             this.txtFen1ListName.Name = "txtFen1ListName";
             this.txtFen1ListName.Size = new System.Drawing.Size(204, 19);
             this.txtFen1ListName.TabIndex = 1;
-            this.txtFen1ListName.TextChanged += new System.EventHandler(this.TxtFen1ListName_TextChanged);
             // 
             // lblFen1ListName
             // 
@@ -1519,8 +1516,7 @@ namespace MSBT_Editor
             this.txtSelectedMsbtListName.ReadOnly = true;
             this.txtSelectedMsbtListName.Size = new System.Drawing.Size(204, 19);
             this.txtSelectedMsbtListName.TabIndex = 1;
-            this.txtSelectedMsbtListName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox30_MouseClick);
-            this.txtSelectedMsbtListName.TextChanged += new System.EventHandler(this.textBox30_TextChanged);
+            this.txtSelectedMsbtListName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.TxtSelectedMsbtListName_MouseClick);
             // 
             // lblMsbtListEditNote
             // 
@@ -1528,9 +1524,9 @@ namespace MSBT_Editor
             this.lblMsbtListEditNote.ForeColor = System.Drawing.Color.Red;
             this.lblMsbtListEditNote.Location = new System.Drawing.Point(6, 27);
             this.lblMsbtListEditNote.Name = "lblMsbtListEditNote";
-            this.lblMsbtListEditNote.Size = new System.Drawing.Size(176, 12);
+            this.lblMsbtListEditNote.Size = new System.Drawing.Size(198, 12);
             this.lblMsbtListEditNote.TabIndex = 5;
-            this.lblMsbtListEditNote.Text = "※ゲームの命名規則を守ってください";
+            this.lblMsbtListEditNote.Text = "※ゲーム内での命名規則を守ってください";
             // 
             // btnDeleteMsbtList
             // 
@@ -1548,7 +1544,6 @@ namespace MSBT_Editor
             this.txtMsbtListName.Name = "txtMsbtListName";
             this.txtMsbtListName.Size = new System.Drawing.Size(204, 19);
             this.txtMsbtListName.TabIndex = 0;
-            this.txtMsbtListName.TextChanged += new System.EventHandler(this.TxtMsbtListName_TextChanged);
             // 
             // btnAddMsbtList
             // 
@@ -1608,7 +1603,6 @@ namespace MSBT_Editor
             this.txtReadOnlyMsbtText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtReadOnlyMsbtText.Size = new System.Drawing.Size(548, 58);
             this.txtReadOnlyMsbtText.TabIndex = 17;
-            this.txtReadOnlyMsbtText.TextChanged += new System.EventHandler(this.TxtReadOnlyMsbtText_TextChanged);
             // 
             // lblMsbfFlow
             // 
@@ -1632,9 +1626,9 @@ namespace MSBT_Editor
             this.lblMsbfSettingNote.AutoSize = true;
             this.lblMsbfSettingNote.Location = new System.Drawing.Point(6, 335);
             this.lblMsbfSettingNote.Name = "lblMsbfSettingNote";
-            this.lblMsbfSettingNote.Size = new System.Drawing.Size(210, 24);
+            this.lblMsbfSettingNote.Size = new System.Drawing.Size(216, 24);
             this.lblMsbfSettingNote.TabIndex = 14;
-            this.lblMsbfSettingNote.Text = "※まだすべての機能が解明できていないので\r\n　不具合が発生する可能性があります";
+            this.lblMsbfSettingNote.Text = "※まだすべての機能を解明できていないため、\r\n　不具合が発生する可能性があります";
             // 
             // gbxFen1
             // 
@@ -1754,18 +1748,18 @@ namespace MSBT_Editor
             this.lblFlw2BranchFalse.AutoSize = true;
             this.lblFlw2BranchFalse.Location = new System.Drawing.Point(6, 44);
             this.lblFlw2BranchFalse.Name = "lblFlw2BranchFalse";
-            this.lblFlw2BranchFalse.Size = new System.Drawing.Size(59, 12);
+            this.lblFlw2BranchFalse.Size = new System.Drawing.Size(83, 12);
             this.lblFlw2BranchFalse.TabIndex = 1;
-            this.lblFlw2BranchFalse.Text = "ジャンプ先2";
+            this.lblFlw2BranchFalse.Text = "ジャンプ先2（偽）";
             // 
             // lblFlw2BranchTrue
             // 
             this.lblFlw2BranchTrue.AutoSize = true;
             this.lblFlw2BranchTrue.Location = new System.Drawing.Point(6, 19);
             this.lblFlw2BranchTrue.Name = "lblFlw2BranchTrue";
-            this.lblFlw2BranchTrue.Size = new System.Drawing.Size(59, 12);
+            this.lblFlw2BranchTrue.Size = new System.Drawing.Size(83, 12);
             this.lblFlw2BranchTrue.TabIndex = 0;
-            this.lblFlw2BranchTrue.Text = "ジャンプ先1";
+            this.lblFlw2BranchTrue.Text = "ジャンプ先1（真）";
             // 
             // lblFlw2Arg4
             // 
@@ -1908,7 +1902,6 @@ namespace MSBT_Editor
             this.lblMsbfHashCalculator.Size = new System.Drawing.Size(107, 12);
             this.lblMsbfHashCalculator.TabIndex = 16;
             this.lblMsbfHashCalculator.Text = "MSBFハッシュ計算機";
-            this.lblMsbfHashCalculator.Click += new System.EventHandler(this.LblMsbfHashCalculator_Click);
             // 
             // textBox34
             // 
@@ -1928,7 +1921,7 @@ namespace MSBT_Editor
             this.button30.Text = "button30";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Visible = false;
-            this.button30.Click += new System.EventHandler(this.button30_Click);
+            this.button30.Click += new System.EventHandler(this.Button30_Click);
             // 
             // textBox33
             // 
@@ -1936,7 +1929,6 @@ namespace MSBT_Editor
             this.textBox33.Name = "textBox33";
             this.textBox33.Size = new System.Drawing.Size(133, 19);
             this.textBox33.TabIndex = 11;
-            this.textBox33.TextChanged += new System.EventHandler(this.textBox33_TextChanged);
             // 
             // textBox32
             // 
@@ -1944,7 +1936,7 @@ namespace MSBT_Editor
             this.textBox32.Name = "textBox32";
             this.textBox32.Size = new System.Drawing.Size(133, 19);
             this.textBox32.TabIndex = 10;
-            this.textBox32.TextChanged += new System.EventHandler(this.textBox32_TextChanged);
+            this.textBox32.TextChanged += new System.EventHandler(this.TextBox32_TextChanged);
             // 
             // btnCalculateHash
             // 
@@ -1962,7 +1954,6 @@ namespace MSBT_Editor
             this.txtListNameToCalculateHash.Name = "txtListNameToCalculateHash";
             this.txtListNameToCalculateHash.Size = new System.Drawing.Size(262, 19);
             this.txtListNameToCalculateHash.TabIndex = 8;
-            this.txtListNameToCalculateHash.TextChanged += new System.EventHandler(this.TxtListNameToCalculateHash_TextChanged);
             // 
             // richTextBox1
             // 
@@ -2184,7 +2175,7 @@ namespace MSBT_Editor
             this.gbxCreditDebugger.Controls.Add(this.lblDebuggerAcknowledgment);
             this.gbxCreditDebugger.Controls.Add(this.gbxCreditDebuggerVIP);
             this.gbxCreditDebugger.Controls.Add(this.lblCreditPorto);
-            this.gbxCreditDebugger.Controls.Add(this.lblCreditHiiraghi);
+            this.gbxCreditDebugger.Controls.Add(this.lblCreditHiiragi);
             this.gbxCreditDebugger.Controls.Add(this.lblCreditEigen);
             this.gbxCreditDebugger.Location = new System.Drawing.Point(6, 112);
             this.gbxCreditDebugger.Name = "gbxCreditDebugger";
@@ -2240,14 +2231,14 @@ namespace MSBT_Editor
             this.lblCreditPorto.TabIndex = 5;
             this.lblCreditPorto.Text = "ChurenPorto";
             // 
-            // lblCreditHiiraghi
+            // lblCreditHiiragi
             // 
-            this.lblCreditHiiraghi.AutoSize = true;
-            this.lblCreditHiiraghi.Location = new System.Drawing.Point(78, 59);
-            this.lblCreditHiiraghi.Name = "lblCreditHiiraghi";
-            this.lblCreditHiiraghi.Size = new System.Drawing.Size(47, 12);
-            this.lblCreditHiiraghi.TabIndex = 3;
-            this.lblCreditHiiraghi.Text = "柊：貴星";
+            this.lblCreditHiiragi.AutoSize = true;
+            this.lblCreditHiiragi.Location = new System.Drawing.Point(78, 59);
+            this.lblCreditHiiragi.Name = "lblCreditHiiragi";
+            this.lblCreditHiiragi.Size = new System.Drawing.Size(47, 12);
+            this.lblCreditHiiragi.TabIndex = 3;
+            this.lblCreditHiiragi.Text = "柊：貴星";
             // 
             // lblCreditEigen
             // 
@@ -2595,11 +2586,11 @@ namespace MSBT_Editor
             // chkMsbAutoSave
             // 
             this.chkMsbAutoSave.AutoSize = true;
-            this.chkMsbAutoSave.Location = new System.Drawing.Point(223, 268);
+            this.chkMsbAutoSave.Location = new System.Drawing.Point(214, 268);
             this.chkMsbAutoSave.Name = "chkMsbAutoSave";
-            this.chkMsbAutoSave.Size = new System.Drawing.Size(201, 16);
+            this.chkMsbAutoSave.Size = new System.Drawing.Size(215, 16);
             this.chkMsbAutoSave.TabIndex = 2;
-            this.chkMsbAutoSave.Text = "(Msbt Msbf) オートセーブ/AutoSave";
+            this.chkMsbAutoSave.Text = "(MSBT, MSBF) オートセーブ/AutoSave";
             this.chkMsbAutoSave.UseVisualStyleBackColor = true;
             this.chkMsbAutoSave.CheckedChanged += new System.EventHandler(this.ChkMsbAutoSave_CheckedChanged);
             // 
@@ -2608,10 +2599,10 @@ namespace MSBT_Editor
             this.lblSaveSystemDiscription.AutoSize = true;
             this.lblSaveSystemDiscription.Location = new System.Drawing.Point(6, 287);
             this.lblSaveSystemDiscription.Name = "lblSaveSystemDiscription";
-            this.lblSaveSystemDiscription.Size = new System.Drawing.Size(297, 60);
+            this.lblSaveSystemDiscription.Size = new System.Drawing.Size(235, 72);
             this.lblSaveSystemDiscription.TabIndex = 1;
-            this.lblSaveSystemDiscription.Text = "ARCファイルから開いた\r\nMsbtやMsbfの内容を変更した際は上書き保存をしてください。\r\n上書き保存してからリストを選択し直さないと、\r\n変更が保存されませ" +
-    "ん。\r\n全ての変更が終わったらARCを保存してください。";
+            this.lblSaveSystemDiscription.Text = "ARCファイルから開いたMSBTやMSBFの\r\n内容を変更した際は、上書き保存をしてください。\r\n上書き保存してからリストを選択し直さないと、\r\n変更が保存されま" +
+    "せん。\r\n全ての変更が終わったらARCを保存してください。\r\n※MSBT, MSBF以外は表示されません";
             // 
             // lstFilesInsideRarc
             // 
@@ -2666,15 +2657,14 @@ namespace MSBT_Editor
             this.Load += new System.EventHandler(this.Form1_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
             this.stbStatusBar.ResumeLayout(false);
             this.stbStatusBar.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tbpMsbtSetting.ResumeLayout(false);
-            this.gbxMsbtSettingsAtr1.ResumeLayout(false);
-            this.gbxMsbtSettingsAtr1.PerformLayout();
+            this.gbxMsbtSettingAtr1.ResumeLayout(false);
+            this.gbxMsbtSettingAtr1.PerformLayout();
             this.tbpMsbtTextEdit.ResumeLayout(false);
             this.tbpMsbtTextEdit.PerformLayout();
             this.tabControl2.ResumeLayout(false);
@@ -2688,7 +2678,7 @@ namespace MSBT_Editor
             this.gbxSpecialTag.ResumeLayout(false);
             this.tbpIconTag.ResumeLayout(false);
             this.tbpIconTag.PerformLayout();
-            this.AdvancedTagsTabPage.ResumeLayout(false);
+            this.AdvancedTagTabPage.ResumeLayout(false);
             this.gbxSoundEffectTag.ResumeLayout(false);
             this.gbxSoundEffectTag.PerformLayout();
             this.gbxCustomIconTag.ResumeLayout(false);
@@ -2808,7 +2798,7 @@ namespace MSBT_Editor
         public System.Windows.Forms.ToolStripMenuItem 開くToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem Msbt上書き保存ToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem Msbt保存ToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem mSBF開くToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem Msbf開くToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem Msbf上書き保存ToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem Msbf保存ToolStripMenuItem;
         public System.Windows.Forms.TabControl tabControl1;
@@ -2872,7 +2862,7 @@ namespace MSBT_Editor
         private System.Windows.Forms.Label lblMsbfFlow;
         public System.Windows.Forms.ComboBox cmbCharacterIconTag;
         public System.Windows.Forms.ComboBox cmbObjectIconTag;
-        public System.Windows.Forms.ComboBox cmbOthersIconTag;
+        public System.Windows.Forms.ComboBox cmbOtherIconTag;
         public System.Windows.Forms.GroupBox gbxRubiTag;
         public System.Windows.Forms.Button btnInsertRubiTag;
         public System.Windows.Forms.Label lblRubiTagKanjiCount;
@@ -2893,13 +2883,13 @@ namespace MSBT_Editor
         public System.Windows.Forms.Button btnInsertHourTag;
         public System.Windows.Forms.Button btnInsertVariableInt5DigitsTag;
         public System.Windows.Forms.Button btnInsertVariableInt4DigitsTag;
-        public System.Windows.Forms.Button btnInsertNumbersBelowDecimalPoint;
+        public System.Windows.Forms.Button btnInsertNumbersBelowDecimalPointTag;
         public System.Windows.Forms.Button btnInsertCharacterIconTag;
         public System.Windows.Forms.Label lblCharacterIconTag;
         public System.Windows.Forms.Button btnInsertObjectIconTag;
         public System.Windows.Forms.Label lblObjectIconTag;
-        public System.Windows.Forms.Button btnInsertOthersIconTag;
-        public System.Windows.Forms.Label lblOthersIconTag;
+        public System.Windows.Forms.Button btnInsertOtherIconTag;
+        public System.Windows.Forms.Label lblOtherIconTag;
         public System.Windows.Forms.Button btnInsertTotalPlayTimeTag;
         public System.Windows.Forms.Button btnInsertUserNameTag;
         public System.Windows.Forms.Button btnInsertScoreTag;
@@ -2914,7 +2904,7 @@ namespace MSBT_Editor
         private System.Windows.Forms.GroupBox gbxCreditDebugger;
         private System.Windows.Forms.Label lblCreditPorto;
         private System.Windows.Forms.Label lblCreditEvanbowl;
-        private System.Windows.Forms.Label lblCreditHiiraghi;
+        private System.Windows.Forms.Label lblCreditHiiragi;
         private System.Windows.Forms.Label lblCreditEigen;
         private System.Windows.Forms.Label lblCreditDossun;
         private System.Windows.Forms.Label lblCreditXenon;
@@ -2936,8 +2926,8 @@ namespace MSBT_Editor
         private System.Windows.Forms.TextBox txtSoundEffectName;
         public System.Windows.Forms.ListBox lstFilesInsideRarc;
         public System.Windows.Forms.Label lblSaveSystemDiscription;
-        public System.Windows.Forms.GroupBox gbxMsbtSettingsAtr1;
-        public System.Windows.Forms.TabPage AdvancedTagsTabPage;
+        public System.Windows.Forms.GroupBox gbxMsbtSettingAtr1;
+        public System.Windows.Forms.TabPage AdvancedTagTabPage;
         private System.Windows.Forms.GroupBox gbxCreditDebuggerVIP;
         private System.Windows.Forms.GroupBox gbxCreditContributor;
         private System.Windows.Forms.GroupBox gbxHowToUse;
@@ -2953,9 +2943,9 @@ namespace MSBT_Editor
         private System.Windows.Forms.LinkLabel llbGitHubReleasesUrl;
         private System.Windows.Forms.Label lblCurrentVersion;
         private System.Windows.Forms.GroupBox gbxCurrentVersion;
-        public System.Windows.Forms.ToolStripMenuItem ARC開くToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem ARC上書き保存ToolStripMenuItem;
-        public System.Windows.Forms.ToolStripMenuItem ARC保存ToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem Arc開くToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem Arc上書き保存ToolStripMenuItem;
+        public System.Windows.Forms.ToolStripMenuItem Arc保存ToolStripMenuItem;
         public System.Windows.Forms.TabControl tabControl3;
         public System.Windows.Forms.TabPage tbpFilesInsideRarc;
         public System.Windows.Forms.Button btnInsertCustomIconTag;

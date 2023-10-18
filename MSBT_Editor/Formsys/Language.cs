@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace MSBT_Editor.Formsys
 {
-    public class Langage : objects
+    public class Language : objects
     {
         private static readonly string[] IconNameJP01 = { "ピーチ", "クッパ", "キノピオ", "マリオ", "マリオ2", "チコ", "ヨッシー", "腹ペコチコ", "ルイージ", "ベビーチコ", "アシストチコ", "ベーゴマン", "クリボー", "星ウサギ" };
         private static readonly string[] IconNameJP02 = { "彗星メダル", "コイン×3", "カラフルスターピース", "イエローチップ", "スターピース紫", "シルバースター", "スター", "グランドスター", "ブロンズスター", "コイン", "パープルコイン", "1UPキノコ", "ライフアップキノコ", "ブルースター", "スターリング", "ヨッシーキャプチャー花", "ココナッツ", "ブルーチップ", "バルーンフルーツ", "中間ポイント", "グランドブロンズスター" };
@@ -15,10 +15,10 @@ namespace MSBT_Editor.Formsys
         
         //<>で挟んでいる理由は、ファイル名に<>を付けることが出来ないので付けています。
         //<>を付けることにより、ファイルを読み込んでいるときにこの項目を削除させない意図があります。
-        public static readonly string[] FileReadStatusJP = { "<Msbtファイルなし>","<Msbfファイルなし>","<Arcファイルなし>" } ;
+        public static readonly string[] FileReadStatusJP = { "<MSBTファイルなし>","<MSBFファイルなし>","<ARCファイルなし>" } ;
         public static readonly string[] FileReadStatusUS = { "<No MSBT Open>", "<No MSBF Open>", "<No ARC Open>" };
 
-        public static void Langage_Check()
+        public static void Language_Check()
         {
             switch (Properties.Settings.Default.言語)
             {
@@ -44,7 +44,7 @@ namespace MSBT_Editor.Formsys
             }
         }
 
-        public static string FLW2_List_Langage(int num) {
+        public static string FLW2_List_Language(int num) {
             switch (Properties.Settings.Default.言語)
             {
                 case "日本語":
@@ -106,7 +106,7 @@ namespace MSBT_Editor.Formsys
         public static void JP(){
             tssl1.Text = "開いたファイル：";
             tssl6.Text = "保存したファイル：";
-            //menue
+            //menu
             tlmi_file.Text = "ファイル";
             tlmi_msbt_open.Text = "開く";
             tlmi_msbt_save.Text = "MSBT上書き保存";
@@ -131,7 +131,7 @@ namespace MSBT_Editor.Formsys
             tabp12.Text = "ARCファイルの中身";
             tabp14.Text = "情報";
 
-            AdvancedTagsTabPage.Text = "上級者向けタグ";
+            AdvancedTagTabPage.Text = "上級者向けタグ";
             //label
             labeltxt01.Text = "NPCボイス";
             labeltxt02.Text = "カメラ";
@@ -139,13 +139,13 @@ namespace MSBT_Editor.Formsys
             labeltxt04.Text = "ウィンドウタイプ";
             labeltxt05.Text = "イベントカメラID";
             labeltxt06.Text = "会話制御エリア Obj_arg0";
-            labeltxt07.Text = "分からない6";
+            labeltxt07.Text = "不明6";
             labeltxt08.Text = "特殊テキストオフセット";
             labeltxt09.Text = "特殊テキスト(基本null) ※上級者以外触らない";
             labeltxt10.Text = "タグインデックス？";
             labeltxt11.Text = "追加するMSBTリスト名";
             labeltxt12.Text = "削除は対象のリスト選択後に" + Environment.NewLine + "右の削除ボタンを押す";
-            labeltxt13.Text = "※ゲームの命名規則を守ってください";
+            labeltxt13.Text = "※ゲーム内での命名規則を守ってください";
             labeltxt15.Text = "※初心者は触らないでください" + Environment.NewLine + "データが破損する恐れあり";
             labeltxt17.Text = "ふりがなの数";
             labeltxt18.Text = "漢字の数";
@@ -161,24 +161,26 @@ namespace MSBT_Editor.Formsys
             labeltxt27.Text = "不明4";
             labeltxt28.Text = "不明5";
 
-            labeltxt29.Text = "ジャンプ先1";
-            labeltxt30.Text = "ジャンプ先2";
-            labeltxt33.Text = "※まだすべての機能が解明できていないので" + Environment.NewLine + "不具合が発生する可能性があります";
+            labeltxt29.Text = "ジャンプ先1（真）";
+            labeltxt30.Text = "ジャンプ先2（偽）";
+            labeltxt33.Text = "※まだすべての機能を解明できていないため、" + Environment.NewLine + "　不具合が発生する可能性があります";
             labeltxt34.Text = "この項目は名前が不要です";
             labeltxt35.Text = "名前必須(Flowなどを省いた名前)";
             labeltxt31.Text = "不明";
             labeltxt32.Text = "FLW2開始インデックス";
             labeltxt39.Text = "この項目が　0　の場合"+ Environment.NewLine +"ゲームにテキストが認識されません";
             Label58.Text 
-                = "ARCファイルから開いた" 
+                = "ARCファイルから開いたMSBTやMSBFの" 
                 + Environment.NewLine 
-                + "MsbtやMsbfの内容を変更した際は上書き保存をしてください。" 
+                + "内容を変更した際は、上書き保存をしてください。" 
                 + Environment.NewLine 
-                + "上書き保存してからリストを選択し直さないと、変更が保存されません。" 
+                + "上書き保存してからリストを選択し直さないと、" 
                 + Environment.NewLine 
+                + "変更が保存されません。"
+                + Environment.NewLine
                 + "全ての変更が終わったらARCを保存してください。"
                 + Environment.NewLine
-                + "※MSBT,MSBF以外は表示されません";
+                + "※MSBT, MSBF以外は表示されません";
 
             UserIconInsertLabel1.Text 
                 = "アイコンを作成した場合のみ使用可能"
@@ -198,7 +200,7 @@ namespace MSBT_Editor.Formsys
                 + "例： SE_BV_KOOPA_BURN_RUN";
 
             //groupbox
-            Atr1GroupBox.Text = "選択されたMsbtメッセージの詳細設定";
+            Atr1GroupBox.Text = "選択されたMSBTメッセージの詳細設定";
             groupbox3.Text = "各セクションのエントリーサイズ";
             groupbox4.Text = "ルビ";
             groupbox5.Text = "タイマー";
@@ -311,7 +313,7 @@ namespace MSBT_Editor.Formsys
             tabp12.Text = "Contents of ARC file";
             tabp14.Text = "Info";
 
-            AdvancedTagsTabPage.Text = "Advanced Tags";
+            AdvancedTagTabPage.Text = "Advanced Tags";
             //label
             labeltxt01.Text = "Sound ID";
             labeltxt02.Text = "Camera";
