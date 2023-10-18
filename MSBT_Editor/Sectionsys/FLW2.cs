@@ -239,7 +239,7 @@ namespace MSBT_Editor.Sectionsys
             
             switch (num) {
                 case 0x0001:
-                    str = Langage.FLW2_List_Langage(num);
+                    str = Language.FLW2_List_Language(num);
                     //labeltxt25.Text = "FLW2ジャンプ先";
                     if (delete_flag == true)
                     {
@@ -247,7 +247,7 @@ namespace MSBT_Editor.Sectionsys
                     }
                     break;
                 case 0x0002:
-                    str = Langage.FLW2_List_Langage(num);
+                    str = Language.FLW2_List_Language(num);
                     //labeltxt25.Text = "固定";
                     if (delete_flag == false)
                     {
@@ -258,14 +258,14 @@ namespace MSBT_Editor.Sectionsys
 
                     break;
                 case 0x0003:
-                    str = Langage.FLW2_List_Langage(num);
+                    str = Language.FLW2_List_Language(num);
                     if (delete_flag == true)
                     {
                         branch_list_no.RemoveAt(FLW2.branch_list_no.IndexOf(index));
                     }
                     break;
                 case 0x0004:
-                    str = Langage.FLW2_List_Langage(num);
+                    str = Language.FLW2_List_Language(num);
                     if (delete_flag == true)
                     {
                         branch_list_no.RemoveAt(FLW2.branch_list_no.IndexOf(index));
@@ -420,17 +420,17 @@ namespace MSBT_Editor.Sectionsys
                         switch (/*flw2.Item[index].TypeCheck*/numhex)
                         {
                             case 1:
-                                lb.Items[index] = Langage.FLW2_List_Langage(1);
+                                lb.Items[index] = Language.FLW2_List_Language(1);
 
                                 break;
                             case 2:
-                                lb.Items[index] = Langage.FLW2_List_Langage(2);
+                                lb.Items[index] = Language.FLW2_List_Language(2);
                                 break;
                             case 3:
-                                lb.Items[index] = Langage.FLW2_List_Langage(3);
+                                lb.Items[index] = Language.FLW2_List_Language(3);
                                 break;
                             case 4:
-                                lb.Items[index] = Langage.FLW2_List_Langage(4);
+                                lb.Items[index] = Language.FLW2_List_Language(4);
                                 break;
                             default:
                                 lb.Items[index] = "エラーデータ「正しいデータを読み込んで」";

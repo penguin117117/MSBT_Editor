@@ -24,8 +24,8 @@ namespace MSBT_Editor
         private static Form1 _form1Instance;
 
         //開発専用のメニューを表示します
-        public static readonly bool UseDevelopMenue = true;
-        public static readonly bool UseDebugMenue = true;
+        public static readonly bool EnableDevelopMenu = true;
+        public static readonly bool EnableDebugMenu = true;
 
         private static bool s_useAutoSave = false;
 
@@ -41,13 +41,13 @@ namespace MSBT_Editor
         private void Msbt上書き保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Save(Dialog.Save_Path_Msbt, 1);
 
 
-        private void MSBF開くToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Open(2);
+        private void Msbf開くToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Open(2);
         private void Msbf保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.SaveAs(2);
         private void Msbf上書き保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Save(Dialog.Save_Path_Msbf, 2);
 
-        private void ARC開くToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Open(3);
-        private void ARC保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.SaveAs(3);
-        private void ARC上書き保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.ArcSave();
+        private void Arc開くToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.Open(3);
+        private void Arc保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.SaveAs(3);
+        private void Arc上書き保存ToolStripMenuItem_Click(object sender, EventArgs e) => Dialog.ArcSave();
         #endregion
 
 
@@ -63,7 +63,7 @@ namespace MSBT_Editor
 
             //言語設定
             cmbLanguage.Text = Properties.Settings.Default.言語;
-            Langage.Langage_Check();
+            Language.Language_Check();
 
             chkShowTvwMsbfFlow.Checked = true;
 
@@ -92,9 +92,9 @@ namespace MSBT_Editor
             {
                 Dialog.FileCheck(item);
                 if ((stbOpenedMsbtName.Text
-                    == Langage.FileReadStatusJP[0]) ||
+                    == Language.FileReadStatusJP[0]) ||
                     (stbOpenedMsbtName.Text
-                    == Langage.FileReadStatusUS[0]))
+                    == Language.FileReadStatusUS[0]))
                     return;
                 string appPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
                 string msbtname = Path.GetFileNameWithoutExtension(stbOpenedMsbtName.Text);
@@ -107,7 +107,7 @@ namespace MSBT_Editor
 
         private void DebugFormPartsVisible()
         {
-            if (UseDebugMenue == false)
+            if (EnableDebugMenu == false)
             {
                 lblMsbfHashCalculator.Visible = false;
                 txtListNameToCalculateHash.Visible = false;
@@ -128,7 +128,7 @@ namespace MSBT_Editor
 
         private void DevFormPartsVisible()
         {
-            if (UseDevelopMenue == false)
+            if (EnableDevelopMenu == false)
             {
                 //ARC機能の非表示
                 //tabControl3.TabPages.Remove(tabPage12);
@@ -199,7 +199,7 @@ namespace MSBT_Editor
             txtSelectedMsbtListName.Text = lstListsInsideMsbt.Text;
             lblMsbtListSelectIndex.Text = "0x" + lstListsInsideMsbt.SelectedIndex.ToString("X");
 
-            if (UseDebugMenue == false) return;
+            if (EnableDebugMenu == false) return;
             //ハッシュスキップ数を表示
             var FindMsbtListTextIndexNum = LBL1.NameList.IndexOf(lstListsInsideMsbt.Text);
             if (-1 != FindMsbtListTextIndexNum)
@@ -212,7 +212,7 @@ namespace MSBT_Editor
             }
         }
 
-        private void TxtATR1SoundID_TextChanged(object sender, EventArgs e)
+        private void TxtAtr1SoundID_TextChanged(object sender, EventArgs e)
         {
             if (lstListsInsideMsbt.Items.Count < 1) return;
             //Console.WriteLine(e.GetType().FullName);
@@ -669,10 +669,10 @@ namespace MSBT_Editor
             Calculation_System.TextBoxTagAdder(lstListsInsideMsbt, txtMsbtText, cmbObjectIconTag, IconTag);
         }
 
-        private void BtnInsertOthersIconTag_Click(object sender, EventArgs e)
+        private void BtnInsertOtherIconTag_Click(object sender, EventArgs e)
         {
             string[] IconTag = { "<Icon=\"Pointer\">", "<Icon=\"PointerYellow\">", "<Icon=\"PointerHand\">", "<Icon=\"WiiMote\">", "<Icon=\"AButton\">", "<Icon=\"BButton\">", "<Icon=\"CButton\">", "<Icon=\"ZButton\">", "<Icon=\"DPad\">", "<Icon=\"DPadDown\">", "<Icon=\"DPadUp\">", "<Icon=\"JoyStick\">", "<Icon=\"Nunchuck\">", "<Icon=\"Aim\">", "<Icon=\"MButton\">", "<Icon=\"PButton\">", "<Icon=\"XIcon\">", "<Icon=\"GreenComet\">", "<Icon=\"SilverCrown\">", "<Icon=\"SilverCrownwJewel\">", "<Icon=\"GoldCrown\">", "<Icon=\"Letter\">", "<Icon=\"ArrowDown\">", "<Icon=\"StopWatch\">", "<Icon=\"1Button\">", "<Icon=\"2Button\">", "<Icon=\"HomeButton\">", "<Icon=\"PointerGrip\">", "<Icon=\"PointerNonGrip\">", "<Icon=\"QuestionMark\">", "<Icon=\"YellowComet\">", "<Icon=\"GreenQuestionMark\">", "<Icon=\"EmptyStar\">", "<Icon=\"EmptyCometMedal\">", "<Icon=\"EmptyStarComet\">", "<Icon=\"HiddenStar\">", "<Icon=\"BronzeComet\">" };
-            Calculation_System.TextBoxTagAdder(lstListsInsideMsbt, txtMsbtText, cmbOthersIconTag, IconTag);
+            Calculation_System.TextBoxTagAdder(lstListsInsideMsbt, txtMsbtText, cmbOtherIconTag, IconTag);
         }
 
         private void BtnInsertVariableInt4DigitsTag_Click(object sender, EventArgs e)
@@ -710,7 +710,7 @@ namespace MSBT_Editor
             Calculation_System.TextBoxInsert(txtMsbtText, tag);
         }
 
-        private void BtnInsertNumbersBelowDecimalPoint_Click(object sender, EventArgs e)
+        private void BtnInsertNumbersBelowDecimalPointTag_Click(object sender, EventArgs e)
         {
             if (lstListsInsideMsbt.Items.Count < 1) return;
             string tag = "</AfterTheDecimalPoint>";
@@ -750,7 +750,7 @@ namespace MSBT_Editor
             {
                 case "0001":
                     lblFlw2Arg1.Text = "グループ番号";
-                    lblFlw2Arg2.Text = "Msbtテキストlist番号";
+                    lblFlw2Arg2.Text = "MSBTテキストlist番号";
                     lblFlw2Arg3.Text = "FLW2オフセット";
                     lblFlw2Arg4.Text = "不明5";
                     if (Properties.Settings.Default.言語 == "日本語") break;
@@ -887,7 +887,7 @@ namespace MSBT_Editor
             string[] fileName = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             var filecount = fileName.Count();
 
-            if (UseDebugMenue == true)
+            if (EnableDebugMenu == true)
             {
                 MultipleFileRead(fileName, out bool readFiles);
                 if (readFiles == true) return;
@@ -927,16 +927,6 @@ namespace MSBT_Editor
             else e.Effect = DragDropEffects.None;
         }
 
-        private void textBox25_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
-
-        private void textBox26_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
-
         private void TxtFen1Arg0_TextChanged(object sender, EventArgs e)
         {
             FEN1.FEN1_Item_Change(lstListsInsideFen1, txtFen1Arg0);
@@ -971,28 +961,18 @@ namespace MSBT_Editor
 
         }
 
-        private void textBox30_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TxtFen1ListName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void BtnAddFlw2List_Click(object sender, EventArgs e)
         {
             FLW2 flw2 = new FLW2();
             if (lstListsInsideFlw2.Items.Count != 0)
             {
-                lstListsInsideFlw2.Items.Add(Langage.FLW2_List_Langage(4));
+                lstListsInsideFlw2.Items.Add(Language.FLW2_List_Language(4));
                 flw2.Item.Add(new FLW2.flw2_item(4, 0, 0, 0, 0, 0));
                 lstListsInsideFlw2.EndUpdate();
             }
             else
             {
-                lstListsInsideFlw2.Items.Add(Langage.FLW2_List_Langage(4));
+                lstListsInsideFlw2.Items.Add(Language.FLW2_List_Language(4));
                 flw2.Item = new List<FLW2.flw2_item>();
                 flw2.Item.Add(new FLW2.flw2_item(4, 0, 0, 0, 0, 0));
                 flw2.Branch_List_No = new List<int>();
@@ -1040,13 +1020,13 @@ namespace MSBT_Editor
 
                     //if (listBox2.Items.Count != 0)
                     //{
-                    //    listBox2.Items.Add(Langage.FLW2_List_Langage(4));
+                    //    listBox2.Items.Add(Language.FLW2_List_Language(4));
                     //    flw2.Item.Add(new FLW2.flw2_item(4, 0, list2count, 0, 0, 0));
                     //    listBox2.EndUpdate();
                     //}
                     //else
                     //{
-                    //    listBox2.Items.Add(Langage.FLW2_List_Langage(4));
+                    //    listBox2.Items.Add(Language.FLW2_List_Language(4));
                     //    flw2.Item = new List<FLW2.flw2_item>();
                     //    flw2.Item.Add(new FLW2.flw2_item(4, 0, list2count, 0, 0, 0));
                     //    flw2.Branch_List_No = new List<int>();
@@ -1075,13 +1055,13 @@ namespace MSBT_Editor
 
                     //if (listBox2.Items.Count != 0)
                     //{
-                    //    listBox2.Items.Add(Langage.FLW2_List_Langage(4));
+                    //    listBox2.Items.Add(Language.FLW2_List_Language(4));
                     //    flw2.Item.Add(new FLW2.flw2_item(4, 0, list2count, 0, 0, 0));
                     //    listBox2.EndUpdate();
                     //}
                     //else
                     //{
-                    //    listBox2.Items.Add(Langage.FLW2_List_Langage(4));
+                    //    listBox2.Items.Add(Language.FLW2_List_Language(4));
                     //    flw2.Item = new List<FLW2.flw2_item>();
                     //    flw2.Item.Add(new FLW2.flw2_item(4, 0, list2count, 0, 0, 0));
                     //    flw2.Branch_List_No = new List<int>();
@@ -1116,11 +1096,6 @@ namespace MSBT_Editor
             }
         }
 
-        private void TxtMsbtListName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void CmbLanguage_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (cmbLanguage.SelectedIndex)
@@ -1137,10 +1112,10 @@ namespace MSBT_Editor
             }
 
             Properties.Settings.Default.Save();
-            Formsys.Langage.Langage_Check();
+            Formsys.Language.Language_Check();
         }
 
-        public static TreeNode Tvparenfinder(TreeView tv)
+        public static TreeNode TreeViewParentFinder(TreeView tv)
         {
             var rootnode = tv.SelectedNode;
             //this.textBox25.TextChanged -= new EventHandler(this.textBox25_TextChanged)
@@ -1159,7 +1134,7 @@ namespace MSBT_Editor
             if (tvwMsbfFlow.SelectedNode.Tag == default) return;
 
             //var oldindex = MsbfTreeView.SelectedNode;
-            var rootnode = Form1.Tvparenfinder(tvwMsbfFlow);
+            var rootnode = Form1.TreeViewParentFinder(tvwMsbfFlow);
 
             var rootnodelistbox3find = 0;
             if (lstListsInsideFen1.Items.Count != 0)
@@ -1241,14 +1216,14 @@ namespace MSBT_Editor
             Calculation_System.TextBoxInsert(txtMsbtText, tag);
         }
 
-        private void textBox32_TextChanged(object sender, EventArgs e)
+        private void TextBox32_TextChanged(object sender, EventArgs e)
         {
             var strbytes = Encoding.GetEncoding("utf-16BE").GetBytes(textBox32.Text);
             textBox33.Text = "";
             foreach (var hexbit in strbytes) textBox33.AppendText(Environment.NewLine + hexbit.ToString("X2"));
         }
 
-        private void button30_Click(object sender, EventArgs e)
+        private void Button30_Click(object sender, EventArgs e)
         {
             //if (richTextBox1.Text.Contains("<Icon=\"AButton\">"))
             //{
@@ -1310,27 +1285,6 @@ namespace MSBT_Editor
             }
         }
 
-        private void textBox33_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TxtListNameToCalculateHash_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-        private void StbOpenedRarcName_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LblMsbfHashCalculator_Click(object sender, EventArgs e)
-        {
-
-        }
         //ATR1セクションテキストボックスのキープレスイベント
         private void TxtAtr1SoundID_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
 
@@ -1351,7 +1305,7 @@ namespace MSBT_Editor
             KeyPressEventSupport.CanWriteChar(e, true);
         }
 
-        private void textBox30_MouseClick(object sender, MouseEventArgs e)
+        private void TxtSelectedMsbtListName_MouseClick(object sender, MouseEventArgs e)
         {
             this.txtSelectedMsbtListName.SelectAll();
         }
@@ -1376,14 +1330,8 @@ namespace MSBT_Editor
             Calculation_System.TextBoxInsert(txtMsbtText, Tag);
         }
 
-        private void UserIconInsertTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void UserIconInsertTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-
             KeyPressEventSupport.OnlyHexChar(e, true);
         }
 
@@ -1399,11 +1347,6 @@ namespace MSBT_Editor
 
             Tag = "<SE=\"" + Tag + "\">";
             Calculation_System.TextBoxInsert(txtMsbtText, Tag);
-        }
-
-        private void TxtReadOnlyMsbtText_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -1442,11 +1385,6 @@ namespace MSBT_Editor
         {
             this.llbSMG2HackDiscordUrl.LinkVisited = true;
             System.Diagnostics.Process.Start("https://discord.gg/B4EwY7h");
-        }
-
-        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
         }
 
         private void TxtFlw2FlowType_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
@@ -1533,14 +1471,14 @@ namespace MSBT_Editor
             bool IsMsbtDef = false;
             bool IsMsbfDef = false;
 
-            if (MsbtOldName == Langage.FileReadStatusJP[0]) IsMsbtDef = true;
-            if (MsbfOldName == Langage.FileReadStatusJP[1]) IsMsbfDef = true;
+            if (MsbtOldName == Language.FileReadStatusJP[0]) IsMsbtDef = true;
+            if (MsbfOldName == Language.FileReadStatusJP[1]) IsMsbfDef = true;
 
 
             if (Properties.Settings.Default.言語 == "EN")
             {
-                if (MsbtOldName == Langage.FileReadStatusUS[0]) IsMsbtDef = true;
-                if (MsbfOldName == Langage.FileReadStatusUS[1]) IsMsbfDef = true;
+                if (MsbtOldName == Language.FileReadStatusUS[0]) IsMsbtDef = true;
+                if (MsbfOldName == Language.FileReadStatusUS[1]) IsMsbfDef = true;
             }
 
             if ((PathExtention == ".msbt") && (Dialog.Save_Path_Msbt != lstFilesInsideRarc.Text))
@@ -1622,8 +1560,11 @@ namespace MSBT_Editor
             }
 
             //MSBTの内容を一度全て消す
-            txtMsbtText.Clear();
-            txtReadOnlyMsbtText.Clear();
+            if (PathExtention == ".msbt")    //MSBF読み込み時に、MSBT_Data.MSBT_All_Data.Text[]の最後の要素に""が代入されてしまうのを防ぐため
+            {
+                txtMsbtText.Clear();
+                txtReadOnlyMsbtText.Clear();
+            }
             txtAtr1SoundID.Clear();
             txtAtr1SimpleCamID.Clear();
             txtAtr1DialogID.Clear();
@@ -1662,7 +1603,6 @@ namespace MSBT_Editor
 
         private void LstFilesInsideRarc_ChangeUICues(object sender, UICuesEventArgs e)
         {
-
             Console.WriteLine(lstFilesInsideRarc.SelectedValue);
         }
     }
