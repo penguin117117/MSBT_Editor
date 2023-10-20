@@ -67,14 +67,14 @@ namespace MSBT_Editor
             this.lblAtr1EventCameraID = new System.Windows.Forms.Label();
             this.lblAtr1WindowID = new System.Windows.Forms.Label();
             this.lblAtr1DialogID = new System.Windows.Forms.Label();
-            this.lblAtr1SimpleCamID = new System.Windows.Forms.Label();
+            this.lblAtr1SimpleCameraID = new System.Windows.Forms.Label();
             this.lblAtr1SoundID = new System.Windows.Forms.Label();
             this.txtAtr1Unknown6 = new System.Windows.Forms.TextBox();
             this.txtAtr1MessageAreaID = new System.Windows.Forms.TextBox();
             this.txtAtr1EventCameraID = new System.Windows.Forms.TextBox();
             this.txtAtr1WindowID = new System.Windows.Forms.TextBox();
             this.txtAtr1DialogID = new System.Windows.Forms.TextBox();
-            this.txtAtr1SimpleCamID = new System.Windows.Forms.TextBox();
+            this.txtAtr1SimpleCameraID = new System.Windows.Forms.TextBox();
             this.txtAtr1SoundID = new System.Windows.Forms.TextBox();
             this.tbpMsbtTextEdit = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
@@ -558,14 +558,14 @@ namespace MSBT_Editor
             this.gbxMsbtSettingAtr1.Controls.Add(this.lblAtr1EventCameraID);
             this.gbxMsbtSettingAtr1.Controls.Add(this.lblAtr1WindowID);
             this.gbxMsbtSettingAtr1.Controls.Add(this.lblAtr1DialogID);
-            this.gbxMsbtSettingAtr1.Controls.Add(this.lblAtr1SimpleCamID);
+            this.gbxMsbtSettingAtr1.Controls.Add(this.lblAtr1SimpleCameraID);
             this.gbxMsbtSettingAtr1.Controls.Add(this.lblAtr1SoundID);
             this.gbxMsbtSettingAtr1.Controls.Add(this.txtAtr1Unknown6);
             this.gbxMsbtSettingAtr1.Controls.Add(this.txtAtr1MessageAreaID);
             this.gbxMsbtSettingAtr1.Controls.Add(this.txtAtr1EventCameraID);
             this.gbxMsbtSettingAtr1.Controls.Add(this.txtAtr1WindowID);
             this.gbxMsbtSettingAtr1.Controls.Add(this.txtAtr1DialogID);
-            this.gbxMsbtSettingAtr1.Controls.Add(this.txtAtr1SimpleCamID);
+            this.gbxMsbtSettingAtr1.Controls.Add(this.txtAtr1SimpleCameraID);
             this.gbxMsbtSettingAtr1.Controls.Add(this.txtAtr1SoundID);
             this.gbxMsbtSettingAtr1.Location = new System.Drawing.Point(6, 6);
             this.gbxMsbtSettingAtr1.Name = "gbxMsbtSettingAtr1";
@@ -640,12 +640,12 @@ namespace MSBT_Editor
             // 
             // lblAtr1SimpleCamID
             // 
-            this.lblAtr1SimpleCamID.AutoSize = true;
-            this.lblAtr1SimpleCamID.Location = new System.Drawing.Point(6, 46);
-            this.lblAtr1SimpleCamID.Name = "lblAtr1SimpleCamID";
-            this.lblAtr1SimpleCamID.Size = new System.Drawing.Size(30, 12);
-            this.lblAtr1SimpleCamID.TabIndex = 9;
-            this.lblAtr1SimpleCamID.Text = "カメラ";
+            this.lblAtr1SimpleCameraID.AutoSize = true;
+            this.lblAtr1SimpleCameraID.Location = new System.Drawing.Point(6, 46);
+            this.lblAtr1SimpleCameraID.Name = "lblAtr1SimpleCamID";
+            this.lblAtr1SimpleCameraID.Size = new System.Drawing.Size(30, 12);
+            this.lblAtr1SimpleCameraID.TabIndex = 9;
+            this.lblAtr1SimpleCameraID.Text = "カメラ";
             // 
             // lblAtr1SoundID
             // 
@@ -707,13 +707,13 @@ namespace MSBT_Editor
             // 
             // txtAtr1SimpleCamID
             // 
-            this.txtAtr1SimpleCamID.Location = new System.Drawing.Point(147, 43);
-            this.txtAtr1SimpleCamID.MaxLength = 2;
-            this.txtAtr1SimpleCamID.Name = "txtAtr1SimpleCamID";
-            this.txtAtr1SimpleCamID.Size = new System.Drawing.Size(100, 19);
-            this.txtAtr1SimpleCamID.TabIndex = 1;
-            this.txtAtr1SimpleCamID.TextChanged += new System.EventHandler(this.TxtAtr1SimpleCamID_TextChanged);
-            this.txtAtr1SimpleCamID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtAtr1SimpleCamID_KeyPress);
+            this.txtAtr1SimpleCameraID.Location = new System.Drawing.Point(147, 43);
+            this.txtAtr1SimpleCameraID.MaxLength = 2;
+            this.txtAtr1SimpleCameraID.Name = "txtAtr1SimpleCameraID";
+            this.txtAtr1SimpleCameraID.Size = new System.Drawing.Size(100, 19);
+            this.txtAtr1SimpleCameraID.TabIndex = 1;
+            this.txtAtr1SimpleCameraID.TextChanged += new System.EventHandler(this.TxtAtr1SimpleCameraID_TextChanged);
+            this.txtAtr1SimpleCameraID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtAtr1SimpleCameraID_KeyPress);
             // 
             // txtAtr1SoundID
             // 
@@ -2748,7 +2748,7 @@ namespace MSBT_Editor
         private System.Windows.Forms.TextBox txtAtr1EventCameraID;
         private System.Windows.Forms.TextBox txtAtr1WindowID;
         private System.Windows.Forms.TextBox txtAtr1DialogID;
-        private System.Windows.Forms.TextBox txtAtr1SimpleCamID;
+        private System.Windows.Forms.TextBox txtAtr1SimpleCameraID;
         private System.Windows.Forms.TextBox txtAtr1SoundID;
         private System.Windows.Forms.TextBox txtLbl1TagIndex;
         public System.Windows.Forms.TextBox txtFlw2DebugHex;
@@ -2812,7 +2812,7 @@ namespace MSBT_Editor
         public System.Windows.Forms.Label lblAtr1EventCameraID;
         public System.Windows.Forms.Label lblAtr1WindowID;
         public System.Windows.Forms.Label lblAtr1DialogID;
-        public System.Windows.Forms.Label lblAtr1SimpleCamID;
+        public System.Windows.Forms.Label lblAtr1SimpleCameraID;
         public System.Windows.Forms.Label lblAtr1SoundID;
         public System.Windows.Forms.Label lblAtr1SpecialText;
         public System.Windows.Forms.Label lblLbl1TagIndex;

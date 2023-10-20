@@ -128,7 +128,7 @@ namespace MSBT_Editor.Sectionsys
             Debugger.MSBF_Text("");
 
             //データ読み取り
-            for (int i = 0; i< entry; i++) {
+            for (int i = 0; i < entry; i++) {
 
                 //読み取り
                 var type = CS.Byte2Short(br);
@@ -213,7 +213,8 @@ namespace MSBT_Editor.Sectionsys
                 bw.Write(CS.StringToBytes(flw2.Item[i].Unknown5.ToString("X4")));
             }
             Console.WriteLine(fs.Position.ToString("X"));
-            for (int j = 0; j < branchsize * 2; j++)
+            int size = branchsize * 2;
+            for (int j = 0; j < size; j++)
             {
                 bw.Write(CS.StringToBytes(flw2.Branch_No[j].ToString("X4")));
             }
@@ -397,7 +398,8 @@ namespace MSBT_Editor.Sectionsys
                         FLW2.branch_no.RemoveAt(item.Unknown5);
                         FLW2.branch_no.RemoveAt(item.Unknown5);
 
-                        for (int i = 0; i < FLW2.branch_list_no.Count(); i++)
+                        int count = FLW2.branch_list_no.Count();
+                        for (int i = 0; i < count; i++)
                         {
                             FLW2 flw2_1 = new FLW2();
                             FLW2.flw2_item item1 = flw2_1.Item[FLW2.branch_list_no[i]];

@@ -57,11 +57,12 @@ namespace MSBT_Editor.Sectionsys
             bw.Write(CS.StringToInt32_byte((MsbtListBox.Items.Count).ToString("X8")));
 
             var txt2_txt_offset_pos = fs.Position;
-            for (int i = 0; i < MsbtListBox.Items.Count; i++)
+            int count = MsbtListBox.Items.Count;
+            for (int i = 0; i < count; i++)
                 CS.Null_Writer_Int32(bw);
 
             List<int> txt2_offset_data = new List<int>();
-            for (int j = 0; j < MsbtListBox.Items.Count; j++)
+            for (int j = 0; j < count; j++)
             {
                 MsbtListBox.SelectedIndex = j;
                 txt2_offset_data.Add((int)(fs.Position - txt2_offset));
@@ -78,7 +79,7 @@ namespace MSBT_Editor.Sectionsys
             bw.Write(CS.StringToInt32_byte(((int)(txt2_txt_end - txt2_offset)).ToString("X8")));
 
             fs.Seek(txt2_txt_offset_pos, SeekOrigin.Begin);
-            for (int i = 0; i < MsbtListBox.Items.Count; i++)
+            for (int i = 0; i < count; i++)
                 bw.Write(CS.StringToInt32_byte(txt2_offset_data[i].ToString("X8")));
 
             fs.Seek(fileend_pos, SeekOrigin.Begin);

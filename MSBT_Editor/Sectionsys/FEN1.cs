@@ -537,7 +537,8 @@ namespace MSBT_Editor.Sectionsys
 
                 if (c.Index == 0)
                 {
-                    for (int k = 0; k < c.Value.Hash + 1; k++)
+                    uint valueHash = c.Value.Hash + 1;
+                    for (int k = 0; k < valueHash; k++)
                     {
                         if (c.Value.Hash != k) bw.Write(CS.StringToBytes((0).ToString("X8")));
                         else bw.Write(CS.StringToBytes(c.Value.tagflag.ToString("X8")));
