@@ -57,7 +57,7 @@ namespace MSBT_Editor.Formsys
 
         //label 0～9
         protected static Label labeltxt01 = Form1.Form1Instance.lblAtr1SoundID;
-        protected static Label labeltxt02 = Form1.Form1Instance.lblAtr1SimpleCamID;
+        protected static Label labeltxt02 = Form1.Form1Instance.lblAtr1SimpleCameraID;
         protected static Label labeltxt03 = Form1.Form1Instance.lblAtr1DialogID;
         protected static Label labeltxt04 = Form1.Form1Instance.lblAtr1WindowID;
         protected static Label labeltxt05 = Form1.Form1Instance.lblAtr1EventCameraID;

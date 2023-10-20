@@ -138,11 +138,12 @@ namespace MSBT_Editor.Sectionsys
 
         private void SpecialTextReader(BinaryReader br, List<AttributeData> AttributeDataList, ref List<string> SpecialTextList)
         {
-            for (int j = 0; j < AttributeDataList.Count; j++)
+            int count = AttributeDataList.Count;
+            for (int j = 0; j < count; j++)
             {
 
                 string SpecialText;
-                if (AttributeDataList.Count - 1 == j)
+                if (count - 1 == j)
                 {
                     SpecialText = CS.Byte2Str_UTF16BE(br);
                 }
@@ -189,41 +190,37 @@ namespace MSBT_Editor.Sectionsys
                 sh = short.Parse(textbox.Text, System.Globalization.NumberStyles.HexNumber);
             }
 
-            
-
             ATR1.AttributeData element = MSBT_Data.MSBT_All_Data.Item[MsbtListBox.SelectedIndex];
 
             switch (textbox.Name)
             {
-                case "Atr1SoundID":
+                case "txtAtr1SoundID":
                     element.SoundID = bit;
                     break;
-                case "Atr1SimpleCamID":
+                case "txtAtr1SimpleCameraID":
                     element.SimpleCameraID = bit;
                     break;
-                case "Atr1DialogID":
+                case "txtAtr1DialogID":
                     element.DialogID = bit;
                     break;
-                case "Atr1WindowID":
+                case "txtAtr1WindowID":
                     element.WindowID = bit;
                     break;
-                case "Atr1EventCameraID":
+                case "txtAtr1EventCameraID":
                     element.EventCameraID = sh;
                     break;
-                case "Atr1MessageAreaID":
+                case "txtAtr1MessageAreaID":
                     element.MessageAreaID = bit;
                     break;
-                case "Atr1Unknown6":
+                case "txtAtr1Unknown6":
                     element.unknown6 = bit;
                     break;
             }
             MSBT_Data.MSBT_All_Data.Item[MsbtListBox.SelectedIndex] = element;
-
         }
 
         public void Write(BinaryWriter bw, FileStream fs)
         {
-
             var SectionSizePosition = fs.Position + 0x04;
             var BasePositionAddress = fs.Position + 0x10;
 
@@ -253,7 +250,8 @@ namespace MSBT_Editor.Sectionsys
 
             //特殊テキストの書き込み
             List<long> sptextoffset = new List<long>();
-            for (int j = 0; j < MsbtListBox.Items.Count; j++)
+            int msbtListBoxItemCount = MsbtListBox.Items.Count;
+            for (int j = 0; j < msbtListBoxItemCount; j++)
             {
                 MsbtListBox.SelectedIndex = j;
                 if (txtb11.Text == "")
@@ -272,8 +270,8 @@ namespace MSBT_Editor.Sectionsys
             //エントリーサイズが102の場合(星船など)
             //if (Entries == 102) bw.Write(CS.StringToBytes("0000"));
             var sptextend_pos = fs.Position;
-
-            for (int k = 0; k < nulloffsetpos.Count(); k++)
+            int nullOffsetPosCount = nulloffsetpos.Count();
+            for (int k = 0; k < nullOffsetPosCount; k++)
             {
                 fs.Seek(nulloffsetpos[k], SeekOrigin.Begin);
                 bw.Write(CS.StringToBytes(((int)sptextoffset[k]).ToString("X8")));
