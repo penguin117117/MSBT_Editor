@@ -53,7 +53,8 @@ namespace MSBT_Editor.MSBTsys
             //終了処理
             fs.Close();
             br.Close();
-            for (var i = 0; i < MsbtListBox.Items.Count; i++)
+            int count = MsbtListBox.Items.Count;
+            for (var i = 0; i < count; i++)
             {
                 MsbtListBox.SelectedIndex = i;
                 Debugger.Unknowntagwriter(MsbtListBox.Text, true);

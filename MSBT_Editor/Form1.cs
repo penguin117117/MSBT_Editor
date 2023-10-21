@@ -141,10 +141,8 @@ namespace MSBT_Editor
 
         public static int ListBoxIndex_NegativeThenSetIndexZero(ListBox lb)
         {
-            if ((lb.SelectedIndex < 0))
-                lb.SelectedIndex = 0;
-            if (lb.SelectedIndex > MSBT_Data.MSBT_All_Data.Item.Count())
-                lb.SelectedIndex = 0;
+            if ((lb.SelectedIndex < 0)) lb.SelectedIndex = 0;
+            if (lb.SelectedIndex > MSBT_Data.MSBT_All_Data.Item.Count()) lb.SelectedIndex = 0;
             return lb.SelectedIndex;
         }
 
@@ -184,11 +182,10 @@ namespace MSBT_Editor
                 Tmp = MsbtAllData.Item[MsbtSelectIndex];
             }
 
-
             txtMsbtText.Text = MsbtAllData.Text[MsbtSelectIndex];
             txtReadOnlyMsbtText.Text = txtMsbtText.Text;
             txtAtr1SoundID.Text = Tmp.SoundID.ToString("X2");
-            txtAtr1SimpleCamID.Text = Tmp.SimpleCameraID.ToString("X2");
+            txtAtr1SimpleCameraID.Text = Tmp.SimpleCameraID.ToString("X2");
             txtAtr1DialogID.Text = Tmp.DialogID.ToString("X2");
             txtAtr1WindowID.Text = Tmp.WindowID.ToString("X2");
             txtAtr1EventCameraID.Text = Tmp.EventCameraID.ToString("X4");
@@ -226,13 +223,12 @@ namespace MSBT_Editor
             //ATR1セクションのテキストボックスの変更を
             //纏めるためのメソッドを作成中
             Console.WriteLine(((TextBox)sender).Name);
-            ATR1.ATR1_Change(txtAtr1SimpleCamID);
+            ATR1.ATR1_Change(txtAtr1SimpleCameraID);
         }
 
-        private void TxtAtr1SimpleCamID_TextChanged(object sender, EventArgs e)
+        private void TxtAtr1SimpleCameraID_TextChanged(object sender, EventArgs e)
         {
-
-            ATR1.ATR1_Change(txtAtr1SimpleCamID);
+            ATR1.ATR1_Change(txtAtr1SimpleCameraID);
         }
 
         private void TxtAtr1DialogID_TextChanged(object sender, EventArgs e)
@@ -264,7 +260,6 @@ namespace MSBT_Editor
         {
             if (lstListsInsideMsbt.Items.Count < 1) return;
             ATR1.SpecialTextList[lstListsInsideMsbt.SelectedIndex] = txtAtr1SpecialText.Text;
-
         }
 
         private void TxtLbl1TagIndex_TextChanged(object sender, EventArgs e)
@@ -279,12 +274,10 @@ namespace MSBT_Editor
 
         private void TxtMsbtText_TextChanged(object sender, EventArgs e)
         {
-
             if (lstListsInsideMsbt.Items.Count != 0)
             {
                 MSBT_Data.MSBT_All_Data.Text[lstListsInsideMsbt.SelectedIndex] = txtMsbtText.Text;
             }
-
         }
 
         //非常によくない複雑で長い処理。改善する必要があります。
@@ -1288,7 +1281,7 @@ namespace MSBT_Editor
         //ATR1セクションテキストボックスのキープレスイベント
         private void TxtAtr1SoundID_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
 
-        private void TxtAtr1SimpleCamID_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
+        private void TxtAtr1SimpleCameraID_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
 
         private void TxtAtr1DialogID_KeyPress(object sender, KeyPressEventArgs e) => KeyPressEventSupport.OnlyHexChar(e, true);
 
@@ -1566,7 +1559,7 @@ namespace MSBT_Editor
                 txtReadOnlyMsbtText.Clear();
             }
             txtAtr1SoundID.Clear();
-            txtAtr1SimpleCamID.Clear();
+            txtAtr1SimpleCameraID.Clear();
             txtAtr1DialogID.Clear();
             txtAtr1WindowID.Clear();
             txtAtr1EventCameraID.Clear();

@@ -754,7 +754,8 @@ namespace MSBT_Editor.FileSys
         public static byte[] StringToBytes(string str)
         {
             var bs = new List<byte>();
-            for (int i = 0; i < str.Length / 2; i++)
+            int halfLength = str.Length / 2;
+            for (int i = 0; i < halfLength; i++)
             {
                 bs.Add(Convert.ToByte(str.Substring(i * 2, 2), 16));
             }
@@ -811,8 +812,9 @@ namespace MSBT_Editor.FileSys
             oldstr = oldstr.Replace("\r", "");
             char[] ch = { '<', '>' };
             string[] oldstrarray = oldstr.Split(ch);
-            
-            for (int i = 0; i < oldstrarray.Count(); i++) {
+
+            int count = oldstrarray.Count();
+            for (int i = 0; i < count; i++) {
                 var roopstr = TagChecker(oldstrarray[i]);
                 oldstrarray[i] = roopstr;
             }

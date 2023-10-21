@@ -131,7 +131,8 @@ namespace MSBT_Editor.Sectionsys
             var Tmp = MsbtListBoxIndexList;
             IOrderedEnumerable<int> MsbtListBoxIndexSorted = Tmp.OrderBy(x => x);
 
-            for (int l = 0; l < MsbtListBoxIndexList.Count; l++) 
+            int count = MsbtListBoxIndexList.Count;
+            for (int l = 0; l < count; l++) 
                 MsbtListBox.Items.Add(NameArray[l]);
 
             CS.Padding(br,fs.Position);
@@ -271,7 +272,8 @@ namespace MSBT_Editor.Sectionsys
         /// <param name="PositionLabelLastAddress"></param>
         private void DataSectionAllWriter(BinaryWriter bw , Hash_Data[] HashDataArray,List<long> PositionIndividualLabelTop,long PositionLabelLastAddress/*, ref int ActualDataCount*/) {
             var ActualDataCount = 0;
-            for (int i = 0; i < HashData.Count(); i++)
+            int count = HashData.Count();
+            for (int i = 0; i < count; i++)
             {
                 var NowHash = HashDataArray[i].Hash;
                 var SkipDataCount = HashDataArray.Where(a => a.Hash.Equals(NowHash)).Count();
@@ -290,7 +292,7 @@ namespace MSBT_Editor.Sectionsys
                 //同じハッシュ値の処理
                 if (SubtractNowFromBeforeHash == 0)
                 {
-                    if ((HashData.Count() - 1) != i)
+                    if ((count - 1) != i)
                     {
                         if (HashDataArray[i + 1].Hash - NowHash == 0)
                             continue;
