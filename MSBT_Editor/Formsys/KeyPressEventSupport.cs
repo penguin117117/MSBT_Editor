@@ -13,7 +13,6 @@ namespace MSBT_Editor.Formsys
     /// </summary>
     public class KeyPressEventSupport
     {
-
         /// <summary>
         /// KeyPressEventArgのKeyCharの入力を16進数しか入力できないようにします。
         /// </summary>
@@ -39,7 +38,8 @@ namespace MSBT_Editor.Formsys
         /// KeyPressEventArgのKeyCharの入力を10進数しか入力できないようにします。
         /// </summary>
         /// <param name="e">TextBoxのKeyPressEventArgs</param>
-        public static void OnlyDecChar(KeyPressEventArgs e) {
+        public static void OnlyDecChar(KeyPressEventArgs e)
+        {
             var Include0to9 = (e.KeyChar < '0' || '9' < e.KeyChar);
             e.Handled = true;
             if (!(Include0to9) || e.KeyChar == '\b')
@@ -53,13 +53,9 @@ namespace MSBT_Editor.Formsys
         /// </summary>
         /// <param name="e">TextBoxのKeyPressEventArgs</param>
         /// <param name="canWrite">Trueで書き込みが可能になります</param>
-        public static void CanWriteChar(KeyPressEventArgs e ,bool canWrite)
+        public static void CanWriteChar(KeyPressEventArgs e, bool canWrite)
         {
             e.Handled = !canWrite;
         }
-
-
-
-        
     }
 }

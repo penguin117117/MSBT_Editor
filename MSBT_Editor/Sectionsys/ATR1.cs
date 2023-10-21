@@ -15,7 +15,7 @@ using System.Globalization;
 
 namespace MSBT_Editor.Sectionsys
 {
-    public class ATR1 : objects
+    public class ATR1 : Objects
     {
         private static string s_magic;
         private static int s_sec_size;
@@ -98,7 +98,6 @@ namespace MSBT_Editor.Sectionsys
 
         public void Read(BinaryReader br, FileStream fs)
         {
-
             AttributeDataList = new List<AttributeData>();
             SpecialTextList = new List<string>();
 
@@ -141,7 +140,6 @@ namespace MSBT_Editor.Sectionsys
             int count = AttributeDataList.Count;
             for (int j = 0; j < count; j++)
             {
-
                 string SpecialText;
                 if (count - 1 == j)
                 {
@@ -157,12 +155,14 @@ namespace MSBT_Editor.Sectionsys
             }
         }
 
-        public static byte ATR1TextBoxChange(TextBox textBox,byte changeData)
+        public static byte ATR1TextBoxChange(TextBox textBox, byte changeData)
         {
             var TextBoxByteData = changeData;
-            
-            if (textBox.Text.Length != 2) return TextBoxByteData;
 
+            if (textBox.Text.Length != 2)
+            {
+                return TextBoxByteData;
+            }
             TextBoxByteData = byte.Parse(textBox.Text, NumberStyles.HexNumber);
 
             return TextBoxByteData;
@@ -170,29 +170,39 @@ namespace MSBT_Editor.Sectionsys
 
         public static void ATR1TextBoxChange(TextBox textBox, short changeData)
         {
-            if (MsbtListBox.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1)
+            {
+                return;
+            }
             var TextCount = textBox.Text.Length;
-            if (TextCount != 4) return;
+            if (TextCount != 4)
+            {
+                return;
+            }
         }
-        public static void ATR1_Change(TextBox textbox)
+        public static void ATR1_Change(TextBox tb)
         {
-            if (MsbtListBox.Items.Count < 1) return;
+            if (MsbtListBox.Items.Count < 1)
+            {
+                return;
+            }
             byte bit = 0x01;
             short sh = 0x0000;
-            var strnum = textbox.Text.Length;
+            var strnum = tb.Text.Length;
 
             if (strnum == 2)
             {
-                bit = byte.Parse(textbox.Text, System.Globalization.NumberStyles.HexNumber);
+                bit = byte.Parse(tb.Text, System.Globalization.NumberStyles.HexNumber);
             }
             else if (strnum == 4)
             {
-                sh = short.Parse(textbox.Text, System.Globalization.NumberStyles.HexNumber);
+                sh = short.Parse(tb.Text, System.Globalization.NumberStyles.HexNumber);
             }
 
             ATR1.AttributeData element = MSBT_Data.MSBT_All_Data.Item[MsbtListBox.SelectedIndex];
 
-            switch (textbox.Name)
+            //要リファクタリング　テキストボックス名リネーム時にここの編集も必要で、保守性に欠ける
+            switch (tb.Name)
             {
                 case "txtAtr1SoundID":
                     element.SoundID = bit;
@@ -230,7 +240,6 @@ namespace MSBT_Editor.Sectionsys
 
             CS.StringToBytesWriter(bw, (MsbtListBox.Items.Count).ToString("X8"));
             CS.StringToBytesWriter(bw, (12).ToString("X8"));
-
 
             //エントリーの各データを書き込む
             var MSBTAllDataCount = MSBT_Data.MSBT_All_Data.Item.Count();
@@ -276,7 +285,6 @@ namespace MSBT_Editor.Sectionsys
                 fs.Seek(nulloffsetpos[k], SeekOrigin.Begin);
                 bw.Write(CS.StringToBytes(((int)sptextoffset[k]).ToString("X8")));
             }
-
 
             fs.Seek(SectionSizePosition, SeekOrigin.Begin);
             bw.Write(CS.StringToBytes(((int)(sptextend_pos - BasePositionAddress)).ToString("X8")));

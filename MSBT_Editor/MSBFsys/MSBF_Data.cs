@@ -7,7 +7,7 @@ using MSBT_Editor.Formsys;
 
 namespace MSBT_Editor.MSBFsys
 {
-    public class MSBF_Data : objects
+    public class MSBF_Data : Objects
     {
         //MSBTヘッダー
         private static string magic;
@@ -22,9 +22,6 @@ namespace MSBT_Editor.MSBFsys
         private static Int16 unknown7;
         private static Int16 unknown8;
         private static Int16 unknown9;
-
-        
-        
 
         public string Magic
         {

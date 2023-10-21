@@ -2601,8 +2601,10 @@ namespace MSBT_Editor
             this.lblSaveSystemDiscription.Name = "lblSaveSystemDiscription";
             this.lblSaveSystemDiscription.Size = new System.Drawing.Size(235, 72);
             this.lblSaveSystemDiscription.TabIndex = 1;
-            this.lblSaveSystemDiscription.Text = "ARCファイルから開いたMSBTやMSBFの\r\n内容を変更した際は、上書き保存をしてください。\r\n上書き保存してからリストを選択し直さないと、\r\n変更が保存されま" +
-    "せん。\r\n全ての変更が終わったらARCを保存してください。\r\n※MSBT, MSBF以外は表示されません";
+            this.lblSaveSystemDiscription.Text
+                = "ARCファイルから開いたMSBTやMSBFの\r\n内容を変更した際は、上書き保存をしてください。\r\n"
+                + "上書き保存してからリストを選択し直さないと、\r\n変更が保存されません。\r\n"
+                + "全ての変更が終わったらARCを保存してください。\r\n※MSBT, MSBF以外は表示されません";
             // 
             // lstFilesInsideRarc
             // 

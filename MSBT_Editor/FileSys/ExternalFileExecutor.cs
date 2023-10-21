@@ -10,7 +10,6 @@ using System.Windows.Forms;
 
 namespace MSBT_Editor.FileSys
 {
-    
     /// <summary>
     /// 外部の実行ファイルを実行するクラス
     /// </summary>
@@ -22,8 +21,8 @@ namespace MSBT_Editor.FileSys
         /// </summary>
         /// <param name="ARCToolExecutorSetDirectoryPath"></param>
         /// <param name="ARCToolExecutorSetPath"></param>
-        private static void ARCToolExeCutorCreator(ref string ARCToolExecutorSetDirectoryPath , ref string ARCToolExecutorSetPath) {
-
+        private static void ARCToolExeCutorCreator(ref string ARCToolExecutorSetDirectoryPath, ref string ARCToolExecutorSetPath)
+        {
             var AppExePath                  = Application.ExecutablePath;
             var AppDirectoryPath            = Path.GetDirectoryName(AppExePath);
             var ARCToolExeBinaryData           = Properties.Resources.ARCTool_ver0_1_5_0;
@@ -43,7 +42,9 @@ namespace MSBT_Editor.FileSys
             File.WriteAllBytes(ARCToolDepsJsonSetPath, ARCToolDepsJsonBinaryData);
             File.WriteAllBytes(ARCToolRuntimeJsonSetPath, ARCToolRuntimeJsonBinaryData);
         }
-        public void ARCToolExecutor(string filepath,bool isFolder = false) {
+
+        public void ARCToolExecutor(string filepath, bool isFolder = false)
+        {
             string ARCToolExecutorSetDirectoryPath = string.Empty;
             string ARCToolExecutorSetPath = string.Empty;
 
@@ -68,16 +69,17 @@ namespace MSBT_Editor.FileSys
             p.StartInfo = psi;
             p.Start();
             OutputCMD = p.StandardOutput.ReadToEnd();
-
             
             p.WaitForExit();
-            if (!p.HasExited) Console.WriteLine(p.StandardError.ReadToEnd());
+            if (!p.HasExited)
+            {
+                Console.WriteLine(p.StandardError.ReadToEnd());
+            }
             
             p.Close();
             p.Dispose();
 
             Console.WriteLine(OutputCMD);
         }
-
     }
 }

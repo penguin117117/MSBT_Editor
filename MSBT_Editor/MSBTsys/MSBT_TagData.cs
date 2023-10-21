@@ -26,15 +26,24 @@ namespace MSBT_Editor.MSBTsys
         /// <returns></returns>
         public static bool CanTextInsert(ListBox msbtList, ComboBox comboBox)
         {
-            if (msbtList.Items.Count < 1) return false;
+            if (msbtList.Items.Count < 1)
+            {
+                return false;
+            }
             var Index = comboBox.SelectedIndex;
-            if (Index == -1) return false;
+            if (Index == -1)
+            {
+                return false;
+            }
             return true;
         }
 
         public static void TextBoxTagInsert(TextBox tb, string str)
         {
-            if (str == string.Empty) return;
+            if (str == string.Empty)
+            {
+                return;
+            }
             tb.SelectedText = str;
         }
 
@@ -98,7 +107,8 @@ namespace MSBT_Editor.MSBTsys
 
         public class CenterTag : ITagDecide
         {
-            private readonly string[] Center = {
+            private readonly string[] Center =
+            {
                 "</XCenter>",
                 "</YCenter>"
             };
@@ -134,15 +144,20 @@ namespace MSBT_Editor.MSBTsys
                 {
                     if (MsbtTextBox.Text.IndexOf("</End>") != -1)
                     {
-
-                        MessageBox.Show("</End>が二つ以上あるとデータが" + "\n\r" + "破損するので挿入をキャンセルしました", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show
+                        (
+                            "</End>が二つ以上あるとデータが" +
+                            "\r\n" +
+                            "破損するので挿入をキャンセルしました",
+                            "エラー",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
+                        );
                         return;
                     }
                 }
                 TextBoxTagInsert(MsbtTextBox, Tag);
             }
-
-
         }
     }
 }

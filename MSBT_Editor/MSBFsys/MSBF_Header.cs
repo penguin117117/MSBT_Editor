@@ -51,15 +51,15 @@ namespace MSBT_Editor.MSBFsys
             Debugger.MSBF_Text(Unknown9.ToString());
 
             //各セクションの読み込み
-            flw2.Read(br,fs);
-            fen1.Read(br,fs);
+            flw2.Read(br, fs);
+            fen1.Read(br, fs);
 
             fs.Close();
             br.Close();
         }
 
-        public void Write(string filepath) {
-
+        public void Write(string filepath)
+        {
             Console.WriteLine("MSBF処理に入りました");
             FileStream fs = new FileStream(filepath, FileMode.Create);
             BinaryWriter bw = new BinaryWriter(fs);
@@ -89,8 +89,8 @@ namespace MSBT_Editor.MSBFsys
             FEN1 fen1 = new FEN1();
 
             //各セクションの書き込み
-            flw2.Write(bw,fs);
-            var filesize = fen1.Write(bw,fs);
+            flw2.Write(bw, fs);
+            var filesize = fen1.Write(bw, fs);
 
             //ファイルサイズの書き込み
             fs.Seek(MSBF_File_Size_pos,SeekOrigin.Begin);
@@ -99,7 +99,6 @@ namespace MSBT_Editor.MSBFsys
             //終了処理
             fs.Close();
             bw.Close();
-
         }
     }
 }

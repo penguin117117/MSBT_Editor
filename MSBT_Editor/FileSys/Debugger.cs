@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using MSBT_Editor.Formsys;
 using EN = System.Environment;
+
 namespace MSBT_Editor.FileSys
 {
-    public class Debugger:objects
+    public class Debugger : Objects
     {
-        public static void Text(string txt , bool txttop = false) {
+        public static void Text(string txt, bool txttop = false)
+        {
             if (txttop == true)
             {
                 msbtdebugtxt.Text = txt;
@@ -21,7 +23,8 @@ namespace MSBT_Editor.FileSys
             }
         }
 
-        public static void MSBF_Text(string txt, bool txttop = false , bool newline = true) {
+        public static void MSBF_Text(string txt, bool txttop = false, bool newline = true)
+        {
             if (txttop == true)
             {
                 txtb2.Text = txt;
@@ -32,14 +35,14 @@ namespace MSBT_Editor.FileSys
                 {
                     txtb2.AppendText(EN.NewLine + txt);
                 }
-                else {
-                    txtb2.AppendText( txt);
+                else
+                {
+                    txtb2.AppendText(txt);
                 }
-                
             }
         }
 
-        public static void HashTxt(string txt, bool txttop = false , bool newline = true)
+        public static void HashTxt(string txt, bool txttop = false, bool newline = true)
         {
             if (txttop == true)
             {
@@ -59,8 +62,8 @@ namespace MSBT_Editor.FileSys
             }
         }
 
-        public static void Unknowntagwriter(string str,bool dupeDelete = false) {
-
+        public static void Unknowntagwriter(string str,bool dupeDelete = false)
+        {
             //var spl = str.Split('_');
             //spl = spl.Replace("_End","");
 
@@ -70,11 +73,14 @@ namespace MSBT_Editor.FileSys
 
             //if (match == Match.Empty) return;
 
-            if (dupeDelete) {
-                
+            if (dupeDelete)
+            {
                 var find = unknowntag.Text.IndexOf(rem+"\r\n");
                 //Console.WriteLine(spl[0] + find);
-                if (find != -1) return;
+                if (find != -1)
+                {
+                    return;
+                }
             }
             unknowntag.AppendText(rem + EN.NewLine);
         }

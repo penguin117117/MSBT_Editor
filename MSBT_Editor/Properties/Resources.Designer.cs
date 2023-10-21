@@ -11,7 +11,6 @@
 namespace MSBT_Editor.Properties {
     using System;
     
-    
     /// <summary>
     ///   ローカライズされた文字列などを検索するための、厳密に型指定されたリソース クラスです。
     /// </summary>
@@ -22,23 +21,26 @@ namespace MSBT_Editor.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
-        
+    internal class Resources
+    {
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal Resources()
+        {
         }
         
         /// <summary>
         ///   このクラスで使用されているキャッシュされた ResourceManager インスタンスを返します。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager
+        {
             get {
-                if (object.ReferenceEquals(resourceMan, null)) {
+                if (object.ReferenceEquals(resourceMan, null))
+                {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MSBT_Editor.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
@@ -51,11 +53,14 @@ namespace MSBT_Editor.Properties {
         ///   現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
-            get {
+        internal static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
                 return resourceCulture;
             }
-            set {
+            set
+            {
                 resourceCulture = value;
             }
         }
@@ -63,8 +68,10 @@ namespace MSBT_Editor.Properties {
         /// <summary>
         ///   型 System.Byte[] のローカライズされたリソースを検索します。
         /// </summary>
-        internal static byte[] ARCTool_ver0_1_5_0 {
-            get {
+        internal static byte[] ARCTool_ver0_1_5_0
+        {
+            get
+            {
                 object obj = ResourceManager.GetObject("ARCTool_ver0_1_5_0", resourceCulture);
                 return ((byte[])(obj));
             }
@@ -73,8 +80,10 @@ namespace MSBT_Editor.Properties {
         /// <summary>
         ///   型 System.Byte[] のローカライズされたリソースを検索します。
         /// </summary>
-        internal static byte[] ARCTool_ver0_1_5_0_deps {
-            get {
+        internal static byte[] ARCTool_ver0_1_5_0_deps
+        {
+            get
+            {
                 object obj = ResourceManager.GetObject("ARCTool_ver0_1_5_0_deps", resourceCulture);
                 return ((byte[])(obj));
             }
@@ -83,8 +92,10 @@ namespace MSBT_Editor.Properties {
         /// <summary>
         ///   型 System.Byte[] のローカライズされたリソースを検索します。
         /// </summary>
-        internal static byte[] ARCTool_ver0_1_5_0_runtimeconfig {
-            get {
+        internal static byte[] ARCTool_ver0_1_5_0_runtimeconfig
+        {
+            get
+            {
                 object obj = ResourceManager.GetObject("ARCTool_ver0_1_5_0_runtimeconfig", resourceCulture);
                 return ((byte[])(obj));
             }
@@ -93,8 +104,10 @@ namespace MSBT_Editor.Properties {
         /// <summary>
         ///   型 System.Byte[] のローカライズされたリソースを検索します。
         /// </summary>
-        internal static byte[] ARCTool_ver0_1_5_01 {
-            get {
+        internal static byte[] ARCTool_ver0_1_5_01
+        {
+            get
+            {
                 object obj = ResourceManager.GetObject("ARCTool_ver0_1_5_01", resourceCulture);
                 return ((byte[])(obj));
             }
@@ -103,8 +116,10 @@ namespace MSBT_Editor.Properties {
         /// <summary>
         ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Icon アイコン {
-            get {
+        internal static System.Drawing.Icon アイコン
+        {
+            get
+            {
                 object obj = ResourceManager.GetObject("アイコン", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
@@ -113,8 +128,10 @@ namespace MSBT_Editor.Properties {
         /// <summary>
         ///   (アイコン) に類似した型 System.Drawing.Icon のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Icon タスクバーアイコン {
-            get {
+        internal static System.Drawing.Icon タスクバーアイコン
+        {
+            get
+            {
                 object obj = ResourceManager.GetObject("タスクバーアイコン", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }

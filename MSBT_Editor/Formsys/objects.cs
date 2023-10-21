@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace MSBT_Editor.Formsys
 {
-    public class objects
+    public class Objects
     {
         protected static TextBox txtb1 = Form1.Form1Instance.txtMsbtText;
         protected static TextBox txtb2 = Form1.Form1Instance.textBox2;
@@ -76,7 +76,6 @@ namespace MSBT_Editor.Formsys
         protected static Label labeltxt17 = Form1.Form1Instance.lblRubiTagRubiCount;
         protected static Label labeltxt18 = Form1.Form1Instance.lblRubiTagKanjiCount;
         protected static Label labeltxt19 = Form1.Form1Instance.lblTimerTagDelayTime;
-
 
         //label 20～29
         protected static Label labeltxt20 = Form1.Form1Instance.lblCharacterIconTag;
@@ -177,6 +176,5 @@ namespace MSBT_Editor.Formsys
 
         //
         protected static TextBox unknowntag = Form1.Form1Instance.txtUnknownTag;
-       
     }
 }

@@ -77,7 +77,7 @@
     </Compile>
     <Compile Include="Formsys\KeyPressEventSupport.cs" />
     <Compile Include="Formsys\Language.cs" />
-    <Compile Include="Formsys\objects.cs" />
+    <Compile Include="Formsys\Objects.cs" />
     <Compile Include="MSBX\IMSBX_Data.cs" />
     <Compile Include="MSBFsys\MSBF_Data.cs" />
     <Compile Include="MSBFsys\MSBF_Header.cs" />
