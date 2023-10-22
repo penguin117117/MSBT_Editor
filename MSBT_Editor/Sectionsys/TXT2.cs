@@ -8,9 +8,10 @@ using MSBT_Editor.FileSys;
 using CS = MSBT_Editor.FileSys.Calculation_System;
 using MSBT_Editor.MSBTsys;
 using MSBT_Editor.Formsys;
+
 namespace MSBT_Editor.Sectionsys
 {
-    class TXT2:objects
+    class TXT2 : Objects
     {
         public string magic;
         public int sec_size;
@@ -19,9 +20,9 @@ namespace MSBT_Editor.Sectionsys
         public static int entries;
         public List<long> txt_pos;
         public static List<string> Text_Data;
-        
 
-        public void Read(BinaryReader br,FileStream fs ) {
+        public void Read(BinaryReader br, FileStream fs)
+        {
             txt_pos = new List<long>();
             Text_Data = new List<string>();
 
@@ -35,7 +36,8 @@ namespace MSBT_Editor.Sectionsys
             var offset = fs.Position;
 
             //テキストオフセットの位置を読み込む
-            for (int i = 0; i < entries; i++){
+            for (int i = 0; i < entries; i++)
+            {
                 txt_pos.Add((int)offset + CS.Byte2Int(br));
             }
 
@@ -43,13 +45,15 @@ namespace MSBT_Editor.Sectionsys
             var offset2 = fs.Position;
 
             //テキストを読み込む
-            for(int j = 0; j<entries; j++) {
+            for(int j = 0; j<entries; j++)
+            {
                 fs.Position = txt_pos[j]-4;
                 Text_Data.Add(CS.Byte2JIS(br, fs));
             }
         }
 
-        public void Write(BinaryWriter bw , FileStream fs, long fileend_pos) {
+        public void Write(BinaryWriter bw, FileStream fs, long fileend_pos)
+        {
             bw.Write(Encoding.ASCII.GetBytes("TXT2"));
             var txt2_sec_pos = fs.Position;
             CS.Null_Writer_Int32(bw, 3);
@@ -59,7 +63,9 @@ namespace MSBT_Editor.Sectionsys
             var txt2_txt_offset_pos = fs.Position;
             int count = MsbtListBox.Items.Count;
             for (int i = 0; i < count; i++)
+            {
                 CS.Null_Writer_Int32(bw);
+            }
 
             List<int> txt2_offset_data = new List<int>();
             for (int j = 0; j < count; j++)
@@ -71,7 +77,6 @@ namespace MSBT_Editor.Sectionsys
 
             var txt2_txt_end = fs.Position;
 
-
             CS.Padding_Writer(bw, fs.Position);
             var msbt_end_pos = fs.Position;
 
@@ -80,7 +85,9 @@ namespace MSBT_Editor.Sectionsys
 
             fs.Seek(txt2_txt_offset_pos, SeekOrigin.Begin);
             for (int i = 0; i < count; i++)
+            {
                 bw.Write(CS.StringToInt32_byte(txt2_offset_data[i].ToString("X8")));
+            }
 
             fs.Seek(fileend_pos, SeekOrigin.Begin);
             bw.Write(CS.StringToInt32_byte(((int)msbt_end_pos).ToString("X8")));

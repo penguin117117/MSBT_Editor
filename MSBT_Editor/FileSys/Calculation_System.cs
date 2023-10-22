@@ -35,12 +35,50 @@ namespace MSBT_Editor.FileSys
             {
                 //MessageBox.Show((br.BaseStream.Position - readchers).ToString("X"), "error-------");
                 br.Close();
-                    string[] errorJP01 = { "深刻なエラーが発生しました\n\r[" + e.Message + "]\n\r" + "ErrorNo 1", "エラー" };
-                    string[] errorJP02 = { "「以前に他のMSBTエディタで編集していませんか？」\n\r", "ファイルフォーマット規則が一部破損しているので\n\r", "このエディタでは開くことが出来ません", "このエラーの原因で考えられること" };
-                    string[] errorJP03 = { "ゲームから吸い出した壊れていないデータを使用してください\n\r", "または、正しい方法でバイナリを修正する必要があります。\n\r", "このメッセージの後アプリケーションを強制終了します", "この問題への提案" };
-                    string[] errorEN01 = { "A serious error has occurred.\n\r[" + e.Message + "]\n\r" + "ErrorNo 1", "Error" };
-                    string[] errorEN02 = { "「Have you edited with a different 'MSBT editor' before?」\n\r", "The file formatting rules are partially broken,\n\r", "so this editor cannot open the file.", "Possible causes for this error." };
-                    string[] errorEN03 = { "Use the uncorrupted data sucked out of the game.\n\r", "Or you need to modify the binary in the right way.\n\r", "After this message, the application will be killed.", "Suggestions for this problem" };
+                    string[] errorJP01 =
+                    {
+                        "深刻なエラーが発生しました\r\n[" +
+                        e.Message +
+                        "]\r\n" +
+                        "ErrorNo 1",
+                        "エラー"
+                    };
+                    string[] errorJP02 =
+                    {
+                        "「以前に他のMSBTエディタで編集していませんか？」\r\n",
+                        "ファイルフォーマット規則が一部破損しているので\r\n",
+                        "このエディタでは開くことが出来ません",
+                        "このエラーの原因で考えられること"
+                    };
+                    string[] errorJP03 =
+                    {
+                        "ゲームから吸い出した壊れていないデータを使用してください\r\n",
+                        "または、正しい方法でバイナリを修正する必要があります。\r\n",
+                        "このメッセージの後アプリケーションを強制終了します",
+                        "この問題への提案"
+                    };
+                    string[] errorEN01 =
+                    {
+                        "A serious error has occurred.\r\n[" +
+                        e.Message +
+                        "]\r\n" +
+                        "ErrorNo 1",
+                        "Error"
+                    };
+                    string[] errorEN02 =
+                    {
+                        "「Have you edited with a different 'MSBT editor' before?」\r\n",
+                        "The file formatting rules are partially broken,\r\n",
+                        "so this editor cannot open the file.",
+                        "Possible causes for this error."
+                    };
+                    string[] errorEN03 =
+                    {
+                        "Use the uncorrupted data sucked out of the game.\r\n",
+                        "Or you need to modify the binary in the right way.\r\n",
+                        "After this message, the application will be killed.",
+                        "Suggestions for this problem"
+                    };
 
                     string[] error01;
                     string[] error02;
@@ -64,15 +102,17 @@ namespace MSBT_Editor.FileSys
                     MessageBox.Show(error03[0] + error03[1] + error03[2], error03[3], MessageBoxButtons.OK, MessageBoxIcon.Information);
                 
                     Environment.Exit(0);
-                
             }
-            
             return strs;
         }
 
-        public static void UTF16BE(string str, List<byte> bits) {
+        public static void UTF16BE(string str, List<byte> bits)
+        {
             var ret = Encoding.GetEncoding("unicodeFFFE").GetBytes(str);
-            foreach (byte bit in ret) bits.Add(bit);
+            foreach (byte bit in ret)
+            {
+                bits.Add(bit);
+            }
         }
 
         public static string Byte2JIS(BinaryReader br, FileStream fs)
@@ -81,19 +121,22 @@ namespace MSBT_Editor.FileSys
             byte bit1, bit2;
             byte bit3, bit4, bit5, bit6, bit7, bit8;
             bool checker = true;
-            while (checker) {
+            while (checker)
+            {
                 bit1 = br.ReadByte();
                 bit2 = br.ReadByte();
                 bit_list.Add(bit1);
                 bit_list.Add(bit2);
-                if (bit1 == 0x00 && bit2 == 0x0A) {
+                if (bit1 == 0x00 && bit2 == 0x0A)
+                {
                     UTF16BE("</br>" + EN.NewLine, bit_list);
                     continue;
                 }
 
 
 
-                if (((bit_list[bit_list.Count - 2] == 0x00) && (bit_list[bit_list.Count - 1]) == 0x0E)) {
+                if (((bit_list[bit_list.Count - 2] == 0x00) && (bit_list[bit_list.Count - 1]) == 0x0E))
+                {
                     bit_list.RemoveRange(bit_list.Count() - 1, 1);
                     bit_list.RemoveRange(bit_list.Count() - 1, 1);
                     bit3 = br.ReadByte();
@@ -103,8 +146,8 @@ namespace MSBT_Editor.FileSys
                     bit7 = br.ReadByte();
                     bit8 = br.ReadByte();
 
-
-                    switch (bit4) {
+                    switch (bit4)
+                    {
                         case 0x00:
                             Tag00(br, fs, bit_list, bit5, bit6, bit7, bit8);
                             continue;
@@ -132,24 +175,21 @@ namespace MSBT_Editor.FileSys
                         default:
                             break;
                     }
-
                     continue;
                 }
 
-                if ((bit_list[bit_list.Count - 2] == 0) && (bit_list[bit_list.Count - 1]) == 0) {
+                if ((bit_list[bit_list.Count - 2] == 0) && (bit_list[bit_list.Count - 1]) == 0)
+                {
                     bit_list.RemoveRange(bit_list.Count() - 1, 1);
                     bit_list.RemoveRange(bit_list.Count() - 1, 1);
                     UTF16BE("</End>", bit_list);
                     checker = false;
                 }
-
             }
             //Console.WriteLine(Encoding.GetEncoding("unicodeFFFE"/*1201*/).GetString(bit_list.ToArray()));
             //Debugger.Text("");
             return Encoding.GetEncoding("unicodeFFFE"/*1201*/).GetString(bit_list.ToArray());
-
         }
-
 
         public static bool Tag00(BinaryReader br, FileStream fs, List<byte> list, byte bit5, byte bit6, byte bit7, byte bit8)
         {
@@ -174,11 +214,15 @@ namespace MSBT_Editor.FileSys
             }
 
             UTF16BE(tagstrs, list);
-            if (tagstrs.Substring(1,7)== "Unknown") Debugger.Unknowntagwriter(tagstrs);
+            if (tagstrs.Substring(1, 7) == "Unknown")
+            {
+                Debugger.Unknowntagwriter(tagstrs);
+            }
             return true;
         }
 
-        public static string Tag_Colors(byte bit10) {
+        public static string Tag_Colors(byte bit10)
+        {
             var tagname = "";
             switch (bit10)
             {
@@ -209,20 +253,18 @@ namespace MSBT_Editor.FileSys
                 case 0xFF:
                     tagname = "</Color>";
                     break;
-
             }
             return tagname;
         }
 
-
-        public static bool Tag01(BinaryReader br, FileStream fs, List<byte> list, byte bit5, byte bit6, byte bit7, byte bit8) {
-
+        public static bool Tag01(BinaryReader br, FileStream fs, List<byte> list, byte bit5, byte bit6, byte bit7, byte bit8)
+        {
             string tagstrs = "<Unknown =\"Tag01\">";
             var bit9 = Bytes2Byte(br);
             var bit10 = Bytes2Byte(br);
-            switch (bit6) {
+            switch (bit6)
+            {
                 case 0x00:
-
                     if ((bit8 == 2))
                     {
                         var time = (bit9 << 8) + bit10;
@@ -231,48 +273,47 @@ namespace MSBT_Editor.FileSys
                     }
                     break;
                 case 0x01:
-
                     //10byte目が0x0Aではない場合の処理
                     tagstrs = "</NCenter>";
-
                     //新しいページ作成処理
-                    if ((bit8 == 0) && (bit9 == 0x00) && (bit10 == 0x0A)) {
+                    if ((bit8 == 0) && (bit9 == 0x00) && (bit10 == 0x0A))
+                    {
                         tagstrs = "</New_Page>" + EN.NewLine + EN.NewLine;
                         break;
                     }
-
                     //9,10bitを使用しない場合2bit分fsを戻す
                     fs.Position -= 2;
-
                     break;
                 case 0x02:
                     tagstrs = "</YCenter>";
-
                     //9,10bitを使用しない場合2bit分fsを戻す
                     fs.Position -= 2;
                     break;
                 case 0x03:
                     tagstrs = "</XCenter>";
-
                     //9,10bitを使用しない場合2bit分fsを戻す
                     fs.Position -= 2;
                     break;
             }
 
             UTF16BE(tagstrs, list);
-            if (tagstrs.Substring(1, 7) == "Unknown") Debugger.Unknowntagwriter(tagstrs);
+            if (tagstrs.Substring(1, 7) == "Unknown")
+            {
+                Debugger.Unknowntagwriter(tagstrs);
+            }
             return true;
         }
-
 
         public static bool Tag02(BinaryReader br, FileStream fs, List<byte> list, byte bit5, byte bit6, byte bit7, byte bit8)
         {
             var bit9 = Bytes2Byte(br);
             var bit10 = Bytes2Byte(br);
 
-            string tagstrs = "<SE=\""+ "000E00020000"+ bit7.ToString("X2")+ bit8.ToString("X2")+ bit9.ToString("X2")+ bit10.ToString("X2") + "\">";
-            var SEName = Byte2Str_UTF16BE(br , bit10);
-            tagstrs = "<SE=\""+ SEName +"\">";
+            string tagstrs
+                = "<SE=\"" + "000E00020000" + bit7.ToString("X2") + bit8.ToString("X2")
+                + bit9.ToString("X2") + bit10.ToString("X2") + "\">";
+            var SEName = Byte2Str_UTF16BE(br, bit10);
+            tagstrs = "<SE=\"" + SEName + "\">";
             //switch (bit6)
             //{
             //    case 0x00:
@@ -299,7 +340,9 @@ namespace MSBT_Editor.FileSys
             var bit9 = Bytes2Byte(br);
             var bit10 = Bytes2Byte(br);
 
-            var icon_num = "0003" + bit5.ToString("X2") + bit6.ToString("X2") + bit7.ToString("X2") + bit8.ToString("X2") + bit9.ToString("X2") + bit10.ToString("X2");
+            var icon_num
+                = "0003" + bit5.ToString("X2") + bit6.ToString("X2") + bit7.ToString("X2")
+                + bit8.ToString("X2") + bit9.ToString("X2") + bit10.ToString("X2");
             //Console.WriteLine(icon_num);
 
             string tagstrs = "<UserIcon=\"" + "000E" + icon_num + "\">";
@@ -521,17 +564,18 @@ namespace MSBT_Editor.FileSys
                 case "0003004000020045":
                     tagstrs = "<Icon=\"BronzeGrandStar\">";
                     break;
-
             }
 
             UTF16BE(tagstrs, list);
-            if (tagstrs.Substring(1, 7) == "Unknown") Debugger.Unknowntagwriter(tagstrs);
+            if (tagstrs.Substring(1, 7) == "Unknown")
+            {
+                Debugger.Unknowntagwriter(tagstrs);
+            }
             return true;
         }
 
         public static bool Tag04(BinaryReader br, FileStream fs, List<byte> list, byte bit5, byte bit6, byte bit7, byte bit8)
         {
-
             string tagstrs = "<Unknown=\"Tag04\">";
             switch (bit6)
             {
@@ -544,10 +588,12 @@ namespace MSBT_Editor.FileSys
                 case 0x02:
                     tagstrs = "<Size=\"Large\">";
                     break;
-
             }
             UTF16BE(tagstrs, list);
-            if (tagstrs.Substring(1, 7) == "Unknown") Debugger.Unknowntagwriter(tagstrs);
+            if (tagstrs.Substring(1, 7) == "Unknown")
+            {
+                Debugger.Unknowntagwriter(tagstrs);
+            }
             return true;
         }
 
@@ -559,12 +605,18 @@ namespace MSBT_Editor.FileSys
             switch (bit6)
             {
                 case 0x00:
-                    if (bit8 != 02) break;
+                    if (bit8 != 02)
+                    {
+                        break;
+                    }
                     tagstrs = "</PlayCharacter>";
                     break;
             }
             UTF16BE(tagstrs, list);
-            if (tagstrs.Substring(1, 7) == "Unknown") Debugger.Unknowntagwriter(tagstrs);
+            if (tagstrs.Substring(1, 7) == "Unknown")
+            {
+                Debugger.Unknowntagwriter(tagstrs);
+            }
             return true;
         }
 
@@ -582,24 +634,38 @@ namespace MSBT_Editor.FileSys
             switch (bit6)
             {
                 case 0x00:
-                    if (bit8 != 08) break;
+                    if (bit8 != 08)
+                    {
+                        break;
+                    }
                     tagstrs = "</WorldNo>";
                     break;
                 case 0x01:
-                    if (bit8 != 08) break;
+                    if (bit8 != 08)
+                    {
+                        break;
+                    }
                     tagstrs = "</ReferenceValue1>";
                     break;
                 case 0x02:
-                    if (bit8 != 08) break;
+                    if (bit8 != 08)
+                    {
+                        break;
+                    }
                     tagstrs = "</ReferenceValue2>";
                     break;
                 case 0x03:
-                    if (bit8 != 08) break;
+                    if (bit8 != 08)
+                    {
+                        break;
+                    }
                     tagstrs = "</ReferenceValue3>";
                     break;
                 case 0x04:
-                    if (bit8 != 08) break;
-                   
+                    if (bit8 != 08)
+                    {
+                        break;
+                    }
                     switch (lastbit)
                     {
                         case 00:
@@ -617,8 +683,12 @@ namespace MSBT_Editor.FileSys
                     }
                     break;
                 case 0x05:
-                    if (bit8 != 08) break;
-                    switch (lastbit) {
+                    if (bit8 != 08)
+                    {
+                        break;
+                    }
+                    switch (lastbit)
+                    {
                         case 00:
                             tagstrs = "</Hour>";
                             break;
@@ -632,17 +702,20 @@ namespace MSBT_Editor.FileSys
                             tagstrs = "</AfterTheDecimalPoint>";
                             break;
                     }
-                    
                     break;
             }
             UTF16BE(tagstrs, list);
-            if (tagstrs.Length > 8) {
+            if (tagstrs.Length > 8)
+            {
                 //Console.WriteLine("tagname   " + tagstrs.Substring(1, 7));
-                if (tagstrs.Substring(1, 7) == "Unknown" && tagstrs.Length > 8) Debugger.Unknowntagwriter(tagstrs);
+                if (tagstrs.Substring(1, 7) == "Unknown" && tagstrs.Length > 8)
+                {
+                    Debugger.Unknowntagwriter(tagstrs);
+                }
             }
-            
             return true;
         }
+
         public static bool Tag07(BinaryReader br, FileStream fs, List<byte> list, byte bit5, byte bit6, byte bit7, byte bit8)
         {
             Bytes2Byte(br);
@@ -657,11 +730,17 @@ namespace MSBT_Editor.FileSys
             switch (bit6)
             {
                 case 0x00:
-                    if (bit8 != 08) break;
+                    if (bit8 != 08)
+                    {
+                        break;
+                    }
                     tagstrs = "</ResultGalaxyName>";
                     break;
                 case 0x01:
-                    if (bit8 != 08) break;
+                    if (bit8 != 08)
+                    {
+                        break;
+                    }
                     tagstrs = "</ResultScenarioName>";
                     break;
                 case 0x02:
@@ -671,22 +750,30 @@ namespace MSBT_Editor.FileSys
                     tagstrs = "</UnusedTags07_03>";
                     break;
                 case 0x04:
-                    if (bit8 != 08) break;
+                    if (bit8 != 08)
+                    {
+                        break;
+                    }
                     tagstrs = "</UserName>";
                     break;
                 case 0x05:
-                    if (bit8 != 08) break;
+                    if (bit8 != 08)
+                    {
+                        break;
+                    }
                     tagstrs = "</TotalPlayTime>";
                     break;
             }
             UTF16BE(tagstrs, list);
-            if (tagstrs.Substring(1, 7) == "Unknown") Debugger.Unknowntagwriter(tagstrs);
+            if (tagstrs.Substring(1, 7) == "Unknown")
+            {
+                Debugger.Unknowntagwriter(tagstrs);
+            }
             return true;
         }
 
-        
-
-        public static byte Bytes2Byte(BinaryReader br) {
+        public static byte Bytes2Byte(BinaryReader br)
+        {
             return br.ReadByte();
         }
 
@@ -700,11 +787,11 @@ namespace MSBT_Editor.FileSys
             return Int16.Parse(BitConverter.ToString(br.ReadBytes(readbyte), 0).Replace("-", "").PadLeft(readbyte, '0'), NumberStyles.HexNumber);
         }
 
-        
-
-        public static uint MSBT_Hash(string label, int num_slots) {
+        public static uint MSBT_Hash(string label, int num_slots)
+        {
             uint hash = 0;
-            foreach (char c in label) {
+            foreach (char c in label)
+            {
                 hash *= 0x492;
                 hash += c;
             }
@@ -762,10 +849,10 @@ namespace MSBT_Editor.FileSys
             return bs.ToArray();
         }
 
-        public static void StringToBytesWriter(BinaryWriter bw , string str) {
+        public static void StringToBytesWriter(BinaryWriter bw, string str)
+        {
             bw.Write(StringToBytes(str));
         }
-        
 
         public static byte[] StringToInt32_byte(string str)
         {
@@ -774,7 +861,6 @@ namespace MSBT_Editor.FileSys
             sh = Convert.ToInt32(str, 16);
             str2 = sh.ToString("X8");
             return StringToBytes(str2);
-
         }
 
         /// <summary>
@@ -782,31 +868,38 @@ namespace MSBT_Editor.FileSys
         /// <remarks>Null_Writer_Int32(進めたいバイナリライト、繰り返し回数(int型))</remarks>
         /// </summary>
         /// 
-        public static void Null_Writer_Int32(BinaryWriter bw , int write_rep_num = 1) {
-
+        public static void Null_Writer_Int32(BinaryWriter bw, int write_rep_num = 1)
+        {
             //0以上または、int型の最大値までしか選択できないようにする。
-            if (write_rep_num < 1) write_rep_num = 1;
-            if (Int32.MaxValue < write_rep_num) write_rep_num = Int32.MaxValue;
-
-            for(int i = 0; i<write_rep_num; i++)
-            bw.Write(BitConverter.GetBytes(0x00000000));
+            if (write_rep_num < 1)
+            {
+                write_rep_num = 1;
+            }
+            if (Int32.MaxValue < write_rep_num)
+            {
+                write_rep_num = Int32.MaxValue;
+            }
+            for (int i = 0; i < write_rep_num; i++)
+            {
+                bw.Write(BitConverter.GetBytes(0x00000000));
+            }
 
             //↓旧計算式
             //bw.Write(BitConverter.GetBytes(0x00000000));
         }
 
-        public static void UTF16BE_String_Writer(BinaryWriter bw , string str) {
+        public static void UTF16BE_String_Writer(BinaryWriter bw, string str)
+        {
             bw.Write(Encoding.GetEncoding("unicodeFFFE").GetBytes(str));
-            
         }
 
-        public static void String_Writer(BinaryWriter bw , string str , string EncodingName = "ASCII") {
+        public static void String_Writer(BinaryWriter bw, string str, string EncodingName = "ASCII")
+        {
             bw.Write(Encoding.GetEncoding(EncodingName).GetBytes(str));
         }
 
-        
-
-        public static string String2TagChecker(string str) {
+        public static string String2TagChecker(string str)
+        {
             var oldstr = str.Replace(EN.NewLine, "");
             oldstr = oldstr.Replace("\n", "");
             oldstr = oldstr.Replace("\r", "");
@@ -814,17 +907,16 @@ namespace MSBT_Editor.FileSys
             string[] oldstrarray = oldstr.Split(ch);
 
             int count = oldstrarray.Count();
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++)
+            {
                 var roopstr = TagChecker(oldstrarray[i]);
                 oldstrarray[i] = roopstr;
             }
-            
             return string.Join("",oldstrarray);
         }
 
         public static string TagChecker(string str)
         {
-
             byte[] bits;
             switch (str)
             {
@@ -973,7 +1065,6 @@ namespace MSBT_Editor.FileSys
                 case "Icon=\"D-Pad Down\"":
                     bits = StringToBytes("000E000300450002004A");
                     break;
-
                 case "Icon=\"JoyStick\"":
                 case "Icon=\"Control Stick\"":
                     bits = StringToBytes("000E0003000F0002000F");
@@ -1014,7 +1105,6 @@ namespace MSBT_Editor.FileSys
                 case "Icon=\"Pull Star\"":
                     bits = StringToBytes("000E0003000900020009");
                     break;
-
                 case "Icon=\"Yoshi\"":
                     bits = StringToBytes("000E0003003400020039");
                     break;
@@ -1053,7 +1143,6 @@ namespace MSBT_Editor.FileSys
                 case "Icon=\"A Button\"":
                     bits = StringToBytes("000E0003000000020000");
                     break;
-
                 case "Icon=\"PurpleCoin\"":
                 case "Icon=\"Purple Coin\"":
                     bits = StringToBytes("000E0003001E0002001E");
@@ -1151,7 +1240,6 @@ namespace MSBT_Editor.FileSys
                 case "Icon=\"BronzeGrandStar\"":
                     bits = StringToBytes("000E0003004000020045");
                     break;
-
                 case "/World_No":
                 case "/WorldNo":
                     bits = StringToBytes("000E0006000000080000000000000000");
@@ -1177,7 +1265,6 @@ namespace MSBT_Editor.FileSys
                 case "/AfterTheDecimalPoint":
                     bits = StringToBytes("000E0006000500080000000000000003");
                     break;
-
                 case "/ResultGalaxyName":
                     bits = StringToBytes("000E0007000000080000000000000000");
                     break;
@@ -1219,7 +1306,8 @@ namespace MSBT_Editor.FileSys
                             var target = Int32.Parse(strs[3]);
                             var total = ((target) << 1) + ((rubi) << 1) ;
 
-                            switch (((target) << 1)) {
+                            switch (((target) << 1))
+                            {
                                 case 2:
                                     total += 2;
                                     break;
@@ -1236,7 +1324,6 @@ namespace MSBT_Editor.FileSys
                                     break;
                                 default:
                                     break;
-                            
                             }
                             
                             var hexnum = ((long)(total) << 32) + ((long)(target) << 17) + ((long)(rubi) << 1);
@@ -1245,7 +1332,8 @@ namespace MSBT_Editor.FileSys
                             break;
                         }
                     }
-                    if (str.Length > 5) {
+                    if (str.Length > 5)
+                    {
                         if (str.Substring(0, 6) == "/Timer")
                         {
                             var strs = str.Split('\"');
@@ -1255,8 +1343,10 @@ namespace MSBT_Editor.FileSys
                             break;
                         }
                     }
-                    if (str.Length > 8) {
-                        if (str.Substring(0,9) == "UserIcon=") {
+                    if (str.Length > 8)
+                    {
+                        if (str.Substring(0,9) == "UserIcon=")
+                        {
                             var strs = str.Split('\"');
                             bits = StringToBytes(strs[1]);
                             break;
@@ -1264,23 +1354,35 @@ namespace MSBT_Editor.FileSys
                     }
                     return str;
             }
-
             return Encoding.GetEncoding("unicodeFFFE"/*1201*/).GetString(bits);
         }
 
-        public static void TextBoxInsert(TextBox tb , string str) {
-            if (str == string.Empty) return;
+        public static void TextBoxInsert(TextBox tb, string str)
+        {
+            if (str == string.Empty)
+            {
+                return;
+            }
             tb.SelectedText = str;
         }
 
-        public static void TextBoxTagAdder(ListBox lb , TextBox tb , ComboBox cb , string[] strs) {
-            if (lb.Items.Count < 1) return;
-            if (cb.Items.Count == -1) return;
-            if (cb.SelectedIndex == -1) cb.SelectedIndex = 0;
+        public static void TextBoxTagAdder(ListBox lb, TextBox tb, ComboBox cb, string[] strs)
+        {
+            if (lb.Items.Count < 1)
+            {
+                return;
+            }
+            if (cb.Items.Count == -1)
+            {
+                return;
+            }
+            if (cb.SelectedIndex == -1)
+            {
+                cb.SelectedIndex = 0;
+            }
             int index = cb.SelectedIndex;
             string tag = strs[index];
             TextBoxInsert(tb, tag);
         }
-
     }
 }

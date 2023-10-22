@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 using System.IO;
 using MSBT_Editor.Formsys;
 using MSBT_Editor.Sectionsys;
+
 namespace MSBT_Editor.MSBTsys
 {
-
-
-    public class MSBT_Data:objects
+    public class MSBT_Data : Objects
     {
-
         //MSBTヘッダー
         private static string magic;
         private static Int16 endian;
@@ -29,10 +27,12 @@ namespace MSBT_Editor.MSBTsys
         public static List<string> Txt2_Text_List;
         public static List<string> Atr1SpecialText;
 
-        public struct Data_List {
+        public struct Data_List
+        {
             public List<string> Text;
             public List<ATR1.AttributeData> Item;
-            public Data_List(List<string> list1, List<ATR1.AttributeData> list2) {
+            public Data_List(List<string> list1, List<ATR1.AttributeData> list2)
+            {
                 this.Text = new List<string>();
                 this.Item = new List<ATR1.AttributeData>();
                 this.Text = list1;

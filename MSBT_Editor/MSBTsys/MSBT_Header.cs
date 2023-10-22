@@ -9,7 +9,6 @@ using CS = MSBT_Editor.FileSys.Calculation_System;
 using EN = System.Environment;
 using MSBT_Editor.Sectionsys;
 
-
 namespace MSBT_Editor.MSBTsys
 {
     public class MSBT_Header : MSBT_Data
@@ -41,14 +40,17 @@ namespace MSBT_Editor.MSBTsys
             //各セクション読み取り
             lbl1.Read(br, fs);
             atr1.Read(br, fs);
-            txt2.Read(br,fs);
+            txt2.Read(br, fs);
             
             //データ記録
-            MSBT_All_Data = new Data_List(new List<string>(TXT2.Text_Data) , new List<ATR1.AttributeData>(atr1.AttributeDataList));
+            MSBT_All_Data = new Data_List(new List<string>(TXT2.Text_Data), new List<ATR1.AttributeData>(atr1.AttributeDataList));
             Atr1SpecialText = new List<string>();
             Atr1SpecialText = ATR1.SpecialTextList;
 
-            if (MsbtListBox.Items.Count > 0) MsbtListBox.SelectedIndex = 0;
+            if (MsbtListBox.Items.Count > 0)
+            {
+                MsbtListBox.SelectedIndex = 0;
+            }
 
             //終了処理
             fs.Close();
@@ -62,8 +64,8 @@ namespace MSBT_Editor.MSBTsys
             }
         }
 
-
-        public void Write(string filepath) {
+        public void Write(string filepath)
+        {
             Console.WriteLine("MSBT処理に入りました");
 
             FileStream fs = new FileStream(filepath, FileMode.Create);
@@ -95,16 +97,13 @@ namespace MSBT_Editor.MSBTsys
             TXT2 txt2 = new TXT2();
 
             //各セクションの書き込み
-            lbl1.Write(bw,fs);
-            atr1.Write(bw,fs);
-            txt2.Write(bw,fs,MSBT_File_Size_pos);
+            lbl1.Write(bw, fs);
+            atr1.Write(bw, fs);
+            txt2.Write(bw, fs, MSBT_File_Size_pos);
 
             //終了処理
             fs.Close();
             bw.Close();
-            
-
         }
-
     }
 }

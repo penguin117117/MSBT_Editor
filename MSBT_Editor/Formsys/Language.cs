@@ -7,15 +7,33 @@ using System.Windows.Forms;
 
 namespace MSBT_Editor.Formsys
 {
-    public class Language : objects
+    public class Language : Objects
     {
-        private static readonly string[] IconNameJP01 = { "ピーチ", "クッパ", "キノピオ", "マリオ", "マリオ2", "チコ", "ヨッシー", "腹ペコチコ", "ルイージ", "ベビーチコ", "アシストチコ", "ベーゴマン", "クリボー", "星ウサギ" };
-        private static readonly string[] IconNameJP02 = { "彗星メダル", "コイン×3", "カラフルスターピース", "イエローチップ", "スターピース紫", "シルバースター", "スター", "グランドスター", "ブロンズスター", "コイン", "パープルコイン", "1UPキノコ", "ライフアップキノコ", "ブルースター", "スターリング", "ヨッシーキャプチャー花", "ココナッツ", "ブルーチップ", "バルーンフルーツ", "中間ポイント", "グランドブロンズスター" };
-        private static readonly string[] IconNameJP03 = { "ポインター", "2Pポインター", "ハンドポインター選択", "Wiiリモコン", "Aボタン", "Bボタン", "Cボタン", "Zボタン", "十字ボタン", "十字ボタン下", "十字ボタン上", "スティック", "ヌンチャク", "照準", "マイナスボタン", "プラスボタン", "×(かける)アイコン", "グリーンコメット", "銀の王冠", "銀の王冠宝石付き", "金の王冠", "手紙", "矢印下", "ストップウォッチ", "1ボタン", "2ボタン", "ホームボタン", "ハンドポインター握り", "ハンドポインター", "？マーク", "イエローコメット", "？マーク緑", "空のスター", "空の彗星メダル", "空の彗星", "隠しスター", "ブロンズコメット" };
+        private static readonly string[] IconNameJP01 =
+        {
+            "ピーチ", "クッパ", "キノピオ", "マリオ", "マリオ2", "チコ", "ヨッシー", "腹ペコチコ",
+            "ルイージ","ベビーチコ", "アシストチコ", "ベーゴマン", "クリボー", "星ウサギ"
+        };
+        private static readonly string[] IconNameJP02 =
+        {
+            "彗星メダル", "コイン×3", "カラフルスターピース", "イエローチップ", "スターピース紫",
+            "シルバースター","スター", "グランドスター", "ブロンズスター", "コイン", "パープルコイン",
+            "1UPキノコ", "ライフアップキノコ", "ブルースター", "スターリング", "ヨッシーキャプチャー花",
+            "ココナッツ", "ブルーチップ", "バルーンフルーツ", "中間ポイント", "グランドブロンズスター"
+        };
+        private static readonly string[] IconNameJP03 =
+        {
+            "ポインター", "2Pポインター", "ハンドポインター選択", "Wiiリモコン", "Aボタン", "Bボタン",
+            "Cボタン", "Zボタン", "十字ボタン", "十字ボタン下", "十字ボタン上", "スティック", "ヌンチャク",
+            "照準", "マイナスボタン", "プラスボタン", "×(かける)アイコン", "グリーンコメット", "銀の王冠",
+            "銀の王冠宝石付き", "金の王冠", "手紙", "矢印下", "ストップウォッチ", "1ボタン", "2ボタン",
+            "ホームボタン", "ハンドポインター握り", "ハンドポインター", "？マーク", "イエローコメット",
+            "？マーク緑", "空のスター", "空の彗星メダル", "空の彗星", "隠しスター", "ブロンズコメット"
+        };
         
         //<>で挟んでいる理由は、ファイル名に<>を付けることが出来ないので付けています。
         //<>を付けることにより、ファイルを読み込んでいるときにこの項目を削除させない意図があります。
-        public static readonly string[] FileReadStatusJP = { "<MSBTファイルなし>","<MSBFファイルなし>","<ARCファイルなし>" } ;
+        public static readonly string[] FileReadStatusJP = { "<MSBTファイルなし>","<MSBFファイルなし>","<ARCファイルなし>" };
         public static readonly string[] FileReadStatusUS = { "<No MSBT Open>", "<No MSBF Open>", "<No ARC Open>" };
 
         public static void Language_Check()
@@ -44,7 +62,8 @@ namespace MSBT_Editor.Formsys
             }
         }
 
-        public static string FLW2_List_Language(int num) {
+        public static string FLW2_List_Language(int num)
+        {
             switch (Properties.Settings.Default.言語)
             {
                 case "日本語":
@@ -56,9 +75,11 @@ namespace MSBT_Editor.Formsys
             }
         }
 
-        public static string FLW_List_JP(int num) {
+        public static string FLW_List_JP(int num)
+        {
             string str = "";
-            switch (num) {
+            switch (num)
+            {
                 case 0x0001:
                     str = "会話決定とジャンプ？";
                     break;
@@ -74,7 +95,6 @@ namespace MSBT_Editor.Formsys
                 default:
                     str ="エラー "+num.ToString();
                     break;
-
             }
             return str;
         }
@@ -103,7 +123,8 @@ namespace MSBT_Editor.Formsys
             return str;
         }
 
-        public static void JP(){
+        public static void JP()
+        {
             tssl1.Text = "開いたファイル：";
             tssl6.Text = "保存したファイル：";
             //menu
@@ -163,7 +184,10 @@ namespace MSBT_Editor.Formsys
 
             labeltxt29.Text = "ジャンプ先1（真）";
             labeltxt30.Text = "ジャンプ先2（偽）";
-            labeltxt33.Text = "※まだすべての機能を解明できていないため、" + Environment.NewLine + "　不具合が発生する可能性があります";
+            labeltxt33.Text
+                = "※まだすべての機能を解明できていないため、"
+                + Environment.NewLine
+                + "　不具合が発生する可能性があります";
             labeltxt34.Text = "この項目は名前が不要です";
             labeltxt35.Text = "名前必須(Flowなどを省いた名前)";
             labeltxt31.Text = "不明";
@@ -255,10 +279,10 @@ namespace MSBT_Editor.Formsys
             combo5.Items.Clear();
             combo6.Items.Clear();
             combo7.Items.Clear();
-            string[] cb1 = { "ブラック" , "レッド" , "グリーン" , "ブルー" , "イエロー" , "パープル" , "オレンジ" , "グレー" , "カラーエンドタグ" };
-            string[] cb2 = { "改行" , "次のページ" ,"終了" };
-            string[] cb3 = { "小" , "普通" , "大" };
-            string[] cb4 = { "横方向" , "縦方向"};
+            string[] cb1 = { "ブラック", "レッド", "グリーン", "ブルー", "イエロー", "パープル", "オレンジ", "グレー", "カラーエンドタグ" };
+            string[] cb2 = { "改行", "次のページ", "終了" };
+            string[] cb3 = { "小", "普通", "大" };
+            string[] cb4 = { "横方向", "縦方向"};
             combo1.Text = "ブラック";
             combo1.Items.AddRange(cb1);
             combo2.Text = "改行";
@@ -457,7 +481,25 @@ namespace MSBT_Editor.Formsys
             button13.Hide();
 
             //all icons in one combo
-            combo5.Items.AddRange(new object[] { "A Button", "B Button", "C Button", "Wii Remote", "Nunchuck", "1 Button", "2 Button", "Power Star", "Launch Star", "Pull Star", "P1 Pointer", "Purple Star Bit", "Coconut", "Down Arrow", "Star Bunny", "Control Stick", "X Icon", "Coin", "Mario Icon", "D-Pad", "Pull Star Chip", "Star Chip", "HOME Button", "Minus Button", "Plus Button", "Z Button", "Silver Star", "Grand Star", "Luigi Icon", "P2 Pointer", "Purple Coin", "Green Comet", "Golden Crown", "Aim Target", "Bowser Icon", "Star Pointer Hand (Selected)", "Star Pointer Hand (Pointing)", "Star Pointer Hand (Selecting)", "Rainbow Star Bit", "Peach Icon", "Letter", "Question Mark", "One Up Mushroom", "Life Up Mushroom", "Hungry Luma", "Luma", "Power Star Comet", "Green Question Mark", "Timer Icon", "Young Master Luma", "Yoshi", "Comet Medal", "Silver Crown", "Yoshi Grapple", "Checkpoint Flag", "Empty Power Star", "Empty Comet Medal", "Empty Comet", "Empty Hidden Star", "Bronze Star", "Blimp Fruit", "Large Silver Crown", "Bronze Grand Star", "Topman", "Goomba", "Coin Stack", "D-Pad Up", "D-Pad Down", "Co-Star Luma", "Toad", "Bronze Comet" });
+            combo5.Items.AddRange(new object[]
+                {
+                    "A Button", "B Button", "C Button", "Wii Remote", "Nunchuck", "1 Button",
+                    "2 Button", "Power Star", "Launch Star", "Pull Star", "P1 Pointer",
+                    "Purple Star Bit", "Coconut", "Down Arrow", "Star Bunny", "Control Stick",
+                    "X Icon", "Coin", "Mario Icon", "D-Pad", "Pull Star Chip", "Star Chip",
+                    "HOME Button", "Minus Button", "Plus Button", "Z Button", "Silver Star",
+                    "Grand Star", "Luigi Icon", "P2 Pointer", "Purple Coin", "Green Comet",
+                    "Golden Crown", "Aim Target", "Bowser Icon", "Star Pointer Hand (Selected)",
+                    "Star Pointer Hand (Pointing)", "Star Pointer Hand (Selecting)",
+                    "Rainbow Star Bit", "Peach Icon", "Letter", "Question Mark", "One Up Mushroom",
+                    "Life Up Mushroom", "Hungry Luma", "Luma", "Power Star Comet",
+                    "Green Question Mark", "Timer Icon", "Young Master Luma", "Yoshi",
+                    "Comet Medal", "Silver Crown", "Yoshi Grapple", "Checkpoint Flag",
+                    "Empty Power Star", "Empty Comet Medal", "Empty Comet", "Empty Hidden Star",
+                    "Bronze Star", "Blimp Fruit", "Large Silver Crown", "Bronze Grand Star",
+                    "Topman", "Goomba", "Coin Stack", "D-Pad Up", "D-Pad Down", "Co-Star Luma",
+                    "Toad", "Bronze Comet"
+                });
             combo5.Text = "A Button";
             StatusBarLabelChenger(tssl2, FileReadStatusJP[0], FileReadStatusUS[0]);
             StatusBarLabelChenger(tssl4, FileReadStatusJP[1], FileReadStatusUS[1]);
@@ -470,14 +512,22 @@ namespace MSBT_Editor.Formsys
             //    tssl4.Text = "No MSBF Open";
         }
 
-        public static void StatusBarLabelChenger(ToolStripStatusLabel tssl,string defaultStr,string newStr) {
-            if (tssl.Text != defaultStr) return;
+        public static void StatusBarLabelChenger(ToolStripStatusLabel tssl, string defaultStr, string newStr)
+        {
+            if (tssl.Text != defaultStr)
+            {
+                return;
+            }
             tssl.Text = newStr;
         }
 
-        public static string DefaultStatusBarLabel(ToolStripStatusLabel tssl,string jp , string us) {
+        public static string DefaultStatusBarLabel(ToolStripStatusLabel tssl,string jp, string us)
+        {
             tssl.Text = jp;
-            if (Properties.Settings.Default.言語 == "日本語") return jp;
+            if (Properties.Settings.Default.言語 == "日本語")
+            {
+                return jp;
+            }
             tssl.Text = us;
             return us;
         }

@@ -9,9 +9,10 @@ using MSBT_Editor.FileSys;
 using CS = MSBT_Editor.FileSys.Calculation_System;
 using MSBT_Editor.MSBTsys;
 using MSBT_Editor.Formsys;
+
 namespace MSBT_Editor.Sectionsys
 {
-    public class LBL1:objects
+    public class LBL1 : Objects
     {
         private static string s_magic;
         private static int s_sectionSize;
@@ -40,54 +41,60 @@ namespace MSBT_Editor.Sectionsys
             }
         }
 
-        public struct LBL_1st_Item {
+        public struct LBL_1st_Item
+        {
             public int HashSkipCounter;
             public string ListName;
             public UInt32 Hash;
-            public LBL_1st_Item(int hashSkipCounter,string listName ,UInt32 hash) {
+            public LBL_1st_Item(int hashSkipCounter, string listName, UInt32 hash)
+            {
                 this.HashSkipCounter = hashSkipCounter;
                 this.ListName = listName;
                 this.Hash = hash;
-
-
             }
         }
 
         public List<LBL_1st_Item> Item_1st;
         public List<Hash_Data> HashData;
 
-        public string Magic {
+        public string Magic
+        {
             set => s_magic = value;
             get => s_magic;
         }
 
-        public int SectionSize {
+        public int SectionSize
+        {
             set => s_sectionSize = value;
             get => s_sectionSize;
         }
 
-        public int Unknown1 {
+        public int Unknown1
+        {
             set => s_unknown1 = value;
             get => s_unknown1;
         }
 
-        public int Unknown2 {
+        public int Unknown2
+        {
             set => s_unknown2 = value;
             get => s_unknown2;
         }
 
-        public int EntrySize {
-            set {
-
-                if (value != 101 || value != 102){
+        public int EntrySize
+        {
+            set
+            {
+                if (value != 101 || value != 102)
+                {
                     s_entrySize = 101;
                 }
-                else {
+                else
+                {
                     s_entrySize = 101;
                 }
             }
             get => s_entrySize;
-
         }
 
         /// <summary>
@@ -98,8 +105,8 @@ namespace MSBT_Editor.Sectionsys
         /// </summary>
         /// <param name="br"></param>
         /// <param name="fs"></param>
-        public void Read(BinaryReader br , FileStream fs) {
-
+        public void Read(BinaryReader br, FileStream fs)
+        {
             MsbtListBox.Items.Clear();
             
             BeginEntryAdressList = new List<long>();
@@ -117,25 +124,24 @@ namespace MSBT_Editor.Sectionsys
 
             //LBL1のベースアドレスを記憶 Stores the base address of LBL1
             s_positionBaseAddress = fs.Position - 4;
-            ReadEntrySection(fs,br);
+            ReadEntrySection(fs, br);
 
             s_positionLastEntrySection = fs.Position;
-
 
             //配列を用意エントリー数を超える場合があるので最大値を0xFFにしています
             //The maximum value is set to 0xFF because the number of entries in the array may be exceeded.
             string[] NameArray = new string[0xFF];
-            ReadLabelSection(fs,br,ref NameArray);
-
+            ReadLabelSection(fs, br, ref NameArray);
 
             var Tmp = MsbtListBoxIndexList;
             IOrderedEnumerable<int> MsbtListBoxIndexSorted = Tmp.OrderBy(x => x);
 
             int count = MsbtListBoxIndexList.Count;
-            for (int l = 0; l < count; l++) 
+            for (int l = 0; l < count; l++)
+            {
                 MsbtListBox.Items.Add(NameArray[l]);
-
-            CS.Padding(br,fs.Position);
+            }
+            CS.Padding(br, fs.Position);
         }
 
         /// <summary>
@@ -144,21 +150,22 @@ namespace MSBT_Editor.Sectionsys
         /// </summary>
         /// <param name="fs"></param>
         /// <param name="br"></param>
-        private void ReadEntrySection(FileStream fs , BinaryReader br) {
-            
+        private void ReadEntrySection(FileStream fs, BinaryReader br)
+        {
             for (int i = 0; i < EntrySize; i++)
             {
-
                 BeginEntryAdressList.Add(fs.Position);
 
                 var SkipIntNum = CS.Byte2Int(br);
                 var NameOffsetIntNum = CS.Byte2Int(br);
 
-
                 HashSkipList.Add(SkipIntNum);
                 NameOffsetList.Add(NameOffsetIntNum);
 
-                if (i == 0) continue;
+                if (i == 0)
+                {
+                    continue;
+                }
 
                 var BeforeNameOffsetIndex = NameOffsetList.Count() - 2;
                 var NowNameOffsetIndex = NameOffsetList.Count() - 1;
@@ -181,11 +188,9 @@ namespace MSBT_Editor.Sectionsys
         /// <param name="fs"></param>
         /// <param name="br"></param>
         /// <param name="NameArray"></param>
-        private void ReadLabelSection(FileStream fs , BinaryReader br , ref string[] NameArray) {
-
+        private void ReadLabelSection(FileStream fs, BinaryReader br, ref string[] NameArray)
+        {
             var PositionNameSectionBytesSize = (s_positionBaseAddress + s_sectionSize) - s_positionLastEntrySection;
-
-
 
             //LBL1セクションのラベル名セクションの処理
             for (long k = 0; k < PositionNameSectionBytesSize; k++)
@@ -195,23 +200,21 @@ namespace MSBT_Editor.Sectionsys
                 var LabelString            = CS.Byte2Char(br, LabelStringSize);
                 var LabelMsbtListBoxIndex  = CS.Byte2Int(br);
 
-                
-
                 NameArray[LabelMsbtListBoxIndex] = LabelString;
 
                 var NameOffset          = (int)(PositionFirstLabelName - s_positionBaseAddress);
                 var FindNameOffsetIndex = NameOffsetList.IndexOf(NameOffset);
 
                 if (-1 != FindNameOffsetIndex)
+                {
                     NameList.Add(LabelString);
+                }
 
                 MsbtListBoxIndexList.Add(LabelMsbtListBoxIndex);
 
                 //文字数のカウント分と末尾のInt32(4byte)分進める
                 k += LabelStringSize;
                 k += 4;
-
-
             }
         }
         /// <summary>
@@ -219,22 +222,23 @@ namespace MSBT_Editor.Sectionsys
         /// </summary>
         /// <param name="bw"></param>
         /// <param name="fs"></param>
-        public void Write(BinaryWriter bw , FileStream fs) {
-
+        public void Write(BinaryWriter bw, FileStream fs)
+        {
             List<long> PositionIndividualLabelTop = new List<long>();
             HashData = new List<Hash_Data>();
 
             var PositionEntrySizeAddress = fs.Position + 4;
 
-
-            if (EntrySize <= 101) EntrySize = 101;
-
+            if (EntrySize <= 101)
+            {
+                EntrySize = 101;
+            }
 
             //ヘッダー情報の書き込み
-            CS.String_Writer(bw ,"LBL1");
+            CS.String_Writer(bw,"LBL1");
             CS.Null_Writer_Int32(bw, 3);
 
-            CS.StringToBytesWriter(bw,(EntrySize).ToString("X8"));
+            CS.StringToBytesWriter(bw, (EntrySize).ToString("X8"));
 
             s_positionBaseAddress = fs.Position - 4;
 
@@ -245,7 +249,7 @@ namespace MSBT_Editor.Sectionsys
             var HashDataArray = LabelHashAndListIndexSortToArray(HashData);
 
             //ラベルセクションを書き込む
-            LabelSectionWriter(fs,bw,HashDataArray,ref PositionIndividualLabelTop);
+            LabelSectionWriter(fs, bw, HashDataArray, ref PositionIndividualLabelTop);
             var PositionLabelLastAddress = fs.Position;
 
             CS.Padding_Writer(bw, fs.Position);
@@ -255,12 +259,11 @@ namespace MSBT_Editor.Sectionsys
             fs.Seek(s_positionBaseAddress + 4, SeekOrigin.Begin);
 
             //データセクションに計算したデータを書き込む
-            DataSectionAllWriter(bw,HashDataArray,PositionIndividualLabelTop, PositionLabelLastAddress);
-
+            DataSectionAllWriter(bw, HashDataArray, PositionIndividualLabelTop, PositionLabelLastAddress);
 
             SectionSize = (int)(PositionLabelLastAddress - s_positionBaseAddress);
             fs.Seek(PositionEntrySizeAddress, SeekOrigin.Begin);
-            CS.StringToBytesWriter(bw,SectionSize.ToString("X8"));
+            CS.StringToBytesWriter(bw, SectionSize.ToString("X8"));
             fs.Seek(PositionLBL1LastAddress, SeekOrigin.Begin);
         }
         /// <summary>
@@ -270,7 +273,8 @@ namespace MSBT_Editor.Sectionsys
         /// <param name="HashDataArray"></param>
         /// <param name="PositionIndividualLabelTop"></param>
         /// <param name="PositionLabelLastAddress"></param>
-        private void DataSectionAllWriter(BinaryWriter bw , Hash_Data[] HashDataArray,List<long> PositionIndividualLabelTop,long PositionLabelLastAddress/*, ref int ActualDataCount*/) {
+        private void DataSectionAllWriter(BinaryWriter bw, Hash_Data[] HashDataArray, List<long> PositionIndividualLabelTop, long PositionLabelLastAddress/*, ref int ActualDataCount*/)
+        {
             var ActualDataCount = 0;
             int count = HashData.Count();
             for (int i = 0; i < count; i++)
@@ -295,7 +299,9 @@ namespace MSBT_Editor.Sectionsys
                     if ((count - 1) != i)
                     {
                         if (HashDataArray[i + 1].Hash - NowHash == 0)
+                        {
                             continue;
+                        }
                     }
                 }
 
@@ -305,19 +311,17 @@ namespace MSBT_Editor.Sectionsys
             DataSectionInsufficientDataWriter(bw, PositionLabelLastAddress, ActualDataCount);
         }
 
-
         /// <summary>
         /// データセクションの不足データをパディングまでのオフセットで埋めます。
         /// </summary>
         /// <param name="bw"></param>
         /// <param name="PositionLabelLastAddress"></param>
         /// <param name="ActualDataCount"></param>
-        private void DataSectionInsufficientDataWriter(BinaryWriter bw,long PositionLabelLastAddress,int ActualDataCount) {
+        private void DataSectionInsufficientDataWriter(BinaryWriter bw, long PositionLabelLastAddress, int ActualDataCount)
+        {
             if (ActualDataCount < EntrySize)
             {
-
                 var NumberOfInsufficientData = EntrySize - ActualDataCount;
-
 
                 for (int a = 0; a < NumberOfInsufficientData; a++)
                 {
@@ -335,16 +339,17 @@ namespace MSBT_Editor.Sectionsys
         /// <param name="LabelOffset"></param>
         /// <param name="ActualDataCount"></param>
         /// <param name="isTop"></param>
-        private void DataSectionActualDataWriter(BinaryWriter bw , uint hash , int SkipDataCount , int LabelOffset ,ref int ActualDataCount , bool isTop) {
+        private void DataSectionActualDataWriter(BinaryWriter bw, uint hash, int SkipDataCount, int LabelOffset, ref int ActualDataCount, bool isTop)
+        {
             var LoopCountChange = 0;
             var BranchDataChenge = -1;
-            if (isTop) {
+            if (isTop)
+            {
                 LoopCountChange = 1;
                 BranchDataChenge = 0;
             }
             for (int j = 0; j < (hash + LoopCountChange); j++)
             {
-
                 if (j == hash + BranchDataChenge)
                 {
                     CS.StringToBytesWriter(bw, (SkipDataCount).ToString("X8"));
@@ -363,29 +368,29 @@ namespace MSBT_Editor.Sectionsys
         /// </summary>
         /// <param name="bw"></param>
         /// <param name="nullSetNum"></param>
-        private void TemporarilyWriteNullData(BinaryWriter bw , int nullSetNum = 2) {
+        private void TemporarilyWriteNullData(BinaryWriter bw, int nullSetNum = 2)
+        {
             //ラベルindex(不明)とラベルオフセットを空白で埋める
-
             for (int i = 0; i < EntrySize; i++)
-
+            {
                 CS.Null_Writer_Int32(bw, nullSetNum);
+            }
         }
 
         /// <summary>
         /// ラベルとMSBTリストのインデックス値のリストデータを取得します
         /// </summary>
         /// <returns></returns>
-        private List<Hash_Data> LabelHashAndListIndexGet() {
+        private List<Hash_Data> LabelHashAndListIndexGet()
+        {
             //ラベルのエリアの値を書き込む
             List<Hash_Data> TemporarilyData = new List<Hash_Data>();
             int itemcount = 0;
             foreach (var item in MsbtListBox.Items)
             {
-
                 var LabelName = item.ToString();
                 //var strnum = (byte)str.Count();
                 //ハッシュ値とリスト番号をリストへ
-
                 var LabelHash = CS.MSBT_Hash(LabelName, EntrySize);
 
                 TemporarilyData.Add(new Hash_Data(LabelHash, itemcount));
@@ -398,9 +403,9 @@ namespace MSBT_Editor.Sectionsys
         /// </summary>
         /// <param name="HashData"></param>
         /// <returns></returns>
-        private Hash_Data[] LabelHashAndListIndexSortToArray(List<Hash_Data> HashData) {
-            IOrderedEnumerable<Hash_Data> HashDataSorted
-                    = HashData.OrderBy(x => x.Hash);
+        private Hash_Data[] LabelHashAndListIndexSortToArray(List<Hash_Data> HashData)
+        {
+            IOrderedEnumerable<Hash_Data> HashDataSorted = HashData.OrderBy(x => x.Hash);
             return HashDataSorted.ToArray();
         }
         /// <summary>
@@ -410,7 +415,8 @@ namespace MSBT_Editor.Sectionsys
         /// <param name="bw"></param>
         /// <param name="HashDataArray"></param>
         /// <param name="PositionIndividualLabelTop"></param>
-        private void LabelSectionWriter(FileStream fs , BinaryWriter bw , Hash_Data[] HashDataArray , ref List<long> PositionIndividualLabelTop) {
+        private void LabelSectionWriter(FileStream fs, BinaryWriter bw, Hash_Data[] HashDataArray, ref List<long> PositionIndividualLabelTop)
+        {
             int hashcount = 0;
             foreach (var hashdatsorted in HashDataArray)
             {
@@ -427,5 +433,4 @@ namespace MSBT_Editor.Sectionsys
             }
         }
     }
-
 }
